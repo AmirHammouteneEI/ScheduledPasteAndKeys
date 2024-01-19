@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>img/programIcon.png</file>
+        <file>img/pinned.png</file>
+        <file>img/unpinned.png</file>
     </qresource>
 </RCC>

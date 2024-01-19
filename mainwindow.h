@@ -18,8 +18,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 public slots:
-    void quitApp();
     void showWindow(QSystemTrayIcon::ActivationReason reason = QSystemTrayIcon::Trigger);
+private slots:
+    void quitApp();
+    void swapStayOnTop(bool state);
 protected :
     QSystemTrayIcon* m_sticon;
     void buildSystemTrayMenu();
@@ -29,6 +31,8 @@ protected :
     void geometrySet();
     void loadSettings();
     void saveSettings();
+    QAction *m_stayOnTopAction;
+    void buildToolBar();
 private:
     Ui::MainWindow *ui;
 };

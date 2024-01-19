@@ -6,6 +6,7 @@
 #include <QCloseEvent>
 #include <QCursor>
 #include <QSettings>
+#include <QToolBar>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     loadSettings();
     geometrySet();
+
+    buildToolBar();
 }
 
 MainWindow::~MainWindow()
@@ -76,13 +79,50 @@ void MainWindow::saveSettings()
 {
     QSettings settings("programSettings.ini", QSettings::IniFormat);
     settings.setValue("windowWidth", width());
-        settings.setValue("windowHeight", height());
+    settings.setValue("windowHeight", height());
+}
+
+void MainWindow::buildToolBar()
+{
+    QToolBar* toolBar = new QToolBar("toolbar",this);
+    toolBar->setMovable(false);
+    toolBar->setFloatable(false);
+    toolBar->setFixedHeight(30);
+
+    QWidget* spacer = new QWidget();
+    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    toolBar->addWidget(spacer);
+
+    m_stayOnTopAction = new QAction(QIcon(":/img/unpinned.png"),"",this);
+    m_stayOnTopAction->setCheckable(true);
+    m_stayOnTopAction->setToolTip(tr("Click to pin the window so it will stay on top"));
+    connect(m_stayOnTopAction, &QAction::triggered, this, &MainWindow::swapStayOnTop);
+
+    toolBar->addAction(m_stayOnTopAction);
+
+    addToolBar(toolBar);
 }
 
 void MainWindow::quitApp()
 {
     saveSettings();
     QApplication::quit();
+}
+
+void MainWindow::swapStayOnTop(bool state)
+{
+    if(state)
+    {
+        setWindowFlag(Qt::WindowStaysOnTopHint);
+        show();
+        m_stayOnTopAction->setIcon(QIcon(":/img/pinned.png"));
+        m_stayOnTopAction->setToolTip(tr("Click to unpin the window so it won't stay on top"));
+        return;
+    }
+    setWindowFlag(Qt::WindowStaysOnTopHint, false);
+    show();
+    m_stayOnTopAction->setIcon(QIcon(":/img/unpinned.png"));
+    m_stayOnTopAction->setToolTip(tr("Click to pin the window so it will stay on top"));
 }
 
 void MainWindow::showWindow(QSystemTrayIcon::ActivationReason reason)
