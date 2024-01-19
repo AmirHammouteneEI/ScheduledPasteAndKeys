@@ -24,6 +24,11 @@ protected :
     QSystemTrayIcon* m_sticon;
     void buildSystemTrayMenu();
     void closeEvent(QCloseEvent *event) override;
+    int m_windowWidth = 300;
+    int m_windowHeight = 900;
+    void geometrySet();
+    void loadSettings();
+    void saveSettings();
 private:
     Ui::MainWindow *ui;
 };

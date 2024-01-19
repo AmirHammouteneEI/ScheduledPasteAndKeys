@@ -5,6 +5,7 @@
 #include <QAction>
 #include <QCloseEvent>
 #include <QCursor>
+#include <QSettings>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -18,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_sticon = new QSystemTrayIcon(QIcon(":/img/programIcon.png"),this);
     buildSystemTrayMenu();
     m_sticon->show();
+
+    loadSettings();
+    geometrySet();
 }
 
 MainWindow::~MainWindow()
@@ -52,8 +56,32 @@ void MainWindow::closeEvent(QCloseEvent *event)
     event->ignore();
 }
 
+void MainWindow::geometrySet()
+{
+    auto scrsize = QGuiApplication::primaryScreen()->size();
+    setGeometry(scrsize.width()-m_windowWidth-2,30,m_windowWidth,m_windowHeight);
+}
+
+void MainWindow::loadSettings()
+{
+    QSettings settings("programSettings.ini", QSettings::IniFormat);
+    m_windowWidth = settings.value("windowWidth", 300).toInt();
+    m_windowHeight = settings.value("windowHeight", 900).toInt();
+
+    m_windowWidth = m_windowWidth < 50 ? 300 : m_windowWidth;
+    m_windowHeight = m_windowHeight < 50 ? 900 : m_windowHeight;
+}
+
+void MainWindow::saveSettings()
+{
+    QSettings settings("programSettings.ini", QSettings::IniFormat);
+    settings.setValue("windowWidth", width());
+        settings.setValue("windowHeight", height());
+}
+
 void MainWindow::quitApp()
 {
+    saveSettings();
     QApplication::quit();
 }
 
