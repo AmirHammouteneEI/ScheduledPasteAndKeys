@@ -7,6 +7,7 @@
 #include <QCursor>
 #include <QSettings>
 #include <QToolBar>
+#include <QFile>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     geometrySet();
 
     buildToolBar();
+    setTheme();
 }
 
 MainWindow::~MainWindow()
@@ -73,6 +75,8 @@ void MainWindow::loadSettings()
 
     m_windowWidth = m_windowWidth < 50 ? 300 : m_windowWidth;
     m_windowHeight = m_windowHeight < 50 ? 900 : m_windowHeight;
+
+    m_currentThemeName = settings.value("style", "dark").toString();
 }
 
 void MainWindow::saveSettings()
@@ -80,6 +84,7 @@ void MainWindow::saveSettings()
     QSettings settings("programSettings.ini", QSettings::IniFormat);
     settings.setValue("windowWidth", width());
     settings.setValue("windowHeight", height());
+    settings.setValue("style", m_currentThemeName);
 }
 
 void MainWindow::buildToolBar()
@@ -91,16 +96,48 @@ void MainWindow::buildToolBar()
 
     QWidget* spacer = new QWidget();
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    toolBar->addWidget(spacer);
+
+
+    m_lightThemeAction = new QAction(QIcon(":/img/lightTheme.png"),"",this);
+    m_lightThemeAction->setObjectName("lightAction");
+    m_lightThemeAction->setCheckable(true);
+    m_lightThemeAction->setToolTip(tr("Click to switch to Light style"));
+    connect(m_lightThemeAction, &QAction::triggered, this, &MainWindow::switchTheme);
+
+    m_penombraThemeAction = new QAction(QIcon(":/img/penombraTheme.png"),"",this);
+    m_penombraThemeAction->setObjectName("penombraAction");
+    m_penombraThemeAction->setCheckable(true);
+    m_penombraThemeAction->setToolTip(tr("Click to switch to Penombra style"));
+    connect(m_penombraThemeAction, &QAction::triggered, this, &MainWindow::switchTheme);
+
+    m_darkThemeAction = new QAction(QIcon(":/img/darkTheme.png"),"",this);
+    m_darkThemeAction->setObjectName("darkAction");
+    m_darkThemeAction->setCheckable(true);
+    m_darkThemeAction->setToolTip(tr("Click to switch to Dark style"));
+    connect(m_darkThemeAction, &QAction::triggered, this, &MainWindow::switchTheme);
 
     m_stayOnTopAction = new QAction(QIcon(":/img/unpinned.png"),"",this);
     m_stayOnTopAction->setCheckable(true);
     m_stayOnTopAction->setToolTip(tr("Click to pin the window so it will stay on top"));
     connect(m_stayOnTopAction, &QAction::triggered, this, &MainWindow::swapStayOnTop);
 
+    toolBar->addWidget(spacer);
+    toolBar->addAction(m_lightThemeAction);
+    toolBar->addAction(m_penombraThemeAction);
+    toolBar->addAction(m_darkThemeAction);
     toolBar->addAction(m_stayOnTopAction);
 
     addToolBar(toolBar);
+}
+
+void MainWindow::setTheme()
+{
+    if(m_currentThemeName == "light")
+        m_lightThemeAction->trigger();
+    else if(m_currentThemeName == "penombra")
+        m_penombraThemeAction->trigger();
+    else
+        m_darkThemeAction->trigger();
 }
 
 void MainWindow::quitApp()
@@ -123,6 +160,45 @@ void MainWindow::swapStayOnTop(bool state)
     show();
     m_stayOnTopAction->setIcon(QIcon(":/img/unpinned.png"));
     m_stayOnTopAction->setToolTip(tr("Click to pin the window so it will stay on top"));
+}
+
+void MainWindow::switchTheme()
+{
+    QObject* sender = QObject::sender();
+    if(sender == nullptr)
+        return;
+
+    m_lightThemeAction->setChecked(false);
+    m_penombraThemeAction->setChecked(false);
+    m_darkThemeAction->setChecked(false);
+
+    QString objName = sender->objectName();
+    QString qssFileName;
+    if(objName=="lightAction")
+    {
+        qssFileName = ":/style/light.qss";
+        m_lightThemeAction->setChecked(true);
+        m_currentThemeName = "light";
+    }
+    else if(objName=="penombraAction")
+    {
+        qssFileName = ":/style/penombra.qss";
+        m_penombraThemeAction->setChecked(true);
+        m_currentThemeName = "penombra";
+    }
+    else
+    {
+        qssFileName = ":/style/dark.qss";
+        m_darkThemeAction->setChecked(true);
+        m_currentThemeName = "dark";
+    }
+
+    QFile qss(qssFileName);
+    if (qss.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qApp->setStyleSheet(qss.readAll());
+        qss.close();
+    }
 }
 
 void MainWindow::showWindow(QSystemTrayIcon::ActivationReason reason)

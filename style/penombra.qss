@@ -1,0 +1,700 @@
+/*-----BASE-----*/
+QWidget
+{
+	background-color: #c5c5c5;
+	color: #222;
+	selection-background-color: #346098;
+	selection-color: #222;
+}
+
+/*-----MENU-----*/
+QMenuBar 
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(198,198,198,255),stop:1 rgba(204,204,204,255));
+	border: 1px solid #fff;
+}
+
+QMenuBar::item 
+{
+	background-color: transparent;
+	padding : 10px 14px 10px 14px;
+}
+
+QMenuBar::item:selected 
+{
+	background-color: #96345f98;
+	border: 1px solid #964f7cd8;
+}
+
+QMenuBar::item:pressed 
+{
+	background-color: #64345f98;
+	border: 1px solid #644f7cd8;
+}
+
+QMenu
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:1, x2:0, y2:1, stop:0 rgba(185, 185, 185, 255),stop:1 rgba(204, 204, 204, 255));
+    border: 1px solid #eee;
+}
+
+QMenu::item
+{
+    background-color: transparent;
+	padding : 6px 20px 6px 8px;
+}
+
+QMenu::item:selected
+{
+	background-color: #96345f98;
+	border: 1px solid #964f7cd8;
+}
+
+QMenu::item:disabled
+{
+    color: #aaa;
+}
+
+QMenu::separator
+{
+   	background-color: #878787;
+	height: 1px;
+
+}
+/*-----TOOLBAR-----*/
+QToolBar
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(186, 186, 186, 255),stop:1 rgba(197, 197, 197, 255));
+	border-top: none;
+	border-bottom: 1px solid #eee;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
+}
+
+
+QToolBar::separator
+{
+	background-color: #878787;
+	width: 1px;
+}
+
+QToolBarExtension#qt_toolbar_ext_button
+{ 
+    background: url(:/img/down_arrow_penombra.png) bottom center no-repeat;
+}
+
+/*-----STATUSBAR-----*/
+QStatusBar 
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(214,214,214,255),stop:1 rgba(224,224,224,255));
+	border-top: 1px solid #fff;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+}
+QStatusBar QLabel 
+{
+	background-color: transparent;
+}
+
+/*-----DISPLAY-----*/
+QScrollArea
+{
+	border: 1px solid #878787;
+}
+
+QLabel
+{
+	background-color: transparent;
+}
+
+QLabel::disabled
+{
+	color: #aaa;
+}
+
+QProgressBar
+{
+    border: 1px solid #878787;
+    text-align: center;
+	font-weight: bold;
+}
+
+QProgressBar::chunk
+{
+    background-color: #aa5500;
+    width: 20px;
+    margin: 0.5px;
+}
+
+QProgressBar::disabled
+{
+    color: #aaa;
+}
+
+QProgressBar::chunk:disabled
+{
+    background-color: #96aa5500;
+}
+
+QFrame[frameShape="4"]
+{
+    color: black;
+}
+
+QFrame[frameShape="5"]
+{
+    color: black;
+}
+
+/*-----CONTAINERS-----*/
+
+QGroupBox 
+{
+    border: 1px solid;
+    border-color: #999999;
+	border-radius: 5px;
+    margin-top: 20px;
+}
+
+
+QGroupBox::title  
+{
+    background-color: transparent;
+    subcontrol-origin: margin;
+}
+
+QAbstractItemView  
+{
+	background-color: #cdcdcd;
+    show-decoration-selected: 1;
+}
+
+QAbstractItemView::item 
+{
+	background-color: #c6c6c6;
+}
+
+QAbstractItemView::item:alternate 
+{
+    background-color: #bfbfbf;
+}
+
+QAbstractItemView::item:selected 
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(63, 110, 171, 255),stop:1 rgba(69, 100, 135, 255));
+	color: #ddd;
+}
+
+QAbstractItemView::item:hover 
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(92, 124, 165, 255),stop:1 rgba(43, 68, 99, 255));
+	color: #eee;
+}
+
+QAbstractItemView::item:alternate:selected
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(63, 110, 171, 255),stop:1 rgba(69, 100, 135, 255));
+	color: #ddd;
+}
+
+QAbstractItemView::item:alternate:hover
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(92, 124, 165, 255),stop:1 rgba(43, 68, 99, 255));
+	color: #eee;
+}
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings 
+{
+	image: url(:/img/down_arrow_penombra.png);
+}
+
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  
+{
+	image: url(:/img/up_arrow_penombra.png);
+}
+
+QTabBar::tab
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(52, 95, 152, 100),stop:1 rgba(57, 81, 107, 100));
+	border: 1px solid #ddd;
+	padding : 5px 10px 5px 10px;
+}
+
+
+QTabBar::tab:!selected
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(188, 188, 188, 255),stop:1 rgba(193, 193, 193, 255));
+	border: 1px solid #ddd;
+}
+
+QTabWidget::pane 
+{
+	border: 1px solid #999;
+}
+
+QTabBar::tab:!selected:hover
+{
+	border-top: 2px solid #39597f;
+}
+
+QHeaderView::section
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(193, 193, 193, 255),stop:1 rgba(200, 200, 200, 255));
+	border: 1px outset #ddd;
+}
+
+QHeaderView::section:disabled
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(160, 160, 160, 255),stop:1 rgba(164, 164, 164, 255));
+	border: 1px outset #bbb;
+}
+
+QTableCornerButton::section
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(193, 193, 193, 255),stop:1 rgba(200, 200, 200, 255));
+	border: 1px outset #ddd;
+}
+
+QDockWidget 
+{ 
+    titlebar-close-icon: url(:/img/blank.png);
+    titlebar-normal-icon: url(:/img/blank.png);
+}
+
+QMainWindow::separator 
+{
+	background-color: #333;
+	width: 2px;
+	height: 2px;
+}
+
+QDockWidget::title 
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(198,198,198,255),stop:1 rgba(204,204,204,255));
+    text-align: center;
+}
+
+QDockWidget::close-button, QDockWidget::float-button 
+{
+    background: transparent;
+    icon-size: 3px;
+}
+
+QDockWidget::float-button 
+{
+    image: url(:/img/undock_penombra.png);
+}
+
+QDockWidget::close-button 
+{
+    image: url(:/img/close_penombra.png);
+}
+
+QDockWidget::float-button:hover 
+{
+    background-color: #4f7af0;
+}
+
+QDockWidget::close-button:hover 
+{
+    background-color: #4f7af0;
+}
+
+/*-----BUTTON-----*/
+QAbstractButton 
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(171, 171, 171, 255),stop:1 rgba(185, 185, 185, 255));
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 6px;
+}
+
+QAbstractButton::flat
+{
+	background-color: transparent;
+	border: none;
+}
+
+QAbstractButton::disabled
+{
+	background-color: #bfbfbf;
+	color: #aaa;
+	border-color: #aaa;
+}
+
+QAbstractButton::checked
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1,stop:0 rgba(52, 95, 152, 200),stop:1 rgba(56, 91, 130, 200));
+	border: 2px outset #334f7cd8;
+}
+
+QAbstractButton::hover
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(73, 126, 196, 100),stop:1 rgba(40, 69, 115, 150));
+}
+
+QAbstractButton::pressed
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(52, 95, 152, 150),stop:1 rgba(35, 70, 114, 120));
+	border: 1px solid #4f7cd8;
+}
+
+QAbstractButton::flat:pressed
+{
+	border: none;
+}
+
+QCheckBox,QRadioButton
+{
+	background-color: transparent;
+	border: none;
+}
+
+QCheckBox::hover,QRadioButton::hover
+{
+	background-color: transparent;
+}
+
+QCheckBox::checked,QRadioButton::checked
+{
+	background-color: transparent;
+	border: none;
+}
+
+QCheckBox::pressed,QRadioButton::pressed
+{
+	background-color: transparent;
+	border: none;
+}
+
+QCheckBox::disabled,QRadioButton::disabled
+{
+	background-color: transparent;
+	color: #aaa;
+}
+
+QCheckBox::indicator
+{
+    background-color: #cdcdcd;
+    border: 1px solid #000;
+	width: 14px;
+    height: 14px;
+}
+
+
+QCheckBox::indicator:checked
+{
+    image:url(":/img/check_penombra.png");
+	background-color: #345f98;
+}
+
+QCheckBox::indicator:disabled,QRadioButton::indicator:disabled
+{
+	background-color: #aaa;
+	border: 1px solid #ccc;
+}
+
+QRadioButton::indicator
+{
+	border: 1px solid #000;
+	border-radius: 7px;
+	background-color: #cdcdcd;
+	width: 12px;
+    height: 12px;
+
+}
+
+QRadioButton::indicator::checked 
+{
+	border: 2px solid #000;
+	background-color: #345f98;
+}
+
+/*-----INPUT-----*/
+QLineEdit,QPlainTextEdit,QTextEdit,QTextBrowser 
+{
+	background-color: #cdcdcd;
+	border: 1px solid #000;
+	selection-color: #ddd;
+	border-radius: 5px;
+	padding: 3px;
+}
+
+QLineEdit::disabled,QPlainTextEdit::disabled,QTextEdit::disabled,QTextBrowser::disabled 
+{
+	border: 1px solid #aaa;
+	color : #aaa;
+}
+
+QComboBox
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(171, 171, 171, 255),stop:1 rgba(185, 185, 185, 255));
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 6px;
+}
+
+QComboBox::disabled
+{
+	background-color: #bfbfbf;
+	color: #aaa;
+	border-color: #aaa;
+}
+
+
+QComboBox:on
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(88, 154, 242, 100),stop:1 rgba(35, 70, 214, 60));
+}
+
+
+QComboBox QAbstractItemView
+{
+    background-color: transparent;
+	selection-background-color: #345f98;
+	border-radius: 5px;
+	padding: 2px;
+}
+
+QComboBox::drop-down
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(198, 198, 198, 255),stop:1 rgba(205, 205, 205, 255));
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    border-left: 1px solid white;
+}
+
+QComboBox::down-arrow
+{
+    image: url(:/img/down_arrow_penombra.png);
+}
+
+QSpinBox,
+QDateTimeEdit 
+{
+    background-color: #cdcdcd;
+	border: 1px solid #000;
+    border-radius : 5px;
+	selection-color: #ddd;
+}
+
+QSpinBox::up-button, 
+QDateTimeEdit::up-button
+{
+	background-color: transparent;
+}
+
+QSpinBox::up-button:hover, 
+QDateTimeEdit::up-button:hover
+{
+	background-color: #5c7ca5;
+}
+
+QSpinBox::up-arrow,
+QDateTimeEdit::up-arrow
+{
+    image: url(:/img/up_arrow_penombra.png);
+    width: 8px;
+    height: 8px;
+}
+
+QSpinBox::down-button, 
+QDateTimeEdit::down-button
+{
+	background-color: transparent;
+}
+
+QSpinBox::down-button:hover, 
+QDateTimeEdit::down-button:hover
+{
+	background-color: #5c7ca5;
+}
+
+QSpinBox::down-arrow,
+QDateTimeEdit::down-arrow
+{
+    image: url(:/img/down_arrow_penombra.png);
+    width: 8px;
+    height: 8px;
+}
+
+QCalendarWidget QToolButton 
+{
+  	border: none;
+  	background-color: transparent;
+}
+
+QSlider::groove:horizontal
+{
+	background-color: transparent;
+	height: 3px;
+}
+
+QSlider::groove:vertical 
+{
+	background-color: transparent;
+	width: 3px;
+}
+
+QSlider::sub-page:horizontal,
+QSlider::sub-page:vertical 
+{
+	background-color: #878787;
+}
+
+
+QSlider::add-page:horizontal,
+QSlider::add-page:vertical 
+{
+	background-color: #dbdbdb;
+}
+
+
+QSlider::handle:horizontal
+{
+	background-color: #878787;
+	width: 22px;
+	margin-top: -6px;
+	margin-bottom: -6px;
+	border-radius: 6px;
+}
+
+QSlider::handle:vertical 
+{
+	background-color: #878787;
+	height: 22px;
+	margin-left: -6px;
+	margin-right: -6px;
+	border-radius: 6px;
+}
+
+QSlider::handle:horizontal:hover,
+QSlider::handle:vertical:hover 
+{
+	background-color: #39587f;
+}
+
+QSlider::handle:horizontal:disabled,
+QSlider::handle:vertical:disabled
+{
+	background-color: #aaa;
+}
+
+QScrollBar:horizontal
+{
+    background-color: #b8b8b8;
+    border: 1px solid #bdbdbd;
+	border-radius: 6px;
+    margin: 0px 15px 0px 15px;
+}
+
+QScrollBar:vertical
+{
+    background-color: #b8b8b8;
+    border: 1px solid #bdbdbd;
+	border-radius: 6px;
+    margin: 15px 0px 15px 0px;
+}
+
+QScrollBar::handle:horizontal,
+QScrollBar::handle:vertical
+{
+	background-color: #878787;
+	border-radius: 6px;
+	border: 1px solid #d2d2d2;
+}
+
+QScrollBar::handle:horizontal:hover,
+QScrollBar::handle:vertical:hover
+{
+	background-color: #39587f;
+}
+
+QScrollBar::handle:horizontal:disabled,
+QScrollBar::handle:vertical:disabled
+{
+	background-color: #aaa;
+	border : none;
+}
+
+QScrollBar::add-line:horizontal
+{
+	width: 15px;
+    height: 15px;
+	background-color: #9e9e9e;
+	subcontrol-position: right;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical
+{
+	width: 15px;
+    height: 15px;
+	background-color: #9e9e9e;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal
+{
+	height: 15px;
+	width: 15px;
+	background-color: #9e9e9e;
+	subcontrol-position: left;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical
+{
+	height: 15px;
+	width: 15px;
+	background-color: #9e9e9e;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:horizontal:hover,
+QScrollBar::sub-line:horizontal:hover,
+QScrollBar::add-line:vertical:hover,
+QScrollBar::sub-line:vertical:hover
+{
+	background-color: #39587f;
+}
+
+QScrollBar::add-line:horizontal:disabled,
+QScrollBar::sub-line:horizontal:disabled,
+QScrollBar::add-line:vertical:disabled,
+QScrollBar::sub-line:vertical:disabled
+{
+	background-color: #aaa;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal,
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background: transparent;
+}
+
+QScrollBar::right-arrow:horizontal
+{
+    image: url(:/img/right_arrow_penombra.png);
+}
+
+QScrollBar::left-arrow:horizontal
+{
+    image: url(:/img/left_arrow_penombra.png);
+}
+
+QScrollBar::up-arrow:vertical
+{
+    image: url(:/img/up_arrow_penombra.png);
+}
+
+QScrollBar::down-arrow:vertical
+{
+    image: url(:/img/down_arrow_penombra.png);
+}

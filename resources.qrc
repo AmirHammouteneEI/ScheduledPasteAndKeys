@@ -3,5 +3,32 @@
         <file>img/programIcon.png</file>
         <file>img/pinned.png</file>
         <file>img/unpinned.png</file>
+        <file>img/darkTheme.png</file>
+        <file>img/lightTheme.png</file>
+        <file>img/penombraTheme.png</file>
+        <file>style/dark.qss</file>
+        <file>style/light.qss</file>
+        <file>style/penombra.qss</file>
+        <file>img/check.png</file>
+        <file>img/check_light.png</file>
+        <file>img/check_penombra.png</file>
+        <file>img/close.png</file>
+        <file>img/close_light.png</file>
+        <file>img/close_penombra.png</file>
+        <file>img/down_arrow.png</file>
+        <file>img/down_arrow_light.png</file>
+        <file>img/down_arrow_penombra.png</file>
+        <file>img/left_arrow.png</file>
+        <file>img/left_arrow_light.png</file>
+        <file>img/left_arrow_penombra.png</file>
+        <file>img/right_arrow.png</file>
+        <file>img/right_arrow_light.png</file>
+        <file>img/right_arrow_penombra.png</file>
+        <file>img/undock.png</file>
+        <file>img/undock_light.png</file>
+        <file>img/undock_penombra.png</file>
+        <file>img/up_arrow.png</file>
+        <file>img/up_arrow_light.png</file>
+        <file>img/up_arrow_penombra.png</file>
     </qresource>
 </RCC>

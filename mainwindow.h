@@ -22,6 +22,7 @@ public slots:
 private slots:
     void quitApp();
     void swapStayOnTop(bool state);
+    void switchTheme();
 protected :
     QSystemTrayIcon* m_sticon;
     void buildSystemTrayMenu();
@@ -32,7 +33,12 @@ protected :
     void loadSettings();
     void saveSettings();
     QAction *m_stayOnTopAction;
+    QAction * m_lightThemeAction;
+    QAction * m_penombraThemeAction;
+    QAction * m_darkThemeAction;
     void buildToolBar();
+    QString m_currentThemeName;
+    void setTheme();
 private:
     Ui::MainWindow *ui;
 };
