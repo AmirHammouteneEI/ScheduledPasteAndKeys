@@ -26,6 +26,12 @@ MainWindow::MainWindow(QWidget *parent)
     geometrySet();
 
     buildToolBar();
+
+    m_createLoadTaskDialog = new CreateLoadTaskDialog(this);
+
+    // Connect the "+" tab to load or create task dialog
+    connect(ui->tabWidget, &QTabWidget::tabBarClicked, this, &MainWindow::taskTabPageClicked);
+
     setTheme();
 }
 
@@ -38,7 +44,7 @@ void MainWindow::buildSystemTrayMenu()
 {
     QMenu *stmenu = new QMenu(this);
 
-    QAction* titleAction = new QAction(QIcon(":/img/programIcon.png"),"Scheduled Paste & Keys",stmenu);
+    QAction* titleAction = new QAction(QIcon(":/img/programIcon.png"),"Scheduled Paste && Keys",stmenu);
     QFont titleFont = titleAction->font();
     titleFont.setBold(true);
     titleAction->setFont(titleFont);
@@ -199,6 +205,13 @@ void MainWindow::switchTheme()
         qApp->setStyleSheet(qss.readAll());
         qss.close();
     }
+}
+
+void MainWindow::taskTabPageClicked(int index)
+{
+    if(index == ui->tabWidget->count()-1) //the last tab should always be the "+" tab
+        m_createLoadTaskDialog->show();
+
 }
 
 void MainWindow::showWindow(QSystemTrayIcon::ActivationReason reason)

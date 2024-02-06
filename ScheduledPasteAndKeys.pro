@@ -6,13 +6,18 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    ui/CreateLoadTaskDialog.cpp \
+    ui/TaskTab.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    ui/CreateLoadTaskDialog.h \
+    ui/TaskTab.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    ui/CreateLoadTaskDialog.ui
 
 RESOURCES += \
     resources.qrc

@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QSystemTrayIcon>
 
+#include "ui/CreateLoadTaskDialog.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -23,6 +25,7 @@ private slots:
     void quitApp();
     void swapStayOnTop(bool state);
     void switchTheme();
+    void taskTabPageClicked(int newIndex);
 protected :
     QSystemTrayIcon* m_sticon;
     void buildSystemTrayMenu();
@@ -39,6 +42,7 @@ protected :
     void buildToolBar();
     QString m_currentThemeName;
     void setTheme();
+    CreateLoadTaskDialog *m_createLoadTaskDialog;
 private:
     Ui::MainWindow *ui;
 };
