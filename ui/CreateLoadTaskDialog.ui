@@ -72,7 +72,7 @@
          <enum>QAbstractItemView::SingleSelection</enum>
         </property>
         <property name="rowCount">
-         <number>2</number>
+         <number>0</number>
         </property>
         <property name="columnCount">
          <number>2</number>
@@ -86,26 +86,8 @@
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>
         </attribute>
-        <row>
-         <property name="text">
-          <string>Nouvelle ligne</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>Nouvelle ligne</string>
-         </property>
-        </row>
-        <column>
-         <property name="text">
-          <string>Nouvelle colonne</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Nouvelle colonne</string>
-         </property>
-        </column>
+        <column/>
+        <column/>
        </widget>
       </item>
       <item>

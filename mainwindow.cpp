@@ -210,7 +210,7 @@ void MainWindow::switchTheme()
 void MainWindow::taskTabPageClicked(int index)
 {
     if(index == ui->tabWidget->count()-1) //the last tab should always be the "+" tab
-        m_createLoadTaskDialog->show();
+        m_createLoadTaskDialog->showDialog();
 
 }
 

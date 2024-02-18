@@ -14,9 +14,16 @@ class CreateLoadTaskDialog : public QDialog
 public:
     explicit CreateLoadTaskDialog(QWidget *parent = nullptr);
     ~CreateLoadTaskDialog();
+    static const QString s_tasksFolder;
+    static const QString s_tasksFileExtension;
+    void showDialog();
+
+private slots:
+    void accept() override;
 
 private:
     Ui::CreateLoadTaskDialog *ui;
+    void fillExistingTasksTable();
 };
 
 #endif // CREATELOADTASKDIALOG_H
