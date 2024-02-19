@@ -80,8 +80,11 @@
         <attribute name="horizontalHeaderVisible">
          <bool>false</bool>
         </attribute>
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>32</number>
+        </attribute>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>200</number>
+         <number>193</number>
         </attribute>
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>

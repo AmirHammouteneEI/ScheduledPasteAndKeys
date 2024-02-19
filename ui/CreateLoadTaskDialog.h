@@ -20,6 +20,12 @@ public:
 
 private slots:
     void accept() override;
+    void onOpenFilename();
+    void onRenameFilename();
+    void onDeleteFilename();
+
+signals:
+    void requestOpenNewTab(QString);
 
 private:
     Ui::CreateLoadTaskDialog *ui;
