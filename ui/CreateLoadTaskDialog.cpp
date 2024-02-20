@@ -36,6 +36,13 @@ void CreateLoadTaskDialog::showDialog()
 
 void CreateLoadTaskDialog::accept()
 {
+    if(ui->lineEdit->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Empty filename"),
+          tr("Task file must have a name."));
+        return;
+    }
+
     QString filePathChosen = QDir::currentPath()+"/"+s_tasksFolder+ui->lineEdit->text()+s_tasksFileExtension;
     QFileInfo fileChosen(filePathChosen);
 
@@ -48,7 +55,7 @@ void CreateLoadTaskDialog::accept()
     }
 
     QFile fileToCreate(filePathChosen);
-    if(!fileToCreate.open(QIODevice::WriteOnly | QIODevice::Text) || ui->lineEdit->text().isEmpty())
+    if(!fileToCreate.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         QMessageBox::warning(this, tr("Cannot create file"),
           tr("Some system or user action interferes with this file creation, sorry for the inconvenience."));
@@ -95,6 +102,20 @@ void CreateLoadTaskDialog::onRenameFilename()
 
     if(!okButPushed)
         return;
+
+    if(newFileName.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Empty filename"),
+          tr("Task file must have a name."));
+        return;
+    }
+
+    if(newFileName == oldFileName.chopped(5))
+    {
+        QMessageBox::warning(this, tr("Same filename"),
+                             tr("You are trying to rename this file with the same old name. Canceled operation."));
+        return;
+    }
 
     QString filePathChosen = QDir::currentPath()+"/"+s_tasksFolder+newFileName+s_tasksFileExtension;
     QFileInfo fileChosen(filePathChosen);
