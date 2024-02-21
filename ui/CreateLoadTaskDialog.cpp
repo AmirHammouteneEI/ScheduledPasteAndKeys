@@ -1,10 +1,15 @@
 #include "CreateLoadTaskDialog.h"
 #include "ui_CreateLoadTaskDialog.h"
+#include "globals.h"
+
 #include <QPushButton>
 #include <QDir>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 const QString CreateLoadTaskDialog::s_tasksFolder = "saved_tasks/";
 const QString CreateLoadTaskDialog::s_tasksFileExtension = ".scht";
@@ -38,8 +43,7 @@ void CreateLoadTaskDialog::accept()
 {
     if(ui->lineEdit->text().isEmpty())
     {
-        QMessageBox::warning(this, tr("Empty filename"),
-          tr("Task file must have a name."));
+        QMessageBox::warning(this, tr("Empty filename"), tr("Task file must have a name."));
         return;
     }
 
@@ -48,8 +52,7 @@ void CreateLoadTaskDialog::accept()
 
     if(fileChosen.exists() && fileChosen.isFile())
     {
-        if(QMessageBox::question(this, tr("File with this name already exists"),
-          tr("A task file with the chosen name already exists, do you confirm that you would like to overwrite this one ?"),
+        if(QMessageBox::question(this, tr("File with this name already exists"), G_Sentences::AlreadyExists,
           QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
             return;
     }
@@ -57,10 +60,18 @@ void CreateLoadTaskDialog::accept()
     QFile fileToCreate(filePathChosen);
     if(!fileToCreate.open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        QMessageBox::warning(this, tr("Cannot create file"),
-          tr("Some system or user action interferes with this file creation, sorry for the inconvenience."));
+        QMessageBox::warning(this, tr("Cannot create file"), G_Sentences::OperationInterference);
         return;
     }
+
+    QJsonObject newContentJson;
+    newContentJson.insert(G_Files::DocumentIdentification_KeyWord,QJsonValue::fromVariant(G_Files::DocumentIdentification_Value));
+    newContentJson.insert(G_Files::DocumentTaskName_KeyWord,QJsonValue::fromVariant(ui->lineEdit->text()));
+    QJsonArray emptyArray;
+    newContentJson.insert(G_Files::DocumentActionsArray_KeyWord, emptyArray);
+
+    QJsonDocument newJsondoc(newContentJson);
+    fileToCreate.write(newJsondoc.toJson());
 
     fileToCreate.close();
 
@@ -72,8 +83,7 @@ void CreateLoadTaskDialog::onOpenFilename()
 {
     if(ui->tableWidget->selectedItems().count() == 0)
     {
-        QMessageBox::warning(this, tr("No file selected"),
-          tr("No file has been selected from the table of saved files above. Please select one."));
+        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected);
         return;
     }
 
@@ -88,8 +98,7 @@ void CreateLoadTaskDialog::onRenameFilename()
 {
     if(ui->tableWidget->selectedItems().count() == 0)
     {
-        QMessageBox::warning(this, tr("No file selected"),
-          tr("No file has been selected from the table of saved files above. Please select one."));
+        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected);
         return;
     }
 
@@ -113,7 +122,7 @@ void CreateLoadTaskDialog::onRenameFilename()
     if(newFileName == oldFileName.chopped(5))
     {
         QMessageBox::warning(this, tr("Same filename"),
-                             tr("You are trying to rename this file with the same old name. Canceled operation."));
+          tr("You are trying to rename this file with the same old name. Canceled operation."));
         return;
     }
 
@@ -122,16 +131,14 @@ void CreateLoadTaskDialog::onRenameFilename()
 
     if(fileChosen.exists() && fileChosen.isFile())
     {
-        if(QMessageBox::question(this, tr("File with this name already exists"),
-             tr("A task file with the chosen name already exists, do you confirm that you would like to overwrite this one ?"),
+        if(QMessageBox::question(this, tr("File with this name already exists"), G_Sentences::AlreadyExists,
              QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
             return;
         else
         {
             if(!QFile::remove(filePathChosen))
             {
-                QMessageBox::warning(this, tr("Cannot delete file with same name"),
-                 tr("Some system or user action interferes with deleting the file with same name, sorry for the inconvenience."));
+                QMessageBox::warning(this, tr("Cannot delete file with same name"), G_Sentences::OperationInterference);
                 return;
             }
         }
@@ -139,8 +146,7 @@ void CreateLoadTaskDialog::onRenameFilename()
 
     if(!QFile::rename(oldFilePath, filePathChosen))
     {
-        QMessageBox::warning(this, tr("Cannot rename this file"),
-         tr("Some system or user action interferes with renaming this file, sorry for the inconvenience."));
+        QMessageBox::warning(this, tr("Cannot rename this file"), G_Sentences::OperationInterference);
         return;
     }
 
@@ -151,8 +157,7 @@ void CreateLoadTaskDialog::onDeleteFilename()
 {
     if(ui->tableWidget->selectedItems().count() == 0)
     {
-        QMessageBox::warning(this, tr("No file selected"),
-          tr("No file has been selected from the table of saved files above. Please select one."));
+        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected);
         return;
     }
 
@@ -171,8 +176,7 @@ void CreateLoadTaskDialog::onDeleteFilename()
         {
             if(!QFile::remove(filePath))
             {
-                QMessageBox::warning(this, tr("Cannot delete file"),
-                                     tr("Some system or user action interferes with deleting this file, sorry for the inconvenience."));
+                QMessageBox::warning(this, tr("Cannot delete file"), G_Sentences::OperationInterference);
                 return;
             }
         }

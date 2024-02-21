@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "globals.h"
 
 #include <QMenu>
 #include <QAction>
@@ -75,7 +76,7 @@ void MainWindow::geometrySet()
 
 void MainWindow::loadSettings()
 {
-    QSettings settings("programSettings.ini", QSettings::IniFormat);
+    QSettings settings(G_Files::SettingsFilePath, QSettings::IniFormat);
     m_windowWidth = settings.value("windowWidth", 300).toInt();
     m_windowHeight = settings.value("windowHeight", 900).toInt();
 
@@ -87,7 +88,7 @@ void MainWindow::loadSettings()
 
 void MainWindow::saveSettings()
 {
-    QSettings settings("programSettings.ini", QSettings::IniFormat);
+    QSettings settings(G_Files::SettingsFilePath, QSettings::IniFormat);
     settings.setValue("windowWidth", width());
     settings.setValue("windowHeight", height());
     settings.setValue("style", m_currentThemeName);
