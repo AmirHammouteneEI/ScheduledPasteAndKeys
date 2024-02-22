@@ -1,15 +1,16 @@
 #ifndef TASKTAB_H
 #define TASKTAB_H
 
-#include <QObject>
-#include <QWidget>
+#include <QScrollArea>
+#include <QVBoxLayout>
 
-class TaskTab : public QWidget
+class TaskTab : public QScrollArea
 {
     Q_OBJECT
 protected:
     QString m_name;
     int m_ID;
+    QVBoxLayout *m_actionsLayout;
 public:
     explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
 
