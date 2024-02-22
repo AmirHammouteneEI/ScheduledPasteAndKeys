@@ -7,10 +7,13 @@
 class TaskTab : public QWidget
 {
     Q_OBJECT
+protected:
+    QString m_name;
+    int m_ID;
 public:
-    explicit TaskTab(QWidget *parent = nullptr);
+    explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
 
-signals:
+    friend class TaskTabsManager;
 };
 
 #endif // TASKTAB_H

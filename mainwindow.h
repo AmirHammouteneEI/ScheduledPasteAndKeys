@@ -5,6 +5,7 @@
 #include <QSystemTrayIcon>
 
 #include "ui/CreateLoadTaskDialog.h"
+#include "TaskTabsManager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,6 +20,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    QTabWidget * getTabWidget();
 public slots:
     void showWindow(QSystemTrayIcon::ActivationReason reason = QSystemTrayIcon::Trigger);
 private slots:
@@ -43,6 +45,7 @@ protected :
     QString m_currentThemeName;
     void setTheme();
     CreateLoadTaskDialog *m_createLoadTaskDialog;
+    TaskTabsManager* m_tasktabsManager;
 private:
     Ui::MainWindow *ui;
 };

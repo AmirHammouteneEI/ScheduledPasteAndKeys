@@ -88,7 +88,7 @@ void CreateLoadTaskDialog::onOpenFilename()
     }
 
 
-    QString filePathSelected = QDir::currentPath()+"/"+s_tasksFolder+ui->tableWidget->selectedItems().at(0)->text()+s_tasksFileExtension;
+    QString filePathSelected = QDir::currentPath()+"/"+s_tasksFolder+ui->tableWidget->selectedItems().at(0)->text();
 
     emit requestOpenNewTab(filePathSelected);
     QDialog::accept();
@@ -150,7 +150,42 @@ void CreateLoadTaskDialog::onRenameFilename()
         return;
     }
 
+    QFile fileToModify(filePathChosen);
+    if(!fileToModify.open(QIODevice::ReadWrite | QIODevice::Text))
+    {
+        QMessageBox::warning(this, tr("Cannot open file to rename"), G_Sentences::OperationInterference);
+        return;
+    }
+
+    QString fileContent = fileToModify.readAll();
+
+    fileToModify.resize(0);
+
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
+    if(jsonDoc.isNull())
+    {
+        QMessageBox::warning(this, tr("File format error"), G_Sentences::FileParsingError);
+        return;
+    }
+
+    QJsonObject jsonContent = jsonDoc.object();
+
+    if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
+        != G_Files::DocumentIdentification_Value)
+    {
+        QMessageBox::warning(this, tr("File format error"), G_Sentences::FileParsingError);
+        return;
+    }
+
+    jsonContent.insert(G_Files::DocumentTaskName_KeyWord,QJsonValue::fromVariant(newFileName)) ;
+
+    jsonDoc.setObject(jsonContent);
+    fileToModify.write(jsonDoc.toJson());
+    fileToModify.close();
+
     fillExistingTasksTable();
+    emit taskfilePathChanged(oldFilePath,filePathChosen);
+    emit requestRefreshTabs();
 }
 
 void CreateLoadTaskDialog::onDeleteFilename()
@@ -183,6 +218,8 @@ void CreateLoadTaskDialog::onDeleteFilename()
     }
 
     fillExistingTasksTable();
+
+    emit requestRefreshTabs();
 }
 
 void CreateLoadTaskDialog::fillExistingTasksTable()

@@ -8,6 +8,7 @@
 #include <QCursor>
 #include <QSettings>
 #include <QToolBar>
+#include <QTabBar>
 #include <QFile>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -30,15 +31,28 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_createLoadTaskDialog = new CreateLoadTaskDialog(this);
 
+    ui->tabWidget->tabBar()->tabButton(0, QTabBar::RightSide)->resize(0,0);
+
     // Connect the "+" tab to load or create task dialog
     connect(ui->tabWidget, &QTabWidget::tabBarClicked, this, &MainWindow::taskTabPageClicked);
 
     setTheme();
+
+    m_tasktabsManager = new TaskTabsManager(this);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestOpenNewTab, m_tasktabsManager, &TaskTabsManager::onOpenNewTabRequest);
+    connect(ui->tabWidget, &QTabWidget::tabCloseRequested, m_tasktabsManager, &TaskTabsManager::onTabCloseRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager, &TaskTabsManager::onRefreshTabsRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager, &TaskTabsManager::onTaskfilePathChanged);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+QTabWidget *MainWindow::getTabWidget()
+{
+    return ui->tabWidget;
 }
 
 void MainWindow::buildSystemTrayMenu()

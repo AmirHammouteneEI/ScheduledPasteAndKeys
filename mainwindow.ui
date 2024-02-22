@@ -42,7 +42,7 @@
        <enum>Qt::ElideMiddle</enum>
       </property>
       <property name="tabsClosable">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <widget class="QWidget" name="addtab">
        <attribute name="icon">

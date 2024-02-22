@@ -26,6 +26,8 @@ private slots:
 
 signals:
     void requestOpenNewTab(QString);
+    void requestRefreshTabs();
+    void taskfilePathChanged(QString,QString);
 
 private:
     Ui::CreateLoadTaskDialog *ui;

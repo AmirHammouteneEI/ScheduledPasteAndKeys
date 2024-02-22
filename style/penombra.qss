@@ -219,11 +219,13 @@ QTreeView::branch:open:has-children:has-siblings
 
 QTabBar::tab
 {
+	width: 120px;
+	height: 20px;
+	text-align:left;
     background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(52, 95, 152, 100),stop:1 rgba(57, 81, 107, 100));
 	border: 1px solid #ddd;
 	padding : 2px 5px 2px 5px;
 }
-
 
 QTabBar::tab:!selected
 {
