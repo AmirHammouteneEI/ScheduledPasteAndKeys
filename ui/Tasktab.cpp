@@ -1,16 +1,24 @@
 #include "TaskTab.h"
+#include "TaskThread.h"
 
 #include <QPushButton>
 #include <QToolButton>
 #include <QFrame>
 #include <QGridLayout>
 #include <QSpacerItem>
+#include <QTimer>
+#include <QApplication>
 
 TaskTab::TaskTab(QWidget *parent, const QString &name)
     : QScrollArea{parent},m_name(name)
 {
     m_ID = -1;
 
+    buildBasicInterface();
+}
+
+void TaskTab::buildBasicInterface()
+{
     setWidgetResizable(true);
     new QVBoxLayout(this);
 
@@ -58,4 +66,48 @@ TaskTab::TaskTab(QWidget *parent, const QString &name)
     setWidget(mainWidget);
 
     setAlignment(Qt::AlignTop | Qt::AlignHCenter);
+
+    connect(scheduleButton,&QPushButton::released, this, &TaskTab::TODELETE_PushScheduleToDelayRun);//TODELETE testing prebuilt task
 }
+
+//TODELETE testing prebuilt task
+#include "actions/PasteAction.h"
+#include "actions/WaitAction.h"
+
+void TaskTab::TODELETE_PushScheduleToDelayRun()
+{
+    QTimer::singleShot(9000, this, &TaskTab::TODELETE_TaskRunTest);
+}
+
+
+void TaskTab::TODELETE_TaskRunTest()
+{
+    m_task = new Task();
+
+    ActionParameters paramPaste1;
+    paramPaste1.m_pasteContent = "Maître Corbeau, sur un arbre perché,\n\n";
+    ActionParameters paramWait;
+    paramWait.m_waitDuration = 12;
+    ActionParameters paramPaste2;
+    paramPaste2.m_pasteContent = "Tenait en son bec un fromage.\n\n";
+
+    PasteAction *paste1 = new PasteAction();
+    paste1->setParameters(paramPaste1);
+    WaitAction *wait = new WaitAction();
+    wait->setParameters(paramWait);
+    PasteAction *paste2 = new PasteAction();
+    paste2->setParameters(paramPaste2);
+
+    m_task->appendAction(paste1);
+    m_task->appendAction(wait);
+    m_task->appendAction(paste2);
+
+    TaskThread* thread = new TaskThread(this);
+
+    thread->m_task = m_task;
+
+    connect(thread, &TaskThread::taskFinished, thread, &TaskThread::deleteLater);
+    thread->start();
+}
+
+//TODELETE end
