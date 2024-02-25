@@ -36,6 +36,10 @@ MainWindow::MainWindow(QWidget *parent)
     // Connect the "+" tab to load or create task dialog
     connect(ui->tabWidget, &QTabWidget::tabBarClicked, this, &MainWindow::taskTabPageClicked);
 
+    ui->tabWidget->tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    connect(ui->tabWidget->tabBar(), &QTabBar::customContextMenuRequested, this, &MainWindow::taskTabContextMenuRequest);
+
     setTheme();
 
     m_tasktabsManager = new TaskTabsManager(this);
@@ -115,7 +119,7 @@ void MainWindow::buildToolBar()
     toolBar->setFloatable(false);
     toolBar->setFixedHeight(30);
 
-    QWidget* spacer = new QWidget();
+    QWidget* spacer = new QWidget(toolBar);
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 
@@ -227,6 +231,27 @@ void MainWindow::taskTabPageClicked(int index)
     if(index == ui->tabWidget->count()-1) //the last tab should always be the "+" tab
         m_createLoadTaskDialog->showDialog();
 
+}
+
+void MainWindow::taskTabContextMenuRequest(QPoint point)
+{
+    int index = ui->tabWidget->tabBar()->tabAt(point);
+    if(index < 0 || index == ui->tabWidget->count()-1)
+        return;
+
+    auto menu = new QMenu(ui->tabWidget->tabBar());
+    auto renameAct = new QAction(tr("Rename..."),menu);
+    auto closeAct = new QAction(tr("Close"), menu);
+    menu->addAction(renameAct);
+    menu->addAction(closeAct);
+    connect(renameAct, &QAction::triggered, this, [=]()
+        {
+            QString taskName = ui->tabWidget->tabBar()->tabText(index);
+            m_createLoadTaskDialog->renameFilename(taskName+".scht",m_tasktabsManager->m_taskFilePathsMap.value(m_tasktabsManager->getIdforTaskName(taskName)));
+        });
+    connect(closeAct, &QAction::triggered, this, [=](){ m_tasktabsManager->onTabCloseRequest(index); });
+
+    menu->popup(ui->tabWidget->tabBar()->mapToGlobal(point));
 }
 
 void MainWindow::showWindow(QSystemTrayIcon::ActivationReason reason)

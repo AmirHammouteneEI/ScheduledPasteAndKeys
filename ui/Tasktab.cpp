@@ -17,6 +17,20 @@ TaskTab::TaskTab(QWidget *parent, const QString &name)
     buildBasicInterface();
 }
 
+TaskTab::~TaskTab()
+{
+    if(m_task != nullptr)
+    {
+        delete m_task;
+        m_task = nullptr;
+    }
+}
+
+void TaskTab::refreshActionsList()
+{
+
+}
+
 void TaskTab::buildBasicInterface()
 {
     setWidgetResizable(true);
@@ -28,13 +42,21 @@ void TaskTab::buildBasicInterface()
     //-- Top widget with Schedule button
     auto topWidget = new QFrame(mainWidget);
     auto topGridLayout = new QGridLayout(topWidget);
+    topGridLayout->setSizeConstraint(QLayout::SetMinimumSize);
+    m_nameLabel = new QLabel(m_name,topWidget);
+    m_nameLabel->setWordWrap(true);
+    m_nameLabel->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_nameLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
     auto scheduleButton = new QPushButton(tr("Schedule the Task"), topWidget);
     scheduleButton->setObjectName("scheduleButton");
-    auto font = scheduleButton->font();
+    auto font = m_nameLabel->font();
     font.setBold(true);
+    font.setPointSize(13);
+    m_nameLabel->setFont(font);
     font.setPointSize(16);
     scheduleButton->setFont(font);
-    topGridLayout->addWidget(scheduleButton,0,0, Qt::AlignCenter | Qt::AlignHCenter);
+    topGridLayout->addWidget(m_nameLabel,0,0, Qt::AlignCenter | Qt::AlignHCenter);
+    topGridLayout->addWidget(scheduleButton,1,0, Qt::AlignCenter | Qt::AlignHCenter);
 
     //-- Middle widget with list of actions
     auto actionsFrame = new QFrame(mainWidget);
@@ -70,38 +92,34 @@ void TaskTab::buildBasicInterface()
     connect(scheduleButton,&QPushButton::released, this, &TaskTab::TODELETE_PushScheduleToDelayRun);//TODELETE testing prebuilt task
 }
 
+void TaskTab::setTask(Task *task)
+{
+    if(m_task != nullptr)
+    {
+        delete m_task;
+        m_task = nullptr;
+    }
+
+    m_task = task;
+}
+
+void TaskTab::setName(const QString &newname)
+{
+    m_name = newname;
+    m_nameLabel->setText(m_name);
+}
+
 //TODELETE testing prebuilt task
-#include "actions/PasteAction.h"
-#include "actions/WaitAction.h"
 
 void TaskTab::TODELETE_PushScheduleToDelayRun()
 {
-    QTimer::singleShot(9000, this, &TaskTab::TODELETE_TaskRunTest);
+    QTimer::singleShot(9000, this, &TaskTab::runTaskThread);
 }
 
+//TODELETE end
 
-void TaskTab::TODELETE_TaskRunTest()
+void TaskTab::runTaskThread()
 {
-    m_task = new Task();
-
-    ActionParameters paramPaste1;
-    paramPaste1.m_pasteContent = "Maître Corbeau, sur un arbre perché,\n\n";
-    ActionParameters paramWait;
-    paramWait.m_waitDuration = 12;
-    ActionParameters paramPaste2;
-    paramPaste2.m_pasteContent = "Tenait en son bec un fromage.\n\n";
-
-    PasteAction *paste1 = new PasteAction();
-    paste1->setParameters(paramPaste1);
-    WaitAction *wait = new WaitAction();
-    wait->setParameters(paramWait);
-    PasteAction *paste2 = new PasteAction();
-    paste2->setParameters(paramPaste2);
-
-    m_task->appendAction(paste1);
-    m_task->appendAction(wait);
-    m_task->appendAction(paste2);
-
     TaskThread* thread = new TaskThread(this);
 
     thread->m_task = m_task;
@@ -110,4 +128,3 @@ void TaskTab::TODELETE_TaskRunTest()
     thread->start();
 }
 
-//TODELETE end

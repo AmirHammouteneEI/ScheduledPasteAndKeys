@@ -18,11 +18,13 @@ public:
     static const QString s_tasksFileExtension;
     void showDialog();
 
+public:
+    void renameFilename(const QString &oldFileName, const QString &oldFilePath);
 private slots:
     void accept() override;
     void onOpenFilename();
-    void onRenameFilename();
     void onDeleteFilename();
+    void onRenameFilename();
 
 signals:
     void requestOpenNewTab(QString);

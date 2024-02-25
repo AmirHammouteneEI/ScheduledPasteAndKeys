@@ -28,6 +28,7 @@ private slots:
     void swapStayOnTop(bool state);
     void switchTheme();
     void taskTabPageClicked(int newIndex);
+    void taskTabContextMenuRequest(QPoint point);
 protected :
     QSystemTrayIcon* m_sticon;
     void buildSystemTrayMenu();

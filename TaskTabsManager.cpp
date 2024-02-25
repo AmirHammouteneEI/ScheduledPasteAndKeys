@@ -63,6 +63,8 @@ void TaskTabsManager::onOpenNewTabRequest(QString path)
     int id = appendTaskInMap(createEmptyTaskAndOpenTab(taskName));
 
     m_taskFilePathsMap.insert(id, path);
+
+    createAndLoadTaskObject(id);
 }
 
 TaskTab* TaskTabsManager::createEmptyTaskAndOpenTab(const QString &name)
@@ -166,7 +168,7 @@ void TaskTabsManager::onRefreshTabsRequest()
 
         QString taskName = jsonContent.value(G_Files::DocumentTaskName_KeyWord).toString();
 
-        it->second->m_name = taskName;
+        it->second->setName(taskName);
 
         m_mainwindow->getTabWidget()->setTabText(getTabIndexforId(it->first), taskName);
 
@@ -182,3 +184,59 @@ void TaskTabsManager::onTaskfilePathChanged(QString oldpath, QString newpath)
             m_taskFilePathsMap.insert(it->first, newpath);
     }
 }
+
+void TaskTabsManager::createAndLoadTaskObject(int id)
+{
+    QFile fileToOpen(m_taskFilePathsMap.value(id));
+    if(!fileToOpen.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    QString fileContent = fileToOpen.readAll();
+    fileToOpen.close();
+
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
+    if(jsonDoc.isNull())
+        return;
+
+    Task *task = new Task();
+
+    QJsonObject jsonContent = jsonDoc.object();
+
+    //TODO go through actions to fill new Task
+
+    TODELETE_fillTaskTest(task); //TODELETE testing prebuilt task
+
+    m_taskTabsMap.value(id)->setTask(task);
+    m_taskTabsMap.value(id)->refreshActionsList();
+}
+
+//TODELETE testing prebuilt task
+
+#include "actions/PasteAction.h"
+#include "actions/WaitAction.h"
+
+void TaskTabsManager::TODELETE_fillTaskTest(Task *task)
+{
+    if(task == nullptr)
+        return;
+
+    ActionParameters paramPaste1;
+    paramPaste1.m_pasteContent = "Maître Corbeau, sur un arbre perché,\n\n";
+    ActionParameters paramWait;
+    paramWait.m_waitDuration = 12;
+    ActionParameters paramPaste2;
+    paramPaste2.m_pasteContent = "Tenait en son bec un fromage.\n\n";
+
+    PasteAction *paste1 = new PasteAction();
+    paste1->setParameters(paramPaste1);
+    WaitAction *wait = new WaitAction();
+    wait->setParameters(paramWait);
+    PasteAction *paste2 = new PasteAction();
+    paste2->setParameters(paramPaste2);
+
+    task->appendAction(paste1);
+    task->appendAction(wait);
+    task->appendAction(paste2);
+}
+
+//TODELETE end

@@ -10,7 +10,7 @@ class TaskThread : public QThread
     Q_OBJECT
 public:
     explicit TaskThread(QObject *parent = nullptr);
-    Task *m_task;
+    Task *m_task = nullptr;
     bool m_loop = false;
 protected:
     void run() override;

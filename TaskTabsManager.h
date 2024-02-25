@@ -11,7 +11,7 @@ class TaskTabsManager : public QObject
 {
     Q_OBJECT
 
-    MainWindow *m_mainwindow;
+    MainWindow *m_mainwindow = nullptr;
     QMap<unsigned int, TaskTab*> m_taskTabsMap;
     unsigned int m_idCounter = 0;
     QMap<unsigned int, QString> m_taskFilePathsMap; // may contains old closed tab paths of file, but should be updated with opened tasks
@@ -28,8 +28,10 @@ protected:
     int appendTaskInMap(TaskTab* task);
     int getIdforTaskName(const QString &name);
     int getTabIndexforId(int id);
+    void createAndLoadTaskObject(int id); //TODO go through actions to fill new Task
+    void TODELETE_fillTaskTest(Task *task); //TODELETE testing prebuilt task
 
-signals:
+    friend class MainWindow;
 };
 
 #endif // TASKTABSMANAGER_H

@@ -6,11 +6,13 @@
 
 class Task
 {
+    QMap<unsigned int, AbstractAction*> m_actions;
 public:
     explicit Task();
     ~Task();
-    QMap<unsigned int, AbstractAction*> m_actions;
     int appendAction(AbstractAction *act);
+
+    friend class TaskThread;
 };
 
 #endif // TASK_H

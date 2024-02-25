@@ -94,6 +94,7 @@ void CreateLoadTaskDialog::onOpenFilename()
     QDialog::accept();
 }
 
+
 void CreateLoadTaskDialog::onRenameFilename()
 {
     if(ui->tableWidget->selectedItems().count() == 0)
@@ -105,9 +106,15 @@ void CreateLoadTaskDialog::onRenameFilename()
     QString oldFileName = ui->tableWidget->selectedItems().at(0)->text();
     QString oldFilePath = QDir::currentPath()+"/"+s_tasksFolder+oldFileName;
 
+    renameFilename(oldFileName, oldFilePath);
+}
+
+void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QString &oldFilePath)
+{
+
     bool okButPushed;
     QString newFileName = QInputDialog::getText(this, tr("New name for this file"),tr("Please choose a new name for this file : \n")+oldFileName.chopped(5),
-       QLineEdit::Normal, QString(),&okButPushed);
+       QLineEdit::Normal, oldFileName.chopped(5),&okButPushed);
 
     if(!okButPushed)
         return;
@@ -221,6 +228,7 @@ void CreateLoadTaskDialog::onDeleteFilename()
 
     emit requestRefreshTabs();
 }
+
 
 void CreateLoadTaskDialog::fillExistingTasksTable()
 {
