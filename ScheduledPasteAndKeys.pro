@@ -15,7 +15,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     ui/CreateLoadTaskDialog.cpp \
-    ui/TaskTab.cpp
+    ui/TaskTab.cpp \
+    ui/getDelayDialog.cpp
 
 HEADERS += \
     Task.h \
@@ -29,11 +30,13 @@ HEADERS += \
     globals.h \
     mainwindow.h \
     ui/CreateLoadTaskDialog.h \
-    ui/TaskTab.h
+    ui/TaskTab.h \
+    ui/getDelayDialog.h
 
 FORMS += \
     mainwindow.ui \
-    ui/CreateLoadTaskDialog.ui
+    ui/CreateLoadTaskDialog.ui \
+    ui/getDelayDialog.ui
 
 LIBS += -luser32
 

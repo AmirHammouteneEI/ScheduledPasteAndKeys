@@ -89,7 +89,10 @@ void TaskTab::buildBasicInterface()
 
     setAlignment(Qt::AlignTop | Qt::AlignHCenter);
 
-    connect(scheduleButton,&QPushButton::released, this, &TaskTab::TODELETE_PushScheduleToDelayRun);//TODELETE testing prebuilt task
+    m_getDelayDialog = new getDelayDialog(this);
+
+    connect(scheduleButton,&QPushButton::released, m_getDelayDialog, &getDelayDialog::showDialog);
+    connect(m_getDelayDialog,&getDelayDialog::sendDelay, this, &TaskTab::scheduleTaskAfterDelay);
 }
 
 void TaskTab::setTask(Task *task)
@@ -109,14 +112,10 @@ void TaskTab::setName(const QString &newname)
     m_nameLabel->setText(m_name);
 }
 
-//TODELETE testing prebuilt task
-
-void TaskTab::TODELETE_PushScheduleToDelayRun()
+void TaskTab::scheduleTaskAfterDelay(int delayInSeconds)
 {
-    QTimer::singleShot(9000, this, &TaskTab::runTaskThread);
+    QTimer::singleShot(delayInSeconds*1000, this, &TaskTab::runTaskThread);
 }
-
-//TODELETE end
 
 void TaskTab::runTaskThread()
 {

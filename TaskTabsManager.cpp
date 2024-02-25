@@ -223,7 +223,7 @@ void TaskTabsManager::TODELETE_fillTaskTest(Task *task)
     ActionParameters paramPaste1;
     paramPaste1.m_pasteContent = "Maître Corbeau, sur un arbre perché,\n\n";
     ActionParameters paramWait;
-    paramWait.m_waitDuration = 12;
+    paramWait.m_waitDuration = 3;
     ActionParameters paramPaste2;
     paramPaste2.m_pasteContent = "Tenait en son bec un fromage.\n\n";
 

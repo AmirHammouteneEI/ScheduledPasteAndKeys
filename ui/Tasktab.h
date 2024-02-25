@@ -2,6 +2,7 @@
 #define TASKTAB_H
 
 #include "Task.h"
+#include "ui/getDelayDialog.h"
 
 #include <QScrollArea>
 #include <QVBoxLayout>
@@ -19,6 +20,7 @@ protected:
     void setTask(Task *task);
     QLabel *m_nameLabel;
     void setName(const QString & newname);
+    getDelayDialog *m_getDelayDialog;
 public:
     explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
     ~TaskTab();
@@ -26,7 +28,7 @@ public:
     void runTaskThread();
 
 public slots:
-    void TODELETE_PushScheduleToDelayRun(); //TODELETE testing prebuilt task
+    void scheduleTaskAfterDelay(int delayInSeconds);
 
     friend class TaskTabsManager;
 };
