@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>CreateLoadTaskDialog</class>
  <widget class="QDialog" name="CreateLoadTaskDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Open or create a task...</string>
+   <string>Open or create a task</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">

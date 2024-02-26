@@ -90,6 +90,7 @@ void TaskTab::buildBasicInterface()
     setAlignment(Qt::AlignTop | Qt::AlignHCenter);
 
     m_getDelayDialog = new getDelayDialog(this);
+    m_getDelayDialog->m_savedDelay = QTime(0,1,0);
 
     connect(scheduleButton,&QPushButton::released, m_getDelayDialog, &getDelayDialog::showDialog);
     connect(m_getDelayDialog,&getDelayDialog::sendDelay, this, &TaskTab::scheduleTaskAfterDelay);

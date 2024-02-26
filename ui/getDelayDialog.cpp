@@ -13,6 +13,7 @@ getDelayDialog::getDelayDialog(QWidget *parent)
 
     connect(ui->delayGroup, &QGroupBox::clicked, this, &getDelayDialog::uncheckDateGroup);
     connect(ui->dateTimeGroup, &QGroupBox::clicked, this, &getDelayDialog::uncheckDelayGroup);
+    connect(ui->dateTimeEdit, &QDateTimeEdit::dateTimeChanged, this, &getDelayDialog::refreshDateDelayDetails);
 }
 
 getDelayDialog::~getDelayDialog()
@@ -53,9 +54,23 @@ void getDelayDialog::accept()
     QDialog::accept();
 }
 
+void getDelayDialog::refreshDateDelayDetails(const QDateTime & datet)
+{
+    int dateDelay = QDateTime::currentDateTime().secsTo(datet);
+    int secs = dateDelay % 60;
+    int minNum = (dateDelay-secs)/60;
+    int mins = minNum % 60;
+    int hourNum = (minNum-mins)/ 60 ;
+    int hours = hourNum %24;
+    int days = (hourNum - hours)/ 24;
+    ui->delayDetailsLabel->setText(QString::number(days)+tr(" days ")+QString::number(hours)+tr(" hours ")
+                                   +QString::number(mins)+tr(" mins ")+QString::number(secs)+tr(" secs "));
+}
+
 void getDelayDialog::showDialog()
 {
     ui->timeEdit->setTime(m_savedDelay);
-    ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
+    ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime().addSecs(60));
+    refreshDateDelayDetails(ui->dateTimeEdit->dateTime());
     show();
 }

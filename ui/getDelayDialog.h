@@ -20,6 +20,7 @@ private slots:
     void uncheckDelayGroup();
     void uncheckDateGroup();
     void accept() override;
+    void refreshDateDelayDetails(const QDateTime &datet);
 public slots:
     void showDialog();
 signals:
