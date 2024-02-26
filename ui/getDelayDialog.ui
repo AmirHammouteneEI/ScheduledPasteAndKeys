@@ -38,7 +38,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Choose a delay for the run of the Task :</string>
+      <string>Choose a delay to run of the Task :</string>
      </property>
     </widget>
    </item>

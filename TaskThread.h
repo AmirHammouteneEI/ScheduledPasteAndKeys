@@ -12,6 +12,9 @@ public:
     explicit TaskThread(QObject *parent = nullptr);
     Task *m_task = nullptr;
     bool m_loop = false;
+    bool m_haveToStop = false;
+public slots:
+    void stop();
 protected:
     void run() override;
 

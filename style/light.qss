@@ -692,6 +692,21 @@ QAbstractButton#scheduleButton
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(78, 134, 212, 200),stop:1 rgba(25, 50, 84, 160));
 }
 
+QAbstractButton::disabled#scheduleButton
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(78, 134, 212, 100),stop:1 rgba(25, 50, 84, 60));
+}
+
+QAbstractButton#stopButton
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(255, 0, 0, 200),stop:1 rgba(139, 0, 0, 160));
+}
+
+QAbstractButton::disabled#stopButton
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(255, 0, 0, 100),stop:1 rgba(139, 0, 0, 60));
+}
+
 QAbstractButton#addActionButton
 {
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(50, 250, 50, 100),stop:1 rgba(0, 100, 0, 160));

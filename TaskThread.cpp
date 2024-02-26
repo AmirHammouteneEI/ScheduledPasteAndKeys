@@ -6,6 +6,12 @@ TaskThread::TaskThread(QObject *parent)
 
 }
 
+void TaskThread::stop()
+{
+    m_haveToStop = true;
+    quit();
+}
+
 void TaskThread::run()
 {
     if(m_task == nullptr)
@@ -14,6 +20,8 @@ void TaskThread::run()
     for(auto it = m_task->m_actions.keyValueBegin(); it != m_task->m_actions.keyValueEnd(); ++it)
     {
         it->second->runAction();
+        if(m_haveToStop == true)
+            return;
     }
 
     emit taskFinished();
