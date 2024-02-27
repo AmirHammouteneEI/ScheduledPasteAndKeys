@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QPushButton>
+#include <QToolButton>
 
 enum class ScheduleState{
     NotScheduled,
@@ -21,6 +22,7 @@ class TaskTab : public QScrollArea
 protected:
     QString m_name;
     int m_ID;
+    QWidget *m_mainWidget;
     QVBoxLayout *m_actionsLayout;
     Task *m_task = nullptr;
     void buildBasicInterface();
@@ -28,11 +30,13 @@ protected:
     QLabel *m_nameLabel;
     QPushButton *m_scheduleButton;
     QPushButton *m_stopButton;
+    QPushButton *m_addActionButton;
+    QToolButton *m_loopButton;
     QLabel *m_delayChrono;
     QLabel *m_loopState;
     void setName(const QString & newname);
     getDelayDialog *m_getDelayDialog;
-    TaskThread* m_thread = nullptr;
+    QDateTime m_datetimeOfRun;
 public:
     explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
     ~TaskTab();
@@ -42,8 +46,10 @@ public:
 
 private slots:
     void stopPushed();
+    void loopToggled(bool state);
+    void refreshScheduleText();
 public slots:
-    void scheduleTaskAfterDelay(int delayInSeconds);
+    void scheduleTaskAfterDelay(qint64 delayInSeconds);
 
     friend class TaskTabsManager;
 };

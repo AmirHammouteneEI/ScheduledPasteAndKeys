@@ -6,7 +6,7 @@
 class WaitAction : public AbstractAction
 {
 private:
-    unsigned int m_duration;
+    float m_duration;
 public:
     WaitAction();
 

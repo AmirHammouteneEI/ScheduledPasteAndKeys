@@ -9,7 +9,7 @@ WaitAction::WaitAction()
 
 void WaitAction::runAction()
 {
-    QThread::sleep(m_duration);
+    QThread::msleep((int)(m_duration*1000));
 }
 
 void WaitAction::setParameters(const ActionParameters &param)

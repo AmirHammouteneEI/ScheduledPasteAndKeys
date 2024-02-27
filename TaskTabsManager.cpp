@@ -112,6 +112,12 @@ void TaskTabsManager::onTabCloseRequest(int index)
 
     if(task != nullptr)
     {
+        if(task->m_scheduleState != ScheduleState::NotScheduled)
+        {
+            QMessageBox::warning(m_mainwindow,tr("Task is scheduled or is running"),
+              tr("This task is scheduled for execution or is currently running, please stop it in order to close the tab."));
+            return;
+        }
 
         //TODO save before close request
 
@@ -223,9 +229,11 @@ void TaskTabsManager::TODELETE_fillTaskTest(Task *task)
     ActionParameters paramPaste1;
     paramPaste1.m_pasteContent = "Maître Corbeau, sur un arbre perché,\n\n";
     ActionParameters paramWait;
-    paramWait.m_waitDuration = 3;
+    paramWait.m_waitDuration = 4;
     ActionParameters paramPaste2;
     paramPaste2.m_pasteContent = "Tenait en son bec un fromage.\n\n";
+    ActionParameters paramWait2;
+    paramWait2.m_waitDuration = 0.2f;
 
     PasteAction *paste1 = new PasteAction();
     paste1->setParameters(paramPaste1);
@@ -233,10 +241,13 @@ void TaskTabsManager::TODELETE_fillTaskTest(Task *task)
     wait->setParameters(paramWait);
     PasteAction *paste2 = new PasteAction();
     paste2->setParameters(paramPaste2);
+    WaitAction *wait2 = new WaitAction();
+    wait2->setParameters(paramWait2);
 
     task->appendAction(paste1);
     task->appendAction(wait);
     task->appendAction(paste2);
+    task->appendAction(wait2);
 }
 
 //TODELETE end

@@ -42,7 +42,7 @@ void getDelayDialog::accept()
     else
     {
         QDateTime cur = QDateTime::currentDateTime();
-        int delayInSec = cur.secsTo(ui->dateTimeEdit->dateTime());
+        qint64 delayInSec = cur.secsTo(ui->dateTimeEdit->dateTime());
         if(delayInSec < 0)
         {
             QMessageBox::warning(this, tr("Date selected not correct"), tr("Date/time selected is not later than the current date/time, please set a correct date."));
@@ -56,13 +56,13 @@ void getDelayDialog::accept()
 
 void getDelayDialog::refreshDateDelayDetails(const QDateTime & datet)
 {
-    int dateDelay = QDateTime::currentDateTime().secsTo(datet);
-    int secs = dateDelay % 60;
-    int minNum = (dateDelay-secs)/60;
-    int mins = minNum % 60;
-    int hourNum = (minNum-mins)/ 60 ;
-    int hours = hourNum %24;
-    int days = (hourNum - hours)/ 24;
+    qint64 dateDelay = QDateTime::currentDateTime().secsTo(datet);
+    qint64 secs = dateDelay % 60;
+    qint64 minNum = (dateDelay-secs)/60;
+    qint64 mins = minNum % 60;
+    qint64 hourNum = (minNum-mins)/ 60 ;
+    qint64 hours = hourNum %24;
+    qint64 days = (hourNum - hours)/ 24;
     ui->delayDetailsLabel->setText(QString::number(days)+tr(" days ")+QString::number(hours)+tr(" hours ")
                                    +QString::number(mins)+tr(" mins ")+QString::number(secs)+tr(" secs "));
 }

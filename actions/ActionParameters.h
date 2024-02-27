@@ -12,7 +12,7 @@ public:
     ActionParameters &operator=(const ActionParameters &) = default;
 
     QString m_pasteContent;
-    unsigned int m_waitDuration;
+    float m_waitDuration;
 };
 
 Q_DECLARE_METATYPE(ActionParameters);

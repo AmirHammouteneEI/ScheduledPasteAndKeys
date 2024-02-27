@@ -24,7 +24,7 @@ private slots:
 public slots:
     void showDialog();
 signals:
-    void sendDelay(int delayInSeconds);
+    void sendDelay(qint64 delayInSeconds);
 private:
     Ui::getDelayDialog *ui;
 };
