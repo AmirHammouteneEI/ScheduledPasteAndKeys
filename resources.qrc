@@ -31,5 +31,6 @@
         <file>img/up_arrow_light.png</file>
         <file>img/up_arrow_penombra.png</file>
         <file>img/plus.png</file>
+        <file>img/close_red.png</file>
     </qresource>
 </RCC>

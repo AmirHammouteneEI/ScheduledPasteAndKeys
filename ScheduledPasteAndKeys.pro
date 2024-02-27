@@ -5,6 +5,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++17
 
 SOURCES += \
+    ActionWidgetsManager.cpp \
     Task.cpp \
     TaskTabsManager.cpp \
     TaskThread.cpp \
@@ -16,9 +17,13 @@ SOURCES += \
     mainwindow.cpp \
     ui/CreateLoadTaskDialog.cpp \
     ui/TaskTab.cpp \
+    ui/actionwidgets/AbstractActionWidget.cpp \
+    ui/actionwidgets/PasteWidget.cpp \
+    ui/actionwidgets/WaitWidget.cpp \
     ui/getDelayDialog.cpp
 
 HEADERS += \
+    ActionWidgetsManager.h \
     Task.h \
     TaskTabsManager.h \
     TaskThread.h \
@@ -31,6 +36,9 @@ HEADERS += \
     mainwindow.h \
     ui/CreateLoadTaskDialog.h \
     ui/TaskTab.h \
+    ui/actionwidgets/AbstractActionWidget.h \
+    ui/actionwidgets/PasteWidget.h \
+    ui/actionwidgets/WaitWidget.h \
     ui/getDelayDialog.h
 
 FORMS += \

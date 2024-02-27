@@ -13,6 +13,7 @@ public:
     int appendAction(AbstractAction *act);
 
     friend class TaskThread;
+    friend class TaskTab;
 };
 
 #endif // TASK_H

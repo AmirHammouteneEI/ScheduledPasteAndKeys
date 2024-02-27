@@ -1,7 +1,8 @@
 #include "TaskTab.h"
 #include "TaskThread.h"
+#include "ui/actionwidgets/PasteWidget.h"
+#include "ui/actionwidgets/WaitWidget.h"
 
-#include <QFrame>
 #include <QGridLayout>
 #include <QSpacerItem>
 #include <QTimer>
@@ -15,6 +16,8 @@ TaskTab::TaskTab(QWidget *parent, const QString &name)
     buildBasicInterface();
 
     m_scheduleState = ScheduleState::NotScheduled;
+
+    m_actionWidgetsManager = new ActionWidgetsManager(m_actionsLayout);
 }
 
 TaskTab::~TaskTab()
@@ -78,9 +81,9 @@ void TaskTab::buildBasicInterface()
     topGridLayout->setSpacing(2);
 
     //-- Middle widget with list of actions
-    auto actionsFrame = new QFrame(m_mainWidget);
-    actionsFrame->setObjectName("actionFrame");
-    m_actionsLayout =  new QVBoxLayout(actionsFrame);
+    m_actionsFrame = new QFrame(m_mainWidget);
+    m_actionsFrame->setObjectName("actionFrame");
+    m_actionsLayout =  new QVBoxLayout(m_actionsFrame);
 
     //-- Botton widget with + button and loop button
     auto bottomWidget = new QFrame(m_mainWidget);
@@ -101,7 +104,7 @@ void TaskTab::buildBasicInterface()
     bottomGridLayout->addWidget(m_loopButton,2,0, Qt::AlignCenter | Qt::AlignHCenter);
 
     m_mainWidget->layout()->addWidget(topWidget);
-    m_mainWidget->layout()->addWidget(actionsFrame);
+    m_mainWidget->layout()->addWidget(m_actionsFrame);
     m_mainWidget->layout()->addWidget(bottomWidget);
     m_mainWidget->layout()->addItem(new QSpacerItem(20,20,QSizePolicy::Expanding,QSizePolicy::Expanding));
 
@@ -129,6 +132,33 @@ void TaskTab::setTask(Task *task)
     }
 
     m_task = task;
+
+    for(auto it = m_task->m_actions.keyValueBegin(); it != m_task->m_actions.keyValueEnd(); ++it)
+    {
+        m_actionWidgetsManager->appendWidget(createActionWidget(it->second));
+    }
+}
+
+AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
+{
+    if(act == nullptr)
+        return nullptr;
+
+    AbstractActionWidget *actWidgToCreate = nullptr;
+    switch (act->m_type)
+    {
+        case ActionType::Paste:
+            actWidgToCreate = new PasteWidget(m_actionsFrame);
+            actWidgToCreate->setAction(act);
+        break;
+        case ActionType::Wait:
+            actWidgToCreate = new WaitWidget(m_actionsFrame);
+            actWidgToCreate->setAction(act);
+        break;
+        default:
+        break;
+    }
+    return actWidgToCreate;
 }
 
 void TaskTab::setName(const QString &newname)

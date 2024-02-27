@@ -12,6 +12,8 @@ public:
 
     void runAction();
     void setParameters(const ActionParameters& param);
+
+    friend class WaitWidget;
 };
 
 #endif // WAITACTION_H

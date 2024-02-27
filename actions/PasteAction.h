@@ -13,6 +13,7 @@ public:
     void runAction();
     void setParameters(const ActionParameters& param);
 
+    friend class PasteWidget;
 };
 
 #endif // PASTEACTION_H

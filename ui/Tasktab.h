@@ -3,7 +3,9 @@
 
 #include "Task.h"
 #include "ui/getDelayDialog.h"
+#include "ActionWidgetsManager.h"
 
+#include <QFrame>
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include <QLabel>
@@ -23,10 +25,12 @@ protected:
     QString m_name;
     int m_ID;
     QWidget *m_mainWidget;
+    QFrame *m_actionsFrame;
     QVBoxLayout *m_actionsLayout;
     Task *m_task = nullptr;
     void buildBasicInterface();
     void setTask(Task *task);
+    AbstractActionWidget *createActionWidget(AbstractAction *act);
     QLabel *m_nameLabel;
     QPushButton *m_scheduleButton;
     QPushButton *m_stopButton;
@@ -37,6 +41,7 @@ protected:
     void setName(const QString & newname);
     getDelayDialog *m_getDelayDialog;
     QDateTime m_datetimeOfRun;
+    ActionWidgetsManager *m_actionWidgetsManager;
 public:
     explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
     ~TaskTab();
