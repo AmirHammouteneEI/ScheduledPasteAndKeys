@@ -10,11 +10,6 @@ WaitWidget::WaitWidget(QWidget *parent)
 
 }
 
-void WaitWidget::setAction(AbstractAction *action)
-{
-    m_action =  dynamic_cast<WaitAction*>(action);
-}
-
 void WaitWidget::buildWidget()
 {
 
@@ -28,7 +23,7 @@ void WaitWidget::buildWidget()
         durationStr = QString::number(pasteaction->m_duration);
 
     auto gridLayout = new QGridLayout(m_centralWidget);
-    auto mainButton = new QPushButton(tr("Wait for") + durationStr + tr(" seconds"),m_centralWidget); //TODO icon
+    auto mainButton = new QPushButton(tr("Wait for ") + durationStr + tr(" secs"),m_centralWidget); //TODO icon
     mainButton->setToolTip(durationStr+tr(" seconds"));
 
     gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding),0,0);

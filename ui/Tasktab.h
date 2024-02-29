@@ -55,6 +55,8 @@ private slots:
     void refreshScheduleText();
 public slots:
     void scheduleTaskAfterDelay(qint64 delayInSeconds);
+    void finishedOneLoop();
+    void receivedActionRunningState(unsigned int actId);
 
     friend class TaskTabsManager;
 };

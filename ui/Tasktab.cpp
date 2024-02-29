@@ -179,6 +179,23 @@ void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
     m_loopButton->setEnabled(false);
 
     refreshScheduleText();
+
+    m_actionWidgetsManager->taskScheduled();
+}
+
+void TaskTab::finishedOneLoop()
+{
+    m_actionWidgetsManager->taskStopped();
+    m_actionWidgetsManager->taskScheduled();
+}
+
+void TaskTab::receivedActionRunningState(unsigned int actId)
+{
+    auto widg = m_actionWidgetsManager->m_actionWidgetsMap.value(actId);
+    if(widg != nullptr)
+        ensureWidgetVisible(widg,0,15);
+
+    m_actionWidgetsManager->receivedActionRunningState(actId);
 }
 
 void TaskTab::runTaskThread()
@@ -192,6 +209,9 @@ void TaskTab::runTaskThread()
     thread->m_loop = m_loopButton->isChecked();
 
     connect(m_stopButton, &QPushButton::released, thread, &TaskThread::stop);
+    connect(thread, &TaskThread::sendRunningStateAct, this, &TaskTab::receivedActionRunningState);
+    connect(thread, &TaskThread::sendDoneStateAct, m_actionWidgetsManager, &ActionWidgetsManager::receivedActionDoneState);
+    connect(thread, &TaskThread::sendFinishedOneLoop, this, &TaskTab::finishedOneLoop);
     connect(thread, &TaskThread::finished, this, &TaskTab::stopPushed);
     connect(thread, &TaskThread::finished, thread, &TaskThread::quit);
     connect(thread, &TaskThread::finished, thread, &TaskThread::deleteLater);
@@ -210,6 +230,7 @@ void TaskTab::stopPushed()
     m_addActionButton->setEnabled(true);
     m_loopButton->setEnabled(true);
     refreshScheduleText();
+    m_actionWidgetsManager->taskStopped();
 }
 
 void TaskTab::loopToggled(bool state)

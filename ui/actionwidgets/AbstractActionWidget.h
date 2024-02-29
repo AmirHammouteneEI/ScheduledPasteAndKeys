@@ -3,19 +3,28 @@
 
 #include "actions/AbstractAction.h"
 
-#include <QWidget>
+#include <QFrame>
 
-class AbstractActionWidget : public QWidget
+enum class RunningState{
+    NotExecuted,
+    Running,
+    Done
+};
+
+class AbstractActionWidget : public QFrame
 {
     Q_OBJECT
 protected:
-    QWidget *m_centralWidget = nullptr;
+    QFrame *m_centralWidget = nullptr;
     AbstractAction *m_action = nullptr;
+    unsigned int m_actionID;
+    RunningState m_runningState;
 public:
     explicit AbstractActionWidget(QWidget *parent = nullptr);
-    void setRunningState(const QString & state);
-    virtual void setAction(AbstractAction *action) = 0;
+    void setRunningState(RunningState state);
+    void setAction(AbstractAction *action);
     virtual void buildWidget() = 0;
+    unsigned int getActionID() {return m_actionID;}
 
 signals:
     void removeSelf();

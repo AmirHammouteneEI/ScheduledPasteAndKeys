@@ -10,9 +10,9 @@ Task::~Task()
 
 int Task::appendAction(AbstractAction *act)
 {
-    if(act == nullptr)
-        return -1;
-    int pos = m_actions.size();
-    m_actions.insert(pos, act);
-    return pos;
+    if(act != nullptr)
+    {
+        m_actions.insert(act->getID(), act);
+    }
+    return m_actions.size();
 }

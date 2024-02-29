@@ -21,7 +21,44 @@ int ActionWidgetsManager::appendWidget(AbstractActionWidget *actionWidget)
         return -1;
 
     actionWidget->buildWidget();
-    m_actionWidgetsList.append(actionWidget);
+    m_actionWidgetsMap.insert(actionWidget->getActionID(),actionWidget);
     m_layout->addWidget(actionWidget);
-    return m_actionWidgetsList.count();
+    return m_actionWidgetsMap.count();
+}
+
+void ActionWidgetsManager::taskStopped()
+{
+    for(auto it = m_actionWidgetsMap.keyValueBegin(); it != m_actionWidgetsMap.keyValueEnd(); ++it)
+    {
+        if(it->second == nullptr)
+            continue;
+
+        it->second->setRunningState(RunningState::NotExecuted);
+        it->second->setEnabled(true);
+    }
+}
+
+void ActionWidgetsManager::taskScheduled()
+{
+    for(auto it = m_actionWidgetsMap.keyValueBegin(); it != m_actionWidgetsMap.keyValueEnd(); ++it)
+    {
+        if(it->second == nullptr)
+            continue;
+
+        it->second->setEnabled(false);
+    }
+}
+
+void ActionWidgetsManager::receivedActionRunningState(unsigned int id)
+{
+    AbstractActionWidget * widg = m_actionWidgetsMap.value(id,nullptr);
+    if(widg != nullptr)
+        widg->setRunningState(RunningState::Running);
+}
+
+void ActionWidgetsManager::receivedActionDoneState(unsigned int id)
+{
+    AbstractActionWidget * widg = m_actionWidgetsMap.value(id,nullptr);
+    if(widg != nullptr)
+        widg->setRunningState(RunningState::Done);
 }

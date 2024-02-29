@@ -775,5 +775,38 @@ QAbstractButton::pressed#loopButton
 QFrame#actionFrame
 {
 	background-color: #595959;
-	border: 1px solid #474747
+	border: 1px solid #474747;
+}
+
+AbstractActionWidget[runningState="notExecuted"]
+{
+	background-color: #474747;
+	border: 1px solid #adadad;
+}
+
+AbstractActionWidget[runningState="notExecuted"] QFrame
+{
+	background-color: #474747;
+}
+
+AbstractActionWidget[runningState="running"]
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(78, 134, 212, 120),stop:1 rgba(25, 50, 84, 80));
+	border: 1px solid #000080;
+}
+
+AbstractActionWidget[runningState="running"] QFrame
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(78, 134, 212, 120),stop:1 rgba(25, 50, 84, 80));
+}
+
+AbstractActionWidget[runningState="done"]
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(50, 250, 50, 80),stop:1 rgba(0, 100, 0, 120));
+	border: 1px solid #00561B;
+}
+
+AbstractActionWidget[runningState="done"] QFrame
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(50, 250, 50, 80),stop:1 rgba(0, 100, 0, 120));
 }

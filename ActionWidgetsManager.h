@@ -10,12 +10,17 @@ class ActionWidgetsManager : public QObject
 {
     Q_OBJECT
     QVBoxLayout *m_layout = nullptr;
-    QList<AbstractActionWidget*> m_actionWidgetsList;
+    QMap<unsigned int, AbstractActionWidget*> m_actionWidgetsMap;
 public:
     explicit ActionWidgetsManager(QVBoxLayout *parent = nullptr);
     int appendWidget(AbstractActionWidget* actionWidget);
+    void taskStopped();
+    void taskScheduled();
+public slots:
+    void receivedActionRunningState(unsigned int id);
+    void receivedActionDoneState(unsigned int id);
 
-signals:
+    friend class TaskTab;
 };
 
 #endif // ACTIONWIDGETSMANAGER_H

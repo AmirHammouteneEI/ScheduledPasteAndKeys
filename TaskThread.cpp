@@ -15,19 +15,23 @@ void TaskThread::stop()
 void TaskThread::run()
 {
     if(m_task == nullptr)
-        emit taskFinished();
+        return;
 
     begin:
 
     for(auto it = m_task->m_actions.keyValueBegin(); it != m_task->m_actions.keyValueEnd(); ++it)
     {
+        emit sendRunningStateAct(it->second->getID());
         it->second->runAction();
+        emit sendDoneStateAct(it->second->getID());
+
         if(m_haveToStop == true)
             return;
     }
 
     if(m_loop)
+    {
+        emit sendFinishedOneLoop();
         goto begin;
-
-    emit taskFinished();
+    }
 }

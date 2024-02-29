@@ -19,7 +19,9 @@ protected:
     void run() override;
 
 signals:
-    void taskFinished();
+    void sendRunningStateAct(unsigned int actId);
+    void sendDoneStateAct(unsigned int actId);
+    void sendFinishedOneLoop();
 };
 
 #endif // TASKTHREAD_H

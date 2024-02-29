@@ -11,6 +11,8 @@ enum class ActionType {
 
 class AbstractAction
 {
+    static unsigned int m_idCounter;
+    unsigned int m_ID;
 public:
     AbstractAction();
 
@@ -18,6 +20,7 @@ public:
     virtual void setParameters(const ActionParameters& param) = 0;
 
     ActionType m_type;
+    unsigned int getID() const {return m_ID;}
 };
 
 #endif // ABSTRACTACTION_H

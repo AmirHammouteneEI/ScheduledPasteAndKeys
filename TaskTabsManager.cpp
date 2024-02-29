@@ -227,27 +227,67 @@ void TaskTabsManager::TODELETE_fillTaskTest(Task *task)
         return;
 
     ActionParameters paramPaste1;
-    paramPaste1.m_pasteContent = "Maître Corbeau, sur un arbre perché,\n\n";
-    ActionParameters paramWait;
-    paramWait.m_waitDuration = 4;
+    paramPaste1.m_pasteContent = "Maître Corbeau, sur un arbre perché,\n";
+    ActionParameters paramWait1;
+    paramWait1.m_waitDuration = 0.4f;
     ActionParameters paramPaste2;
-    paramPaste2.m_pasteContent = "Tenait en son bec un fromage.\n\n";
+    paramPaste2.m_pasteContent = "Tenait en son bec un fromage.\n";
     ActionParameters paramWait2;
-    paramWait2.m_waitDuration = 0.2f;
+    paramWait2.m_waitDuration = 4;
+    ActionParameters paramPaste3;
+    paramPaste3.m_pasteContent = "Maître Renard, par l'odeur alléché,\n";
+    ActionParameters paramWait3;
+    paramWait3.m_waitDuration = 0.6f;
+    ActionParameters paramPaste4;
+    paramPaste4.m_pasteContent = "Lui tint à peu près ce langage :\n";
+    ActionParameters paramWait4;
+    paramWait4.m_waitDuration = 1;
+    ActionParameters paramPaste5;
+    paramPaste5.m_pasteContent = "Et bonjour, Monsieur du Corbeau.\n";
+    ActionParameters paramWait5;
+    paramWait5.m_waitDuration = 0.2f;
+    ActionParameters paramPaste6;
+    paramPaste6.m_pasteContent = "Que vous êtes joli ! que vous me semblez beau !\n\n";
+    ActionParameters paramWait6;
+    paramWait6.m_waitDuration = 5;
 
     PasteAction *paste1 = new PasteAction();
     paste1->setParameters(paramPaste1);
-    WaitAction *wait = new WaitAction();
-    wait->setParameters(paramWait);
+    WaitAction *wait1 = new WaitAction();
+    wait1->setParameters(paramWait1);
     PasteAction *paste2 = new PasteAction();
     paste2->setParameters(paramPaste2);
     WaitAction *wait2 = new WaitAction();
     wait2->setParameters(paramWait2);
+    PasteAction *paste3 = new PasteAction();
+    paste3->setParameters(paramPaste3);
+    WaitAction *wait3 = new WaitAction();
+    wait3->setParameters(paramWait3);
+    PasteAction *paste4 = new PasteAction();
+    paste4->setParameters(paramPaste4);
+    WaitAction *wait4 = new WaitAction();
+    wait4->setParameters(paramWait4);
+    PasteAction *paste5 = new PasteAction();
+    paste5->setParameters(paramPaste5);
+    WaitAction *wait5 = new WaitAction();
+    wait5->setParameters(paramWait5);
+    PasteAction *paste6 = new PasteAction();
+    paste6->setParameters(paramPaste6);
+    WaitAction *wait6 = new WaitAction();
+    wait6->setParameters(paramWait6);
 
     task->appendAction(paste1);
-    task->appendAction(wait);
+    task->appendAction(wait1);
     task->appendAction(paste2);
     task->appendAction(wait2);
+    task->appendAction(paste3);
+    task->appendAction(wait3);
+    task->appendAction(paste4);
+    task->appendAction(wait4);
+    task->appendAction(paste5);
+    task->appendAction(wait5);
+    task->appendAction(paste6);
+    task->appendAction(wait6);
 }
 
 //TODELETE end
