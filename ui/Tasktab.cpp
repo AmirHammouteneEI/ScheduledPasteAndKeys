@@ -153,11 +153,15 @@ AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
         break;
         case ActionType::Wait:
             actWidgToCreate = new WaitWidget(m_actionsFrame);
-            actWidgToCreate->setAction(act);
         break;
         default:
         break;
     }
+
+    actWidgToCreate->setAction(act);
+    actWidgToCreate->buildWidget();
+    connect(actWidgToCreate, &AbstractActionWidget::removeActionRequest, this, &TaskTab::removeActionReceived);
+
     return actWidgToCreate;
 }
 
@@ -196,6 +200,26 @@ void TaskTab::receivedActionRunningState(unsigned int actId)
         ensureWidgetVisible(widg,0,15);
 
     m_actionWidgetsManager->receivedActionRunningState(actId);
+}
+
+void TaskTab::removeActionReceived(unsigned int actId)
+{
+    if(m_task == nullptr)
+        return;
+
+    auto act = m_task->m_actions.take(actId);
+    if(act != nullptr)
+    {
+        delete act;
+        act = nullptr;
+    }
+
+    auto actWidg = m_actionWidgetsManager->m_actionWidgetsMap.take(actId);
+    m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.removeOne(actWidg);
+    if(actWidg != nullptr)
+        actWidg->deleteLater();
+
+    m_actionWidgetsManager->fullRefreshActionWidgets();
 }
 
 void TaskTab::runTaskThread()
@@ -238,7 +262,7 @@ void TaskTab::loopToggled(bool state)
     if(state)
     {
         m_loopState->setText(tr("Loop ON"));
-        m_loopState->setStyleSheet("color: darkgreen;");
+        m_loopState->setStyleSheet("color: green;");
     }
     else
     {
@@ -257,7 +281,7 @@ void TaskTab::refreshScheduleText()
     else if(m_scheduleState == ScheduleState::Running)
     {
         m_delayChrono->setText(tr("Running"));
-        m_delayChrono->setStyleSheet("color: darkgreen;");
+        m_delayChrono->setStyleSheet("color: green;");
     }
     else
     {
@@ -268,10 +292,10 @@ void TaskTab::refreshScheduleText()
         qint64 hourNum = (minNum-mins)/ 60 ;
         qint64 hours = hourNum %24;
         qint64 days = (hourNum - hours)/ 24;
-        m_delayChrono->setText(tr("Schedule to run in :\n")
+        m_delayChrono->setText(tr("Scheduled to run in :\n")
             +QString::number(days)+tr(" days ")+QString::number(hours)+tr(" hours ")
             +QString::number(mins)+tr(" mins ")+QString::number(secs)+tr(" secs"));
-        m_delayChrono->setStyleSheet("color: darkblue;");
+        m_delayChrono->setStyleSheet("color: #4169E1;");
         QTimer::singleShot(200, this, &TaskTab::refreshScheduleText);
     }
 }

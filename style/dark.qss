@@ -324,6 +324,12 @@ QAbstractButton::disabled
 	border-color: #555;
 }
 
+QAbstractButton::flat:disabled
+{
+	background-color: transparent;
+	border: none;
+}
+
 QAbstractButton::checked
 {
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1,stop:0 rgba(42, 75, 122, 200),stop:1 rgba(47, 61, 77, 200));
@@ -786,7 +792,7 @@ AbstractActionWidget[runningState="notExecuted"]
 
 AbstractActionWidget[runningState="notExecuted"] QFrame
 {
-	background-color: #474747;
+	background-color: rgba(0, 0, 0, 0);
 }
 
 AbstractActionWidget[runningState="running"]
@@ -797,7 +803,7 @@ AbstractActionWidget[runningState="running"]
 
 AbstractActionWidget[runningState="running"] QFrame
 {
-	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(78, 134, 212, 120),stop:1 rgba(25, 50, 84, 80));
+	background-color: rgba(0, 0, 0, 0);
 }
 
 AbstractActionWidget[runningState="done"]
@@ -808,5 +814,5 @@ AbstractActionWidget[runningState="done"]
 
 AbstractActionWidget[runningState="done"] QFrame
 {
-	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(50, 250, 50, 80),stop:1 rgba(0, 100, 0, 120));
+	background-color: rgba(0, 0, 0, 0);
 }

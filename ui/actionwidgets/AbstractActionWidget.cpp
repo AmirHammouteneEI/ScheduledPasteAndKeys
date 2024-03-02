@@ -2,6 +2,7 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <QStyle>
+#include <QMessageBox>
 
 AbstractActionWidget::AbstractActionWidget(QWidget *parent)
     : QFrame{parent}
@@ -9,7 +10,7 @@ AbstractActionWidget::AbstractActionWidget(QWidget *parent)
     auto gridLayout = new QGridLayout(this);
     m_centralWidget = new QFrame(this);
 
-    auto removeButton = new QPushButton(QIcon(":/img/close_red.png"),"",this);
+    auto removeButton = new QPushButton(QIcon(":/img/close_red.png"),"",m_centralWidget);
     removeButton->setMaximumSize(QSize(20,20));
     removeButton->setFlat(true);
 
@@ -28,6 +29,8 @@ AbstractActionWidget::AbstractActionWidget(QWidget *parent)
     setRunningState(RunningState::NotExecuted);
     connect(removeButton,&QPushButton::released, this, &AbstractActionWidget::removeSelf);
 }
+
+AbstractActionWidget::~AbstractActionWidget() = default;
 
 void AbstractActionWidget::setRunningState(RunningState state)
 {
@@ -51,4 +54,13 @@ void AbstractActionWidget::setAction(AbstractAction *action)
     m_action = action;
     if(action != nullptr)
         m_actionID = action->getID();
+}
+
+void AbstractActionWidget::removeSelf()
+{
+    if(QMessageBox::question(this, tr("Confirm removing action"), tr("You are about to remove this action from Task, are you sure ?"),
+        QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
+        return;
+
+    emit removeActionRequest(m_actionID);
 }

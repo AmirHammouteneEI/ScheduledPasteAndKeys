@@ -20,10 +20,22 @@ int ActionWidgetsManager::appendWidget(AbstractActionWidget *actionWidget)
     if(actionWidget == nullptr)
         return -1;
 
-    actionWidget->buildWidget();
     m_actionWidgetsMap.insert(actionWidget->getActionID(),actionWidget);
     m_layout->addWidget(actionWidget);
+    m_actionWidgetsDisplayOrderedList.append(actionWidget);
     return m_actionWidgetsMap.count();
+}
+
+void ActionWidgetsManager::fullRefreshActionWidgets()
+{
+    while(m_layout->count() != 0)
+        m_layout->removeItem(m_layout->itemAt(0));
+
+    for(auto it = m_actionWidgetsDisplayOrderedList.begin(); it != m_actionWidgetsDisplayOrderedList.end();++it)
+    {
+        if((*it) != nullptr)
+            m_layout->addWidget(*it);
+    }
 }
 
 void ActionWidgetsManager::taskStopped()

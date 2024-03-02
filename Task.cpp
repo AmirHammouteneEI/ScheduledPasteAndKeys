@@ -16,3 +16,4 @@ int Task::appendAction(AbstractAction *act)
     }
     return m_actions.size();
 }
+

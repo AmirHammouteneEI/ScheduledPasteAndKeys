@@ -328,6 +328,12 @@ QAbstractButton::disabled
 	border-color: #aaa;
 }
 
+QAbstractButton::flat:disabled
+{
+	background-color: transparent;
+	border: none;
+}
+
 QAbstractButton::checked
 {
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1,stop:0 rgba(52, 95, 152, 200),stop:1 rgba(56, 91, 130, 200));
@@ -779,5 +785,38 @@ QAbstractButton::pressed#loopButton
 QFrame#actionFrame
 {
 	background-color: #9c9c9c;
-	border: 1px solid #6e6e6e
+	border: 1px solid #6e6e6e;
+}
+
+AbstractActionWidget[runningState="notExecuted"]
+{
+	background-color: #474747;
+	border: 1px solid #adadad;
+}
+
+AbstractActionWidget[runningState="notExecuted"] QFrame
+{
+	background-color: rgba(0, 0, 0, 0);
+}
+
+AbstractActionWidget[runningState="running"]
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(78, 134, 212, 120),stop:1 rgba(25, 50, 84, 80));
+	border: 1px solid #000080;
+}
+
+AbstractActionWidget[runningState="running"] QFrame
+{
+	background-color: rgba(0, 0, 0, 0);
+}
+
+AbstractActionWidget[runningState="done"]
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(50, 250, 50, 80),stop:1 rgba(0, 100, 0, 120));
+	border: 1px solid #00561B;
+}
+
+AbstractActionWidget[runningState="done"] QFrame
+{
+	background-color: rgba(0, 0, 0, 0);
 }

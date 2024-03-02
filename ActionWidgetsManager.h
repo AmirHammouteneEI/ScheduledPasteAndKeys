@@ -11,6 +11,8 @@ class ActionWidgetsManager : public QObject
     Q_OBJECT
     QVBoxLayout *m_layout = nullptr;
     QMap<unsigned int, AbstractActionWidget*> m_actionWidgetsMap;
+    QList<AbstractActionWidget*> m_actionWidgetsDisplayOrderedList;
+    void fullRefreshActionWidgets();
 public:
     explicit ActionWidgetsManager(QVBoxLayout *parent = nullptr);
     int appendWidget(AbstractActionWidget* actionWidget);
