@@ -21,14 +21,18 @@ void TaskThread::run()
 
     for(auto it = m_task->m_actionsOrderedList.begin(); it != m_task->m_actionsOrderedList.end(); ++it)
     {
+        if(m_haveToStop == true)
+            return;
+
         if((*it) == nullptr)
             continue;
         emit sendRunningStateAct((*it)->getID());
-        (*it)->runAction();
-        emit sendDoneStateAct((*it)->getID());
 
-        if(m_haveToStop == true)
-            return;
+        (*it)->runAction();
+
+        if((*it) == nullptr)
+            continue;
+        emit sendDoneStateAct((*it)->getID());
     }
 
     if(m_loop)

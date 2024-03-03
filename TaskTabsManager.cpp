@@ -114,8 +114,12 @@ void TaskTabsManager::onTabCloseRequest(int index)
     {
         if(task->m_scheduleState != ScheduleState::NotScheduled)
         {
-            QMessageBox::warning(m_mainwindow,tr("Task is scheduled or is running"),
-              tr("This task is scheduled for execution or is currently running, please stop it in order to close the tab."));
+            if(QMessageBox::question(m_mainwindow,tr("Task is scheduled or is running"),
+              tr("This task is scheduled for execution or is currently running, by pressing \"Yes\" you are going to stop it.\n"\
+                "(alternative way to stop it is by Ctrl+Alt+S shortcut)\n\nIf you want to close it, you will have to request again."),
+              QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
+                return;
+            task->m_stopButton->animateClick();
             return;
         }
 
@@ -188,6 +192,23 @@ void TaskTabsManager::onTaskfilePathChanged(QString oldpath, QString newpath)
     {
         if(it->second == oldpath)
             m_taskFilePathsMap.insert(it->first, newpath);
+    }
+}
+
+void TaskTabsManager::stopAllTasksReceived()
+{
+    for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd(); ++it)
+    {
+        if(it->second == nullptr)
+            continue;
+
+        if(it->second->m_scheduleState == ScheduleState::NotScheduled)
+            continue;
+
+        if(it->second->m_stopButton == nullptr)
+            continue;
+
+        it->second->m_stopButton->animateClick();
     }
 }
 

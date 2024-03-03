@@ -10,6 +10,7 @@
 #include <QToolBar>
 #include <QTabBar>
 #include <QFile>
+#include <QShortcut>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -47,6 +48,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->tabWidget, &QTabWidget::tabCloseRequested, m_tasktabsManager, &TaskTabsManager::onTabCloseRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager, &TaskTabsManager::onRefreshTabsRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager, &TaskTabsManager::onTaskfilePathChanged);
+
+    QShortcut *stopAllTasksShortcut = new QShortcut(QKeySequence("Ctrl+Alt+S"), this);
+    connect(stopAllTasksShortcut, &QShortcut::activated, m_tasktabsManager, &TaskTabsManager::stopAllTasksReceived);
 }
 
 MainWindow::~MainWindow()

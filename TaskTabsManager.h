@@ -23,6 +23,7 @@ public slots:
     void onTabCloseRequest(int index);
     void onRefreshTabsRequest();
     void onTaskfilePathChanged(QString oldpath, QString newpath);
+    void stopAllTasksReceived();
 protected:
     TaskTab* createEmptyTaskAndOpenTab(const QString& name);
     int appendTaskInMap(TaskTab* task);

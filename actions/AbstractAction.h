@@ -15,7 +15,7 @@ class AbstractAction
     unsigned int m_ID;
 public:
     AbstractAction();
-    virtual ~AbstractAction() {}
+    virtual ~AbstractAction() = default;
 
     virtual void runAction() = 0;
     virtual void setParameters(const ActionParameters& param) = 0;

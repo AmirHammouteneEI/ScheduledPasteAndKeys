@@ -7,7 +7,6 @@
 #include <QSpacerItem>
 #include <QTimer>
 #include <QApplication>
-#include <algorithm>
 
 TaskTab::TaskTab(QWidget *parent, const QString &name)
     : QScrollArea{parent},m_name(name)
@@ -331,6 +330,10 @@ void TaskTab::moveToTopActionReceived(unsigned int actId)
     m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.move(indexWidg,0);
 
     m_actionWidgetsManager->fullRefreshActionWidgets();
+
+    qApp->processEvents();
+
+    ensureWidgetVisible(actWidg,0,15);
 }
 
 void TaskTab::moveToBottomActionReceived(unsigned int actId)
@@ -357,6 +360,10 @@ void TaskTab::moveToBottomActionReceived(unsigned int actId)
     m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.move(indexWidg,m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.size()-1);
 
     m_actionWidgetsManager->fullRefreshActionWidgets();
+
+    qApp->processEvents();
+
+    ensureWidgetVisible(actWidg,0,15);
 }
 
 void TaskTab::moveUpActionReceived(unsigned int actId)
@@ -383,6 +390,10 @@ void TaskTab::moveUpActionReceived(unsigned int actId)
     m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.move(indexWidg,indexWidg-1);
 
     m_actionWidgetsManager->fullRefreshActionWidgets();
+
+    qApp->processEvents();
+
+    ensureWidgetVisible(actWidg,0,15);
 }
 
 void TaskTab::moveDownActionReceived(unsigned int actId)
@@ -409,4 +420,8 @@ void TaskTab::moveDownActionReceived(unsigned int actId)
     m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.move(indexWidg,indexWidg+1);
 
     m_actionWidgetsManager->fullRefreshActionWidgets();
+
+    qApp->processEvents();
+
+    ensureWidgetVisible(actWidg,0,15);
 }
