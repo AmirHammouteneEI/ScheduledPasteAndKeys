@@ -31,8 +31,16 @@ public:
 
 protected slots:
     void removeSelf();
+    void moveToTopSelf();
+    void moveToBottomSelf();
+    void moveUpSelf();
+    void moveDownSelf();
 signals:
     void removeActionRequest(unsigned int id);
+    void moveToTopActionRequest(unsigned int id);
+    void moveToBottomActionRequest(unsigned int id);
+    void moveUpActionRequest(unsigned int id);
+    void moveDownActionRequest(unsigned int id);
 };
 
 #endif // ABSTRACTACTIONWIDGET_H

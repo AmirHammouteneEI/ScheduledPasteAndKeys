@@ -7,6 +7,7 @@
 #include <QSpacerItem>
 #include <QTimer>
 #include <QApplication>
+#include <algorithm>
 
 TaskTab::TaskTab(QWidget *parent, const QString &name)
     : QScrollArea{parent},m_name(name)
@@ -133,9 +134,9 @@ void TaskTab::setTask(Task *task)
 
     m_task = task;
 
-    for(auto it = m_task->m_actions.keyValueBegin(); it != m_task->m_actions.keyValueEnd(); ++it)
+    for(auto it = m_task->m_actionsOrderedList.begin(); it != m_task->m_actionsOrderedList.end(); ++it)
     {
-        m_actionWidgetsManager->appendWidget(createActionWidget(it->second));
+        m_actionWidgetsManager->appendWidget(createActionWidget((*it)));
     }
 }
 
@@ -155,12 +156,17 @@ AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
             actWidgToCreate = new WaitWidget(m_actionsFrame);
         break;
         default:
+            return nullptr;
         break;
     }
 
     actWidgToCreate->setAction(act);
     actWidgToCreate->buildWidget();
     connect(actWidgToCreate, &AbstractActionWidget::removeActionRequest, this, &TaskTab::removeActionReceived);
+    connect(actWidgToCreate, &AbstractActionWidget::moveToTopActionRequest, this, &TaskTab::moveToTopActionReceived);
+    connect(actWidgToCreate, &AbstractActionWidget::moveToBottomActionRequest, this, &TaskTab::moveToBottomActionReceived);
+    connect(actWidgToCreate, &AbstractActionWidget::moveUpActionRequest, this, &TaskTab::moveUpActionReceived);
+    connect(actWidgToCreate, &AbstractActionWidget::moveDownActionRequest, this, &TaskTab::moveDownActionReceived);
 
     return actWidgToCreate;
 }
@@ -185,41 +191,6 @@ void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
     refreshScheduleText();
 
     m_actionWidgetsManager->taskScheduled();
-}
-
-void TaskTab::finishedOneLoop()
-{
-    m_actionWidgetsManager->taskStopped();
-    m_actionWidgetsManager->taskScheduled();
-}
-
-void TaskTab::receivedActionRunningState(unsigned int actId)
-{
-    auto widg = m_actionWidgetsManager->m_actionWidgetsMap.value(actId);
-    if(widg != nullptr)
-        ensureWidgetVisible(widg,0,15);
-
-    m_actionWidgetsManager->receivedActionRunningState(actId);
-}
-
-void TaskTab::removeActionReceived(unsigned int actId)
-{
-    if(m_task == nullptr)
-        return;
-
-    auto act = m_task->m_actions.take(actId);
-    if(act != nullptr)
-    {
-        delete act;
-        act = nullptr;
-    }
-
-    auto actWidg = m_actionWidgetsManager->m_actionWidgetsMap.take(actId);
-    m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.removeOne(actWidg);
-    if(actWidg != nullptr)
-        actWidg->deleteLater();
-
-    m_actionWidgetsManager->fullRefreshActionWidgets();
 }
 
 void TaskTab::runTaskThread()
@@ -255,6 +226,21 @@ void TaskTab::stopPushed()
     m_loopButton->setEnabled(true);
     refreshScheduleText();
     m_actionWidgetsManager->taskStopped();
+}
+
+void TaskTab::finishedOneLoop()
+{
+    m_actionWidgetsManager->taskStopped();
+    m_actionWidgetsManager->taskScheduled();
+}
+
+void TaskTab::receivedActionRunningState(unsigned int actId)
+{
+    auto widg = m_actionWidgetsManager->m_actionWidgetsMap.value(actId);
+    if(widg != nullptr)
+        ensureWidgetVisible(widg,0,15);
+
+    m_actionWidgetsManager->receivedActionRunningState(actId);
 }
 
 void TaskTab::loopToggled(bool state)
@@ -300,3 +286,127 @@ void TaskTab::refreshScheduleText()
     }
 }
 
+void TaskTab::removeActionReceived(unsigned int actId)
+{
+    if(m_task == nullptr)
+        return;
+
+    auto act = m_task->m_actionsMap.take(actId);
+    m_task->m_actionsOrderedList.removeOne(act);
+    if(act != nullptr)
+    {
+        delete act;
+        act = nullptr;
+    }
+
+    auto actWidg = m_actionWidgetsManager->m_actionWidgetsMap.take(actId);
+    m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.removeOne(actWidg);
+    if(actWidg != nullptr)
+        actWidg->deleteLater();
+
+    m_actionWidgetsManager->fullRefreshActionWidgets();
+}
+
+void TaskTab::moveToTopActionReceived(unsigned int actId)
+{
+    if(m_task == nullptr)
+        return;
+
+    auto act = m_task->m_actionsMap.value(actId, nullptr);
+    if(act == nullptr)
+        return;
+    int indexAct = m_task->m_actionsOrderedList.indexOf(act);
+    if(indexAct == -1)
+        return;
+
+    m_task->m_actionsOrderedList.move(indexAct,0);
+
+    auto actWidg = m_actionWidgetsManager->m_actionWidgetsMap.value(actId, nullptr);
+    if(actWidg == nullptr)
+        return;
+    int indexWidg = m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.indexOf(actWidg);
+    if(indexWidg == -1)
+        return;
+
+    m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.move(indexWidg,0);
+
+    m_actionWidgetsManager->fullRefreshActionWidgets();
+}
+
+void TaskTab::moveToBottomActionReceived(unsigned int actId)
+{
+    if(m_task == nullptr)
+        return;
+
+    auto act = m_task->m_actionsMap.value(actId, nullptr);
+    if(act == nullptr)
+        return;
+    int indexAct = m_task->m_actionsOrderedList.indexOf(act);
+    if(indexAct == -1)
+        return;
+
+    m_task->m_actionsOrderedList.move(indexAct,m_task->m_actionsOrderedList.size()-1);
+
+    auto actWidg = m_actionWidgetsManager->m_actionWidgetsMap.value(actId, nullptr);
+    if(actWidg == nullptr)
+        return;
+    int indexWidg = m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.indexOf(actWidg);
+    if(indexWidg == -1)
+        return;
+
+    m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.move(indexWidg,m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.size()-1);
+
+    m_actionWidgetsManager->fullRefreshActionWidgets();
+}
+
+void TaskTab::moveUpActionReceived(unsigned int actId)
+{
+    if(m_task == nullptr)
+        return;
+
+    auto act = m_task->m_actionsMap.value(actId, nullptr);
+    if(act == nullptr)
+        return;
+    int indexAct = m_task->m_actionsOrderedList.indexOf(act);
+    if(indexAct <= 0)
+        return;
+
+    m_task->m_actionsOrderedList.move(indexAct,indexAct-1);
+
+    auto actWidg = m_actionWidgetsManager->m_actionWidgetsMap.value(actId, nullptr);
+    if(actWidg == nullptr)
+        return;
+    int indexWidg = m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.indexOf(actWidg);
+    if(indexWidg <= 0)
+        return;
+
+    m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.move(indexWidg,indexWidg-1);
+
+    m_actionWidgetsManager->fullRefreshActionWidgets();
+}
+
+void TaskTab::moveDownActionReceived(unsigned int actId)
+{
+    if(m_task == nullptr)
+        return;
+
+    auto act = m_task->m_actionsMap.value(actId, nullptr);
+    if(act == nullptr)
+        return;
+    int indexAct = m_task->m_actionsOrderedList.indexOf(act);
+    if(indexAct == -1 || indexAct >= (m_task->m_actionsOrderedList.size()-1))
+        return;
+
+    m_task->m_actionsOrderedList.move(indexAct,indexAct+1);
+
+    auto actWidg = m_actionWidgetsManager->m_actionWidgetsMap.value(actId, nullptr);
+    if(actWidg == nullptr)
+        return;
+    int indexWidg = m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.indexOf(actWidg);
+    if(indexWidg == -1 || indexWidg >= (m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.size()-1))
+        return;
+
+    m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.move(indexWidg,indexWidg+1);
+
+    m_actionWidgetsManager->fullRefreshActionWidgets();
+}

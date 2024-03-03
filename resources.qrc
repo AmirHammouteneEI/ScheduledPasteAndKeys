@@ -32,5 +32,9 @@
         <file>img/up_arrow_penombra.png</file>
         <file>img/plus.png</file>
         <file>img/close_red.png</file>
+        <file>img/bottom_arrow_rounded.png</file>
+        <file>img/down_arrow_rounded.png</file>
+        <file>img/top_arrow_rounded.png</file>
+        <file>img/up_arrow_rounded.png</file>
     </qresource>
 </RCC>

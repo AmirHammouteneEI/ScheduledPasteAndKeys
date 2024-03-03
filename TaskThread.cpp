@@ -19,11 +19,13 @@ void TaskThread::run()
 
     begin:
 
-    for(auto it = m_task->m_actions.keyValueBegin(); it != m_task->m_actions.keyValueEnd(); ++it)
+    for(auto it = m_task->m_actionsOrderedList.begin(); it != m_task->m_actionsOrderedList.end(); ++it)
     {
-        emit sendRunningStateAct(it->second->getID());
-        it->second->runAction();
-        emit sendDoneStateAct(it->second->getID());
+        if((*it) == nullptr)
+            continue;
+        emit sendRunningStateAct((*it)->getID());
+        (*it)->runAction();
+        emit sendDoneStateAct((*it)->getID());
 
         if(m_haveToStop == true)
             return;

@@ -10,6 +10,7 @@ class TaskThread : public QThread
     Q_OBJECT
 public:
     explicit TaskThread(QObject *parent = nullptr);
+private:
     Task *m_task = nullptr;
     bool m_loop = false;
     bool m_haveToStop = false;
@@ -22,6 +23,8 @@ signals:
     void sendRunningStateAct(unsigned int actId);
     void sendDoneStateAct(unsigned int actId);
     void sendFinishedOneLoop();
+
+    friend class TaskTab;
 };
 
 #endif // TASKTHREAD_H

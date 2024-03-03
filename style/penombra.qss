@@ -790,7 +790,7 @@ QFrame#actionFrame
 
 AbstractActionWidget[runningState="notExecuted"]
 {
-	background-color: #474747;
+	background-color: rgba(0, 0, 0, 50);
 	border: 1px solid #adadad;
 }
 

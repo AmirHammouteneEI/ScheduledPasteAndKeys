@@ -2,11 +2,13 @@
 #define TASK_H
 
 #include <QMap>
+#include <QList>
 #include "actions/AbstractAction.h"
 
 class Task
 {
-    QMap<unsigned int, AbstractAction*> m_actions;
+    QMap<unsigned int, AbstractAction*> m_actionsMap;
+    QList<AbstractAction*> m_actionsOrderedList;
 public:
     explicit Task();
     ~Task();

@@ -58,6 +58,10 @@ public slots:
     void finishedOneLoop();
     void receivedActionRunningState(unsigned int actId);
     void removeActionReceived(unsigned int actId);
+    void moveToTopActionReceived(unsigned int actId);
+    void moveToBottomActionReceived(unsigned int actId);
+    void moveUpActionReceived(unsigned int actId);
+    void moveDownActionReceived(unsigned int actId);
 
     friend class TaskTabsManager;
 };
