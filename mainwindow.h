@@ -47,6 +47,9 @@ protected :
     void setTheme();
     CreateLoadTaskDialog *m_createLoadTaskDialog;
     TaskTabsManager* m_tasktabsManager;
+    QMenu *m_stmenu;
+    QShortcut *m_stopAllTasksShortcut;
+    QToolBar *m_toolBar;
 private:
     Ui::MainWindow *ui;
 };

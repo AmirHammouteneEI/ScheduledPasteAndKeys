@@ -6,12 +6,14 @@
 class WaitAction : public AbstractAction
 {
 private:
-    float m_duration;
+    float m_duration; // in seconds
 public:
     WaitAction();
+    ~WaitAction() = default;
 
-    void runAction();
-    void setParameters(const ActionParameters& param);
+    void runAction() override;
+    void setParameters(const ActionParameters& param) override;
+    WaitAction* deepCopy() override;
 
     friend class WaitWidget;
 };

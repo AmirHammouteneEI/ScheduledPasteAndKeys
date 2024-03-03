@@ -22,6 +22,11 @@ TaskTabsManager::TaskTabsManager(MainWindow *parent)
     }
 }
 
+TaskTabsManager::~TaskTabsManager()
+{
+    qDeleteAll(m_taskTabsMap);
+}
+
 void TaskTabsManager::onOpenNewTabRequest(QString path)
 {
     QFile fileToOpen(path);
@@ -195,7 +200,7 @@ void TaskTabsManager::onTaskfilePathChanged(QString oldpath, QString newpath)
     }
 }
 
-void TaskTabsManager::stopAllTasksReceived()
+void TaskTabsManager::stopAllRunningTasksReceived()
 {
     for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd(); ++it)
     {

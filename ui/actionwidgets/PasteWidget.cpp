@@ -28,4 +28,7 @@ void PasteWidget::buildWidget()
     gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding),0,0);
     gridLayout->addWidget(mainButton,1,1,Qt::AlignCenter | Qt::AlignHCenter);
     gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding),2,2);
+
+    gridLayout->setContentsMargins(1,1,1,1);
+    gridLayout->setSpacing(2);
 }

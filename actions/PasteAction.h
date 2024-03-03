@@ -9,9 +9,11 @@ private:
     QString m_content;
 public:
     PasteAction();
+    ~PasteAction() = default;
 
-    void runAction();
-    void setParameters(const ActionParameters& param);
+    void runAction() override;
+    void setParameters(const ActionParameters& param) override;
+    PasteAction* deepCopy() override;
 
     friend class PasteWidget;
 };

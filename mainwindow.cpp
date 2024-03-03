@@ -49,13 +49,23 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager, &TaskTabsManager::onRefreshTabsRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager, &TaskTabsManager::onTaskfilePathChanged);
 
-    QShortcut *stopAllTasksShortcut = new QShortcut(QKeySequence("Ctrl+Alt+S"), this);
-    connect(stopAllTasksShortcut, &QShortcut::activated, m_tasktabsManager, &TaskTabsManager::stopAllTasksReceived);
+    m_stopAllTasksShortcut = new QShortcut(QKeySequence("Ctrl+Alt+S"), this);
+    connect(m_stopAllTasksShortcut, &QShortcut::activated, m_tasktabsManager, &TaskTabsManager::stopAllRunningTasksReceived);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    m_stopAllTasksShortcut->deleteLater();
+    m_createLoadTaskDialog->deleteLater();
+    m_toolBar->deleteLater();
+    m_stayOnTopAction->deleteLater();
+    m_lightThemeAction->deleteLater();
+    m_penombraThemeAction->deleteLater();
+    m_darkThemeAction->deleteLater();
+    m_tasktabsManager->deleteLater();
+    m_stmenu->deleteLater();
+    m_sticon->deleteLater();
 }
 
 QTabWidget *MainWindow::getTabWidget()
@@ -65,21 +75,21 @@ QTabWidget *MainWindow::getTabWidget()
 
 void MainWindow::buildSystemTrayMenu()
 {
-    QMenu *stmenu = new QMenu(this);
+    m_stmenu = new QMenu(this);
 
-    QAction* titleAction = new QAction(QIcon(":/img/programIcon.png"),"Scheduled Paste && Keys",stmenu);
+    QAction* titleAction = new QAction(QIcon(":/img/programIcon.png"),"Scheduled Paste && Keys",m_stmenu);
     QFont titleFont = titleAction->font();
     titleFont.setBold(true);
     titleAction->setFont(titleFont);
     connect(titleAction, SIGNAL(triggered()), this, SLOT(showWindow()));
 
-    QAction* quitAction = new QAction(tr("Quit"),stmenu);
+    QAction* quitAction = new QAction(tr("Quit"),m_stmenu);
     connect(quitAction, &QAction::triggered, this, &MainWindow::quitApp);
 
-    stmenu->addAction(titleAction);
-    stmenu->addSeparator();
-    stmenu->addAction(quitAction);
-    m_sticon->setContextMenu(stmenu);
+    m_stmenu->addAction(titleAction);
+    m_stmenu->addSeparator();
+    m_stmenu->addAction(quitAction);
+    m_sticon->setContextMenu(m_stmenu);
 
     connect(m_sticon, &QSystemTrayIcon::activated, this, &MainWindow::showWindow);
 }
@@ -118,12 +128,12 @@ void MainWindow::saveSettings()
 
 void MainWindow::buildToolBar()
 {
-    QToolBar* toolBar = new QToolBar("toolbar",this);
-    toolBar->setMovable(false);
-    toolBar->setFloatable(false);
-    toolBar->setFixedHeight(30);
+    m_toolBar = new QToolBar("toolbar",this);
+    m_toolBar->setMovable(false);
+    m_toolBar->setFloatable(false);
+    m_toolBar->setFixedHeight(30);
 
-    QWidget* spacer = new QWidget(toolBar);
+    QWidget* spacer = new QWidget(m_toolBar);
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 
@@ -150,13 +160,13 @@ void MainWindow::buildToolBar()
     m_stayOnTopAction->setToolTip(tr("Click to pin the window so it will stay on top"));
     connect(m_stayOnTopAction, &QAction::triggered, this, &MainWindow::swapStayOnTop);
 
-    toolBar->addWidget(spacer);
-    toolBar->addAction(m_lightThemeAction);
-    toolBar->addAction(m_penombraThemeAction);
-    toolBar->addAction(m_darkThemeAction);
-    toolBar->addAction(m_stayOnTopAction);
+    m_toolBar->addWidget(spacer);
+    m_toolBar->addAction(m_lightThemeAction);
+    m_toolBar->addAction(m_penombraThemeAction);
+    m_toolBar->addAction(m_darkThemeAction);
+    m_toolBar->addAction(m_stayOnTopAction);
 
-    addToolBar(toolBar);
+    addToolBar(m_toolBar);
 }
 
 void MainWindow::setTheme()

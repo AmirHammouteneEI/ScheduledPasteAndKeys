@@ -229,6 +229,18 @@ QTabBar::tab:!selected:hover
 	border-top: 2px solid #39597f;
 }
 
+QTabBar QToolButton::right-arrow 
+{ 
+    image: url(:/img/right_arrow_light.png);
+	width: 10px;
+}
+
+QTabBar QToolButton::left-arrow 
+{
+    image: url(:/img/left_arrow_light.png);
+	width: 10px;
+}
+
 QHeaderView::section
 {
 	border: 1px outset #ddd;
@@ -787,4 +799,9 @@ AbstractActionWidget[runningState="done"]
 AbstractActionWidget[runningState="done"] QFrame
 {
 	background-color: rgba(0, 0, 0, 0);
+}
+
+QLabel::disabled#actionSubLabel
+{
+	color : #222; 
 }

@@ -12,16 +12,20 @@ enum class ActionType {
 class AbstractAction
 {
     static unsigned int m_idCounter;
-    unsigned int m_ID;
+protected:
+    unsigned int m_ID = 0;
+    unsigned int m_refID = 0;
 public:
     AbstractAction();
     virtual ~AbstractAction() = default;
 
     virtual void runAction() = 0;
     virtual void setParameters(const ActionParameters& param) = 0;
+    virtual AbstractAction* deepCopy() = 0;
 
     ActionType m_type;
     unsigned int getID() const {return m_ID;}
+    unsigned int getRefID() const {return m_refID;}
 };
 
 #endif // ABSTRACTACTION_H

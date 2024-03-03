@@ -6,33 +6,53 @@ TaskThread::TaskThread(QObject *parent)
 
 }
 
+TaskThread::~TaskThread()
+{
+    qDeleteAll(m_actionsList);
+    quit();
+    requestInterruption();
+    wait();
+}
+
+void TaskThread::copyActionsList(Task *task)
+{
+    qDeleteAll(m_actionsList);
+    m_actionsList.clear();
+
+    if(task == nullptr)
+        return;
+
+    for(auto it = task->m_actionsOrderedList.begin(); it != task->m_actionsOrderedList.end(); ++it)
+    {
+        m_actionsList.append((*it)->deepCopy());
+    }
+}
+
 void TaskThread::stop()
 {
     m_haveToStop = true;
-    quit();
+    //quit();
+    terminate();
 }
 
 void TaskThread::run()
 {
-    if(m_task == nullptr)
-        return;
-
     begin:
 
-    for(auto it = m_task->m_actionsOrderedList.begin(); it != m_task->m_actionsOrderedList.end(); ++it)
+    for(auto it = m_actionsList.begin(); it != m_actionsList.end(); ++it)
     {
         if(m_haveToStop == true)
             return;
 
         if((*it) == nullptr)
             continue;
-        emit sendRunningStateAct((*it)->getID());
+        emit sendRunningStateAct((*it)->getRefID());
 
         (*it)->runAction();
 
         if((*it) == nullptr)
             continue;
-        emit sendDoneStateAct((*it)->getID());
+        emit sendDoneStateAct((*it)->getRefID());
     }
 
     if(m_loop)

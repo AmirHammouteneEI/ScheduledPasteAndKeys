@@ -15,6 +15,11 @@ ActionWidgetsManager::ActionWidgetsManager(QVBoxLayout *parent)
     }
 }
 
+ActionWidgetsManager::~ActionWidgetsManager()
+{
+    qDeleteAll(m_actionWidgetsMap);
+}
+
 int ActionWidgetsManager::appendWidget(AbstractActionWidget *actionWidget)
 {
     if(actionWidget == nullptr)
@@ -36,6 +41,8 @@ void ActionWidgetsManager::fullRefreshActionWidgets()
         if((*it) != nullptr)
             m_layout->addWidget(*it);
     }
+
+    m_layout->update();
 }
 
 void ActionWidgetsManager::taskStopped()

@@ -15,6 +15,7 @@ class ActionWidgetsManager : public QObject
     void fullRefreshActionWidgets();
 public:
     explicit ActionWidgetsManager(QVBoxLayout *parent = nullptr);
+    ~ActionWidgetsManager();
     int appendWidget(AbstractActionWidget* actionWidget);
     void taskStopped();
     void taskScheduled();

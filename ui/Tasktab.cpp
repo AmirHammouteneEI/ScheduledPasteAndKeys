@@ -28,7 +28,10 @@ TaskTab::~TaskTab()
         m_task = nullptr;
     }
 
+    m_getDelayDialog->deleteLater();
     m_mainWidget->deleteLater();
+    layout()->deleteLater();
+    m_actionWidgetsManager->deleteLater();
 }
 
 void TaskTab::refreshActionsList()
@@ -56,6 +59,7 @@ void TaskTab::buildBasicInterface()
     m_scheduleButton->setObjectName("scheduleButton");
     m_stopButton = new QPushButton("■", topWidget);
     m_stopButton->setObjectName("stopButton");
+    m_stopButton->setToolTip(tr("Stop the task. shortcut: Ctrl+Alt+S"));
     m_delayChrono = new QLabel(tr("not scheduled"),topWidget);
     m_delayChrono->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
     m_loopState = new QLabel(tr("Loop OFF"),topWidget);
@@ -83,12 +87,13 @@ void TaskTab::buildBasicInterface()
     //-- Middle widget with list of actions
     m_actionsFrame = new QFrame(m_mainWidget);
     m_actionsFrame->setObjectName("actionFrame");
-    m_actionsLayout =  new QVBoxLayout(m_actionsFrame);
+    m_actionsLayout = new QVBoxLayout(m_actionsFrame);
+    m_actionsLayout->setSizeConstraint(QLayout::SetMinimumSize);
 
     //-- Botton widget with + button and loop button
     auto bottomWidget = new QFrame(m_mainWidget);
     auto bottomGridLayout = new QGridLayout(bottomWidget);
-    m_addActionButton = new QPushButton(tr("+"), bottomWidget);
+    m_addActionButton = new QPushButton("+", bottomWidget);
     m_addActionButton->setObjectName("addActionButton");
     font.setPointSize(14);
     font.setBold(true);
@@ -199,7 +204,7 @@ void TaskTab::runTaskThread()
 
     TaskThread* thread = new TaskThread();
 
-    thread->m_task = m_task;
+    thread->copyActionsList(m_task);
     thread->m_loop = m_loopButton->isChecked();
 
     connect(m_stopButton, &QPushButton::released, thread, &TaskThread::stop);
@@ -207,7 +212,7 @@ void TaskTab::runTaskThread()
     connect(thread, &TaskThread::sendDoneStateAct, m_actionWidgetsManager, &ActionWidgetsManager::receivedActionDoneState);
     connect(thread, &TaskThread::sendFinishedOneLoop, this, &TaskTab::finishedOneLoop);
     connect(thread, &TaskThread::finished, this, &TaskTab::stopPushed);
-    connect(thread, &TaskThread::finished, thread, &TaskThread::quit);
+    //connect(thread, &TaskThread::finished, thread, &TaskThread::quit);
     connect(thread, &TaskThread::finished, thread, &TaskThread::deleteLater);
     connect(qApp, &QApplication::aboutToQuit, thread, &TaskThread::stop);
 

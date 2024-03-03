@@ -8,10 +8,12 @@
 class TaskThread : public QThread
 {
     Q_OBJECT
+    QList<AbstractAction*> m_actionsList;
 public:
     explicit TaskThread(QObject *parent = nullptr);
+    ~TaskThread();
 private:
-    Task *m_task = nullptr;
+    void copyActionsList(Task *task);
     bool m_loop = false;
     bool m_haveToStop = false;
 public slots:

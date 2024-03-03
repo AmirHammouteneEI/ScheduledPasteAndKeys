@@ -8,6 +8,7 @@ class PasteWidget : public AbstractActionWidget
     Q_OBJECT
 public:
     explicit PasteWidget(QWidget *parent = nullptr);
+    ~PasteWidget() = default;
     void buildWidget() override;
 signals:
 };

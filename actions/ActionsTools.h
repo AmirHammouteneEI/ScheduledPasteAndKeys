@@ -9,6 +9,7 @@ class ActionsTools
 {
 public:
     ActionsTools();
+    ~ActionsTools() = default;
 
     static void pasteKeystrokeSimulate();
     static void setClipboard(const QString & str);

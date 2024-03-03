@@ -17,13 +17,14 @@ class TaskTabsManager : public QObject
     QMap<unsigned int, QString> m_taskFilePathsMap; // may contains old closed tab paths of file, but should be updated with opened tasks
 public:
     explicit TaskTabsManager(MainWindow *parent = nullptr);
+    ~TaskTabsManager();
     void forceCloseTask(int id);
 public slots:
     void onOpenNewTabRequest(QString path);
     void onTabCloseRequest(int index);
     void onRefreshTabsRequest();
     void onTaskfilePathChanged(QString oldpath, QString newpath);
-    void stopAllTasksReceived();
+    void stopAllRunningTasksReceived();
 protected:
     TaskTab* createEmptyTaskAndOpenTab(const QString& name);
     int appendTaskInMap(TaskTab* task);

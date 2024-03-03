@@ -4,6 +4,7 @@
 #include "actions/AbstractAction.h"
 
 #include <QFrame>
+#include <QPushButton>
 
 enum class RunningState{
     NotExecuted,
@@ -19,6 +20,12 @@ protected:
     AbstractAction *m_action = nullptr;
     unsigned int m_actionID = 0;
     RunningState m_runningState;
+    virtual void changedRunningState() {}
+    QPushButton *m_removeButton;
+    QPushButton *m_moveToTopButton;
+    QPushButton *m_moveToBottomButton;
+    QPushButton *m_moveUpButton;
+    QPushButton *m_moveDownButton;
 public:
     explicit AbstractActionWidget(QWidget *parent = nullptr);
     virtual ~AbstractActionWidget();
