@@ -16,6 +16,9 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     ui/CreateLoadTaskDialog.cpp \
+    ui/DataEditDialog.cpp \
+    ui/SentenceSelectedEditDialog.cpp \
+    ui/SentencesTableWidget.cpp \
     ui/TaskTab.cpp \
     ui/actionwidgets/AbstractActionWidget.cpp \
     ui/actionwidgets/PasteWidget.cpp \
@@ -35,6 +38,9 @@ HEADERS += \
     globals.h \
     mainwindow.h \
     ui/CreateLoadTaskDialog.h \
+    ui/DataEditDialog.h \
+    ui/SentenceSelectedEditDialog.h \
+    ui/SentencesTableWidget.h \
     ui/TaskTab.h \
     ui/actionwidgets/AbstractActionWidget.h \
     ui/actionwidgets/PasteWidget.h \
@@ -44,6 +50,8 @@ HEADERS += \
 FORMS += \
     mainwindow.ui \
     ui/CreateLoadTaskDialog.ui \
+    ui/DataEditDialog.ui \
+    ui/SentenceSelectedEditDialog.ui \
     ui/getDelayDialog.ui
 
 LIBS += -luser32

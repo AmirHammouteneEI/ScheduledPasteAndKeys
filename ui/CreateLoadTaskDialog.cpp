@@ -192,7 +192,7 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
 
     fillExistingTasksTable();
     emit taskfilePathChanged(oldFilePath,filePathChosen);
-    emit requestRefreshTabs();
+    emit requestRefreshTabsName();
 }
 
 void CreateLoadTaskDialog::onDeleteFilename()
@@ -226,7 +226,7 @@ void CreateLoadTaskDialog::onDeleteFilename()
 
     fillExistingTasksTable();
 
-    emit requestRefreshTabs();
+    emit requestRefreshTabsName();
 }
 
 

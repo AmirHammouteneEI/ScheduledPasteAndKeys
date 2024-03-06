@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QToolButton>
+#include <QTimer>
 
 enum class ScheduleState{
     NotScheduled,
@@ -37,11 +38,11 @@ protected:
     QPushButton *m_addActionButton;
     QToolButton *m_loopButton;
     QLabel *m_delayChrono;
-    QLabel *m_loopState;
     void setName(const QString & newname);
     getDelayDialog *m_getDelayDialog;
     QDateTime m_datetimeOfRun;
     ActionWidgetsManager *m_actionWidgetsManager;
+    QTimer *m_scheduleTimer;
 public:
     explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
     ~TaskTab();

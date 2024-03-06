@@ -22,7 +22,7 @@ public:
 public slots:
     void onOpenNewTabRequest(QString path);
     void onTabCloseRequest(int index);
-    void onRefreshTabsRequest();
+    void onRefreshTabsNameRequest();
     void onTaskfilePathChanged(QString oldpath, QString newpath);
     void stopAllRunningTasksReceived();
 protected:

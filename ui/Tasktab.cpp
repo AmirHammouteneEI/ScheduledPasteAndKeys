@@ -5,7 +5,6 @@
 
 #include <QGridLayout>
 #include <QSpacerItem>
-#include <QTimer>
 #include <QApplication>
 
 TaskTab::TaskTab(QWidget *parent, const QString &name)
@@ -18,6 +17,9 @@ TaskTab::TaskTab(QWidget *parent, const QString &name)
     m_scheduleState = ScheduleState::NotScheduled;
 
     m_actionWidgetsManager = new ActionWidgetsManager(m_actionsLayout);
+
+    m_scheduleTimer = new QTimer(this);
+    connect(m_scheduleTimer, &QTimer::timeout, this, &TaskTab::runTaskThread);
 }
 
 TaskTab::~TaskTab()
@@ -62,7 +64,10 @@ void TaskTab::buildBasicInterface()
     m_stopButton->setToolTip(tr("Stop the task. shortcut: Ctrl+Alt+S"));
     m_delayChrono = new QLabel(tr("not scheduled"),topWidget);
     m_delayChrono->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
-    m_loopState = new QLabel(tr("Loop OFF"),topWidget);
+    m_loopButton = new QToolButton(topWidget);
+    m_loopButton->setObjectName("loopButton");
+    m_loopButton->setText(tr("Loop OFF"));
+    m_loopButton->setCheckable(true);
     auto font = m_nameLabel->font();
     font.setBold(true);
     font.setPointSize(13);
@@ -70,16 +75,17 @@ void TaskTab::buildBasicInterface()
     font.setPointSize(16);
     m_scheduleButton->setFont(font);
     m_stopButton->setFont(font);
+    font.setPointSize(12);
+    m_loopButton->setFont(font);
     font.setPointSize(11);
     font.setBold(false);
     m_delayChrono->setFont(font);
-    m_loopState->setFont(font);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),0,0);
     topGridLayout->addWidget(m_nameLabel,0,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     topGridLayout->addWidget(m_scheduleButton,1,1, Qt::AlignCenter | Qt::AlignRight);
     topGridLayout->addWidget(m_stopButton,1,2, Qt::AlignCenter | Qt::AlignLeft);
     topGridLayout->addWidget(m_delayChrono,2,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
-    topGridLayout->addWidget(m_loopState,3,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
+    topGridLayout->addWidget(m_loopButton,3,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     m_stopButton->setFont(font);topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),3,3);
     topGridLayout->setContentsMargins(1,1,1,1);
     topGridLayout->setSpacing(2);
@@ -99,14 +105,6 @@ void TaskTab::buildBasicInterface()
     font.setBold(true);
     m_addActionButton->setFont(font);
     bottomGridLayout->addWidget(m_addActionButton,0,0,Qt::AlignCenter | Qt::AlignHCenter);
-    m_loopButton = new QToolButton(bottomWidget);
-    m_loopButton->setObjectName("loopButton");
-    m_loopButton->setText(tr("Loop"));
-    m_loopButton->setCheckable(true);
-    font.setPointSize(12);
-    m_loopButton->setFont(font);
-    bottomGridLayout->addItem(new QSpacerItem(20,20,QSizePolicy::Minimum,QSizePolicy::Minimum),1,0);
-    bottomGridLayout->addWidget(m_loopButton,2,0, Qt::AlignCenter | Qt::AlignHCenter);
 
     m_mainWidget->layout()->addWidget(topWidget);
     m_mainWidget->layout()->addWidget(m_actionsFrame);
@@ -184,7 +182,8 @@ void TaskTab::setName(const QString &newname)
 void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
 {
     m_datetimeOfRun = QDateTime::currentDateTime().addSecs(delayInSeconds);
-    QTimer::singleShot((std::chrono::milliseconds)(delayInSeconds*1000), this, &TaskTab::runTaskThread);
+    m_scheduleTimer->setInterval((std::chrono::milliseconds)(delayInSeconds*1000));
+    m_scheduleTimer->start();
     m_scheduleState = ScheduleState::ScheduledInDelay;
 
     m_scheduleButton->setEnabled(false);
@@ -223,6 +222,7 @@ void TaskTab::runTaskThread()
 void TaskTab::stopPushed()
 {
     // Stop button is also connect to quitting the thread in TaskTab::runTaskThread()
+    m_scheduleTimer->stop();
     m_scheduleState = ScheduleState::NotScheduled;
     m_scheduleButton->setEnabled(true);
     m_stopButton->setEnabled(false);
@@ -251,13 +251,11 @@ void TaskTab::loopToggled(bool state)
 {
     if(state)
     {
-        m_loopState->setText(tr("Loop ON"));
-        m_loopState->setStyleSheet("color: green;");
+        m_loopButton->setText(tr("Loop ON"));
     }
     else
     {
-        m_loopState->setText(tr("Loop OFF"));
-        m_loopState->setStyleSheet("");
+        m_loopButton->setText(tr("Loop OFF"));
     }
 }
 

@@ -24,7 +24,6 @@ TaskTabsManager::TaskTabsManager(MainWindow *parent)
 
 TaskTabsManager::~TaskTabsManager()
 {
-    qDeleteAll(m_taskTabsMap);
 }
 
 void TaskTabsManager::onOpenNewTabRequest(QString path)
@@ -151,7 +150,7 @@ void TaskTabsManager::forceCloseTask(int id)
 
 }
 
-void TaskTabsManager::onRefreshTabsRequest()
+void TaskTabsManager::onRefreshTabsNameRequest()
 {
     for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd();)
     {

@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
     loadSettings();
     geometrySet();
 
+    m_dataEditDialog = new DataEditDialog(this);
+
     buildToolBar();
 
     m_createLoadTaskDialog = new CreateLoadTaskDialog(this);
@@ -46,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_tasktabsManager = new TaskTabsManager(this);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestOpenNewTab, m_tasktabsManager, &TaskTabsManager::onOpenNewTabRequest);
     connect(ui->tabWidget, &QTabWidget::tabCloseRequested, m_tasktabsManager, &TaskTabsManager::onTabCloseRequest);
-    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager, &TaskTabsManager::onRefreshTabsRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabsName, m_tasktabsManager, &TaskTabsManager::onRefreshTabsNameRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager, &TaskTabsManager::onTaskfilePathChanged);
 
     m_stopAllTasksShortcut = new QShortcut(QKeySequence("Ctrl+Alt+S"), this);
@@ -57,6 +59,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     m_stopAllTasksShortcut->deleteLater();
+    m_dataEditDialog->deleteLater();
     m_createLoadTaskDialog->deleteLater();
     m_toolBar->deleteLater();
     m_stayOnTopAction->deleteLater();
@@ -133,9 +136,20 @@ void MainWindow::buildToolBar()
     m_toolBar->setFloatable(false);
     m_toolBar->setFixedHeight(30);
 
+    QWidget* spacer0 = new QWidget(m_toolBar);
+    spacer0->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    QAction *dataEditAction = new QAction("▤",this);
+    dataEditAction->setObjectName("dataEditButton");
+    QFont font = dataEditAction->font();
+    font.setBold(true);
+    font.setPointSize(21);
+    dataEditAction->setFont(font);
+    dataEditAction->setToolTip(tr("Edit data..."));
+    connect(dataEditAction, &QAction::triggered, m_dataEditDialog, &DataEditDialog::showDialog);
+
     QWidget* spacer = new QWidget(m_toolBar);
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
 
     m_lightThemeAction = new QAction(QIcon(":/img/lightTheme.png"),"",this);
     m_lightThemeAction->setObjectName("lightAction");
@@ -160,6 +174,8 @@ void MainWindow::buildToolBar()
     m_stayOnTopAction->setToolTip(tr("Click to pin the window so it will stay on top"));
     connect(m_stayOnTopAction, &QAction::triggered, this, &MainWindow::swapStayOnTop);
 
+    m_toolBar->addWidget(spacer0);
+    m_toolBar->addAction(dataEditAction);
     m_toolBar->addWidget(spacer);
     m_toolBar->addAction(m_lightThemeAction);
     m_toolBar->addAction(m_penombraThemeAction);

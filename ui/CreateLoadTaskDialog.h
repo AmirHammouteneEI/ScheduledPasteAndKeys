@@ -28,7 +28,7 @@ private slots:
 
 signals:
     void requestOpenNewTab(QString);
-    void requestRefreshTabs();
+    void requestRefreshTabsName();
     void taskfilePathChanged(QString,QString);
 
 private:

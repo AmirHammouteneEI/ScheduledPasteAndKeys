@@ -215,12 +215,12 @@ QTreeView::branch:open:has-children:has-siblings
 
 QTabBar::tab
 {
-	width: 120px;
-	height: 20px;
+	min-width: 20px;
+	min-height: 20px;
 	text-align: left;
     background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(42, 75, 122, 100),stop:1 rgba(47, 61, 77, 100));
 	border: 1px solid #222;
-	padding : 2px 5px 2px 5px;
+	padding : 5px 5px 5px 5px;
 }
 
 QTabBar::tab:!selected
@@ -776,8 +776,16 @@ QAbstractButton#loopButton
 
 QAbstractButton::checked#loopButton
 {
-	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(221, 160, 221, 255),stop:1 rgba(128, 0, 128, 255));
-	border: 6px outset #334568ba;
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(221, 160, 221, 255),stop:1 rgba(128, 40, 128, 190));
+	border: 3px solid #334568;
+	color : rgba(40, 230, 40, 180);
+}
+
+QAbstractButton::disabled:checked#loopButton
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(221, 160, 221, 180),stop:1 rgba(128, 40, 128, 120));
+	border: 3px solid #5b6a86;
+	color : rgba(40, 230, 40, 100);
 }
 
 QAbstractButton::hover#loopButton
@@ -832,4 +840,10 @@ AbstractActionWidget[runningState="done"] QFrame
 QLabel::disabled#actionSubLabel
 {
 	color: #eee; 
+}
+
+QAbstractButton#dataEditButton
+{
+	padding: -6px -6px -6px -6px;
+	margin: -6px -6px -6px -6px;
 }
