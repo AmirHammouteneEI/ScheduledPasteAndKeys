@@ -19,7 +19,7 @@ void WaitWidget::buildWidget()
 
     auto pasteaction =  dynamic_cast<WaitAction*>(m_action);
 
-    QString durationStr = "ERROR on access duration";
+    QString durationStr = tr("ERROR on accessing action");
     if(pasteaction != nullptr)
         durationStr = QString::number(pasteaction->m_duration);
 

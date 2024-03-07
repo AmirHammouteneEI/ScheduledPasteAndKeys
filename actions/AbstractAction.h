@@ -18,10 +18,12 @@ protected:
 public:
     AbstractAction();
     virtual ~AbstractAction() = default;
+    AbstractAction(const AbstractAction & other) = delete;
+    AbstractAction& operator=(const AbstractAction & other) = delete;
 
-    virtual void runAction() = 0;
+    virtual void runAction() const = 0;
     virtual void setParameters(const ActionParameters& param) = 0;
-    virtual AbstractAction* deepCopy() = 0;
+    virtual AbstractAction* deepCopy() const = 0;
 
     ActionType m_type;
     unsigned int getID() const {return m_ID;}

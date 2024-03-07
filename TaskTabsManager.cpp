@@ -92,7 +92,7 @@ int TaskTabsManager::appendTaskInMap(TaskTab *task)
     return m_idCounter++;
 }
 
-int TaskTabsManager::getIdforTaskName(const QString &name)
+int TaskTabsManager::getIdforTaskName(const QString &name) const
 {
     for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd(); ++it)
     {
@@ -102,7 +102,7 @@ int TaskTabsManager::getIdforTaskName(const QString &name)
     return -1;
 }
 
-int TaskTabsManager::getTabIndexforId(int id)
+int TaskTabsManager::getTabIndexforId(int id) const
 {
     if(id < 0 || !m_taskTabsMap.contains(id))
         return -1;
@@ -233,12 +233,11 @@ void TaskTabsManager::createAndLoadTaskObject(int id)
 
     QJsonObject jsonContent = jsonDoc.object();
 
-    //TODO go through actions to fill new Task
+    //TODO go through actions in file to fill new Task (LOADING FILE)
 
-    TODELETE_fillTaskTest(task); //TODELETE testing prebuilt task
+   // TODELETE_fillTaskTest(task); //TODELETE testing prebuilt task
 
     m_taskTabsMap.value(id)->setTask(task);
-    m_taskTabsMap.value(id)->refreshActionsList();
 }
 
 //TODELETE testing prebuilt task

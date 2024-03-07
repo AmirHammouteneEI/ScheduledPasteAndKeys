@@ -11,6 +11,7 @@ public:
     ActionParameters(const ActionParameters &) = default;
     ActionParameters &operator=(const ActionParameters &) = default;
 
+    QString m_dataId;
     QString m_pasteContent;
     float m_waitDuration; // in seconds
 };

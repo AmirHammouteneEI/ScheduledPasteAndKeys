@@ -18,5 +18,6 @@ namespace G_Sentences {
     inline QString NoFileSelected = QObject::tr("No file has been selected from the table of saved files above. Please select one.");
     inline QString OperationInterference = QObject::tr("Some system or user action interferes with this operation, sorry for the inconvenience.");
     inline QString FileParsingError = QObject::tr("The file is not in the correct format for this software : parse error.");
+    inline QString NoSetenceSelected = QObject::tr("No sentence has been selected. Please select one.");
 }
 #endif // GLOBALS_H

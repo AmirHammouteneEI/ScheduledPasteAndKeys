@@ -2,10 +2,15 @@
 #include "TaskThread.h"
 #include "ui/actionwidgets/PasteWidget.h"
 #include "ui/actionwidgets/WaitWidget.h"
+#include "globals.h"
+#include "actions/PasteAction.h"
+#include "actions/WaitAction.h"
 
 #include <QGridLayout>
 #include <QSpacerItem>
 #include <QApplication>
+#include <QMenu>
+#include <QSettings>
 
 TaskTab::TaskTab(QWidget *parent, const QString &name)
     : QScrollArea{parent},m_name(name)
@@ -19,6 +24,7 @@ TaskTab::TaskTab(QWidget *parent, const QString &name)
     m_actionWidgetsManager = new ActionWidgetsManager(m_actionsLayout);
 
     m_scheduleTimer = new QTimer(this);
+    m_scheduleTimer->setSingleShot(true);
     connect(m_scheduleTimer, &QTimer::timeout, this, &TaskTab::runTaskThread);
 }
 
@@ -36,13 +42,10 @@ TaskTab::~TaskTab()
     m_actionWidgetsManager->deleteLater();
 }
 
-void TaskTab::refreshActionsList()
-{
-
-}
-
 void TaskTab::buildBasicInterface()
 {
+    m_createPasteActionDialog = new CreatePasteActionDialog(this);
+
     setWidgetResizable(true);
     new QVBoxLayout(this);
 
@@ -99,8 +102,11 @@ void TaskTab::buildBasicInterface()
     //-- Botton widget with + button and loop button
     auto bottomWidget = new QFrame(m_mainWidget);
     auto bottomGridLayout = new QGridLayout(bottomWidget);
-    m_addActionButton = new QPushButton("+", bottomWidget);
+    m_addActionButton = new QToolButton(bottomWidget);
     m_addActionButton->setObjectName("addActionButton");
+    m_addActionButton->setText("+");
+    buildAddButtonMenu();
+    //m_addActionButton->setContextMenuPolicy(Qt::CustomContextMenu);
     font.setPointSize(14);
     font.setBold(true);
     m_addActionButton->setFont(font);
@@ -124,6 +130,21 @@ void TaskTab::buildBasicInterface()
     connect(m_stopButton,&QPushButton::released, this, &TaskTab::stopPushed);
     connect(m_getDelayDialog,&getDelayDialog::sendDelay, this, &TaskTab::scheduleTaskAfterDelay);
     connect(m_loopButton,&QToolButton::toggled, this, &TaskTab::loopToggled);
+
+    connect(m_createPasteActionDialog, &CreatePasteActionDialog::createPasteActionRequest, this, &TaskTab::createPasteActionRequest);
+}
+
+void TaskTab::buildAddButtonMenu()
+{
+    auto menu = new QMenu(m_addActionButton);
+    auto creaPasteAct = new QAction(tr("Add Paste Action..."),menu);
+    auto creaWaitAct = new QAction(tr("Add Wait Action..."), menu);
+    menu->addAction(creaPasteAct);
+    menu->addAction(creaWaitAct);
+    connect(creaPasteAct, &QAction::triggered, m_createPasteActionDialog, &CreatePasteActionDialog::showDialog);
+
+    m_addActionButton->setMenu(menu);
+    m_addActionButton->setPopupMode(QToolButton::InstantPopup);
 }
 
 void TaskTab::setTask(Task *task)
@@ -140,6 +161,19 @@ void TaskTab::setTask(Task *task)
     {
         m_actionWidgetsManager->appendWidget(createActionWidget((*it)));
     }
+
+    m_actionWidgetsManager->fullRefreshActionWidgets();
+}
+
+void TaskTab::appendAction(AbstractAction *act)
+{
+    if(act == nullptr || m_task == nullptr)
+        return;
+
+    m_task->appendAction(act);
+    m_actionWidgetsManager->appendWidget(createActionWidget(act));
+
+    m_actionWidgetsManager->fullRefreshActionWidgets();
 }
 
 AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
@@ -152,7 +186,6 @@ AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
     {
         case ActionType::Paste:
             actWidgToCreate = new PasteWidget(m_actionsFrame);
-            actWidgToCreate->setAction(act);
         break;
         case ActionType::Wait:
             actWidgToCreate = new WaitWidget(m_actionsFrame);
@@ -211,7 +244,6 @@ void TaskTab::runTaskThread()
     connect(thread, &TaskThread::sendDoneStateAct, m_actionWidgetsManager, &ActionWidgetsManager::receivedActionDoneState);
     connect(thread, &TaskThread::sendFinishedOneLoop, this, &TaskTab::finishedOneLoop);
     connect(thread, &TaskThread::finished, this, &TaskTab::stopPushed);
-    //connect(thread, &TaskThread::finished, thread, &TaskThread::quit);
     connect(thread, &TaskThread::finished, thread, &TaskThread::deleteLater);
     connect(qApp, &QApplication::aboutToQuit, thread, &TaskThread::stop);
 
@@ -427,4 +459,30 @@ void TaskTab::moveDownActionReceived(unsigned int actId)
     qApp->processEvents();
 
     ensureWidgetVisible(actWidg,0,15);
+}
+
+void TaskTab::createPasteActionRequest(QString sentenceIdentity, float addWaitActionSeconds)
+{
+    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QString content = settings.value(G_Files::SentencesDataCategory+sentenceIdentity).toString();
+
+    ActionParameters paramPaste;
+    paramPaste.m_pasteContent = content;
+    paramPaste.m_dataId = sentenceIdentity;
+
+    PasteAction *pasteAct = new PasteAction();
+    pasteAct->setParameters(paramPaste);
+
+    appendAction(pasteAct);
+
+    if(addWaitActionSeconds < 0.f)
+        return;
+
+    ActionParameters paramWait;
+    paramWait.m_waitDuration = addWaitActionSeconds;
+
+    WaitAction *waitAct = new WaitAction();
+    waitAct->setParameters(paramWait);
+
+    appendAction(waitAct);
 }

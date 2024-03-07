@@ -28,8 +28,8 @@ public slots:
 protected:
     TaskTab* createEmptyTaskAndOpenTab(const QString& name);
     int appendTaskInMap(TaskTab* task);
-    int getIdforTaskName(const QString &name);
-    int getTabIndexforId(int id);
+    int getIdforTaskName(const QString &name) const;
+    int getTabIndexforId(int id) const;
     void createAndLoadTaskObject(int id); //TODO go through actions to fill new Task
     void TODELETE_fillTaskTest(Task *task); //TODELETE testing prebuilt task
 

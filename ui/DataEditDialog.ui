@@ -291,7 +291,7 @@
   <customwidget>
    <class>SentencesTableWidget</class>
    <extends>QTableWidget</extends>
-   <header>ui/SentencesTableWidget.h</header>
+   <header location="global">ui/SentencesTableWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

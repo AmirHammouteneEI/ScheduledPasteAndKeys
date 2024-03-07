@@ -10,10 +10,12 @@ private:
 public:
     WaitAction();
     ~WaitAction() = default;
+    WaitAction(const WaitAction & other) = delete;
+    WaitAction& operator=(const WaitAction & other) = delete;
 
-    void runAction() override;
+    void runAction() const override;
     void setParameters(const ActionParameters& param) override;
-    WaitAction* deepCopy() override;
+    WaitAction* deepCopy() const override;
 
     friend class WaitWidget;
 };

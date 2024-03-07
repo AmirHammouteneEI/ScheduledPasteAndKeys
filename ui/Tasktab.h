@@ -4,6 +4,7 @@
 #include "Task.h"
 #include "ui/getDelayDialog.h"
 #include "ActionWidgetsManager.h"
+#include "ui/createactiondialog/CreatePasteActionDialog.h"
 
 #include <QFrame>
 #include <QScrollArea>
@@ -35,7 +36,7 @@ protected:
     QLabel *m_nameLabel;
     QPushButton *m_scheduleButton;
     QPushButton *m_stopButton;
-    QPushButton *m_addActionButton;
+    QToolButton *m_addActionButton;
     QToolButton *m_loopButton;
     QLabel *m_delayChrono;
     void setName(const QString & newname);
@@ -43,10 +44,12 @@ protected:
     QDateTime m_datetimeOfRun;
     ActionWidgetsManager *m_actionWidgetsManager;
     QTimer *m_scheduleTimer;
+    CreatePasteActionDialog *m_createPasteActionDialog;
+    void buildAddButtonMenu();
+    void appendAction(AbstractAction *act);
 public:
     explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
     ~TaskTab();
-    void refreshActionsList(); //TODO refresh ui for actions widgets
     void runTaskThread();
     ScheduleState m_scheduleState;
 
@@ -63,6 +66,7 @@ public slots:
     void moveToBottomActionReceived(unsigned int actId);
     void moveUpActionReceived(unsigned int actId);
     void moveDownActionReceived(unsigned int actId);
+    void createPasteActionRequest(QString sentenceIdentity, float addWaitActionSeconds);
 
     friend class TaskTabsManager;
 };

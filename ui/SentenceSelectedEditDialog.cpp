@@ -9,7 +9,7 @@ SentenceSelectedEditDialog::SentenceSelectedEditDialog(QWidget *parent)
     , ui(new Ui::SentenceSelectedEditDialog)
 {
     ui->setupUi(this);
-    ui->lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("\\w+"), this ));
+    ui->lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("\\w+"), this));
 }
 
 SentenceSelectedEditDialog::~SentenceSelectedEditDialog()

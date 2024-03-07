@@ -32,7 +32,7 @@ public:
     void setRunningState(RunningState state);
     void setAction(AbstractAction *action);
     virtual void buildWidget() = 0;
-    unsigned int getActionID() {return m_actionID;}
+    unsigned int getActionID() const {return m_actionID;}
 
     inline bool operator==(const AbstractActionWidget& otherActWidg) { return m_actionID == otherActWidg.m_actionID; }
 

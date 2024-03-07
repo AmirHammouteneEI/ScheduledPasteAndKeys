@@ -1,8 +1,9 @@
 #include "SentencesTableWidget.h"
+#include "globals.h"
+
 #include <QSettings>
 #include <QMessageBox>
 
-#include "globals.h"
 
 SentencesTableWidget::SentencesTableWidget(QWidget *parent)
     : QTableWidget{parent}
@@ -14,8 +15,6 @@ SentencesTableWidget::SentencesTableWidget(QWidget *parent)
 
 void SentencesTableWidget::createSentenceReceived()
 {
-    if(m_editMode == EditMode::SelectOnly)
-        return;
     m_sentenceEditDialog->setEditable(true, true);
     m_sentenceEditDialog->setIdentity("");
     m_sentenceEditDialog->setContent("");
@@ -30,7 +29,7 @@ void SentencesTableWidget::editSentenceSelected(int row, int)
 
     QString trueId = idItem->text().remove(0,1);
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
-    m_sentenceEditDialog->setEditable(false, (m_editMode == EditMode::Editable));
+    m_sentenceEditDialog->setEditable(false, true);
     m_sentenceEditDialog->setIdentity(trueId);
     m_sentenceEditDialog->setContent(settings.value(G_Files::SentencesDataCategory + trueId).toString());
     m_sentenceEditDialog->show();
@@ -38,8 +37,12 @@ void SentencesTableWidget::editSentenceSelected(int row, int)
 
 void SentencesTableWidget::editFromDialogReceived()
 {
-    if(m_editMode == EditMode::SelectOnly)
+    if(m_sentenceEditDialog->identity().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Sentence has no identity"),
+                             tr("The sentence you tried to add has no identity, cancelled operation."));
         return;
+    }
 
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
     settings.setValue(G_Files::SentencesDataCategory+m_sentenceEditDialog->identity(),
@@ -49,14 +52,10 @@ void SentencesTableWidget::editFromDialogReceived()
 
 void SentencesTableWidget::removeSentenceReceived()
 {
-    if(m_editMode == EditMode::SelectOnly)
-        return;
-
     QItemSelectionModel *selection = selectionModel();
     if(!selection->hasSelection())
     {
-        QMessageBox::warning(this, tr("No sentence selected"),
-                             tr("No sentence has been selected for removing. Please select one."));
+        QMessageBox::warning(this, tr("No sentence selected"),G_Sentences::NoSetenceSelected);
         return;
     }
 

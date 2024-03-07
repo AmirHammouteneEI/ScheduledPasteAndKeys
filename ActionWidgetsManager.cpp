@@ -26,7 +26,7 @@ int ActionWidgetsManager::appendWidget(AbstractActionWidget *actionWidget)
         return -1;
 
     m_actionWidgetsMap.insert(actionWidget->getActionID(),actionWidget);
-    m_layout->addWidget(actionWidget);
+    //m_layout->addWidget(actionWidget);
     m_actionWidgetsDisplayOrderedList.append(actionWidget);
     return m_actionWidgetsMap.count();
 }
