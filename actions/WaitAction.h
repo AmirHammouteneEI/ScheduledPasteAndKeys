@@ -6,7 +6,7 @@
 class WaitAction : public AbstractAction
 {
 private:
-    float m_duration; // in seconds
+    long double m_duration; // in seconds
 public:
     WaitAction();
     ~WaitAction() = default;

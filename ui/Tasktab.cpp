@@ -45,6 +45,7 @@ TaskTab::~TaskTab()
 void TaskTab::buildBasicInterface()
 {
     m_createPasteActionDialog = new CreatePasteActionDialog(this);
+    m_createWaitActionDialog = new CreateWaitActionDialog(this);
 
     setWidgetResizable(true);
     new QVBoxLayout(this);
@@ -124,7 +125,7 @@ void TaskTab::buildBasicInterface()
     m_stopButton->setEnabled(false);
 
     m_getDelayDialog = new getDelayDialog(this);
-    m_getDelayDialog->m_savedDelay = QTime(0,1,0);
+    m_getDelayDialog->m_savedDelayTimePart = QTime(0,1,0);
 
     connect(m_scheduleButton,&QPushButton::released, m_getDelayDialog, &getDelayDialog::showDialog);
     connect(m_stopButton,&QPushButton::released, this, &TaskTab::stopPushed);
@@ -132,6 +133,7 @@ void TaskTab::buildBasicInterface()
     connect(m_loopButton,&QToolButton::toggled, this, &TaskTab::loopToggled);
 
     connect(m_createPasteActionDialog, &CreatePasteActionDialog::createPasteActionRequest, this, &TaskTab::createPasteActionRequest);
+    connect(m_createWaitActionDialog, &CreateWaitActionDialog::sendDuration, this, &TaskTab::createWaitActionRequest);
 }
 
 void TaskTab::buildAddButtonMenu()
@@ -142,6 +144,7 @@ void TaskTab::buildAddButtonMenu()
     menu->addAction(creaPasteAct);
     menu->addAction(creaWaitAct);
     connect(creaPasteAct, &QAction::triggered, m_createPasteActionDialog, &CreatePasteActionDialog::showDialog);
+    connect(creaWaitAct, &QAction::triggered, m_createWaitActionDialog, &CreateWaitActionDialog::showDialog);
 
     m_addActionButton->setMenu(menu);
     m_addActionButton->setPopupMode(QToolButton::InstantPopup);
@@ -480,6 +483,17 @@ void TaskTab::createPasteActionRequest(QString sentenceIdentity, float addWaitAc
 
     ActionParameters paramWait;
     paramWait.m_waitDuration = addWaitActionSeconds;
+
+    WaitAction *waitAct = new WaitAction();
+    waitAct->setParameters(paramWait);
+
+    appendAction(waitAct);
+}
+
+void TaskTab::createWaitActionRequest(long double duration)
+{
+    ActionParameters paramWait;
+    paramWait.m_waitDuration = duration;
 
     WaitAction *waitAct = new WaitAction();
     waitAct->setParameters(paramWait);

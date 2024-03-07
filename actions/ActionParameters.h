@@ -13,7 +13,7 @@ public:
 
     QString m_dataId;
     QString m_pasteContent;
-    float m_waitDuration; // in seconds
+    long double m_waitDuration; // in seconds
 };
 
 Q_DECLARE_METATYPE(ActionParameters);

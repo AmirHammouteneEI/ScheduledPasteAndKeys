@@ -35,10 +35,15 @@ void getDelayDialog::uncheckDateGroup()
 
 void getDelayDialog::accept()
 {
-    m_savedDelay = ui->timeEdit->time();
+    m_savedDelayTimePart = ui->timeEdit->time();
+    m_savedDelayDayPart = ui->spinBox->value();
 
     if(ui->delayGroup->isChecked())
-        emit sendDelay(QTime(0,0,0).secsTo(m_savedDelay));
+    {
+        qint64 totalDelay = QTime(0,0,0).secsTo(m_savedDelayTimePart);
+        totalDelay+= m_savedDelayDayPart * 86400;
+        emit sendDelay(totalDelay);
+    }
     else
     {
         QDateTime cur = QDateTime::currentDateTime();
@@ -69,7 +74,8 @@ void getDelayDialog::refreshDateDelayDetails(const QDateTime & datet)
 
 void getDelayDialog::showDialog()
 {
-    ui->timeEdit->setTime(m_savedDelay);
+    ui->timeEdit->setTime(m_savedDelayTimePart);
+    ui->spinBox->setValue(m_savedDelayDayPart);
     ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime().addSecs(60));
     refreshDateDelayDetails(ui->dateTimeEdit->dateTime());
     show();

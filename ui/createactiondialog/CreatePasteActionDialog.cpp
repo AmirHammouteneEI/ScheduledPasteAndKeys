@@ -37,7 +37,7 @@ void CreatePasteActionDialog::accept()
     if(idItem == nullptr)
     {
         QMessageBox::warning(nullptr, tr("Internal Error"),
-                             tr("An internal error occured : err03\nitem selected in SelectSentenceDialog is null !"));
+                             tr("An internal error occured : err04\nitem selected in CreatePasteActionDialog is null !"));
 
         return;
     }

@@ -5,6 +5,7 @@
 #include "ui/getDelayDialog.h"
 #include "ActionWidgetsManager.h"
 #include "ui/createactiondialog/CreatePasteActionDialog.h"
+#include "ui/createactiondialog/CreateWaitActionDialog.h"
 
 #include <QFrame>
 #include <QScrollArea>
@@ -45,6 +46,7 @@ protected:
     ActionWidgetsManager *m_actionWidgetsManager;
     QTimer *m_scheduleTimer;
     CreatePasteActionDialog *m_createPasteActionDialog;
+    CreateWaitActionDialog *m_createWaitActionDialog;
     void buildAddButtonMenu();
     void appendAction(AbstractAction *act);
 public:
@@ -67,6 +69,7 @@ public slots:
     void moveUpActionReceived(unsigned int actId);
     void moveDownActionReceived(unsigned int actId);
     void createPasteActionRequest(QString sentenceIdentity, float addWaitActionSeconds);
+    void createWaitActionRequest(long double duration);
 
     friend class TaskTabsManager;
 };

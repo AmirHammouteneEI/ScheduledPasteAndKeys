@@ -76,7 +76,7 @@ void SentencesTableWidget::removeSentenceReceived()
 
 void SentencesTableWidget::refresh()
 {
-    clear();
+    clearContents();
     setRowCount(0);
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
     QStringList keys = settings.allKeys();

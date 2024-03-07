@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>659</width>
-    <height>146</height>
+    <width>820</width>
+    <height>131</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -84,6 +84,21 @@
          <bool>true</bool>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="spacing">
+          <number>2</number>
+         </property>
+         <property name="leftMargin">
+          <number>1</number>
+         </property>
+         <property name="topMargin">
+          <number>1</number>
+         </property>
+         <property name="rightMargin">
+          <number>1</number>
+         </property>
+         <property name="bottomMargin">
+          <number>1</number>
+         </property>
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
@@ -101,12 +116,36 @@
           </spacer>
          </item>
          <item>
+          <widget class="QSpinBox" name="spinBox">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="maximum">
+            <number>10000</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string> days and </string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QTimeEdit" name="timeEdit">
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
            <property name="displayFormat">
             <string>HH:mm:ss</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string> hours,minutes,seconds</string>
            </property>
           </widget>
          </item>

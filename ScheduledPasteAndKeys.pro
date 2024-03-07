@@ -25,6 +25,7 @@ SOURCES += \
     ui/actionwidgets/PasteWidget.cpp \
     ui/actionwidgets/WaitWidget.cpp \
     ui/createactiondialog/CreatePasteActionDialog.cpp \
+    ui/createactiondialog/CreateWaitActionDialog.cpp \
     ui/getDelayDialog.cpp
 
 HEADERS += \
@@ -49,6 +50,7 @@ HEADERS += \
     ui/actionwidgets/PasteWidget.h \
     ui/actionwidgets/WaitWidget.h \
     ui/createactiondialog/CreatePasteActionDialog.h \
+    ui/createactiondialog/CreateWaitActionDialog.h \
     ui/getDelayDialog.h
 
 FORMS += \
@@ -58,6 +60,7 @@ FORMS += \
     ui/SelectSentenceDialog.ui \
     ui/SentenceSelectedEditDialog.ui \
     ui/createactiondialog/CreatePasteActionDialog.ui \
+    ui/createactiondialog/CreateWaitActionDialog.ui \
     ui/getDelayDialog.ui
 
 LIBS += -luser32
