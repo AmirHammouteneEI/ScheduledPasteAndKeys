@@ -138,7 +138,7 @@
             <set>Qt::AlignCenter</set>
            </property>
            <property name="displayFormat">
-            <string>HH:mm:ss</string>
+            <string notr="true">HH:mm:ss</string>
            </property>
           </widget>
          </item>
@@ -266,7 +266,7 @@
                <set>Qt::AlignCenter</set>
               </property>
               <property name="displayFormat">
-               <string>dd/MM/yyyy HH:mm:ss</string>
+               <string notr="true">dd/MM/yyyy HH:mm:ss</string>
               </property>
               <property name="calendarPopup">
                <bool>true</bool>

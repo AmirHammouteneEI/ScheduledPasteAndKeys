@@ -19,7 +19,7 @@ void PasteWidget::buildWidget()
 
     auto pasteaction =  dynamic_cast<PasteAction*>(m_action);
 
-    QString content = tr("ERROR on accessing action");
+    QString content = tr("ERROR on access to action");
     QString id = tr("ERROR");
     if(pasteaction != nullptr)
     {
@@ -28,7 +28,7 @@ void PasteWidget::buildWidget()
     }
 
     auto gridLayout = new QGridLayout(m_centralWidget);
-    m_mainButton = new QPushButton(QIcon(":/img/text.png"),tr("Paste #")+id,m_centralWidget);
+    m_mainButton = new QPushButton(QIcon(":/img/text.png"),tr("Paste text #")+id,m_centralWidget);
     m_mainButton->setToolTip(content);
 
     gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding),0,0);
@@ -52,13 +52,13 @@ void PasteWidget::sentenceIdentityReceived(QString id)
     auto pasteaction =  dynamic_cast<PasteAction*>(m_action);
     if(pasteaction == nullptr)
     {
-        m_mainButton->setToolTip("ERROR on access action");
-        m_mainButton->setText("Paste #ERROR");
+        m_mainButton->setToolTip("ERROR on access to action");
+        m_mainButton->setText("Paste text #ERROR");
         return;
     }
     pasteaction->m_content = content;
     pasteaction->m_contentId = id;
-    m_mainButton->setText(tr("Paste #")+id);
+    m_mainButton->setText(tr("Paste text #")+id);
     m_mainButton->setToolTip(content);
 
     emit anyParamChanged();

@@ -6,6 +6,7 @@ CreateWaitActionDialog::CreateWaitActionDialog(QWidget *parent)
     , ui(new Ui::CreateWaitActionDialog)
 {
     ui->setupUi(this);
+    ui->doubleSpinBox->setLocale(QLocale::English);
 
     connect(ui->bySecondsGroup, &QGroupBox::clicked, this, &CreateWaitActionDialog::uncheckByDayBasedGroup);
     connect(ui->byDayGroup, &QGroupBox::clicked, this, &CreateWaitActionDialog::uncheckBySecondsGroup);

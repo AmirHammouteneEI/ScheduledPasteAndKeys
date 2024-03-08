@@ -149,8 +149,8 @@ void TaskTab::buildBasicInterface()
 void TaskTab::buildAddButtonMenu()
 {
     auto menu = new QMenu(m_addActionButton);
-    auto creaPasteAct = new QAction(tr("Add Paste Action..."),menu);
-    auto creaWaitAct = new QAction(tr("Add Wait Action..."), menu);
+    auto creaPasteAct = new QAction(tr("Add a Paste text action..."),menu);
+    auto creaWaitAct = new QAction(tr("Add a Wait action..."), menu);
     menu->addAction(creaPasteAct);
     menu->addAction(creaWaitAct);
     connect(creaPasteAct, &QAction::triggered, m_createPasteActionDialog, &CreatePasteActionDialog::showDialog);
@@ -267,6 +267,7 @@ void TaskTab::runTaskThread()
     connect(qApp, &QApplication::aboutToQuit, thread, &TaskThread::stop);
 
     thread->start();
+
     m_scheduleState = ScheduleState::Running;
 }
 

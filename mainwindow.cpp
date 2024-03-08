@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("Schedule Paste & Keys v1.0");
+    setWindowTitle("Scheduled PC Tasks v0.1");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
     // Will also be a system tray app
@@ -51,9 +51,15 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->tabWidget, &QTabWidget::tabCloseRequested, m_tasktabsManager, &TaskTabsManager::onTabCloseRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabsName, m_tasktabsManager, &TaskTabsManager::onRefreshTabsNameRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager, &TaskTabsManager::onTaskfilePathChanged);
+    connect(ui->pushButton, &QPushButton::released, m_createLoadTaskDialog, &CreateLoadTaskDialog::showDialog);
 
     m_stopAllTasksShortcut = new QShortcut(QKeySequence("Ctrl+Alt+S"), this);
     connect(m_stopAllTasksShortcut, &QShortcut::activated, m_tasktabsManager, &TaskTabsManager::stopAllRunningTasksReceived);
+
+    setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
+                    "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
+                    "initial work on February 2024\n\n"
+                    "version 0.1"));
 }
 
 MainWindow::~MainWindow()
@@ -81,7 +87,7 @@ void MainWindow::buildSystemTrayMenu()
 {
     m_stmenu = new QMenu(this);
 
-    QAction* titleAction = new QAction(QIcon(":/img/programIcon.png"),"Scheduled Paste && Keys",m_stmenu);
+    QAction* titleAction = new QAction(QIcon(":/img/programIcon.png"),"Scheduled PC Tasks",m_stmenu);
     QFont titleFont = titleAction->font();
     titleFont.setBold(true);
     titleAction->setFont(titleFont);
@@ -113,11 +119,11 @@ void MainWindow::geometrySet()
 void MainWindow::loadSettings()
 {
     QSettings settings(G_Files::SettingsFilePath, QSettings::IniFormat);
-    m_windowWidth = settings.value("windowWidth", 300).toInt();
-    m_windowHeight = settings.value("windowHeight", 900).toInt();
+    m_windowWidth = settings.value("windowWidth", 450).toInt();
+    m_windowHeight = settings.value("windowHeight", 650).toInt();
 
-    m_windowWidth = m_windowWidth < 50 ? 300 : m_windowWidth;
-    m_windowHeight = m_windowHeight < 50 ? 900 : m_windowHeight;
+    m_windowWidth = m_windowWidth < 50 ? 450 : m_windowWidth;
+    m_windowHeight = m_windowHeight < 50 ? 650 : m_windowHeight;
 
     m_currentThemeName = settings.value("style", "dark").toString();
 }

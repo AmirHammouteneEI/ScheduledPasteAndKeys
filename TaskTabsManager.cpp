@@ -132,9 +132,13 @@ void TaskTabsManager::onTabCloseRequest(int index)
 
         if(task->m_taskModifiedFromLastSave)
         {
-            if(QMessageBox::question(m_mainwindow,tr("Saving changes"),
+            QMessageBox::StandardButton response = QMessageBox::question(m_mainwindow,tr("Saving changes"),
               tr("This Task has been modified since the last save, would you like to save changes ?"),
-              QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No), QMessageBox::StandardButton(QMessageBox::Yes)) == QMessageBox::Yes)
+              QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Yes));
+
+            if(response == QMessageBox::Cancel)
+                return;
+            if(response == QMessageBox::Yes)
                 saveTaskReceived(task->m_ID, true);
         }
 
@@ -251,7 +255,7 @@ void TaskTabsManager::createAndLoadTaskObject(int id)
     else
     {
         QJsonArray actionsArray = jsonContent.value(G_Files::DocumentActionsArray_KeyWord).toArray();
-        foreach(const QJsonValue & jvalue, actionsArray)
+        for(auto jvalue : actionsArray)
         {
             QJsonObject jobj = jvalue.toObject();
             auto actionToAdd = jsonToAction(jobj);

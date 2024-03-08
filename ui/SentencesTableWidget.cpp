@@ -80,7 +80,7 @@ void SentencesTableWidget::refresh()
     setRowCount(0);
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
     QStringList keys = settings.allKeys();
-    foreach(const QString &key, keys)
+    for(auto key : keys)
     {
         if(key.startsWith(G_Files::SentencesDataCategory))
         {

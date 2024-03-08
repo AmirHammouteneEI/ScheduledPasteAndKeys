@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>791</width>
+    <width>836</width>
     <height>144</height>
    </rect>
   </property>
@@ -231,7 +231,7 @@
             <set>Qt::AlignCenter</set>
            </property>
            <property name="displayFormat">
-            <string>HH:mm:ss</string>
+            <string notr="true">HH:mm:ss</string>
            </property>
           </widget>
          </item>

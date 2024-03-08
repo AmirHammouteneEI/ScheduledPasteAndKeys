@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QSystemTrayIcon>
+#include <QShortcut>
 
 #include "ui/CreateLoadTaskDialog.h"
 #include "TaskTabsManager.h"

@@ -4,6 +4,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
 
+TARGET = ScheduledPCTasks
+
 SOURCES += \
     ActionWidgetsManager.cpp \
     Task.cpp \
@@ -65,5 +67,17 @@ FORMS += \
 
 LIBS += -luser32
 
+TRANSLATIONS = ScheduledPCTasks_fr.ts
+
 RESOURCES += \
     resources.qrc
+
+RC_ICONS = img/programIcon.ico
+
+VERSION = 0.1.0
+QMAKE_TARGET_COMPANY = "Amir Hammoutene"
+QMAKE_TARGET_COPYRIGHT = "GNU general public license version 3"
+
+DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\" \
+           APP_COMPANY=\"\\\"$${QMAKE_TARGET_COMPANY}\\\"\" \
+           APP_COPYRIGHT=\"\\\"$${QMAKE_TARGET_COPYRIGHT}\\\"\"

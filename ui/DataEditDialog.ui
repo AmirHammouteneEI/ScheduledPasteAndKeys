@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Edit Data</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -116,7 +116,7 @@
          <item row="1" column="1">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Here you can edit the sentences that will be used in Paste Actions.</string>
+            <string>Here you can edit the sentences that will be used in actions :</string>
            </property>
           </widget>
          </item>

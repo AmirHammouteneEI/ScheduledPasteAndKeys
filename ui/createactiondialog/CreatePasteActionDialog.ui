@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Create a Paste Action</string>
+   <string>Create a Paste Text Action</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -86,7 +86,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Add a minimal Wait Action after this Paste Action</string>
+          <string>Add a minimal Wait action after this Paste text action</string>
          </property>
          <property name="checkable">
           <bool>true</bool>

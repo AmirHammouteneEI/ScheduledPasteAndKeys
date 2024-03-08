@@ -9,6 +9,7 @@ CreatePasteActionDialog::CreatePasteActionDialog(QWidget *parent)
     , ui(new Ui::CreatePasteActionDialog)
 {
     ui->setupUi(this);
+    ui->doubleSpinBox->setLocale(QLocale::English);
     connect(ui->addSentenceButton, &QPushButton::released, ui->tableWidget, &SentencesTableWidget::createSentenceReceived);
 }
 
