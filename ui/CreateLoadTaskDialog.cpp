@@ -166,8 +166,6 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
 
     QString fileContent = fileToModify.readAll();
 
-    fileToModify.resize(0);
-
     QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
     if(jsonDoc.isNull())
     {
@@ -183,6 +181,8 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
         QMessageBox::warning(this, tr("File format error"), G_Sentences::FileParsingError);
         return;
     }
+
+    fileToModify.resize(0);
 
     jsonContent.insert(G_Files::DocumentTaskName_KeyWord,QJsonValue::fromVariant(newFileName)) ;
 

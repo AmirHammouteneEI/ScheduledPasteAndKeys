@@ -24,7 +24,7 @@ void WaitWidget::buildWidget()
         durationStr = QString::number((double)waitaction->m_duration);
 
     auto gridLayout = new QGridLayout(m_centralWidget);
-    m_mainButton = new QPushButton(tr("Wait for ") + durationStr + tr(" secs"),m_centralWidget); //TODO icon
+    m_mainButton = new QPushButton(QIcon(":/img/wait.png"),tr("Wait for ") + durationStr + tr(" secs"),m_centralWidget);
     m_mainButton->setToolTip(durationStr+tr(" seconds"));
     m_timeRemainingLabel = new QLabel("",m_centralWidget);
     m_timeRemainingLabel->setObjectName("actionSubLabel");
@@ -98,4 +98,6 @@ void WaitWidget::durationReceived(long double dur)
     QString durationStr = QString::number((double)dur);
     m_mainButton->setText(tr("Wait for ") + durationStr + tr(" secs"));
     m_mainButton->setToolTip(durationStr + tr(" seconds"));
+
+    emit anyParamChanged();
 }

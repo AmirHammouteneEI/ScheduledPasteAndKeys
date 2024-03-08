@@ -16,7 +16,7 @@ public:
     explicit getDelayDialog(QWidget *parent = nullptr);
     ~getDelayDialog();
     QTime m_savedDelayTimePart;
-    int m_savedDelayDayPart;
+    int m_savedDelayDayPart = 0;
 private slots:
     void uncheckDelayGroup();
     void uncheckDateGroup();

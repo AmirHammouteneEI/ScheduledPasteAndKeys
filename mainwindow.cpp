@@ -11,6 +11,7 @@
 #include <QTabBar>
 #include <QFile>
 #include <QShortcut>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -197,6 +198,18 @@ void MainWindow::setTheme()
 
 void MainWindow::quitApp()
 {
+    if(m_tasktabsManager->isAnyTaskModified())
+    {
+        QMessageBox::StandardButton response = QMessageBox::question(this,tr("Saving changes"),
+          tr("Some Tasks have been modified since the last save of each, would you like to save all changes ?"),
+          QMessageBox::StandardButtons(QMessageBox::YesToAll | QMessageBox::NoToAll | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::YesToAll));
+
+        if(response == QMessageBox::Cancel)
+            return;
+        if(response == QMessageBox::YesToAll)
+            m_tasktabsManager->saveAllTasks();
+    }
+
     saveSettings();
     QApplication::quit();
 }
@@ -277,7 +290,7 @@ void MainWindow::taskTabContextMenuRequest(QPoint point)
     connect(renameAct, &QAction::triggered, this, [=]()
         {
             QString taskName = ui->tabWidget->tabBar()->tabText(index);
-            m_createLoadTaskDialog->renameFilename(taskName+".scht",m_tasktabsManager->m_taskFilePathsMap.value(m_tasktabsManager->getIdforTaskName(taskName)));
+        m_createLoadTaskDialog->renameFilename(taskName+".scht",m_tasktabsManager->m_taskFilePathsMap.value(m_tasktabsManager->getIdfromTaskName(taskName)));
         });
     connect(closeAct, &QAction::triggered, this, [=](){ m_tasktabsManager->onTabCloseRequest(index); });
 

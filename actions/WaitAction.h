@@ -16,6 +16,7 @@ public:
     void runAction() const override;
     void setParameters(const ActionParameters& param) override;
     WaitAction* deepCopy() const override;
+    ActionParameters generateParameters() const override;
 
     friend class WaitWidget;
 };

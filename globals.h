@@ -11,6 +11,12 @@ namespace G_Files {
     inline QString DocumentIdentification_Value = "ScheduleTask File";
     inline QString DocumentTaskName_KeyWord = "taskName";
     inline QString DocumentActionsArray_KeyWord = "actions";
+    inline QString ActionType_KeyWord = "type";
+    inline QString ActionPasteType_Value = "paste";
+    inline QString ActionWaitType_Value = "wait";
+    inline QString ActionContent_KeyWord = "content";
+    inline QString ActionContentId_KeyWord = "contentId";
+    inline QString ActionDuration_KeyWord = "duration";
 }
 
 namespace G_Sentences {

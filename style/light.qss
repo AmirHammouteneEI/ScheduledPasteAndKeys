@@ -1,3 +1,11 @@
+/***
+ * Amir Hammmoutene (contact@amirhammoutene.dev)
+ * January 2023
+ * QSS "light" style sheet, made to use with programs using Qt framework
+ * Open-source, under GNU general public license version 3
+***/
+
+
 /*-----BASE-----*/
 QWidget
 {

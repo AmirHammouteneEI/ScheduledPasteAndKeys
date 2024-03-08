@@ -48,6 +48,7 @@ signals:
     void moveToBottomActionRequest(unsigned int id);
     void moveUpActionRequest(unsigned int id);
     void moveDownActionRequest(unsigned int id);
+    void anyParamChanged();
 };
 
 #endif // ABSTRACTACTIONWIDGET_H

@@ -36,5 +36,8 @@
         <file>img/down_arrow_rounded.png</file>
         <file>img/top_arrow_rounded.png</file>
         <file>img/up_arrow_rounded.png</file>
+        <file>img/text.png</file>
+        <file>img/wait.png</file>
+        <file>img/save.png</file>
     </qresource>
 </RCC>

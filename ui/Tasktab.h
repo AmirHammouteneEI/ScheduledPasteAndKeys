@@ -49,16 +49,22 @@ protected:
     CreateWaitActionDialog *m_createWaitActionDialog;
     void buildAddButtonMenu();
     void appendAction(AbstractAction *act);
+    unsigned int m_loopedTimes = 0;
+    QLabel *m_loopedTimesLabel;
+    QPushButton *m_saveButton;
+    bool m_taskModifiedFromLastSave = false;
 public:
     explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
     ~TaskTab();
     void runTaskThread();
     ScheduleState m_scheduleState;
-
+    void setTaskModified(bool val);
+    bool taskIsModified() const {return m_taskModifiedFromLastSave;}
 private slots:
     void stopPushed();
     void loopToggled(bool state);
     void refreshScheduleText();
+    void anyActionChangedParam();
 public slots:
     void scheduleTaskAfterDelay(qint64 delayInSeconds);
     void finishedOneLoop();
@@ -70,6 +76,8 @@ public slots:
     void moveDownActionReceived(unsigned int actId);
     void createPasteActionRequest(QString sentenceIdentity, float addWaitActionSeconds);
     void createWaitActionRequest(long double duration);
+signals:
+    void saveTaskRequest(int taskId, bool verb);
 
     friend class TaskTabsManager;
 };

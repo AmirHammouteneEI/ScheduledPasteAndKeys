@@ -61,6 +61,9 @@ void TaskTab::buildBasicInterface()
     m_nameLabel->setWordWrap(true);
     m_nameLabel->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
     m_nameLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+    m_saveButton = new QPushButton(QIcon(":/img/save.png"),"", topWidget);
+    m_saveButton->setFlat(true);
+    m_saveButton->setToolTip(tr("Save changes"));
     m_scheduleButton = new QPushButton(tr("Schedule the Task"), topWidget);
     m_scheduleButton->setObjectName("scheduleButton");
     m_stopButton = new QPushButton("■", topWidget);
@@ -72,6 +75,8 @@ void TaskTab::buildBasicInterface()
     m_loopButton->setObjectName("loopButton");
     m_loopButton->setText(tr("Loop OFF"));
     m_loopButton->setCheckable(true);
+    m_loopedTimesLabel = new QLabel(tr("Looped ")+"0"+tr(" times"),topWidget);
+    m_loopedTimesLabel->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
     auto font = m_nameLabel->font();
     font.setBold(true);
     font.setPointSize(13);
@@ -85,12 +90,15 @@ void TaskTab::buildBasicInterface()
     font.setBold(false);
     m_delayChrono->setFont(font);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),0,0);
-    topGridLayout->addWidget(m_nameLabel,0,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
-    topGridLayout->addWidget(m_scheduleButton,1,1, Qt::AlignCenter | Qt::AlignRight);
-    topGridLayout->addWidget(m_stopButton,1,2, Qt::AlignCenter | Qt::AlignLeft);
-    topGridLayout->addWidget(m_delayChrono,2,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
-    topGridLayout->addWidget(m_loopButton,3,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
-    m_stopButton->setFont(font);topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),3,3);
+    topGridLayout->addWidget(m_nameLabel,1,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
+    topGridLayout->addWidget(m_saveButton,1,3, Qt::AlignRight | Qt::AlignVCenter);
+    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::Minimum,QSizePolicy::Minimum),2,1);
+    topGridLayout->addWidget(m_scheduleButton,3,1, Qt::AlignCenter | Qt::AlignRight);
+    topGridLayout->addWidget(m_stopButton,3,2, Qt::AlignCenter | Qt::AlignLeft);
+    topGridLayout->addWidget(m_delayChrono,4,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
+    topGridLayout->addWidget(m_loopButton,5,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
+    topGridLayout->addWidget(m_loopedTimesLabel,6,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
+    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),7,3);
     topGridLayout->setContentsMargins(1,1,1,1);
     topGridLayout->setSpacing(2);
 
@@ -134,6 +142,8 @@ void TaskTab::buildBasicInterface()
 
     connect(m_createPasteActionDialog, &CreatePasteActionDialog::createPasteActionRequest, this, &TaskTab::createPasteActionRequest);
     connect(m_createWaitActionDialog, &CreateWaitActionDialog::sendDuration, this, &TaskTab::createWaitActionRequest);
+
+    connect(m_saveButton, &QPushButton::released, this, [=](){ emit saveTaskRequest(m_ID, true); });
 }
 
 void TaskTab::buildAddButtonMenu()
@@ -166,6 +176,8 @@ void TaskTab::setTask(Task *task)
     }
 
     m_actionWidgetsManager->fullRefreshActionWidgets();
+
+    setTaskModified(false);
 }
 
 void TaskTab::appendAction(AbstractAction *act)
@@ -177,6 +189,8 @@ void TaskTab::appendAction(AbstractAction *act)
     m_actionWidgetsManager->appendWidget(createActionWidget(act));
 
     m_actionWidgetsManager->fullRefreshActionWidgets();
+
+    setTaskModified(true);
 }
 
 AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
@@ -205,6 +219,7 @@ AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
     connect(actWidgToCreate, &AbstractActionWidget::moveToBottomActionRequest, this, &TaskTab::moveToBottomActionReceived);
     connect(actWidgToCreate, &AbstractActionWidget::moveUpActionRequest, this, &TaskTab::moveUpActionReceived);
     connect(actWidgToCreate, &AbstractActionWidget::moveDownActionRequest, this, &TaskTab::moveDownActionReceived);
+    connect(actWidgToCreate, &AbstractActionWidget::anyParamChanged, this, &TaskTab::anyActionChangedParam);
 
     return actWidgToCreate;
 }
@@ -226,7 +241,8 @@ void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
     m_stopButton->setEnabled(true);
     m_addActionButton->setEnabled(false);
     m_loopButton->setEnabled(false);
-
+    m_loopedTimes = 0;
+    m_loopedTimesLabel->setText(tr("Looped ")+"0"+tr(" times"));
     refreshScheduleText();
 
     m_actionWidgetsManager->taskScheduled();
@@ -254,6 +270,12 @@ void TaskTab::runTaskThread()
     m_scheduleState = ScheduleState::Running;
 }
 
+void TaskTab::setTaskModified(bool val)
+{
+    m_taskModifiedFromLastSave = val;
+    m_saveButton->setEnabled(val);
+}
+
 void TaskTab::stopPushed()
 {
     // Stop button is also connect to quitting the thread in TaskTab::runTaskThread()
@@ -271,6 +293,7 @@ void TaskTab::finishedOneLoop()
 {
     m_actionWidgetsManager->taskStopped();
     m_actionWidgetsManager->taskScheduled();
+    m_loopedTimesLabel->setText(tr("Looped ")+QString::number(++m_loopedTimes)+tr(" times"));
 }
 
 void TaskTab::receivedActionRunningState(unsigned int actId)
@@ -323,6 +346,11 @@ void TaskTab::refreshScheduleText()
     }
 }
 
+void TaskTab::anyActionChangedParam()
+{
+    setTaskModified(true);
+}
+
 void TaskTab::removeActionReceived(unsigned int actId)
 {
     if(m_task == nullptr)
@@ -342,6 +370,8 @@ void TaskTab::removeActionReceived(unsigned int actId)
         actWidg->deleteLater();
 
     m_actionWidgetsManager->fullRefreshActionWidgets();
+
+    setTaskModified(true);
 }
 
 void TaskTab::moveToTopActionReceived(unsigned int actId)
@@ -372,6 +402,8 @@ void TaskTab::moveToTopActionReceived(unsigned int actId)
     qApp->processEvents();
 
     ensureWidgetVisible(actWidg,0,15);
+
+    setTaskModified(true);
 }
 
 void TaskTab::moveToBottomActionReceived(unsigned int actId)
@@ -402,6 +434,8 @@ void TaskTab::moveToBottomActionReceived(unsigned int actId)
     qApp->processEvents();
 
     ensureWidgetVisible(actWidg,0,15);
+
+    setTaskModified(true);
 }
 
 void TaskTab::moveUpActionReceived(unsigned int actId)
@@ -432,6 +466,8 @@ void TaskTab::moveUpActionReceived(unsigned int actId)
     qApp->processEvents();
 
     ensureWidgetVisible(actWidg,0,15);
+
+    setTaskModified(true);
 }
 
 void TaskTab::moveDownActionReceived(unsigned int actId)
@@ -462,6 +498,8 @@ void TaskTab::moveDownActionReceived(unsigned int actId)
     qApp->processEvents();
 
     ensureWidgetVisible(actWidg,0,15);
+
+    setTaskModified(true);
 }
 
 void TaskTab::createPasteActionRequest(QString sentenceIdentity, float addWaitActionSeconds)

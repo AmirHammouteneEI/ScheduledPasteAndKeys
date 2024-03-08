@@ -28,3 +28,11 @@ PasteAction *PasteAction::deepCopy() const
     actToReturn->m_refID = m_ID;
     return actToReturn;
 }
+
+ActionParameters PasteAction::generateParameters() const
+{
+    ActionParameters param;
+    param.m_pasteContent = m_content;
+    param.m_dataId = m_contentId;
+    return param;
+}

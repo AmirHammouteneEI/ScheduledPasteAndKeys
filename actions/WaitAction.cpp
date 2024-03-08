@@ -26,3 +26,10 @@ WaitAction *WaitAction::deepCopy() const
     actToReturn->m_refID = m_ID;
     return actToReturn;
 }
+
+ActionParameters WaitAction::generateParameters() const
+{
+    ActionParameters param;
+    param.m_waitDuration = m_duration;
+    return param;
+}

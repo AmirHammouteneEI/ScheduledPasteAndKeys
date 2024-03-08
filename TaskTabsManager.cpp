@@ -1,12 +1,13 @@
 #include "TaskTabsManager.h"
 #include "globals.h"
 #include "mainwindow.h"
+#include "actions/PasteAction.h"
+#include "actions/WaitAction.h"
 
 #include <QApplication>
 #include <QMessageBox>
 #include <QFile>
 #include <QJsonDocument>
-#include <QJsonObject>
 #include <QJsonArray>
 #include <QTabBar>
 
@@ -57,7 +58,7 @@ void TaskTabsManager::onOpenNewTabRequest(QString path)
 
     QString taskName = jsonContent.value(G_Files::DocumentTaskName_KeyWord).toString();
 
-    int tabIfAlreadyOpen = getTabIndexforId(getIdforTaskName(taskName));
+    int tabIfAlreadyOpen = getTabIndexfomId(getIdfromTaskName(taskName));
     if(tabIfAlreadyOpen != -1)
     {
         m_mainwindow->getTabWidget()->setCurrentIndex(tabIfAlreadyOpen);
@@ -78,6 +79,8 @@ TaskTab* TaskTabsManager::createEmptyTaskAndOpenTab(const QString &name)
     m_mainwindow->getTabWidget()->tabBar()->setTabToolTip(0,name);
     m_mainwindow->getTabWidget()->setCurrentIndex(0);
 
+    connect(newEmptyTask, &TaskTab::saveTaskRequest, this, &TaskTabsManager::saveTaskReceived);
+
     return newEmptyTask;
 }
 
@@ -92,7 +95,7 @@ int TaskTabsManager::appendTaskInMap(TaskTab *task)
     return m_idCounter++;
 }
 
-int TaskTabsManager::getIdforTaskName(const QString &name) const
+int TaskTabsManager::getIdfromTaskName(const QString &name) const
 {
     for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd(); ++it)
     {
@@ -102,7 +105,7 @@ int TaskTabsManager::getIdforTaskName(const QString &name) const
     return -1;
 }
 
-int TaskTabsManager::getTabIndexforId(int id) const
+int TaskTabsManager::getTabIndexfomId(int id) const
 {
     if(id < 0 || !m_taskTabsMap.contains(id))
         return -1;
@@ -127,7 +130,13 @@ void TaskTabsManager::onTabCloseRequest(int index)
             return;
         }
 
-        //TODO save before close request
+        if(task->m_taskModifiedFromLastSave)
+        {
+            if(QMessageBox::question(m_mainwindow,tr("Saving changes"),
+              tr("This Task has been modified since the last save, would you like to save changes ?"),
+              QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No), QMessageBox::StandardButton(QMessageBox::Yes)) == QMessageBox::Yes)
+                saveTaskReceived(task->m_ID, true);
+        }
 
         m_taskTabsMap.remove(task->m_ID);
         task->deleteLater();
@@ -142,7 +151,7 @@ void TaskTabsManager::forceCloseTask(int id)
     if(!m_taskTabsMap.contains(id))
         return;
 
-    m_mainwindow->getTabWidget()->removeTab(getTabIndexforId(id));
+    m_mainwindow->getTabWidget()->removeTab(getTabIndexfomId(id));
     m_mainwindow->getTabWidget()->setCurrentIndex(0);
 
     auto task = m_taskTabsMap.take(id);
@@ -184,7 +193,7 @@ void TaskTabsManager::onRefreshTabsNameRequest()
 
         it->second->setName(taskName);
 
-        m_mainwindow->getTabWidget()->setTabText(getTabIndexforId(it->first), taskName);
+        m_mainwindow->getTabWidget()->setTabText(getTabIndexfomId(it->first), taskName);
 
         ++it;
     }
@@ -233,85 +242,158 @@ void TaskTabsManager::createAndLoadTaskObject(int id)
 
     QJsonObject jsonContent = jsonDoc.object();
 
-    //TODO go through actions in file to fill new Task (LOADING FILE)
-
-   // TODELETE_fillTaskTest(task); //TODELETE testing prebuilt task
+    if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
+        != G_Files::DocumentIdentification_Value)
+    {
+        QMessageBox::warning(m_mainwindow, tr("File format error"),
+                             tr("The file is not in the good format, no action can't be loaded."));
+    }
+    else
+    {
+        QJsonArray actionsArray = jsonContent.value(G_Files::DocumentActionsArray_KeyWord).toArray();
+        foreach(const QJsonValue & jvalue, actionsArray)
+        {
+            QJsonObject jobj = jvalue.toObject();
+            auto actionToAdd = jsonToAction(jobj);
+            if(actionToAdd != nullptr)
+                task->appendAction(actionToAdd);
+        }
+    }
 
     m_taskTabsMap.value(id)->setTask(task);
 }
 
-//TODELETE testing prebuilt task
-
-#include "actions/PasteAction.h"
-#include "actions/WaitAction.h"
-
-void TaskTabsManager::TODELETE_fillTaskTest(Task *task)
+void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
 {
-    if(task == nullptr)
+    QFile fileToModify(m_taskFilePathsMap.value(taskTabId));
+    if(!fileToModify.open(QIODevice::ReadWrite | QIODevice::Text))
+    {
+        if(verbose)
+            QMessageBox::warning(m_mainwindow,tr("Cannot access file"), G_Sentences::OperationInterference);
         return;
+    }
 
-    ActionParameters paramPaste1;
-    paramPaste1.m_pasteContent = "Maître Corbeau, sur un arbre perché,\n";
-    ActionParameters paramWait1;
-    paramWait1.m_waitDuration = 0.1f;
-    ActionParameters paramPaste2;
-    paramPaste2.m_pasteContent = "Tenait en son bec un fromage.\n";
-    ActionParameters paramWait2;
-    paramWait2.m_waitDuration = 0.1f;
-    ActionParameters paramPaste3;
-    paramPaste3.m_pasteContent = "Maître Renard, par l'odeur alléché,\n";
-    ActionParameters paramWait3;
-    paramWait3.m_waitDuration = 0.1f;
-    ActionParameters paramPaste4;
-    paramPaste4.m_pasteContent = "Lui tint à peu près ce langage :\n";
-    ActionParameters paramWait4;
-    paramWait4.m_waitDuration = 0.1f;
-    ActionParameters paramPaste5;
-    paramPaste5.m_pasteContent = "Et bonjour, Monsieur du Corbeau.\n";
-    ActionParameters paramWait5;
-    paramWait5.m_waitDuration = 0.1f;
-    ActionParameters paramPaste6;
-    paramPaste6.m_pasteContent = "Que vous êtes joli ! que vous me semblez beau !\n\n";
-    ActionParameters paramWait6;
-    paramWait6.m_waitDuration = 0.1f;
+    QString fileContent = fileToModify.readAll();
 
-    PasteAction *paste1 = new PasteAction();
-    paste1->setParameters(paramPaste1);
-    WaitAction *wait1 = new WaitAction();
-    wait1->setParameters(paramWait1);
-    PasteAction *paste2 = new PasteAction();
-    paste2->setParameters(paramPaste2);
-    WaitAction *wait2 = new WaitAction();
-    wait2->setParameters(paramWait2);
-    PasteAction *paste3 = new PasteAction();
-    paste3->setParameters(paramPaste3);
-    WaitAction *wait3 = new WaitAction();
-    wait3->setParameters(paramWait3);
-    PasteAction *paste4 = new PasteAction();
-    paste4->setParameters(paramPaste4);
-    WaitAction *wait4 = new WaitAction();
-    wait4->setParameters(paramWait4);
-    PasteAction *paste5 = new PasteAction();
-    paste5->setParameters(paramPaste5);
-    WaitAction *wait5 = new WaitAction();
-    wait5->setParameters(paramWait5);
-    PasteAction *paste6 = new PasteAction();
-    paste6->setParameters(paramPaste6);
-    WaitAction *wait6 = new WaitAction();
-    wait6->setParameters(paramWait6);
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
+    if(jsonDoc.isNull())
+    {
+        if(verbose)
+            QMessageBox::warning(m_mainwindow,tr("File isn't in the good format anymore"), G_Sentences::FileParsingError);
+        return;
+    }
 
-    task->appendAction(paste1);
-    task->appendAction(wait1);
-    task->appendAction(paste2);
-    task->appendAction(wait2);
-    task->appendAction(paste3);
-    task->appendAction(wait3);
-    task->appendAction(paste4);
-    task->appendAction(wait4);
-    task->appendAction(paste5);
-    task->appendAction(wait5);
-    task->appendAction(paste6);
-    task->appendAction(wait6);
+    QJsonObject jsonContent = jsonDoc.object();
+
+    if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
+        != G_Files::DocumentIdentification_Value)
+    {
+        if(verbose)
+            QMessageBox::warning(m_mainwindow, tr("File isn't in the good format anymore"), G_Sentences::FileParsingError);
+        return;
+    }
+    fileToModify.resize(0);
+
+    QJsonArray emptyArray;
+    TaskTab *task = m_taskTabsMap.value(taskTabId);
+    if(task == nullptr || task->m_task == nullptr)
+    {
+        if(verbose)
+            QMessageBox::warning(m_mainwindow, tr("Internal Error"),
+             tr("An internal error occured : err05\nTaskTab or Task associated is null in TaskTabsManager !"));
+        return;
+    }
+
+    for(auto it = task->m_task->m_actionsOrderedList.begin(); it != task->m_task->m_actionsOrderedList.end(); ++it)
+    {
+        emptyArray.append(actionToJson(*it));
+    }
+
+    jsonContent.insert(G_Files::DocumentActionsArray_KeyWord, emptyArray);
+
+    QJsonDocument newJsondoc(jsonContent);
+    fileToModify.write(newJsondoc.toJson());
+    fileToModify.close();
+
+    m_taskTabsMap.value(taskTabId)->setTaskModified(false);
 }
 
-//TODELETE end
+QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
+{
+    QJsonObject jsonToReturn;
+
+    switch(act->m_type)
+    {
+        case ActionType::Paste:
+          {
+            jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionPasteType_Value));
+            auto pasteaction =  dynamic_cast<PasteAction*>(act);
+            if(pasteaction != nullptr)
+            {
+                auto params = pasteaction->generateParameters();
+                jsonToReturn.insert(G_Files::ActionContent_KeyWord, QJsonValue::fromVariant(params.m_pasteContent));
+                jsonToReturn.insert(G_Files::ActionContentId_KeyWord, QJsonValue::fromVariant(params.m_dataId));
+            }
+          }
+          break;
+        case ActionType::Wait:
+          {
+              jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionWaitType_Value));
+              auto waitaction =  dynamic_cast<WaitAction*>(act);
+              if(waitaction != nullptr)
+              {
+                  auto params = waitaction->generateParameters();
+                  jsonToReturn.insert(G_Files::ActionDuration_KeyWord, QJsonValue::fromVariant((double)params.m_waitDuration));
+              }
+          }
+          break;
+        default:
+          break;
+    }
+
+    return jsonToReturn;
+}
+
+AbstractAction *TaskTabsManager::jsonToAction(const QJsonObject &jobj)
+{
+    AbstractAction* actionToReturn = nullptr;
+    ActionParameters params;
+
+    QString type = jobj.value(G_Files::ActionType_KeyWord).toString();
+    if(type == G_Files::ActionPasteType_Value)
+    {
+        actionToReturn = new PasteAction();
+        params.m_pasteContent = jobj.value(G_Files::ActionContent_KeyWord).toString();
+        params.m_dataId = jobj.value(G_Files::ActionContentId_KeyWord).toString();
+    }
+    else if(type == G_Files::ActionWaitType_Value)
+    {
+        actionToReturn = new WaitAction();
+        params.m_waitDuration = jobj.value(G_Files::ActionDuration_KeyWord).toDouble();
+    }
+    else
+        return nullptr;
+
+    actionToReturn->setParameters(params);
+
+    return actionToReturn;
+}
+
+void TaskTabsManager::saveAllTasks()
+{
+    for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd(); ++it)
+    {
+        if(it->second->m_taskModifiedFromLastSave)
+            saveTaskReceived(it->first);
+    }
+}
+
+bool TaskTabsManager::isAnyTaskModified()
+{
+    for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd(); ++it)
+    {
+        if(it->second->m_taskModifiedFromLastSave)
+            return true;
+    }
+    return false;
+}

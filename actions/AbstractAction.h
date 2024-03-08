@@ -24,6 +24,7 @@ public:
     virtual void runAction() const = 0;
     virtual void setParameters(const ActionParameters& param) = 0;
     virtual AbstractAction* deepCopy() const = 0;
+    virtual ActionParameters generateParameters() const = 0;
 
     ActionType m_type;
     unsigned int getID() const {return m_ID;}

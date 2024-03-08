@@ -28,7 +28,7 @@ void PasteWidget::buildWidget()
     }
 
     auto gridLayout = new QGridLayout(m_centralWidget);
-    m_mainButton = new QPushButton("Paste #"+id,m_centralWidget); //TODO title is the #id of the text + Icon
+    m_mainButton = new QPushButton(QIcon(":/img/text.png"),tr("Paste #")+id,m_centralWidget);
     m_mainButton->setToolTip(content);
 
     gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding),0,0);
@@ -58,6 +58,8 @@ void PasteWidget::sentenceIdentityReceived(QString id)
     }
     pasteaction->m_content = content;
     pasteaction->m_contentId = id;
-    m_mainButton->setText("Paste #"+id);
+    m_mainButton->setText(tr("Paste #")+id);
     m_mainButton->setToolTip(content);
+
+    emit anyParamChanged();
 }

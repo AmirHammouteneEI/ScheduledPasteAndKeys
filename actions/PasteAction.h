@@ -17,6 +17,7 @@ public:
     void runAction() const override;
     void setParameters(const ActionParameters& param) override;
     PasteAction* deepCopy() const override;
+    ActionParameters generateParameters() const override;
 
     friend class PasteWidget;
 };

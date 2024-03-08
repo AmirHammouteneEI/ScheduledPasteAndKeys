@@ -4,6 +4,7 @@
 #include "ui/TaskTab.h"
 
 #include <QObject>
+#include <QJsonObject>
 
 class MainWindow;
 
@@ -25,13 +26,17 @@ public slots:
     void onRefreshTabsNameRequest();
     void onTaskfilePathChanged(QString oldpath, QString newpath);
     void stopAllRunningTasksReceived();
+    void saveTaskReceived(int taskTabId, bool verbose = false);
+    QJsonObject actionToJson(AbstractAction *act);
+    AbstractAction* jsonToAction(const QJsonObject &jobj);
+    void saveAllTasks();
+    bool isAnyTaskModified();
 protected:
     TaskTab* createEmptyTaskAndOpenTab(const QString& name);
     int appendTaskInMap(TaskTab* task);
-    int getIdforTaskName(const QString &name) const;
-    int getTabIndexforId(int id) const;
-    void createAndLoadTaskObject(int id); //TODO go through actions to fill new Task
-    void TODELETE_fillTaskTest(Task *task); //TODELETE testing prebuilt task
+    int getIdfromTaskName(const QString &name) const;
+    int getTabIndexfomId(int id) const;
+    void createAndLoadTaskObject(int id);
 
     friend class MainWindow;
 };

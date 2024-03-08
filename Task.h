@@ -17,6 +17,7 @@ public:
 
     friend class TaskThread;
     friend class TaskTab;
+    friend class TaskTabsManager;
 };
 
 #endif // TASK_H
