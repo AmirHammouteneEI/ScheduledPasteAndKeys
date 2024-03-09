@@ -22,7 +22,8 @@ namespace G_Files {
 namespace G_Sentences {
     inline QString AlreadyExists = QObject::tr("A task file with the chosen name already exists, do you confirm that you would like to overwrite this one ?");
     inline QString NoFileSelected = QObject::tr("No file has been selected from the table of saved files above. Please select one.");
-    inline QString OperationInterference = QObject::tr("Some system or user action interferes with this operation, sorry for the inconvenience.");
+    inline QString OperationInterference = QObject::tr("Some system or user action interferes with this operation, sorry for the inconvenience.\n\n"\
+            "Be sure that this program is run as administrator (right click on the executable or the shortcut for this option).");
     inline QString FileParsingError = QObject::tr("The file is not in the correct format for this software : parse error.");
     inline QString NoSetenceSelected = QObject::tr("No sentence has been selected. Please select one.");
 }

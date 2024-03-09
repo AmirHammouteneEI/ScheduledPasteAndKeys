@@ -383,7 +383,7 @@ version 0.1</translation>
     </message>
     <message>
         <source>Some system or user action interferes with this operation, sorry for the inconvenience.</source>
-        <translation>Certaines actions du système ou de l&apos;utilisateur interfèrent avec cette opération, désolé pour le désagrément occasionné.</translation>
+        <translation type="vanished">Certaines actions du système ou de l&apos;utilisateur interfèrent avec cette opération, désolé pour le désagrément occasionné.</translation>
     </message>
     <message>
         <source>The file is not in the correct format for this software : parse error.</source>
@@ -392,6 +392,14 @@ version 0.1</translation>
     <message>
         <source>No sentence has been selected. Please select one.</source>
         <translation>Aucune phrase n&apos;a été sélectionnée. Veuillez en sélectionner une.</translation>
+    </message>
+    <message>
+        <source>Some system or user action interferes with this operation, sorry for the inconvenience.
+
+Be sure that this program is run as administrator (right click on the executable or the shortcut for this option).</source>
+        <translation>Certaines interactions du système ou de l&apos;utilisateur interfèrent avec cette opération, désolé pour le désagrément occasionné.
+
+Assurez-vous que ce programme est exécuté en tant qu&apos;administrateur (clic droit sur l&apos;exécutable ou le raccourci pour cette option).</translation>
     </message>
 </context>
 <context>

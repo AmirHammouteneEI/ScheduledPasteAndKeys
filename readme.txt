@@ -1,4 +1,4 @@
-# Scheduled PC Tasks
+Scheduled PC Tasks
 version 0.1
 
 Automatically schedule the actions you would perform on your PC.
