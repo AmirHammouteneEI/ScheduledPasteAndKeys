@@ -33,7 +33,7 @@ void TaskTabsManager::onOpenNewTabRequest(QString path)
     if(!fileToOpen.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QMessageBox::warning(m_mainwindow, tr("Cannot open file"), tr("Trying to open file located in :\n")+
-          path+"\n"+G_Sentences::OperationInterference);
+          path+"\n"+G_Sentences::OperationInterference());
         return;
     }
 
@@ -43,7 +43,7 @@ void TaskTabsManager::onOpenNewTabRequest(QString path)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
     if(jsonDoc.isNull())
     {
-        QMessageBox::warning(m_mainwindow, tr("File format error"),G_Sentences::FileParsingError);
+        QMessageBox::warning(m_mainwindow, tr("File format error"),G_Sentences::FileParsingError());
         return;
     }
 
@@ -52,7 +52,7 @@ void TaskTabsManager::onOpenNewTabRequest(QString path)
     if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
         != G_Files::DocumentIdentification_Value)
     {
-        QMessageBox::warning(m_mainwindow, tr("File format error"), G_Sentences::FileParsingError);
+        QMessageBox::warning(m_mainwindow, tr("File format error"), G_Sentences::FileParsingError());
         return;
     }
 
@@ -273,7 +273,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(!fileToModify.open(QIODevice::ReadWrite | QIODevice::Text))
     {
         if(verbose)
-            QMessageBox::warning(m_mainwindow,tr("Cannot access file"), G_Sentences::OperationInterference);
+            QMessageBox::warning(m_mainwindow,tr("Cannot access file"), G_Sentences::OperationInterference());
         return;
     }
 
@@ -283,7 +283,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(jsonDoc.isNull())
     {
         if(verbose)
-            QMessageBox::warning(m_mainwindow,tr("File isn't in the good format anymore"), G_Sentences::FileParsingError);
+            QMessageBox::warning(m_mainwindow,tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
         return;
     }
 
@@ -293,7 +293,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
         != G_Files::DocumentIdentification_Value)
     {
         if(verbose)
-            QMessageBox::warning(m_mainwindow, tr("File isn't in the good format anymore"), G_Sentences::FileParsingError);
+            QMessageBox::warning(m_mainwindow, tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
         return;
     }
     fileToModify.resize(0);

@@ -53,6 +53,7 @@ protected :
     QMenu *m_stmenu;
     QShortcut *m_stopAllTasksShortcut;
     QToolBar *m_toolBar;
+    bool m_stMessageShown = false;
 private:
     Ui::MainWindow *ui;
 };

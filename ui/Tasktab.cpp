@@ -64,18 +64,41 @@ void TaskTab::buildBasicInterface()
     m_saveButton = new QPushButton(QIcon(":/img/save.png"),"", topWidget);
     m_saveButton->setFlat(true);
     m_saveButton->setToolTip(tr("Save changes"));
+    auto scheduleAndStopWidget = new QWidget(topWidget);
+    auto scheduleAndStopLayout = new QHBoxLayout(scheduleAndStopWidget);
     m_scheduleButton = new QPushButton(tr("Schedule the Task"), topWidget);
     m_scheduleButton->setObjectName("scheduleButton");
     m_stopButton = new QPushButton("■", topWidget);
     m_stopButton->setObjectName("stopButton");
     m_stopButton->setToolTip(tr("Stop the task. shortcut: Ctrl+Alt+S"));
+    scheduleAndStopLayout->addWidget(m_scheduleButton);
+    scheduleAndStopLayout->addWidget(m_stopButton);
     m_delayChrono = new QLabel(tr("not scheduled"),topWidget);
     m_delayChrono->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_runOptionsWidget = new QWidget(topWidget);
+    auto runOptionsLayout = new QHBoxLayout(m_runOptionsWidget);
+    m_timesToRunWidget = new QWidget(m_runOptionsWidget);
+    auto timesToRunLayout = new QHBoxLayout(m_timesToRunWidget);
+    QLabel *executeLabel = new QLabel(tr("Execute "),m_timesToRunWidget);
+    m_timesToRunSpinBox = new QSpinBox(m_timesToRunWidget);
+    m_timesToRunSpinBox->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_timesToRunSpinBox->setMinimum(1);
+    m_timesToRunSpinBox->setMaximum(9999);
+    QLabel *timesLabel = new QLabel(tr(" times"),m_timesToRunWidget);
+    timesToRunLayout->addWidget(executeLabel);
+    timesToRunLayout->addWidget(m_timesToRunSpinBox);
+    timesToRunLayout->addWidget(timesLabel);
+    timesToRunLayout->setSizeConstraint(QLayout::SetMinimumSize);
+    QLabel *orLabel = new QLabel(tr("OR   "), m_runOptionsWidget);
     m_loopButton = new QToolButton(topWidget);
     m_loopButton->setObjectName("loopButton");
     m_loopButton->setText(tr("Loop OFF"));
     m_loopButton->setCheckable(true);
-    m_loopedTimesLabel = new QLabel(tr("Looped ")+"0"+tr(" times"),topWidget);
+    runOptionsLayout->addWidget(m_timesToRunWidget,0,Qt::AlignRight);
+    runOptionsLayout->addWidget(orLabel);
+    runOptionsLayout->addWidget(m_loopButton,0,Qt::AlignLeft);
+    runOptionsLayout->setSizeConstraint(QLayout::SetMinimumSize);
+    m_loopedTimesLabel = new QLabel(tr("Has been executed ")+"0"+tr(" times"),topWidget);
     m_loopedTimesLabel->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
     auto font = m_nameLabel->font();
     font.setBold(true);
@@ -85,18 +108,21 @@ void TaskTab::buildBasicInterface()
     m_scheduleButton->setFont(font);
     m_stopButton->setFont(font);
     font.setPointSize(12);
+    m_timesToRunSpinBox->setFont(font);
+    orLabel->setFont(font);
     m_loopButton->setFont(font);
-    font.setPointSize(11);
     font.setBold(false);
+    font.setPointSize(11);
+    executeLabel->setFont(font);
+    timesLabel->setFont(font);
     m_delayChrono->setFont(font);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),0,0);
     topGridLayout->addWidget(m_nameLabel,1,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     topGridLayout->addWidget(m_saveButton,1,3, Qt::AlignRight | Qt::AlignVCenter);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::Minimum,QSizePolicy::Minimum),2,1);
-    topGridLayout->addWidget(m_scheduleButton,3,1, Qt::AlignCenter | Qt::AlignRight);
-    topGridLayout->addWidget(m_stopButton,3,2, Qt::AlignCenter | Qt::AlignLeft);
+    topGridLayout->addWidget(scheduleAndStopWidget,3,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     topGridLayout->addWidget(m_delayChrono,4,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
-    topGridLayout->addWidget(m_loopButton,5,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
+    topGridLayout->addWidget(m_runOptionsWidget,5,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     topGridLayout->addWidget(m_loopedTimesLabel,6,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),7,3);
     topGridLayout->setContentsMargins(1,1,1,1);
@@ -115,7 +141,6 @@ void TaskTab::buildBasicInterface()
     m_addActionButton->setObjectName("addActionButton");
     m_addActionButton->setText("+");
     buildAddButtonMenu();
-    //m_addActionButton->setContextMenuPolicy(Qt::CustomContextMenu);
     font.setPointSize(14);
     font.setBold(true);
     m_addActionButton->setFont(font);
@@ -240,7 +265,7 @@ void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
     m_scheduleButton->setEnabled(false);
     m_stopButton->setEnabled(true);
     m_addActionButton->setEnabled(false);
-    m_loopButton->setEnabled(false);
+    m_runOptionsWidget->setEnabled(false);
     m_loopedTimes = 0;
     m_loopedTimesLabel->setText(tr("Looped ")+"0"+tr(" times"));
     refreshScheduleText();
@@ -257,6 +282,7 @@ void TaskTab::runTaskThread()
 
     thread->copyActionsList(m_task);
     thread->m_loop = m_loopButton->isChecked();
+    thread->m_timesToRun = m_timesToRunSpinBox->value();
 
     connect(m_stopButton, &QPushButton::released, thread, &TaskThread::stop);
     connect(thread, &TaskThread::sendRunningStateAct, this, &TaskTab::receivedActionRunningState);
@@ -285,7 +311,9 @@ void TaskTab::stopPushed()
     m_scheduleButton->setEnabled(true);
     m_stopButton->setEnabled(false);
     m_addActionButton->setEnabled(true);
-    m_loopButton->setEnabled(true);
+    m_runOptionsWidget->setEnabled(true);
+    if(m_loopButton->isChecked())
+        m_timesToRunWidget->setEnabled(false);
     refreshScheduleText();
     m_actionWidgetsManager->taskStopped();
 }
@@ -311,10 +339,12 @@ void TaskTab::loopToggled(bool state)
     if(state)
     {
         m_loopButton->setText(tr("Loop ON"));
+        m_timesToRunWidget->setEnabled(false);
     }
     else
     {
         m_loopButton->setText(tr("Loop OFF"));
+        m_timesToRunWidget->setEnabled(true);
     }
 }
 

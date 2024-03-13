@@ -55,9 +55,12 @@ void TaskThread::run()
         emit sendDoneStateAct((*it)->getRefID());
     }
 
-    if(m_loop)
+    --m_timesToRun;
+    if(m_loop || m_timesToRun > 0)
     {
         emit sendFinishedOneLoop();
         goto begin;
     }
+
+    emit sendFinishedOneLoop();
 }
