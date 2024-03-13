@@ -15,6 +15,7 @@ public:
 private:
     void copyActionsList(Task *task);
     bool m_loop = false;
+    unsigned int m_timesToRun = 1;
     bool m_haveToStop = false;
 public slots:
     void stop();

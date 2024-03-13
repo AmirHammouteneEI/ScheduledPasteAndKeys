@@ -52,7 +52,7 @@ void CreateLoadTaskDialog::accept()
 
     if(fileChosen.exists() && fileChosen.isFile())
     {
-        if(QMessageBox::question(this, tr("File with this name already exists"), G_Sentences::AlreadyExists,
+        if(QMessageBox::question(this, tr("File with this name already exists"), G_Sentences::AlreadyExists(),
           QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
             return;
     }
@@ -60,7 +60,7 @@ void CreateLoadTaskDialog::accept()
     QFile fileToCreate(filePathChosen);
     if(!fileToCreate.open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        QMessageBox::warning(this, tr("Cannot create file"), G_Sentences::OperationInterference);
+        QMessageBox::warning(this, tr("Cannot create file"), G_Sentences::OperationInterference());
         return;
     }
 
@@ -83,7 +83,7 @@ void CreateLoadTaskDialog::onOpenFilename()
 {
     if(ui->tableWidget->selectedItems().count() == 0)
     {
-        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected);
+        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected());
         return;
     }
 
@@ -99,7 +99,7 @@ void CreateLoadTaskDialog::onRenameFilename()
 {
     if(ui->tableWidget->selectedItems().count() == 0)
     {
-        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected);
+        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected());
         return;
     }
 
@@ -138,14 +138,14 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
 
     if(fileChosen.exists() && fileChosen.isFile())
     {
-        if(QMessageBox::question(this, tr("File with this name already exists"), G_Sentences::AlreadyExists,
+        if(QMessageBox::question(this, tr("File with this name already exists"), G_Sentences::AlreadyExists(),
              QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
             return;
         else
         {
             if(!QFile::remove(filePathChosen))
             {
-                QMessageBox::warning(this, tr("Cannot delete file with same name"), G_Sentences::OperationInterference);
+                QMessageBox::warning(this, tr("Cannot delete file with same name"), G_Sentences::OperationInterference());
                 return;
             }
         }
@@ -153,14 +153,14 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
 
     if(!QFile::rename(oldFilePath, filePathChosen))
     {
-        QMessageBox::warning(this, tr("Cannot rename this file"), G_Sentences::OperationInterference);
+        QMessageBox::warning(this, tr("Cannot rename this file"), G_Sentences::OperationInterference());
         return;
     }
 
     QFile fileToModify(filePathChosen);
     if(!fileToModify.open(QIODevice::ReadWrite | QIODevice::Text))
     {
-        QMessageBox::warning(this, tr("Cannot open file to rename"), G_Sentences::OperationInterference);
+        QMessageBox::warning(this, tr("Cannot open file to rename"), G_Sentences::OperationInterference());
         return;
     }
 
@@ -169,7 +169,7 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
     QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
     if(jsonDoc.isNull())
     {
-        QMessageBox::warning(this, tr("File format error"), G_Sentences::FileParsingError);
+        QMessageBox::warning(this, tr("File format error"), G_Sentences::FileParsingError());
         return;
     }
 
@@ -178,7 +178,7 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
     if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
         != G_Files::DocumentIdentification_Value)
     {
-        QMessageBox::warning(this, tr("File format error"), G_Sentences::FileParsingError);
+        QMessageBox::warning(this, tr("File format error"), G_Sentences::FileParsingError());
         return;
     }
 
@@ -199,7 +199,7 @@ void CreateLoadTaskDialog::onDeleteFilename()
 {
     if(ui->tableWidget->selectedItems().count() == 0)
     {
-        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected);
+        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected());
         return;
     }
 
@@ -218,7 +218,7 @@ void CreateLoadTaskDialog::onDeleteFilename()
         {
             if(!QFile::remove(filePath))
             {
-                QMessageBox::warning(this, tr("Cannot delete file"), G_Sentences::OperationInterference);
+                QMessageBox::warning(this, tr("Cannot delete file"), G_Sentences::OperationInterference());
                 return;
             }
         }

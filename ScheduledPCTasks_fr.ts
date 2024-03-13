@@ -339,7 +339,7 @@ item selected in CreatePasteActionDialog is null !</translation>
     </message>
     <message>
         <source>Please make good use of the possibilities 🙂</source>
-        <translation>S&apos;il vous plaît, faites bon usage des possibilités 🙂</translation>
+        <translation>Veuillez faire bon usage des possibilités 🙂</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -383,7 +383,7 @@ version 0.1</translation>
     </message>
     <message>
         <source>Some system or user action interferes with this operation, sorry for the inconvenience.</source>
-        <translation type="vanished">Certaines actions du système ou de l&apos;utilisateur interfèrent avec cette opération, désolé pour le désagrément occasionné.</translation>
+        <translation>Certaines actions du système ou de l&apos;utilisateur interfèrent avec cette opération, désolé pour le désagrément occasionné.</translation>
     </message>
     <message>
         <source>The file is not in the correct format for this software : parse error.</source>
@@ -397,7 +397,7 @@ version 0.1</translation>
         <source>Some system or user action interferes with this operation, sorry for the inconvenience.
 
 Be sure that this program is run as administrator (right click on the executable or the shortcut for this option).</source>
-        <translation>Certaines interactions du système ou de l&apos;utilisateur interfèrent avec cette opération, désolé pour le désagrément occasionné.
+        <translation type="vanished">Certaines interactions du système ou de l&apos;utilisateur interfèrent avec cette opération, désolé pour le désagrément occasionné.
 
 Assurez-vous que ce programme est exécuté en tant qu&apos;administrateur (clic droit sur l&apos;exécutable ou le raccourci pour cette option).</translation>
     </message>
@@ -544,6 +544,18 @@ item selected in SelectSentenceDialog is null !</translation>
     <message>
         <source>Add a Wait action...</source>
         <translation>Ajouter une action d&apos;Attente...</translation>
+    </message>
+    <message>
+        <source>Execute </source>
+        <translation>Exécuter </translation>
+    </message>
+    <message>
+        <source>OR   </source>
+        <translation>OU   </translation>
+    </message>
+    <message>
+        <source>Has been executed </source>
+        <translation>A été exécuté </translation>
     </message>
 </context>
 <context>

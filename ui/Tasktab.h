@@ -14,6 +14,7 @@
 #include <QPushButton>
 #include <QToolButton>
 #include <QTimer>
+#include <QSpinBox>
 
 enum class ScheduleState{
     NotScheduled,
@@ -53,6 +54,9 @@ protected:
     QLabel *m_loopedTimesLabel;
     QPushButton *m_saveButton;
     bool m_taskModifiedFromLastSave = false;
+    QWidget *m_runOptionsWidget;
+    QWidget *m_timesToRunWidget;
+    QSpinBox *m_timesToRunSpinBox;
 public:
     explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
     ~TaskTab();

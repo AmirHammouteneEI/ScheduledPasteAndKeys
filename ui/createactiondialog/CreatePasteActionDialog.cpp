@@ -29,7 +29,7 @@ void CreatePasteActionDialog::accept()
     QItemSelectionModel *selection = ui->tableWidget->selectionModel();
     if(!selection->hasSelection())
     {
-        QMessageBox::warning(this, tr("No sentence selected"),G_Sentences::NoSetenceSelected);
+        QMessageBox::warning(this, tr("No sentence selected"),G_Sentences::NoSetenceSelected());
         return;
     }
 

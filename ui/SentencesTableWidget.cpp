@@ -55,7 +55,7 @@ void SentencesTableWidget::removeSentenceReceived()
     QItemSelectionModel *selection = selectionModel();
     if(!selection->hasSelection())
     {
-        QMessageBox::warning(this, tr("No sentence selected"),G_Sentences::NoSetenceSelected);
+        QMessageBox::warning(this, tr("No sentence selected"),G_Sentences::NoSetenceSelected());
         return;
     }
 

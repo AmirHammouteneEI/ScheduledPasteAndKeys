@@ -107,6 +107,15 @@ void MainWindow::buildSystemTrayMenu()
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     hide();
+    // Shows a system tray message saying that app is still running only the first time we close window
+    //TOREVIEW Does not seems to work on windows 11
+    if(!m_stMessageShown)
+    {
+        m_sticon->showMessage(tr("Scheduled PC Tasks is still running..."),
+                                 tr("You can open the window by a simple click on the system tray icon.\n"\
+                                 "Right click on it to quit the application."),QIcon(":/img/programIcon.png"));
+        m_stMessageShown = true;
+    }
     event->ignore();
 }
 
@@ -119,11 +128,11 @@ void MainWindow::geometrySet()
 void MainWindow::loadSettings()
 {
     QSettings settings(G_Files::SettingsFilePath, QSettings::IniFormat);
-    m_windowWidth = settings.value("windowWidth", 450).toInt();
-    m_windowHeight = settings.value("windowHeight", 650).toInt();
+    m_windowWidth = settings.value("windowWidth", 470).toInt();
+    m_windowHeight = settings.value("windowHeight", 800).toInt();
 
-    m_windowWidth = m_windowWidth < 50 ? 450 : m_windowWidth;
-    m_windowHeight = m_windowHeight < 50 ? 650 : m_windowHeight;
+    m_windowWidth = m_windowWidth < 50 ? 470 : m_windowWidth;
+    m_windowHeight = m_windowHeight < 50 ? 800 : m_windowHeight;
 
     m_currentThemeName = settings.value("style", "dark").toString();
 }
