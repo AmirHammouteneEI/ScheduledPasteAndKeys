@@ -6,7 +6,7 @@ CONFIG += c++17
 
 TARGET = ScheduledPCTasks
 
-QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
+QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function -Wno-unused-parameter -Wno-unused-result
 
 SOURCES += \
     ActionWidgetsManager.cpp \

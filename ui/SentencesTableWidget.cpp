@@ -48,6 +48,24 @@ void SentencesTableWidget::editFromDialogReceived()
     settings.setValue(G_Files::SentencesDataCategory+m_sentenceEditDialog->identity(),
                       m_sentenceEditDialog->content());
     refresh();
+
+    QTableWidgetItem *idItem = nullptr;
+    int rowFound = -1;
+    for(int k=0; k< rowCount(); ++k)
+    {
+        idItem = item(k,0);
+        if(idItem != nullptr && idItem->text() == "#"+m_sentenceEditDialog->identity())
+        {
+            rowFound = k;
+            break;
+        }
+    }
+
+    if(rowFound >= 0)
+    {
+        selectRow(rowFound);
+        scrollToItem(idItem,QAbstractItemView::PositionAtCenter);
+    }
 }
 
 void SentencesTableWidget::removeSentenceReceived()
@@ -80,7 +98,7 @@ void SentencesTableWidget::refresh()
     setRowCount(0);
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
     QStringList keys = settings.allKeys();
-    for(auto key : keys)
+    for(const auto &key : keys)
     {
         if(key.startsWith(G_Files::SentencesDataCategory))
         {
