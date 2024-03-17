@@ -30,6 +30,7 @@ void PasteWidget::buildWidget()
     auto gridLayout = new QGridLayout(m_centralWidget);
     m_mainButton = new QPushButton(QIcon(":/img/text.png"),tr("Paste text #")+id,m_centralWidget);
     m_mainButton->setToolTip(content);
+    m_mainButton->setProperty("contentId", id);
 
     gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding),0,0);
     gridLayout->addWidget(m_mainButton,1,1,Qt::AlignCenter | Qt::AlignHCenter);
@@ -60,6 +61,7 @@ void PasteWidget::sentenceIdentityReceived(QString id)
     pasteaction->m_contentId = id;
     m_mainButton->setText(tr("Paste text #")+id);
     m_mainButton->setToolTip(content);
+    m_mainButton->setProperty("contentId", id);
 
     emit anyParamChanged();
 }
