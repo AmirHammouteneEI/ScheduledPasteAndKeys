@@ -8,6 +8,9 @@ Automatically schedule the actions you would perform on your PC.
 Under GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
 Please read license.txt file
 
+We collect no data
+Please read private_policy.txt
+
 ----------
 Details of version 0.1:
 
