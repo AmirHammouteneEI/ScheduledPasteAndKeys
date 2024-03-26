@@ -7,8 +7,9 @@ By using the application "Scheduled PC Tasks" you are consenting to our policies
 
 __Definition__
 
-- Application : refers to Scheduled PC Tasks, the software program provided by the Company.
-- You means the individual accessing or using the Application, or the company, or other legal entity on behalf of which such individual is accessing or using the Application, as applicable.
+- Application : refers to Scheduled PC Tasks, the software program provided by the Us.
+- You : means the individual accessing or using the Application, or the company, or other legal entity on behalf of which such individual is accessing or using the Application, as applicable.
+- Us : means the conceptor and developer of the software, in the person of Amir Hammoutene
 
 __Collection of Personal Information__
 
