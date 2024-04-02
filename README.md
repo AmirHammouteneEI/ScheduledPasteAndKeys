@@ -4,11 +4,15 @@ version 0.1 (March 2024)
 
 Automatically schedule the actions you would perform on your PC.
 
+![Screenshot](/screenshot.png?raw=true "Screenshot")
+
 
 Under GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+
 Please read license.txt file
 
 We don't collect any data
+
 Please read private_policy.txt
 
 ----------
@@ -21,7 +25,7 @@ For the moment, those actions are available :
    - Paste text
    - Wait
 
-The goal in future version is to include those actions :
+The goal in future versions is to include those actions :
 
    - Mouve Cursor (to destination and in circle)
    - Sequence of mouse clicks and keystrokes
@@ -29,16 +33,18 @@ The goal in future version is to include those actions :
    - Open files, folders, executables, url
    - Run Windows system specific command (shut down, reboot, switch audio device...)
 
-Feebacks and idea of other actions are very welcomed !
+Feebacks and idea of other actions are very welcome !
 
 ----------
 Available for install on Microsoft Store : 
+
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
 Needs 30 Mo disk space, available for Windows systems only
    
 ----------
 A serie of videos explaining, step by step, how I developed this program is available on Youtube :
+
 https://www.youtube.com/watch?v=QmSNdI0Id6c&list=PLtgI97zcoKTaHE3xgl9k1xTTHprcufgvl
 
 Audio in French language, autosubtitles are available for any language
