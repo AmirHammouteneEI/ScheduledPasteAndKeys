@@ -13,6 +13,8 @@
 #include <QShortcut>
 #include <QMessageBox>
 
+bool G_Parameters::AutoScrollTask = true;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -24,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     // Will also be a system tray app
     m_sticon = new QSystemTrayIcon(QIcon(":/img/programIcon.png"),this);
     buildSystemTrayMenu();
+    m_sticon->setToolTip("Scheduled PC Tasks");
     m_sticon->show();
 
     loadSettings();
@@ -164,8 +167,18 @@ void MainWindow::buildToolBar()
     dataEditAction->setToolTip(tr("Edit data..."));
     connect(dataEditAction, &QAction::triggered, m_dataEditDialog, &DataEditDialog::showDialog);
 
-    QWidget* spacer = new QWidget(m_toolBar);
-    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    QWidget* spacer1 = new QWidget(m_toolBar);
+    spacer1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    m_scrollAction = new QAction(QIcon(":/img/scroll.png"),"",this);
+    m_scrollAction->setCheckable(true);
+    m_scrollAction->setChecked(true);
+    m_scrollAction->setToolTip(tr("Uncheck to disable autoscrolling during task execution"));
+    connect(m_scrollAction, &QAction::triggered, this, &MainWindow::swapAutoscrollMode);
+
+    QWidget* spacer2 = new QWidget(m_toolBar);
+    spacer2->setFixedWidth(20);
+    spacer2->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 
     m_lightThemeAction = new QAction(QIcon(":/img/lightTheme.png"),"",this);
     m_lightThemeAction->setObjectName("lightAction");
@@ -192,7 +205,9 @@ void MainWindow::buildToolBar()
 
     m_toolBar->addWidget(spacer0);
     m_toolBar->addAction(dataEditAction);
-    m_toolBar->addWidget(spacer);
+    m_toolBar->addWidget(spacer1);
+    m_toolBar->addAction(m_scrollAction);
+    m_toolBar->addWidget(spacer2);
     m_toolBar->addAction(m_lightThemeAction);
     m_toolBar->addAction(m_penombraThemeAction);
     m_toolBar->addAction(m_darkThemeAction);
@@ -243,6 +258,21 @@ void MainWindow::swapStayOnTop(bool state)
     show();
     m_stayOnTopAction->setIcon(QIcon(":/img/unpinned.png"));
     m_stayOnTopAction->setToolTip(tr("Click to pin the window so it will stay on top"));
+}
+
+void MainWindow::swapAutoscrollMode(bool state)
+{
+    if(state)
+    {
+        G_Parameters::AutoScrollTask = true;
+        m_scrollAction->setIcon(QIcon(":/img/scroll.png"));
+        m_scrollAction->setToolTip(tr("Uncheck to disable autoscrolling during task execution"));
+        return;
+    }
+
+    G_Parameters::AutoScrollTask = false;
+    m_scrollAction->setIcon(QIcon(":/img/noscroll.png"));
+    m_scrollAction->setToolTip(tr("Check to enable autoscrolling during task execution"));
 }
 
 void MainWindow::switchTheme()

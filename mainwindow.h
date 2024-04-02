@@ -28,6 +28,7 @@ public slots:
 private slots:
     void quitApp();
     void swapStayOnTop(bool state);
+    void swapAutoscrollMode(bool state);
     void switchTheme();
     void taskTabPageClicked(int newIndex);
     void taskTabContextMenuRequest(QPoint point);
@@ -44,6 +45,7 @@ protected :
     QAction * m_lightThemeAction;
     QAction * m_penombraThemeAction;
     QAction * m_darkThemeAction;
+    QAction * m_scrollAction;
     void buildToolBar();
     QString m_currentThemeName;
     void setTheme();

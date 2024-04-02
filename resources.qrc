@@ -39,5 +39,7 @@
         <file>img/text.png</file>
         <file>img/wait.png</file>
         <file>img/save.png</file>
+        <file>img/noscroll.png</file>
+        <file>img/scroll.png</file>
     </qresource>
 </RCC>

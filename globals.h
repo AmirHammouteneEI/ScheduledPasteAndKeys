@@ -26,4 +26,9 @@ namespace G_Sentences {
     static QString FileParsingError() {return QObject::tr("The file is not in the correct format for this software : parse error.");}
     static QString NoSetenceSelected() {return QObject::tr("No sentence has been selected. Please select one.");}
 }
+
+struct G_Parameters {
+    static bool AutoScrollTask;
+};
+
 #endif // GLOBALS_H

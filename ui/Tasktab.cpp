@@ -328,7 +328,7 @@ void TaskTab::finishedOneLoop()
 void TaskTab::receivedActionRunningState(unsigned int actId)
 {
     auto widg = m_actionWidgetsManager->m_actionWidgetsMap.value(actId);
-    if(widg != nullptr)
+    if(widg != nullptr && G_Parameters::AutoScrollTask)
         ensureWidgetVisible(widg,0,15);
 
     m_actionWidgetsManager->receivedActionRunningState(actId);
