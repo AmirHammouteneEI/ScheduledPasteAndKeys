@@ -23,21 +23,10 @@ void WaitWidget::buildWidget()
     if(waitaction != nullptr)
         durationStr = QString::number((double)waitaction->m_duration);
 
-    auto gridLayout = new QGridLayout(m_centralWidget);
-    m_mainButton = new QPushButton(QIcon(":/img/wait.png"),tr("Wait for ") + durationStr + tr(" secs"),m_centralWidget);
+    m_mainButton->setIcon(QIcon(":/img/wait.png"));
+    m_mainButton->setText(tr("Wait for ") + durationStr + tr(" secs"));
     m_mainButton->setToolTip(durationStr+tr(" seconds"));
-    m_timeRemainingLabel = new QLabel("",m_centralWidget);
-    m_timeRemainingLabel->setObjectName("actionSubLabel");
-    m_timeRemainingLabel->setWordWrap(true);
-    m_timeRemainingLabel->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
-
-    gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding),0,0);
-    gridLayout->addWidget(m_mainButton,1,1,Qt::AlignCenter | Qt::AlignHCenter);
-    gridLayout->addWidget(m_timeRemainingLabel,2,1,Qt::AlignCenter | Qt::AlignHCenter);
-    gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding),3,2);
-
-    gridLayout->setContentsMargins(1,1,1,1);
-    gridLayout->setSpacing(2);
+    m_mainButton->setProperty("duration", durationStr);
 
     m_editDurationDialog = new CreateWaitActionDialog(this);
 
@@ -55,7 +44,7 @@ void WaitWidget::refreshTimeRemainingText(const QDateTime &departureDate)
 {
     if(m_runningState == RunningState::NotExecuted || m_runningState == RunningState::Done)
     {
-        m_timeRemainingLabel->setText("");
+        m_infoLabel->setText("");
         return;
     }
 
@@ -68,7 +57,8 @@ void WaitWidget::refreshTimeRemainingText(const QDateTime &departureDate)
 
     if(dateDelay < 5)
     {
-        m_timeRemainingLabel->setText(tr("Remaining less than 5 seconds"));
+        m_infoLabel->setText(tr("Remaining less than 5 seconds"));
+        m_infoLabel->setFixedSize(m_infoLabel->sizeHint());
         return;
     }
 
@@ -78,9 +68,9 @@ void WaitWidget::refreshTimeRemainingText(const QDateTime &departureDate)
     qint64 hourNum = (minNum-mins)/ 60 ;
     qint64 hours = hourNum %24;
     qint64 days = (hourNum - hours)/ 24;
-    m_timeRemainingLabel->setText(tr("Remaining :\n")
-                           +QString::number(days)+tr(" days ")+QString::number(hours)+tr(" hours ")
+    m_infoLabel->setText(QString::number(days)+tr(" days ")+QString::number(hours)+tr(" hours ")
                            +QString::number(mins)+tr(" mins ")+QString::number(secs)+tr(" secs"));
+    m_infoLabel->setFixedSize(m_infoLabel->sizeHint());
     QTimer::singleShot(200, this, [=]() {refreshTimeRemainingText(departureDate);});
 }
 
@@ -98,6 +88,7 @@ void WaitWidget::durationReceived(long double dur)
     QString durationStr = QString::number((double)dur);
     m_mainButton->setText(tr("Wait for ") + durationStr + tr(" secs"));
     m_mainButton->setToolTip(durationStr + tr(" seconds"));
+    m_mainButton->setProperty("duration", durationStr);
 
     emit anyParamChanged();
 }

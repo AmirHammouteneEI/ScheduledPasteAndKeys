@@ -5,6 +5,7 @@
 
 #include <QFrame>
 #include <QPushButton>
+#include <QLabel>
 
 enum class RunningState{
     NotExecuted,
@@ -21,6 +22,8 @@ protected:
     unsigned int m_actionID = 0;
     RunningState m_runningState;
     virtual void changedRunningState() {}
+    QPushButton *m_mainButton;
+    QLabel *m_infoLabel;
     QPushButton *m_removeButton;
     QPushButton *m_moveToTopButton;
     QPushButton *m_moveToBottomButton;

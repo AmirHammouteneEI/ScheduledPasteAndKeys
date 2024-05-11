@@ -11,9 +11,7 @@ class WaitWidget : public AbstractActionWidget
 {
     Q_OBJECT
     void changedRunningState() override;
-    QLabel *m_timeRemainingLabel;
     CreateWaitActionDialog *m_editDurationDialog;
-    QPushButton *m_mainButton;
 public:
     explicit WaitWidget(QWidget *parent = nullptr);
     ~WaitWidget() = default;

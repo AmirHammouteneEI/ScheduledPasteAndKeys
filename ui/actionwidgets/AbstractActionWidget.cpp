@@ -13,7 +13,28 @@ AbstractActionWidget::AbstractActionWidget(QWidget *parent)
     auto gridLayout = new QGridLayout(this);
     m_centralWidget = new QFrame(this);
 
-    m_centralWidget->setMinimumHeight(90);
+    //m_centralWidget->setMinimumHeight(90);
+
+    auto centralGridLayout = new QGridLayout(m_centralWidget);
+    m_mainButton = new QPushButton(m_centralWidget);
+    m_mainButton->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    m_mainButton->setMinimumWidth(200);
+
+    m_infoLabel = new QLabel("",m_centralWidget);
+    m_infoLabel->setObjectName("actionSubLabel");
+    m_infoLabel->setWordWrap(true);
+    m_infoLabel->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_infoLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    m_infoLabel->setMinimumWidth(200);
+
+    //centralGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Fixed,QSizePolicy::Fixed),0,0);
+    centralGridLayout->addWidget(m_mainButton,1,1,Qt::AlignCenter | Qt::AlignHCenter);
+    centralGridLayout->addWidget(m_infoLabel,2,1,Qt::AlignCenter | Qt::AlignHCenter);
+    //centralGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Fixed,QSizePolicy::Fixed),3,2);
+
+    centralGridLayout->setContentsMargins(1,1,1,1);
+    centralGridLayout->setSpacing(2);
+    m_centralWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     m_removeButton = new QPushButton(QIcon(":/img/close_red.png"),"",this);
     m_removeButton->setMaximumSize(QSize(20,20));
@@ -37,27 +58,23 @@ AbstractActionWidget::AbstractActionWidget(QWidget *parent)
     m_moveDownButton->setToolTip(tr("Move this action down"));
 
     QGridLayout *rightLayout = new QGridLayout();
-    rightLayout->addWidget(m_removeButton,0,1);
-    rightLayout->addWidget(m_moveToTopButton,1,1);
-    rightLayout->addWidget(m_moveToBottomButton,2,1);
-    rightLayout->addWidget(m_moveUpButton,1,0);
-    rightLayout->addWidget(m_moveDownButton,2,0);
-
+    rightLayout->addWidget(m_moveUpButton,0,0);
+    rightLayout->addWidget(m_moveDownButton,1,0);
+    rightLayout->addWidget(m_moveToTopButton,0,1);
+    rightLayout->addWidget(m_moveToBottomButton,1,1);
+    rightLayout->addWidget(m_removeButton,0,2);
     rightLayout->setContentsMargins(1,1,1,1);
     rightLayout->setSpacing(2);
 
-    gridLayout->addItem(new QSpacerItem(3,3,QSizePolicy::Minimum,QSizePolicy::Minimum),0,0);
-    gridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),1,0);
+    //gridLayout->setSizeConstraint(QLayout::SetMinimumSize);
+    gridLayout->addItem(new QSpacerItem(3,3,QSizePolicy::Fixed,QSizePolicy::Fixed),0,0);
     gridLayout->addWidget(m_centralWidget,1,1,Qt::AlignCenter | Qt::AlignHCenter);
-    gridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),1,2);
-    gridLayout->addWidget(m_removeButton,1,3,Qt::AlignRight | Qt::AlignTop);
+    gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Fixed,QSizePolicy::Fixed),1,2);
     gridLayout->addLayout(rightLayout,1,3,Qt::AlignRight | Qt::AlignTop);
-    gridLayout->addItem(new QSpacerItem(3,3,QSizePolicy::Minimum,QSizePolicy::Minimum),2,0);
-
-
-    gridLayout->setSizeConstraint(QLayout::SetMinimumSize);
+    gridLayout->addItem(new QSpacerItem(3,3,QSizePolicy::Fixed,QSizePolicy::Fixed),2,2);
     gridLayout->setContentsMargins(1,1,1,1);
     gridLayout->setSpacing(2);
+    gridLayout->setColumnStretch(1,1);
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
     connect(m_removeButton,&QPushButton::released, this, &AbstractActionWidget::removeSelf);

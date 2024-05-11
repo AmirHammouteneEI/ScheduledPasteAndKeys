@@ -150,7 +150,7 @@
             <number>60</number>
            </attribute>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>130</number>
+            <number>150</number>
            </attribute>
            <attribute name="horizontalHeaderStretchLastSection">
             <bool>true</bool>
@@ -227,13 +227,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>30</width>
-               <height>30</height>
+               <width>45</width>
+               <height>45</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>14</pointsize>
+               <pointsize>28</pointsize>
                <bold>true</bold>
               </font>
              </property>
@@ -255,13 +255,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>30</width>
-               <height>30</height>
+               <width>45</width>
+               <height>45</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>14</pointsize>
+               <pointsize>28</pointsize>
                <bold>true</bold>
               </font>
              </property>

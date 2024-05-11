@@ -18,7 +18,7 @@ public slots:
     void showDialog();
     void accept() override;
 signals:
-    void createPasteActionRequest(QString sentenceIdentity, float addWaitActionSeconds);
+    void sendSentence(QString sentenceIdentity);
 
 private:
     Ui::CreatePasteActionDialog *ui;

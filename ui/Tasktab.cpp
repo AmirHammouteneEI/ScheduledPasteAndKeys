@@ -70,11 +70,14 @@ void TaskTab::buildBasicInterface()
     m_scheduleButton->setObjectName("scheduleButton");
     m_stopButton = new QPushButton("■", topWidget);
     m_stopButton->setObjectName("stopButton");
-    m_stopButton->setToolTip(tr("Stop the task. shortcut: Ctrl+Alt+S"));
+    m_stopButton->setToolTip(tr("Stop the task. shortcut to stop all tasks : Ctrl+Alt+S"));
     scheduleAndStopLayout->addWidget(m_scheduleButton);
     scheduleAndStopLayout->addWidget(m_stopButton);
+    scheduleAndStopLayout->setContentsMargins(1,1,1,1);
+    scheduleAndStopLayout->setSizeConstraint(QLayout::SetMinimumSize);
     m_delayChrono = new QLabel(tr("not scheduled"),topWidget);
     m_delayChrono->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_delayChrono->setContentsMargins(1,1,1,1);
     m_runOptionsWidget = new QWidget(topWidget);
     auto runOptionsLayout = new QHBoxLayout(m_runOptionsWidget);
     m_timesToRunWidget = new QWidget(m_runOptionsWidget);
@@ -92,14 +95,18 @@ void TaskTab::buildBasicInterface()
     QLabel *orLabel = new QLabel(tr("OR   "), m_runOptionsWidget);
     m_loopButton = new QToolButton(topWidget);
     m_loopButton->setObjectName("loopButton");
-    m_loopButton->setText(tr("Loop OFF"));
+    m_loopButton->setText(tr("Infinite loop OFF"));
+    m_loopButton->setToolTip(tr("Check to execute the task forever. It can be stopped with the red stop button or its shortcut: Ctrl+Alt+S"));
     m_loopButton->setCheckable(true);
+    runOptionsLayout->setContentsMargins(1,1,1,1);
+    runOptionsLayout->setSizeConstraint(QLayout::SetMinimumSize);
     runOptionsLayout->addWidget(m_timesToRunWidget,0,Qt::AlignRight);
     runOptionsLayout->addWidget(orLabel);
     runOptionsLayout->addWidget(m_loopButton,0,Qt::AlignLeft);
     runOptionsLayout->setSizeConstraint(QLayout::SetMinimumSize);
     m_loopedTimesLabel = new QLabel(tr("Has been executed ")+"0"+tr(" times"),topWidget);
     m_loopedTimesLabel->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_loopedTimesLabel->setContentsMargins(1,1,1,1);
     auto font = m_nameLabel->font();
     font.setBold(true);
     font.setPointSize(13);
@@ -116,17 +123,17 @@ void TaskTab::buildBasicInterface()
     executeLabel->setFont(font);
     timesLabel->setFont(font);
     m_delayChrono->setFont(font);
+    topGridLayout->setContentsMargins(1,1,1,1);
+    topGridLayout->setSpacing(2);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),0,0);
     topGridLayout->addWidget(m_nameLabel,1,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     topGridLayout->addWidget(m_saveButton,1,3, Qt::AlignRight | Qt::AlignVCenter);
-    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::Minimum,QSizePolicy::Minimum),2,1);
+    topGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Minimum,QSizePolicy::Minimum),2,1);
     topGridLayout->addWidget(scheduleAndStopWidget,3,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     topGridLayout->addWidget(m_delayChrono,4,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     topGridLayout->addWidget(m_runOptionsWidget,5,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     topGridLayout->addWidget(m_loopedTimesLabel,6,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),7,3);
-    topGridLayout->setContentsMargins(1,1,1,1);
-    topGridLayout->setSpacing(2);
 
     //-- Middle widget with list of actions
     m_actionsFrame = new QFrame(m_mainWidget);
@@ -165,7 +172,7 @@ void TaskTab::buildBasicInterface()
     connect(m_getDelayDialog,&getDelayDialog::sendDelay, this, &TaskTab::scheduleTaskAfterDelay);
     connect(m_loopButton,&QToolButton::toggled, this, &TaskTab::loopToggled);
 
-    connect(m_createPasteActionDialog, &CreatePasteActionDialog::createPasteActionRequest, this, &TaskTab::createPasteActionRequest);
+    connect(m_createPasteActionDialog, &CreatePasteActionDialog::sendSentence, this, &TaskTab::createPasteActionRequest);
     connect(m_createWaitActionDialog, &CreateWaitActionDialog::sendDuration, this, &TaskTab::createWaitActionRequest);
 
     connect(m_saveButton, &QPushButton::released, this, [=](){ emit saveTaskRequest(m_ID, true); });
@@ -338,12 +345,12 @@ void TaskTab::loopToggled(bool state)
 {
     if(state)
     {
-        m_loopButton->setText(tr("Loop ON"));
+        m_loopButton->setText(tr("Infinite loop ON"));
         m_timesToRunWidget->setEnabled(false);
     }
     else
     {
-        m_loopButton->setText(tr("Loop OFF"));
+        m_loopButton->setText(tr("Infinite loop OFF"));
         m_timesToRunWidget->setEnabled(true);
     }
 }
@@ -533,7 +540,7 @@ void TaskTab::moveDownActionReceived(unsigned int actId)
     setTaskModified(true);
 }
 
-void TaskTab::createPasteActionRequest(QString sentenceIdentity, float addWaitActionSeconds)
+void TaskTab::createPasteActionRequest(QString sentenceIdentity)
 {
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
     QString content = settings.value(G_Files::SentencesDataCategory+sentenceIdentity).toString();
@@ -546,17 +553,6 @@ void TaskTab::createPasteActionRequest(QString sentenceIdentity, float addWaitAc
     pasteAct->setParameters(paramPaste);
 
     appendAction(pasteAct);
-
-    if(addWaitActionSeconds < 0.f)
-        return;
-
-    ActionParameters paramWait;
-    paramWait.m_waitDuration = addWaitActionSeconds;
-
-    WaitAction *waitAct = new WaitAction();
-    waitAct->setParameters(paramWait);
-
-    appendAction(waitAct);
 }
 
 void TaskTab::createWaitActionRequest(long double duration)

@@ -1,5 +1,6 @@
 #include "CreateWaitActionDialog.h"
 #include "ui_CreateWaitActionDialog.h"
+#include <QPushButton>
 
 CreateWaitActionDialog::CreateWaitActionDialog(QWidget *parent)
     : QDialog(parent)
@@ -46,4 +47,25 @@ void CreateWaitActionDialog::accept()
 void CreateWaitActionDialog::showDialog()
 {
     show();
+
+    // if shows from an existing Wait Widget
+    auto mainButtonSender = qobject_cast<QPushButton*>(sender());
+    if(mainButtonSender == nullptr)
+        return;
+
+    if(!mainButtonSender->property("duration").isValid() || mainButtonSender->property("duration").toString() == tr("ERROR"))
+        return;
+
+    double dur = mainButtonSender->property("duration").toDouble();
+    ui->doubleSpinBox->setValue(dur);
+
+    qint64 secs = (int)dur % 60;
+    qint64 minNum = (dur-secs)/60;
+    qint64 mins = minNum % 60;
+    qint64 hourNum = (minNum-mins)/ 60 ;
+    qint64 hours = hourNum %24;
+    qint64 days = (hourNum - hours)/ 24;
+
+    ui->timeEdit->setTime(QTime(hours,mins,secs));
+    ui->spinBox->setValue(days);
 }

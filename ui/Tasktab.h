@@ -78,7 +78,7 @@ public slots:
     void moveToBottomActionReceived(unsigned int actId);
     void moveUpActionReceived(unsigned int actId);
     void moveDownActionReceived(unsigned int actId);
-    void createPasteActionRequest(QString sentenceIdentity, float addWaitActionSeconds);
+    void createPasteActionRequest(QString sentenceIdentity);
     void createWaitActionRequest(long double duration);
 signals:
     void saveTaskRequest(int taskId, bool verb);

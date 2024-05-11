@@ -9,7 +9,6 @@ CreatePasteActionDialog::CreatePasteActionDialog(QWidget *parent)
     , ui(new Ui::CreatePasteActionDialog)
 {
     ui->setupUi(this);
-    ui->doubleSpinBox->setLocale(QLocale::English);
     connect(ui->addSentenceButton, &QPushButton::released, ui->tableWidget, &SentencesTableWidget::createSentenceReceived);
 }
 
@@ -22,6 +21,32 @@ void CreatePasteActionDialog::showDialog()
 {
     ui->tableWidget->refresh();
     show();
+
+    // if shows from an existing Paste Widget
+    auto mainButtonSender = qobject_cast<QPushButton*>(sender());
+    if(mainButtonSender == nullptr)
+        return;
+
+    if(!mainButtonSender->property("contentId").isValid() || mainButtonSender->property("contentId").toString() == tr("ERROR"))
+        return;
+
+    QTableWidgetItem *idItem = nullptr;
+    int rowFound = -1;
+    for(int k=0; k< ui->tableWidget->rowCount(); ++k)
+    {
+        idItem = ui->tableWidget->item(k,0);
+        if(idItem != nullptr && idItem->text() == "#"+mainButtonSender->property("contentId").toString())
+        {
+            rowFound = k;
+            break;
+        }
+    }
+
+    if(rowFound >= 0)
+    {
+        ui->tableWidget->selectRow(rowFound);
+        ui->tableWidget->scrollToItem(idItem,QAbstractItemView::PositionAtCenter);
+    }
 }
 
 void CreatePasteActionDialog::accept()
@@ -44,11 +69,8 @@ void CreatePasteActionDialog::accept()
     }
 
     QString trueId = idItem->text().remove(0,1);
-    float waitSec = -1.f;
-    if(ui->groupBox->isChecked())
-        waitSec = ui->doubleSpinBox->value();
 
-    emit createPasteActionRequest(trueId,waitSec);
+    emit sendSentence(trueId);
 
     QDialog::accept();
 }

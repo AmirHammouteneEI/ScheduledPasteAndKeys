@@ -123,7 +123,7 @@ void TaskTabsManager::onTabCloseRequest(int index)
         {
             if(QMessageBox::question(m_mainwindow,tr("Task is scheduled or is running"),
               tr("This task is scheduled for execution or is currently running, by pressing \"Yes\" you are going to stop it.\n"\
-                "(alternative way to stop it is by Ctrl+Alt+S shortcut)\n\nIf you want to close it, you will have to request again."),
+                "(alternative way to stop it is <by>ith Ctrl+Alt+S shortcut)\n\nIf you want to close it, you will have to request again."),
               QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
                 return;
             task->m_stopButton->animateClick();

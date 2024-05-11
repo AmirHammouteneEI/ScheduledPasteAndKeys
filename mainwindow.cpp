@@ -29,12 +29,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_sticon->setToolTip("Scheduled PC Tasks");
     m_sticon->show();
 
+    m_dataEditDialog = new DataEditDialog(this);
+    buildToolBar();
+
     loadSettings();
     geometrySet();
-
-    m_dataEditDialog = new DataEditDialog(this);
-
-    buildToolBar();
 
     m_createLoadTaskDialog = new CreateLoadTaskDialog(this);
 
@@ -138,6 +137,8 @@ void MainWindow::loadSettings()
     m_windowHeight = m_windowHeight < 50 ? 800 : m_windowHeight;
 
     m_currentThemeName = settings.value("style", "dark").toString();
+
+    swapAutoscrollMode(settings.value("autoscroll", true).toBool());
 }
 
 void MainWindow::saveSettings()
@@ -146,6 +147,7 @@ void MainWindow::saveSettings()
     settings.setValue("windowWidth", width());
     settings.setValue("windowHeight", height());
     settings.setValue("style", m_currentThemeName);
+    settings.setValue("autoscroll", G_Parameters::AutoScrollTask);
 }
 
 void MainWindow::buildToolBar()
@@ -170,10 +172,8 @@ void MainWindow::buildToolBar()
     QWidget* spacer1 = new QWidget(m_toolBar);
     spacer1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    m_scrollAction = new QAction(QIcon(":/img/scroll.png"),"",this);
+    m_scrollAction = new QAction("",this);
     m_scrollAction->setCheckable(true);
-    m_scrollAction->setChecked(true);
-    m_scrollAction->setToolTip(tr("Uncheck to disable autoscrolling during task execution"));
     connect(m_scrollAction, &QAction::triggered, this, &MainWindow::swapAutoscrollMode);
 
     QWidget* spacer2 = new QWidget(m_toolBar);
@@ -228,6 +228,8 @@ void MainWindow::setTheme()
 
 void MainWindow::quitApp()
 {
+    m_tasktabsManager->stopAllRunningTasksReceived();
+
     if(m_tasktabsManager->isAnyTaskModified())
     {
         QMessageBox::StandardButton response = QMessageBox::question(this,tr("Saving changes"),
@@ -265,12 +267,14 @@ void MainWindow::swapAutoscrollMode(bool state)
     if(state)
     {
         G_Parameters::AutoScrollTask = true;
+        m_scrollAction->setChecked(true);
         m_scrollAction->setIcon(QIcon(":/img/scroll.png"));
         m_scrollAction->setToolTip(tr("Uncheck to disable autoscrolling during task execution"));
         return;
     }
 
     G_Parameters::AutoScrollTask = false;
+    m_scrollAction->setChecked(false);
     m_scrollAction->setIcon(QIcon(":/img/noscroll.png"));
     m_scrollAction->setToolTip(tr("Check to enable autoscrolling during task execution"));
 }

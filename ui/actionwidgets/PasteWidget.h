@@ -2,19 +2,20 @@
 #define PASTEWIDGET_H
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
-#include "ui/SelectSentenceDialog.h"
+#include "ui/createactiondialog/CreatePasteActionDialog.h"
 
 class PasteWidget : public AbstractActionWidget
 {
     Q_OBJECT
-    SelectSentenceDialog *m_selectSentenceDialog;
-    QPushButton *m_mainButton;
+    CreatePasteActionDialog *m_createPasteActionDialog;
 public:
     explicit PasteWidget(QWidget *parent = nullptr);
     ~PasteWidget() = default;
     void buildWidget() override;
 private slots:
     void sentenceIdentityReceived(QString id);
+private:
+    void changeContentInfo(const QString & content);
 signals:
 };
 

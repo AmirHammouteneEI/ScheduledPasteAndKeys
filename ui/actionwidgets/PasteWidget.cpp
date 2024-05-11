@@ -27,22 +27,17 @@ void PasteWidget::buildWidget()
         id = pasteaction->m_contentId;
     }
 
-    auto gridLayout = new QGridLayout(m_centralWidget);
-    m_mainButton = new QPushButton(QIcon(":/img/text.png"),tr("Paste text #")+id,m_centralWidget);
+    m_mainButton->setIcon(QIcon(":/img/text.png"));
+    m_mainButton->setText(tr("Paste text #")+id);
     m_mainButton->setToolTip(content);
     m_mainButton->setProperty("contentId", id);
 
-    gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding),0,0);
-    gridLayout->addWidget(m_mainButton,1,1,Qt::AlignCenter | Qt::AlignHCenter);
-    gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding),2,2);
+    changeContentInfo(content);
 
-    gridLayout->setContentsMargins(1,1,1,1);
-    gridLayout->setSpacing(2);
+    m_createPasteActionDialog = new CreatePasteActionDialog(m_centralWidget);
 
-    m_selectSentenceDialog = new SelectSentenceDialog(m_centralWidget);
-
-    connect(m_mainButton, &QPushButton::released, m_selectSentenceDialog, &SelectSentenceDialog::showDialog);
-    connect(m_selectSentenceDialog, &SelectSentenceDialog::sendSentenceIdentity, this, &PasteWidget::sentenceIdentityReceived);
+    connect(m_mainButton, &QPushButton::released, m_createPasteActionDialog, &CreatePasteActionDialog::showDialog);
+    connect(m_createPasteActionDialog, &CreatePasteActionDialog::sendSentence, this, &PasteWidget::sentenceIdentityReceived);
 }
 
 void PasteWidget::sentenceIdentityReceived(QString id)
@@ -63,5 +58,21 @@ void PasteWidget::sentenceIdentityReceived(QString id)
     m_mainButton->setToolTip(content);
     m_mainButton->setProperty("contentId", id);
 
+    changeContentInfo(content);
+
     emit anyParamChanged();
+}
+
+void PasteWidget::changeContentInfo(const QString &content)
+{
+    m_infoLabel->setToolTip(content);
+    QString simpliTruncContent = content.simplified();
+    if(simpliTruncContent.size() > 60)
+    {
+        simpliTruncContent.truncate(55);
+        simpliTruncContent+="[...]";
+    }
+
+    m_infoLabel->setText(simpliTruncContent);
+    m_infoLabel->setFixedSize(m_infoLabel->sizeHint());
 }

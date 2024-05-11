@@ -21,7 +21,6 @@ SOURCES += \
     mainwindow.cpp \
     ui/CreateLoadTaskDialog.cpp \
     ui/DataEditDialog.cpp \
-    ui/SelectSentenceDialog.cpp \
     ui/SentenceSelectedEditDialog.cpp \
     ui/SentencesTableWidget.cpp \
     ui/TaskTab.cpp \
@@ -46,7 +45,6 @@ HEADERS += \
     mainwindow.h \
     ui/CreateLoadTaskDialog.h \
     ui/DataEditDialog.h \
-    ui/SelectSentenceDialog.h \
     ui/SentenceSelectedEditDialog.h \
     ui/SentencesTableWidget.h \
     ui/TaskTab.h \
@@ -61,7 +59,6 @@ FORMS += \
     mainwindow.ui \
     ui/CreateLoadTaskDialog.ui \
     ui/DataEditDialog.ui \
-    ui/SelectSentenceDialog.ui \
     ui/SentenceSelectedEditDialog.ui \
     ui/createactiondialog/CreatePasteActionDialog.ui \
     ui/createactiondialog/CreateWaitActionDialog.ui \
