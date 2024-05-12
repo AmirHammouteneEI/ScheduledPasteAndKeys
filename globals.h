@@ -25,6 +25,7 @@ namespace G_Sentences {
     static QString OperationInterference() {return QObject::tr("Some system or user action interferes with this operation, sorry for the inconvenience.");}
     static QString FileParsingError() {return QObject::tr("The file is not in the correct format for this software : parse error.");}
     static QString NoSetenceSelected() {return QObject::tr("No sentence has been selected. Please select one.");}
+    static QString NoKeysSequenceSelected() {return QObject::tr("No keys sequence has been selected. Please select one.");}
 }
 
 struct G_Parameters {

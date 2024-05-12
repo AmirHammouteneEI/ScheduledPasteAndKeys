@@ -6,6 +6,7 @@
 #include "ActionWidgetsManager.h"
 #include "ui/createactiondialog/CreatePasteActionDialog.h"
 #include "ui/createactiondialog/CreateWaitActionDialog.h"
+#include "ui/createactiondialog/CreateKeysSequenceActionDialog.h"
 
 #include <QFrame>
 #include <QScrollArea>
@@ -48,6 +49,7 @@ protected:
     QTimer *m_scheduleTimer;
     CreatePasteActionDialog *m_createPasteActionDialog;
     CreateWaitActionDialog *m_createWaitActionDialog;
+    CreateKeysSequenceActionDialog *m_m_createKeysSequenceActionDialog;
     void buildAddButtonMenu();
     void appendAction(AbstractAction *act);
     unsigned int m_loopedTimes = 0;
@@ -80,6 +82,7 @@ public slots:
     void moveDownActionReceived(unsigned int actId);
     void createPasteActionRequest(QString sentenceIdentity);
     void createWaitActionRequest(long double duration);
+    void createKeysSequenceActionRequest(QString keysSequenceIdentity);
 signals:
     void saveTaskRequest(int taskId, bool verb);
 

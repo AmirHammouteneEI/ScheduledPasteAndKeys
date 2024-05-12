@@ -15,18 +15,22 @@ SOURCES += \
     TaskThread.cpp \
     actions/AbstractAction.cpp \
     actions/ActionsTools.cpp \
+    actions/KeysSequenceAction.cpp \
     actions/PasteAction.cpp \
     actions/WaitAction.cpp \
     main.cpp \
     mainwindow.cpp \
     ui/CreateLoadTaskDialog.cpp \
     ui/DataEditDialog.cpp \
+    ui/KeysSequenceSelectedEditDialog.cpp \
+    ui/KeysSequencesTableWidget.cpp \
     ui/SentenceSelectedEditDialog.cpp \
     ui/SentencesTableWidget.cpp \
     ui/TaskTab.cpp \
     ui/actionwidgets/AbstractActionWidget.cpp \
     ui/actionwidgets/PasteWidget.cpp \
     ui/actionwidgets/WaitWidget.cpp \
+    ui/createactiondialog/CreateKeysSequenceActionDialog.cpp \
     ui/createactiondialog/CreatePasteActionDialog.cpp \
     ui/createactiondialog/CreateWaitActionDialog.cpp \
     ui/getDelayDialog.cpp
@@ -39,18 +43,22 @@ HEADERS += \
     actions/AbstractAction.h \
     actions/ActionParameters.h \
     actions/ActionsTools.h \
+    actions/KeysSequenceAction.h \
     actions/PasteAction.h \
     actions/WaitAction.h \
     globals.h \
     mainwindow.h \
     ui/CreateLoadTaskDialog.h \
     ui/DataEditDialog.h \
+    ui/KeysSequenceSelectedEditDialog.h \
+    ui/KeysSequencesTableWidget.h \
     ui/SentenceSelectedEditDialog.h \
     ui/SentencesTableWidget.h \
     ui/TaskTab.h \
     ui/actionwidgets/AbstractActionWidget.h \
     ui/actionwidgets/PasteWidget.h \
     ui/actionwidgets/WaitWidget.h \
+    ui/createactiondialog/CreateKeysSequenceActionDialog.h \
     ui/createactiondialog/CreatePasteActionDialog.h \
     ui/createactiondialog/CreateWaitActionDialog.h \
     ui/getDelayDialog.h
@@ -59,7 +67,9 @@ FORMS += \
     mainwindow.ui \
     ui/CreateLoadTaskDialog.ui \
     ui/DataEditDialog.ui \
+    ui/KeysSequenceSelectedEditDialog.ui \
     ui/SentenceSelectedEditDialog.ui \
+    ui/createactiondialog/CreateKeysSequenceActionDialog.ui \
     ui/createactiondialog/CreatePasteActionDialog.ui \
     ui/createactiondialog/CreateWaitActionDialog.ui \
     ui/getDelayDialog.ui

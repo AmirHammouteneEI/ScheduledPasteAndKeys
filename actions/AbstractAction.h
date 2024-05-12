@@ -6,7 +6,8 @@
 enum class ActionType {
     Undefined,
     Paste,
-    Wait
+    Wait,
+    KeysSequence
 };
 
 class AbstractAction

@@ -16,6 +16,7 @@ public:
     ~CreatePasteActionDialog();
 public slots:
     void showDialog();
+private slots:
     void accept() override;
 signals:
     void sendSentence(QString sentenceIdentity);

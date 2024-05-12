@@ -17,14 +17,9 @@ SentenceSelectedEditDialog::~SentenceSelectedEditDialog()
     delete ui;
 }
 
-void SentenceSelectedEditDialog::setEditable(bool id, bool content)
+void SentenceSelectedEditDialog::setEditable(bool id)
 {
     ui->lineEdit->setReadOnly(!id);
-    ui->plainTextEdit->setReadOnly(!content);
-    if(!id && !content)
-        ui->buttonBox->button(QDialogButtonBox::Save)->hide();
-    else
-        ui->buttonBox->button(QDialogButtonBox::Save)->show();
 }
 
 void SentenceSelectedEditDialog::setIdentity(const QString &id)

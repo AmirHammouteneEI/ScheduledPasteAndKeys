@@ -15,7 +15,7 @@ SentencesTableWidget::SentencesTableWidget(QWidget *parent)
 
 void SentencesTableWidget::createSentenceReceived()
 {
-    m_sentenceEditDialog->setEditable(true, true);
+    m_sentenceEditDialog->setEditable(true);
     m_sentenceEditDialog->setIdentity("");
     m_sentenceEditDialog->setContent("");
     m_sentenceEditDialog->show();
@@ -29,7 +29,7 @@ void SentencesTableWidget::editSentenceSelected(int row, int)
 
     QString trueId = idItem->text().remove(0,1);
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
-    m_sentenceEditDialog->setEditable(false, true);
+    m_sentenceEditDialog->setEditable(false);
     m_sentenceEditDialog->setIdentity(trueId);
     m_sentenceEditDialog->setContent(settings.value(G_Files::SentencesDataCategory + trueId).toString());
     m_sentenceEditDialog->show();

@@ -14,7 +14,7 @@ class SentenceSelectedEditDialog : public QDialog
 public:
     explicit SentenceSelectedEditDialog(QWidget *parent = nullptr);
     ~SentenceSelectedEditDialog();
-    void setEditable(bool id, bool content);
+    void setEditable(bool id);
     void setIdentity(const QString & id);
     QString identity();
     void setContent(const QString & content);
