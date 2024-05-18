@@ -30,23 +30,7 @@ void CreatePasteActionDialog::showDialog()
     if(!mainButtonSender->property("contentId").isValid() || mainButtonSender->property("contentId").toString() == tr("ERROR"))
         return;
 
-    QTableWidgetItem *idItem = nullptr;
-    int rowFound = -1;
-    for(int k=0; k< ui->tableWidget->rowCount(); ++k)
-    {
-        idItem = ui->tableWidget->item(k,0);
-        if(idItem != nullptr && idItem->text() == "#"+mainButtonSender->property("contentId").toString())
-        {
-            rowFound = k;
-            break;
-        }
-    }
-
-    if(rowFound >= 0)
-    {
-        ui->tableWidget->selectRow(rowFound);
-        ui->tableWidget->scrollToItem(idItem,QAbstractItemView::PositionAtCenter);
-    }
+    ui->tableWidget->selectSentenceFromIdentity(mainButtonSender->property("contentId").toString());
 }
 
 void CreatePasteActionDialog::accept()

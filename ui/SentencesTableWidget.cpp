@@ -49,23 +49,7 @@ void SentencesTableWidget::editFromDialogReceived()
                       m_sentenceEditDialog->content());
     refresh();
 
-    QTableWidgetItem *idItem = nullptr;
-    int rowFound = -1;
-    for(int k=0; k< rowCount(); ++k)
-    {
-        idItem = item(k,0);
-        if(idItem != nullptr && idItem->text() == "#"+m_sentenceEditDialog->identity())
-        {
-            rowFound = k;
-            break;
-        }
-    }
-
-    if(rowFound >= 0)
-    {
-        selectRow(rowFound);
-        scrollToItem(idItem,QAbstractItemView::PositionAtCenter);
-    }
+    selectSentenceFromIdentity(m_sentenceEditDialog->identity());
 }
 
 void SentencesTableWidget::removeSentenceReceived()
@@ -114,5 +98,26 @@ void SentencesTableWidget::refresh()
             contentItem->setText(content.simplified());
             setItem(rowCount()-1,1,contentItem);
         }
+    }
+}
+
+void SentencesTableWidget::selectSentenceFromIdentity(const QString &id)
+{
+    QTableWidgetItem *idItem = nullptr;
+    int rowFound = -1;
+    for(int k=0; k< rowCount(); ++k)
+    {
+        idItem = item(k,0);
+        if(idItem != nullptr && idItem->text() == "#"+id)
+        {
+            rowFound = k;
+            break;
+        }
+    }
+
+    if(rowFound >= 0)
+    {
+        selectRow(rowFound);
+        scrollToItem(idItem,QAbstractItemView::PositionAtCenter);
     }
 }

@@ -237,6 +237,9 @@
                <bold>true</bold>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{padding-top:-10px;}</string>
+             </property>
              <property name="text">
               <string notr="true">+</string>
              </property>
@@ -264,6 +267,9 @@
                <pointsize>28</pointsize>
                <bold>true</bold>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{padding-top:-10px;}</string>
              </property>
              <property name="text">
               <string notr="true">-</string>
@@ -479,6 +485,9 @@
                <bold>true</bold>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{padding-top:-10px;}</string>
+             </property>
              <property name="text">
               <string notr="true">+</string>
              </property>
@@ -506,6 +515,9 @@
                <pointsize>28</pointsize>
                <bold>true</bold>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{padding-top:-10px;}</string>
              </property>
              <property name="text">
               <string notr="true">-</string>
@@ -537,14 +549,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>SentencesTableWidget</class>
-   <extends>QTableWidget</extends>
-   <header location="global">ui/SentencesTableWidget.h</header>
-  </customwidget>
-  <customwidget>
    <class>KeysSequencesTableWidget</class>
    <extends>QTableWidget</extends>
    <header location="global">ui/KeysSequencesTableWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SentencesTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header location="global">ui/SentencesTableWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

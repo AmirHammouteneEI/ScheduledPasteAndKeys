@@ -7,6 +7,7 @@ namespace G_Files {
     inline QString SettingsFilePath = "programSettings.ini";
     inline QString DataFilePath = "programData.ini";
     inline QString SentencesDataCategory = "sentences/";
+    inline QString KeysSequencesDataCategory = "keyssequences/";
     inline QString DocumentIdentification_KeyWord = "docType";
     inline QString DocumentIdentification_Value = "ScheduleTask File";
     inline QString DocumentTaskName_KeyWord = "taskName";

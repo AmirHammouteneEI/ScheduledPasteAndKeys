@@ -12,6 +12,7 @@ class KeysSequencesTableWidget : public QTableWidget
 public:
     explicit KeysSequencesTableWidget(QWidget *parent = nullptr);
     void refresh();
+    void selectKeysSequenceFromIdentity(const QString & id);
 public slots:
     void createKeysSequenceReceived();
     void removeKeysSequenceReceived();

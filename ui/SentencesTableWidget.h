@@ -12,6 +12,7 @@ class SentencesTableWidget : public QTableWidget
 public:
     explicit SentencesTableWidget(QWidget *parent = nullptr);
     void refresh();
+    void selectSentenceFromIdentity(const QString & id);
 public slots:
     void createSentenceReceived();
     void removeSentenceReceived();

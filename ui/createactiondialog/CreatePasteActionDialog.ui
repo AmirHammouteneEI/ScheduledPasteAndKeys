@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Create a Paste Text Action</string>
+   <string>Create/Edit a Paste Text Action</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -191,6 +191,9 @@
            <pointsize>28</pointsize>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{padding-top:-10px;}</string>
          </property>
          <property name="text">
           <string notr="true">+</string>

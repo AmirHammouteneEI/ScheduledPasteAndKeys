@@ -19,9 +19,18 @@ CreateKeysSequenceActionDialog::~CreateKeysSequenceActionDialog()
 
 void CreateKeysSequenceActionDialog::showDialog()
 {
-    //TODO ui->tableWidget->refresh();
+    ui->tableWidget->refresh();
     show();
-    //TODO if shows from an existing Keys Sequence Widget
+
+    // if shows from an existing Keys Sequence Widget
+    auto mainButtonSender = qobject_cast<QPushButton*>(sender());
+    if(mainButtonSender == nullptr)
+        return;
+
+    if(!mainButtonSender->property("contentId").isValid() || mainButtonSender->property("contentId").toString() == tr("ERROR"))
+        return;
+
+    ui->tableWidget->selectKeysSequenceFromIdentity(mainButtonSender->property("contentId").toString());
 }
 
 void CreateKeysSequenceActionDialog::accept()

@@ -34,7 +34,8 @@ void KeysSequenceSelectedEditDialog::setTableKeysSequence(const QMap<double, Rel
     //TODO next step
 }
 
-const QMap<double, ReleaseDelayKeysPair> &KeysSequenceSelectedEditDialog::tableKeysSequence()
+QMap<double, ReleaseDelayKeysPair> KeysSequenceSelectedEditDialog::tableKeysSequence()
 {
     //TODO next step
+    return QMap<double, ReleaseDelayKeysPair>();
 }

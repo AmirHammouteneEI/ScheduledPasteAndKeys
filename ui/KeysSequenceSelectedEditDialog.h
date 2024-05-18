@@ -19,7 +19,7 @@ public:
     void setIdentity(const QString & id);
     QString identity();
     void setTableKeysSequence(const QMap<double, ReleaseDelayKeysPair> & tableContent);
-    const QMap<double, ReleaseDelayKeysPair> & tableKeysSequence();
+    QMap<double, ReleaseDelayKeysPair> tableKeysSequence();
 
 private:
     Ui::KeysSequenceSelectedEditDialog *ui;
