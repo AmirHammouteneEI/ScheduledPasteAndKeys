@@ -22,6 +22,7 @@ SOURCES += \
     mainwindow.cpp \
     ui/CreateLoadTaskDialog.cpp \
     ui/DataEditDialog.cpp \
+    ui/KeysSelectorDialog.cpp \
     ui/KeysSequenceSelectedEditDialog.cpp \
     ui/KeysSequencesTableWidget.cpp \
     ui/SentenceSelectedEditDialog.cpp \
@@ -50,6 +51,7 @@ HEADERS += \
     mainwindow.h \
     ui/CreateLoadTaskDialog.h \
     ui/DataEditDialog.h \
+    ui/KeysSelectorDialog.h \
     ui/KeysSequenceSelectedEditDialog.h \
     ui/KeysSequencesTableWidget.h \
     ui/SentenceSelectedEditDialog.h \
@@ -67,6 +69,7 @@ FORMS += \
     mainwindow.ui \
     ui/CreateLoadTaskDialog.ui \
     ui/DataEditDialog.ui \
+    ui/KeysSelectorDialog.ui \
     ui/KeysSequenceSelectedEditDialog.ui \
     ui/SentenceSelectedEditDialog.ui \
     ui/createactiondialog/CreateKeysSequenceActionDialog.ui \

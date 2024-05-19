@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 #include "actions/PasteAction.h"
 #include "actions/WaitAction.h"
+#include "actions/KeysSequenceAction.h"
 
 #include <QApplication>
 #include <QMessageBox>

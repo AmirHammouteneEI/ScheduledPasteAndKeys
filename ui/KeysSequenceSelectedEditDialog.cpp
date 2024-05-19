@@ -1,5 +1,6 @@
 #include "KeysSequenceSelectedEditDialog.h"
 #include "ui_KeysSequenceSelectedEditDialog.h"
+#include "KeysSelectorDialog.h"
 #include <QDoubleSpinBox>
 #include <QPushButton>
 
@@ -10,6 +11,7 @@ KeysSequenceSelectedEditDialog::KeysSequenceSelectedEditDialog(QWidget *parent)
     ui->setupUi(this);
     ui->lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("\\w+"), this));
     connect(ui->addKeysButton, &QPushButton::released, this,&KeysSequenceSelectedEditDialog::addKeysRow);
+    connect(ui->removeKeysButton, &QPushButton::released, this,&KeysSequenceSelectedEditDialog::removeLastKeysRow);
 }
 
 KeysSequenceSelectedEditDialog::~KeysSequenceSelectedEditDialog()
@@ -32,7 +34,7 @@ QString KeysSequenceSelectedEditDialog::identity()
     return ui->lineEdit->text();
 }
 
-void KeysSequenceSelectedEditDialog::setTableKeysSequence(const QMap<int, ReleaseDelayKeysPair> &tableContent)
+void KeysSequenceSelectedEditDialog::setTableKeysSequence(const PressedReleaseDelaysKeysMap &tableContent)
 {
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
@@ -55,14 +57,14 @@ void KeysSequenceSelectedEditDialog::setTableKeysSequence(const QMap<int, Releas
         auto keysListButton = qobject_cast<QPushButton*>(widgetsList.at(2));
         if(keysListButton == nullptr)
             break;
-        keysListButton->setText(val.second.join("+"));
         keysListButton->setProperty("keys",val.second);
+        keysListButton->setText(val.second.join("+"));
     }
 }
 
-QMap<int, ReleaseDelayKeysPair> KeysSequenceSelectedEditDialog::tableKeysSequence()
+PressedReleaseDelaysKeysMap KeysSequenceSelectedEditDialog::tableKeysSequence()
 {
-    QMap<int, ReleaseDelayKeysPair> returnedMap;
+    PressedReleaseDelaysKeysMap returnedMap;
 
     for(int row = 0; row < ui->tableWidget->rowCount(); ++row)
     {
@@ -106,6 +108,14 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
 
     QPushButton *keysListButton = new QPushButton(this);
 
+    KeysSelectorDialog *keysSelector = new KeysSelectorDialog(keysListButton);
+    connect(keysListButton, &QPushButton::released, keysSelector, &KeysSelectorDialog::showDialog);
+    connect(keysSelector, &KeysSelectorDialog::sendKeysList, this,[=](QStringList keysList)
+        {
+            keysListButton->setProperty("keys", keysList);
+            keysListButton->setText(keysList.join("+"));
+        });
+
     ui->tableWidget->insertRow(index);
     ui->tableWidget->setCellWidget(index,0,pressedDelaySpin);
     ui->tableWidget->setCellWidget(index,1,releasedDelaySpin);
@@ -115,4 +125,10 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
     returnedList << pressedDelaySpin << releasedDelaySpin << keysListButton;
 
     return returnedList;
+}
+
+void KeysSequenceSelectedEditDialog::removeLastKeysRow()
+{
+    if(ui->tableWidget->rowCount() > 0)
+        ui->tableWidget->removeRow(ui->tableWidget->rowCount()-1);
 }

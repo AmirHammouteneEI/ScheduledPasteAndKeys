@@ -13,6 +13,7 @@ public:
 
     static void pasteKeystrokeSimulate();
     static void setClipboard(const QString & str);
+    static INPUT m_ip;
 };
 
 #endif // ACTIONSTOOLS_H

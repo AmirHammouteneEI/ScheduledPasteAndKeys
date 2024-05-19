@@ -17,7 +17,7 @@ void KeysSequencesTableWidget::createKeysSequenceReceived()
 {
     m_keysSequenceEditDialog->setEditable(true);
     m_keysSequenceEditDialog->setIdentity("");
-    m_keysSequenceEditDialog->setTableKeysSequence(QMap<int, ReleaseDelayKeysPair>());
+    m_keysSequenceEditDialog->setTableKeysSequence(PressedReleaseDelaysKeysMap());
     m_keysSequenceEditDialog->exec();
 }
 
@@ -32,7 +32,7 @@ void KeysSequencesTableWidget::editKeysSequenceSelected(int row, int)
     m_keysSequenceEditDialog->setEditable(false);
     m_keysSequenceEditDialog->setIdentity(trueId);
     auto readMap = settings.value(G_Files::KeysSequencesDataCategory + trueId).toMap();
-    QMap<int, ReleaseDelayKeysPair> sentMap;
+    PressedReleaseDelaysKeysMap sentMap;
     for(auto [key,val] : readMap.asKeyValueRange())
     {
         ReleaseDelayKeysPair pair = val.value<ReleaseDelayKeysPair>();
@@ -108,15 +108,15 @@ void KeysSequencesTableWidget::refresh()
 
             QTableWidgetItem *contentItem = new QTableWidgetItem();
             auto readMap = settings.value(G_Files::KeysSequencesDataCategory + id).toMap();
-            QString content;
+            QStringList contentList;
             for(auto [key,val] : readMap.asKeyValueRange())
             {
                 ReleaseDelayKeysPair pair = val.value<ReleaseDelayKeysPair>();
-                content += pair.second.join("+");
-                content += " ; ";
+                contentList.append(pair.second.join("+"));
             }
-            contentItem->setToolTip(content);
-            contentItem->setText(content);
+            QString fullContent = contentList.join(" ; ");
+            contentItem->setToolTip(fullContent);
+            contentItem->setText(fullContent);
             setItem(rowCount()-1,1,contentItem);
         }
     }

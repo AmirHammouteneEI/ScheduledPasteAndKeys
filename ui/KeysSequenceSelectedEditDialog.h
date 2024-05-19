@@ -1,7 +1,7 @@
 #ifndef KEYSSEQUENCESELECTEDEDITDIALOG_H
 #define KEYSSEQUENCESELECTEDEDITDIALOG_H
 
-#include "actions/KeysSequenceAction.h"
+#include "actions/ActionParameters.h"
 #include <QDialog>
 
 namespace Ui {
@@ -18,10 +18,11 @@ public:
     void setEditable(bool id);
     void setIdentity(const QString & id);
     QString identity();
-    void setTableKeysSequence(const QMap<int, ReleaseDelayKeysPair> & tableContent);
-    QMap<int, ReleaseDelayKeysPair> tableKeysSequence();
+    void setTableKeysSequence(const PressedReleaseDelaysKeysMap &tableContent);
+    PressedReleaseDelaysKeysMap tableKeysSequence();
 public slots:
     QList<QWidget*> addKeysRow();
+    void removeLastKeysRow();
 
 private:
     Ui::KeysSequenceSelectedEditDialog *ui;

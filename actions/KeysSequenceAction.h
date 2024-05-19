@@ -6,13 +6,10 @@
 #include <QMap>
 #include <QPair>
 
-typedef QPair<int,QStringList> ReleaseDelayKeysPair;// release delay in milisecond, list of keys as strings
-Q_DECLARE_METATYPE(ReleaseDelayKeysPair);
-
 class KeysSequenceAction : public AbstractAction
 {
 private:
-    QMap<int, ReleaseDelayKeysPair> m_keysSeqMap; // pressed time in milisecond, pair of release delay, list of keys
+    PressedReleaseDelaysKeysMap m_keysSeqMap;
     QString m_sequenceId;
 public:
     KeysSequenceAction();

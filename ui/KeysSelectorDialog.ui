@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KeysSelectorDialog</class>
+ <widget class="QDialog" name="KeysSelectorDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>402</width>
+    <height>540</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Select keys</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>1</number>
+   </property>
+   <property name="leftMargin">
+    <number>2</number>
+   </property>
+   <property name="topMargin">
+    <number>2</number>
+   </property>
+   <property name="rightMargin">
+    <number>2</number>
+   </property>
+   <property name="bottomMargin">
+    <number>2</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Make the list of keys concerned (double click to add or remove items) :</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,1">
+     <property name="spacing">
+      <number>2</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="treeWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="showDropIndicator" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="indentation">
+        <number>10</number>
+       </property>
+       <property name="rootIsDecorated">
+        <bool>true</bool>
+       </property>
+       <property name="uniformRowHeights">
+        <bool>true</bool>
+       </property>
+       <property name="animated">
+        <bool>true</bool>
+       </property>
+       <property name="headerHidden">
+        <bool>true</bool>
+       </property>
+       <property name="columnCount">
+        <number>1</number>
+       </property>
+       <column>
+        <property name="text">
+         <string>Key</string>
+        </property>
+       </column>
+       <item>
+        <property name="text">
+         <string>Modifiers</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">CONTROL_LEFT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">CONTROL_RIGHT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">SHIFT_LEFT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">SHIFT_RIGHT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">ALT_LEFT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">ALT_RIGHT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">ALT_GR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">WINDOWS</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">FN</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Mouse buttons</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">LEFT_MOUSE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">RIGHT_MOUSE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">MIDDLE_MOUSE</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Letters</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">A</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">B</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">C</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">D</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">E</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">G</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">H</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">I</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">J</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">K</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">L</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">M</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">N</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">O</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">P</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">Q</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">R</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">S</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">T</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">U</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">V</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">W</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">X</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">Y</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">Z</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Letters (special)</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">&amp;</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">é</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">è</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">à</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">ç</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">ù</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">µ</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Numbers</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">0</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">9</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUMPAD_0</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUMPAD_1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUMPAD_2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUMPAD_3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUMPAD_4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUMPAD_5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUMPAD_6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUMPAD_7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUMPAD_8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUMPAD_9</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Symbols</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">#</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">@</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">'</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">&quot;</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">`</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">_</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">+</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">-</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">*</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">/</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">\</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">=</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">°</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">²</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">&lt;</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">&gt;</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">^</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">¨</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">~</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">¤</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">§</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">$</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">€</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">£</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Punctuations</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">.</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">,</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">;</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">:</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">(</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">[</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">]</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">{</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">}</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">!</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">?</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">|</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Specials</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">SPACEBAR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">ENTER</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">BACKSPACE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">DELETE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">INSERT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">ESCAPE</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Navigations</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">UP_ARROW</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">DOWN_ARROW</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">LEFT_ARROW</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">RIGHT_ARROW</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">HOME</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">END</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">PAGE_UP</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">PAGE_DOWN</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">TAB</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Functions</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">PRINT_SCREEN</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F9</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F10</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F11</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">F12</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">PLAYPAUSE_MEDIA</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">STOP_MEDIA</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">VOLUME_UP</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">VOLUME_DOWN</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">VOLUME_MUTE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NEXT_TRACK</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">PREVIOUS_TRACK</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Toggles</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">CAPS_LOCK</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">NUM_LOCK</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">SCROLL_LOCK</string>
+         </property>
+        </item>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>30</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QListWidget" name="listWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="showDropIndicator" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="defaultDropAction">
+        <enum>Qt::IgnoreAction</enum>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>KeysSelectorDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>KeysSelectorDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

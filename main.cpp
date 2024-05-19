@@ -7,6 +7,7 @@
 ***/
 
 #include "mainwindow.h"
+#include "actions/ActionParameters.h"
 
 #include <QApplication>
 #include <QTranslator>
@@ -15,6 +16,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     qRegisterMetaType<ActionParameters>();
+    qRegisterMetaType<ReleaseDelayKeysPair>();
+    qRegisterMetaType<PressedReleaseDelaysKeysMap>();
     a.setWindowIcon(QIcon(":/img/programIcon.png"));
 
     QString locale = QLocale::system().name().section('_', 0, 0);
