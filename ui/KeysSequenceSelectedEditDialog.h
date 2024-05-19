@@ -18,8 +18,10 @@ public:
     void setEditable(bool id);
     void setIdentity(const QString & id);
     QString identity();
-    void setTableKeysSequence(const QMap<double, ReleaseDelayKeysPair> & tableContent);
-    QMap<double, ReleaseDelayKeysPair> tableKeysSequence();
+    void setTableKeysSequence(const QMap<int, ReleaseDelayKeysPair> & tableContent);
+    QMap<int, ReleaseDelayKeysPair> tableKeysSequence();
+public slots:
+    QList<QWidget*> addKeysRow();
 
 private:
     Ui::KeysSequenceSelectedEditDialog *ui;

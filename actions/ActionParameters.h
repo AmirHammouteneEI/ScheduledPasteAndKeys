@@ -17,8 +17,8 @@ public:
     QString m_dataId;
     QString m_pasteContent;
     long double m_waitDuration; // in seconds
-    // map with key = delay of key simulated, value = pair of list of keys label and bool (false = pushed, true = released)
-    QMap<double, QPair<double, QStringList>> m_keysSeqMap;
+    // map with key = delay of key simulated pressed in milisecond, value = pair of release delay (ms) and list of keys label
+    QMap<int, QPair<int, QStringList>> m_keysSeqMap;
 };
 
 Q_DECLARE_METATYPE(ActionParameters);

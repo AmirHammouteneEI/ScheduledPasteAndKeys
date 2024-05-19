@@ -15,7 +15,6 @@
         <file>img/close.png</file>
         <file>img/close_light.png</file>
         <file>img/close_penombra.png</file>
-        <file>img/down_arrow.png</file>
         <file>img/down_arrow_light.png</file>
         <file>img/down_arrow_penombra.png</file>
         <file>img/left_arrow.png</file>
@@ -41,5 +40,6 @@
         <file>img/save.png</file>
         <file>img/noscroll.png</file>
         <file>img/scroll.png</file>
+        <file>img/down_arrow.png</file>
     </qresource>
 </RCC>

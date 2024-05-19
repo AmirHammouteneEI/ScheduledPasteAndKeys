@@ -12,6 +12,8 @@ DataEditDialog::DataEditDialog(QWidget *parent)
     ui->tabWidget->tabBar()->setFont(font);
     connect(ui->addSentenceButton, &QPushButton::released, ui->sentencesTableWidget, &SentencesTableWidget::createSentenceReceived);
     connect(ui->removeSentenceButton, &QPushButton::released, ui->sentencesTableWidget, &SentencesTableWidget::removeSentenceReceived);
+    connect(ui->addKeysSequenceButton, &QPushButton::released, ui->keysSequencesTableWidget, &KeysSequencesTableWidget::createKeysSequenceReceived);
+    connect(ui->removeKeysSequenceButton, &QPushButton::released, ui->keysSequencesTableWidget, &KeysSequencesTableWidget::removeKeysSequenceReceived);
 }
 
 DataEditDialog::~DataEditDialog()
@@ -22,5 +24,6 @@ DataEditDialog::~DataEditDialog()
 void DataEditDialog::showDialog()
 {
     ui->sentencesTableWidget->refresh();
+    ui->keysSequencesTableWidget->refresh();
     show();
 }

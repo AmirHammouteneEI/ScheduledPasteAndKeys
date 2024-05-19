@@ -148,7 +148,7 @@ void TaskTab::buildBasicInterface()
     m_addActionButton = new QToolButton(bottomWidget);
     m_addActionButton->setObjectName("addActionButton");
     m_addActionButton->setText("+");
-    m_addActionButton->setStyleSheet("QToolButton{font-size:42px;font-weight:bold;text-align:center;padding:-10px -10px 5px -10px;}");
+    m_addActionButton->setStyleSheet("QToolButton{font-size:42px;font-weight:bold;text-align:center;padding:-10px -5px 5px -5px;}");
     buildAddButtonMenu();
     font.setPointSize(14);
     font.setBold(true);

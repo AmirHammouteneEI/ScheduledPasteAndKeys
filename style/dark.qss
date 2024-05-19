@@ -451,6 +451,7 @@ QLineEdit::disabled,QPlainTextEdit::disabled,QTextEdit::disabled,QTextBrowser::d
 {
 	border: 1px solid #555;
 	color : #555;
+	background-color: #404040;
 }
 
 QComboBox
@@ -498,16 +499,17 @@ QComboBox::down-arrow
 }
 
 QSpinBox,
+QDoubleSpinBox,
 QTimeEdit,
 QDateTimeEdit 
 {
     background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(78, 134, 212, 100),stop:1 rgba(25, 50, 84, 60));
 	border: 1px solid #fff;
     border-radius : 5px;
-
 }
 
 QSpinBox::disabled,
+QDoubleSpinBox::disabled,
 QTimeEdit::disabled,
 QDateTimeEdit::disabled 
 {
@@ -517,6 +519,7 @@ QDateTimeEdit::disabled
 }
 
 QSpinBox::up-button, 
+QDoubleSpinBox::up-button, 
 QTimeEdit::up-button,
 QDateTimeEdit::up-button
 {
@@ -524,6 +527,7 @@ QDateTimeEdit::up-button
 }
 
 QSpinBox::up-button:hover,
+QDoubleSpinBox::up-button:hover,
 QTimeEdit::up-button:hover, 
 QDateTimeEdit::up-button:hover
 {
@@ -531,6 +535,7 @@ QDateTimeEdit::up-button:hover
 }
 
 QSpinBox::up-arrow,
+QDoubleSpinBox::up-arrow,
 QTimeEdit::up-arrow,
 QDateTimeEdit::up-arrow
 {
@@ -540,6 +545,7 @@ QDateTimeEdit::up-arrow
 }
 
 QSpinBox::down-button, 
+QDoubleSpinBox::down-button, 
 QTimeEdit::down-button,
 QDateTimeEdit::down-button
 {
@@ -547,13 +553,15 @@ QDateTimeEdit::down-button
 }
 
 QSpinBox::down-button:hover, 
+QDoubleSpinBox::down-button:hover, 
 QTimeEdit::down-button:hover,
 QDateTimeEdit::down-button:hover
 {
 	background-color: #526887;
 }
 
-QSpinBox::down-arrow,
+QSpinBox::down-arrow, 
+QDoubleSpinBox::down-arrow, 
 QTimeEdit::down-arrow,
 QDateTimeEdit::down-arrow
 {
