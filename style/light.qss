@@ -496,6 +496,10 @@ QTimeEdit::up-button,
 QDateTimeEdit::up-button
 {
 	background-color: transparent;
+	subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-radius : 5px;
 }
 
 QSpinBox::up-button:hover, 
@@ -504,6 +508,7 @@ QTimeEdit::up-button:hover,
 QDateTimeEdit::up-button:hover
 {
 	background-color: #729acc;
+	border: 1px solid #000;
 }
 
 QSpinBox::up-arrow,
@@ -521,7 +526,11 @@ QDoubleSpinBox::down-button,
 QTimeEdit::down-button,
 QDateTimeEdit::down-button
 {
-	background-color: transparent;
+	background-color: transparent;	
+	subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-radius : 5px;
 }
 
 QSpinBox::down-button:hover, 
@@ -530,6 +539,7 @@ QTimeEdit::down-button:hover,
 QDateTimeEdit::down-button:hover
 {
 	background-color: #729acc;
+	border: 1px solid #000;
 }
 
 QSpinBox::down-arrow,

@@ -110,7 +110,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     hide();
     // Shows a system tray message saying that app is still running only the first time we close window
-    //TOREVIEW Does not seems to work on windows 11
     if(!m_stMessageShown)
     {
         m_sticon->showMessage(tr("Scheduled PC Tasks is still running..."),
@@ -243,6 +242,7 @@ void MainWindow::quitApp()
     }
 
     saveSettings();
+    m_stMessageShown = true;
     QApplication::quit();
 }
 
