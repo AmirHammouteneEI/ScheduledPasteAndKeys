@@ -29,6 +29,7 @@ SOURCES += \
     ui/SentencesTableWidget.cpp \
     ui/TaskTab.cpp \
     ui/actionwidgets/AbstractActionWidget.cpp \
+    ui/actionwidgets/KeysSequenceWidget.cpp \
     ui/actionwidgets/PasteWidget.cpp \
     ui/actionwidgets/WaitWidget.cpp \
     ui/createactiondialog/CreateKeysSequenceActionDialog.cpp \
@@ -58,6 +59,7 @@ HEADERS += \
     ui/SentencesTableWidget.h \
     ui/TaskTab.h \
     ui/actionwidgets/AbstractActionWidget.h \
+    ui/actionwidgets/KeysSequenceWidget.h \
     ui/actionwidgets/PasteWidget.h \
     ui/actionwidgets/WaitWidget.h \
     ui/createactiondialog/CreateKeysSequenceActionDialog.h \

@@ -2,10 +2,12 @@
 #include "TaskThread.h"
 #include "ui/actionwidgets/PasteWidget.h"
 #include "ui/actionwidgets/WaitWidget.h"
+#include "ui/actionwidgets/KeysSequenceWidget.h"
 #include "globals.h"
 #include "actions/PasteAction.h"
 #include "actions/WaitAction.h"
 #include "actions/KeysSequenceAction.h"
+#include "actions/ActionsTools.h"
 
 #include <QGridLayout>
 #include <QSpacerItem>
@@ -246,6 +248,9 @@ AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
         case ActionType::Wait:
             actWidgToCreate = new WaitWidget(m_actionsFrame);
         break;
+        case ActionType::KeysSequence:
+            actWidgToCreate = new KeysSequenceWidget(m_actionsFrame);
+            break;
         default:
             return nullptr;
         break;
@@ -575,5 +580,15 @@ void TaskTab::createWaitActionRequest(long double duration)
 
 void TaskTab::createKeysSequenceActionRequest(QString keysSequenceIdentity)
 {
-    //TODO create keys sentence action
+    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    auto keysSequenceFromSettings = settings.value(G_Files::KeysSequencesDataCategory+keysSequenceIdentity).toMap();
+    ActionParameters paramKeysSeq;
+    paramKeysSeq.m_keysSeqMap = ActionsTools::fromStandardQMapToKeysSeqMap(keysSequenceFromSettings);
+    paramKeysSeq.m_dataId = keysSequenceIdentity;
+
+    KeysSequenceAction *keysSeqAct = new KeysSequenceAction();
+    keysSeqAct->setParameters(paramKeysSeq);
+    keysSeqAct->generateTimeline();
+
+    appendAction(keysSeqAct);
 }

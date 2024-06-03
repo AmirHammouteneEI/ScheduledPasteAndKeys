@@ -15,9 +15,12 @@ namespace G_Files {
     inline QString ActionType_KeyWord = "type";
     inline QString ActionPasteType_Value = "paste";
     inline QString ActionWaitType_Value = "wait";
+    inline QString ActionKeysSequenceType_Value = "keyssequence";
     inline QString ActionContent_KeyWord = "content";
     inline QString ActionContentId_KeyWord = "contentId";
     inline QString ActionDuration_KeyWord = "duration";
+    inline QString ActionKeysSeqMap_KeyWord = "keysmap";
+    inline QString ActionKeysSeqId_KeyWord = "keysSeqId";
 }
 
 namespace G_Sentences {

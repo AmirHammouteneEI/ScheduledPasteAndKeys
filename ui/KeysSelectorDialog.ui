@@ -115,11 +115,6 @@
         </item>
         <item>
          <property name="text">
-          <string notr="true">ALT_RIGHT</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string notr="true">ALT_GR</string>
          </property>
         </item>
@@ -153,11 +148,71 @@
           <string notr="true">MIDDLE_MOUSE</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string notr="true">XBUTTON_1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">XBUTTON_2</string>
+         </property>
+        </item>
        </item>
        <item>
         <property name="text">
-         <string>Letters</string>
+         <string>Commons</string>
         </property>
+        <item>
+         <property name="text">
+          <string notr="true">0</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">9</string>
+         </property>
+        </item>
         <item>
          <property name="text">
           <string notr="true">A</string>
@@ -291,98 +346,8 @@
        </item>
        <item>
         <property name="text">
-         <string>Letters (special)</string>
+         <string>NumPad</string>
         </property>
-        <item>
-         <property name="text">
-          <string notr="true">&amp;</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">é</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">è</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">à</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">ç</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">ù</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">µ</string>
-         </property>
-        </item>
-       </item>
-       <item>
-        <property name="text">
-         <string>Numbers</string>
-        </property>
-        <item>
-         <property name="text">
-          <string notr="true">0</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">1</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">2</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">3</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">4</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">5</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">6</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">7</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">8</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">9</string>
-         </property>
-        </item>
         <item>
          <property name="text">
           <string notr="true">NUMPAD_0</string>
@@ -433,41 +398,6 @@
           <string notr="true">NUMPAD_9</string>
          </property>
         </item>
-       </item>
-       <item>
-        <property name="text">
-         <string>Symbols</string>
-        </property>
-        <item>
-         <property name="text">
-          <string notr="true">#</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">@</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">'</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">&quot;</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">`</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">_</string>
-         </property>
-        </item>
         <item>
          <property name="text">
           <string notr="true">+</string>
@@ -490,81 +420,6 @@
         </item>
         <item>
          <property name="text">
-          <string notr="true">\</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">=</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">°</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">²</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">&lt;</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">&gt;</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">^</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">¨</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">~</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">¤</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">§</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">$</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">€</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">£</string>
-         </property>
-        </item>
-       </item>
-       <item>
-        <property name="text">
-         <string>Punctuations</string>
-        </property>
-        <item>
-         <property name="text">
           <string notr="true">.</string>
          </property>
         </item>
@@ -575,57 +430,12 @@
         </item>
         <item>
          <property name="text">
-          <string notr="true">;</string>
+          <string notr="true">NUMPAD_ENTER</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string notr="true">:</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">(</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">[</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">]</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">{</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">}</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">!</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">?</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">|</string>
+          <string notr="true">NUM_LOCK</string>
          </property>
         </item>
        </item>
@@ -721,6 +531,11 @@
         <item>
          <property name="text">
           <string notr="true">PRINT_SCREEN</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">PRINT</string>
          </property>
         </item>
         <item>
@@ -836,6 +651,56 @@
         <item>
          <property name="text">
           <string notr="true">SCROLL_LOCK</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>Misc. chars. (qwerty keyboard reference)</string>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">;:</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">/?</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">`~</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">[{</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">\|</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">]}</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">'&quot;</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">&lt;&gt;</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">!§</string>
          </property>
         </item>
        </item>

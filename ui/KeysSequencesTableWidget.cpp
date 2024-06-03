@@ -1,5 +1,6 @@
 #include "KeysSequencesTableWidget.h"
 #include "globals.h"
+#include "actions/ActionsTools.h"
 
 #include <QSettings>
 #include <QMessageBox>
@@ -7,7 +8,6 @@
 KeysSequencesTableWidget::KeysSequencesTableWidget(QWidget *parent)
     : QTableWidget{parent}
 {
-    //TODO next step MODEL OF THE TABLE : 2x doulblespinbox + button Open dialog for choose keys (treewidget of keys label)
     m_keysSequenceEditDialog = new KeysSequenceSelectedEditDialog(this);
     connect(m_keysSequenceEditDialog, &QDialog::accepted, this, &KeysSequencesTableWidget::editFromDialogReceived);
     connect(this, &QTableWidget::cellDoubleClicked, this, &KeysSequencesTableWidget::editKeysSequenceSelected);
@@ -32,13 +32,7 @@ void KeysSequencesTableWidget::editKeysSequenceSelected(int row, int)
     m_keysSequenceEditDialog->setEditable(false);
     m_keysSequenceEditDialog->setIdentity(trueId);
     auto readMap = settings.value(G_Files::KeysSequencesDataCategory + trueId).toMap();
-    PressedReleaseDelaysKeysMap sentMap;
-    for(auto [key,val] : readMap.asKeyValueRange())
-    {
-        ReleaseDelayKeysPair pair = val.value<ReleaseDelayKeysPair>();
-        sentMap.insert(key.toInt(),pair);
-    }
-    m_keysSequenceEditDialog->setTableKeysSequence(sentMap);
+    m_keysSequenceEditDialog->setTableKeysSequence(ActionsTools::fromStandardQMapToKeysSeqMap(readMap));
     m_keysSequenceEditDialog->show();
 }
 
@@ -115,8 +109,8 @@ void KeysSequencesTableWidget::refresh()
                 contentList.append(pair.second.join("+"));
             }
             QString fullContent = contentList.join(" ; ");
-            contentItem->setToolTip(fullContent);
             contentItem->setText(fullContent);
+            contentItem->setToolTip(ActionsTools::fromKeysSeqMapToPrintedString(ActionsTools::fromStandardQMapToKeysSeqMap(readMap)));
             setItem(rowCount()-1,1,contentItem);
         }
     }
@@ -129,7 +123,7 @@ void KeysSequencesTableWidget::selectKeysSequenceFromIdentity(const QString &id)
     for(int k=0; k< rowCount(); ++k)
     {
         idItem = item(k,0);
-        if(idItem != nullptr && idItem->text() == "#"+id)
+        if(idItem != nullptr && idItem->text() == ">"+id)
         {
             rowFound = k;
             break;

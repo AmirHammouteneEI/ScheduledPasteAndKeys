@@ -352,6 +352,26 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
               }
           }
           break;
+        case ActionType::KeysSequence:
+        {
+            jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionKeysSequenceType_Value));
+            auto keySeqaction =  dynamic_cast<KeysSequenceAction*>(act);
+            if(keySeqaction != nullptr)
+            {
+                auto params = keySeqaction->generateParameters();
+                QJsonObject writtenMapJObj;
+                for(auto [key,val] : params.m_keysSeqMap.asKeyValueRange())
+                {
+                    QJsonArray jarr;
+                    jarr.append(val.first);
+                    jarr.append(QJsonValue::fromVariant(val.second));
+                    writtenMapJObj.insert(QString::number(key),jarr);
+                }
+                jsonToReturn.insert(G_Files::ActionKeysSeqMap_KeyWord, writtenMapJObj);
+                jsonToReturn.insert(G_Files::ActionKeysSeqId_KeyWord, QJsonValue::fromVariant(params.m_dataId));
+            }
+        }
+        break;
         default:
           break;
     }
@@ -376,10 +396,29 @@ AbstractAction *TaskTabsManager::jsonToAction(const QJsonObject &jobj)
         actionToReturn = new WaitAction();
         params.m_waitDuration = jobj.value(G_Files::ActionDuration_KeyWord).toDouble();
     }
+    else if(type == G_Files::ActionKeysSequenceType_Value)
+    {
+        actionToReturn = new KeysSequenceAction();
+        auto readMap = jobj.value(G_Files::ActionKeysSeqMap_KeyWord).toVariant().toMap();
+        PressedReleaseDelaysKeysMap actMap;
+        for(auto [key,val] : readMap.asKeyValueRange())
+        {
+            auto jarr = val.toJsonArray();
+            if(jarr.size()<2)
+                continue;
+            ReleaseDelayKeysPair pair;
+            pair.first = jarr[0].toInt();
+            pair.second = jarr[1].toVariant().toStringList();
+            actMap.insert(key.toInt(),pair);
+        }
+        params.m_keysSeqMap = actMap;
+        params.m_dataId = jobj.value(G_Files::ActionKeysSeqId_KeyWord).toString();
+    }
     else
         return nullptr;
 
     actionToReturn->setParameters(params);
+    actionToReturn->optionalProcesses();
 
     return actionToReturn;
 }

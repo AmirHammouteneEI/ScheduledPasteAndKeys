@@ -27,10 +27,10 @@ void CreateKeysSequenceActionDialog::showDialog()
     if(mainButtonSender == nullptr)
         return;
 
-    if(!mainButtonSender->property("contentId").isValid() || mainButtonSender->property("contentId").toString() == tr("ERROR"))
+    if(!mainButtonSender->property("keysSeqId").isValid() || mainButtonSender->property("keysSeqId").toString() == tr("ERROR"))
         return;
 
-    ui->tableWidget->selectKeysSequenceFromIdentity(mainButtonSender->property("contentId").toString());
+    ui->tableWidget->selectKeysSequenceFromIdentity(mainButtonSender->property("keysSeqId").toString());
 }
 
 void CreateKeysSequenceActionDialog::accept()
