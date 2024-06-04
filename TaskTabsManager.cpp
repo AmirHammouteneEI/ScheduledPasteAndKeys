@@ -369,6 +369,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
                 }
                 jsonToReturn.insert(G_Files::ActionKeysSeqMap_KeyWord, writtenMapJObj);
                 jsonToReturn.insert(G_Files::ActionKeysSeqId_KeyWord, QJsonValue::fromVariant(params.m_dataId));
+                jsonToReturn.insert(G_Files::ActionKeysSeqLoop_KeyWord, QJsonValue::fromVariant(params.m_timesToRun));
             }
         }
         break;
@@ -413,6 +414,7 @@ AbstractAction *TaskTabsManager::jsonToAction(const QJsonObject &jobj)
         }
         params.m_keysSeqMap = actMap;
         params.m_dataId = jobj.value(G_Files::ActionKeysSeqId_KeyWord).toString();
+        params.m_timesToRun = jobj.value(G_Files::ActionKeysSeqLoop_KeyWord).toInt();
     }
     else
         return nullptr;

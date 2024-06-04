@@ -24,6 +24,7 @@ public:
     long double m_waitDuration; // in seconds
     // map with key = delay of key simulated pressed in milisecond, value = pair of release delay (ms) and list of keys label
     PressedReleaseDelaysKeysMap m_keysSeqMap;
+    int m_timesToRun = 1;
 };
 
 Q_DECLARE_METATYPE(ActionParameters);

@@ -6,6 +6,7 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <QSettings>
+#include <QTimer>
 
 KeysSequenceWidget::KeysSequenceWidget(QWidget *parent)
     : AbstractActionWidget{parent}
@@ -15,8 +16,30 @@ KeysSequenceWidget::KeysSequenceWidget(QWidget *parent)
 
 void KeysSequenceWidget::buildWidget()
 {
-    if(m_centralWidget == nullptr)
+    auto centralGridLayout = qobject_cast<QGridLayout*>(m_centralWidget->layout());
+    if(m_centralWidget == nullptr || centralGridLayout == nullptr)
         return;
+
+    auto loopFrame = new QFrame(m_centralWidget);
+    auto loopLabel = new QLabel(tr("Loop "),loopFrame);
+    m_loopSpin = new QSpinBox(loopFrame);
+    auto looptimesLabel = new QLabel(tr(" times"),loopFrame);
+    m_loopSpin->setAlignment(Qt::AlignCenter);
+    m_loopSpin->setMinimum(1);
+    m_loopSpin->setMaximum(9999);
+    m_loopSpin->setMinimumWidth(60);
+    m_loopSpin->setToolTip(tr("Set how many times this keys sequence should be executed"));
+
+    auto loopLayout = new QHBoxLayout(loopFrame);
+    loopLayout->addWidget(loopLabel,0,Qt::AlignVCenter | Qt::AlignRight);
+    loopLayout->addWidget(m_loopSpin,0,Qt::AlignCenter);
+    loopLayout->addWidget(looptimesLabel,0,Qt::AlignVCenter | Qt::AlignLeft);
+    loopLayout->setContentsMargins(1,1,1,1);
+    loopLayout->setSpacing(2);
+
+    centralGridLayout->removeWidget(m_infoLabel);
+    centralGridLayout->addWidget(loopFrame,1,0,Qt::AlignCenter);
+    centralGridLayout->addWidget(m_infoLabel,2,0,Qt::AlignCenter);
 
     auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action);
 
@@ -26,20 +49,19 @@ void KeysSequenceWidget::buildWidget()
     {
         id = keysseqaction->m_sequenceId;
         seqStr = ActionsTools::fromKeysSeqMapToPrintedString(keysseqaction->m_keysSeqMap);
+        m_loopSpin->setValue(keysseqaction->m_timesToRun);
     }
 
-    //TODO find icon for keysSeq
-    //m_mainButton->setIcon(QIcon(":/img/wait.png"));
+    m_mainButton->setIcon(QIcon(":/img/key.png"));
     m_mainButton->setText(tr("Keys sequence >")+id);
     m_mainButton->setToolTip(seqStr);
     m_mainButton->setProperty("keysSeqId", id);
-
-    refreshLoopsRemainingText();
 
     m_createKeysSeqActionDialog = new CreateKeysSequenceActionDialog(m_centralWidget);
 
     connect(m_mainButton, &QPushButton::released, m_createKeysSeqActionDialog, &CreateKeysSequenceActionDialog::showDialog);
     connect(m_createKeysSeqActionDialog, &CreateKeysSequenceActionDialog::sendKeysSequence, this, &KeysSequenceWidget::keysSeqIdentityReceived);
+    connect(m_loopSpin, &QSpinBox::valueChanged, this, &KeysSequenceWidget::timesToRunChanged);
 }
 
 void KeysSequenceWidget::keysSeqIdentityReceived(QString id)
@@ -61,13 +83,41 @@ void KeysSequenceWidget::keysSeqIdentityReceived(QString id)
     m_mainButton->setToolTip(ActionsTools::fromKeysSeqMapToPrintedString(keysMap));
     m_mainButton->setProperty("keysSeqId", id);
 
-    refreshLoopsRemainingText();
-
     emit anyParamChanged();
 }
 
-void KeysSequenceWidget::refreshLoopsRemainingText()
+void KeysSequenceWidget::timesToRunChanged(int times)
 {
-    m_infoLabel->setText("");
-    m_infoLabel->setFixedSize(m_infoLabel->sizeHint());
+    auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action);
+    keysseqaction->m_timesToRun = times;
+    emit anyParamChanged();
+}
+
+void KeysSequenceWidget::changedRunningState()
+{
+    refreshLoopsRemainingText(QDateTime::currentDateTime());
+}
+
+void KeysSequenceWidget::refreshLoopsRemainingText(const QDateTime &departureDate)
+{
+    if(m_runningState == RunningState::NotExecuted || m_runningState == RunningState::Done)
+    {
+        m_infoLabel->setText("");
+        return;
+    }
+
+    auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action);
+    if(keysseqaction == nullptr)
+        return;
+
+    int oneExecutionDuration = keysseqaction->computeOneExecutionDuration();
+    if(oneExecutionDuration == 0)
+        return;
+
+    qint64 timelaps = departureDate.msecsTo(QDateTime::currentDateTime());
+    int timesExecuted = timelaps / oneExecutionDuration;
+
+    m_infoLabel->setText(tr("Remaining ")+QString::number(keysseqaction->m_timesToRun - timesExecuted)+tr(" executions"));
+
+    QTimer::singleShot(200, this, [=]() {refreshLoopsRemainingText(departureDate);});
 }

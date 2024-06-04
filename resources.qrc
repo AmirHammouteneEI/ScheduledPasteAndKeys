@@ -41,5 +41,6 @@
         <file>img/noscroll.png</file>
         <file>img/scroll.png</file>
         <file>img/down_arrow.png</file>
+        <file>img/key.png</file>
     </qresource>
 </RCC>

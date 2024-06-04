@@ -12,6 +12,7 @@ private:
     PressedReleaseDelaysKeysMap m_keysSeqMap;
     QString m_sequenceId;
     QMap<int, QVector<QStringList>> m_keysStrokeTimeline; // Timeline of keys to stroke, each time contain 2 vectors : [0] press keys list [1] released keys list
+    int m_timesToRun = 1;
 public:
     KeysSequenceAction();
     ~KeysSequenceAction() = default;
@@ -25,6 +26,7 @@ public:
 
     void generateTimeline();
     void optionalProcesses() override {generateTimeline();}
+    int computeOneExecutionDuration(); // in miliseconds
 
     friend class KeysSequenceWidget;
 };

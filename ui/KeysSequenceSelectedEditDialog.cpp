@@ -86,7 +86,8 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
     pressedDelaySpin->setDecimals(2);
     pressedDelaySpin->setMaximum(999999999999.);
     pressedDelaySpin->setSingleStep(0.1);
-    pressedDelaySpin->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
+    pressedDelaySpin->setAlignment(Qt::AlignCenter);
+    pressedDelaySpin->setLocale(QLocale::English);
     if(index == 0)
     {
         pressedDelaySpin->setValue(0.);
@@ -104,7 +105,8 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
     releasedDelaySpin->setMinimum(0.1);
     releasedDelaySpin->setMaximum(999999999999.);
     releasedDelaySpin->setSingleStep(0.1);
-    releasedDelaySpin->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
+    releasedDelaySpin->setAlignment(Qt::AlignCenter);
+    releasedDelaySpin->setLocale(QLocale::English);
 
     QPushButton *keysListButton = new QPushButton(this);
 

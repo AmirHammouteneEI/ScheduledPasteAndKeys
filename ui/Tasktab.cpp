@@ -63,7 +63,7 @@ void TaskTab::buildBasicInterface()
     topGridLayout->setSizeConstraint(QLayout::SetMinimumSize);
     m_nameLabel = new QLabel(m_name,topWidget);
     m_nameLabel->setWordWrap(true);
-    m_nameLabel->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_nameLabel->setAlignment(Qt::AlignCenter);
     m_nameLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
     m_saveButton = new QPushButton(QIcon(":/img/save.png"),"", topWidget);
     m_saveButton->setFlat(true);
@@ -80,7 +80,7 @@ void TaskTab::buildBasicInterface()
     scheduleAndStopLayout->setContentsMargins(1,1,1,1);
     scheduleAndStopLayout->setSizeConstraint(QLayout::SetMinimumSize);
     m_delayChrono = new QLabel(tr("not scheduled"),topWidget);
-    m_delayChrono->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_delayChrono->setAlignment(Qt::AlignCenter);
     m_delayChrono->setContentsMargins(1,1,1,1);
     m_runOptionsWidget = new QWidget(topWidget);
     auto runOptionsLayout = new QHBoxLayout(m_runOptionsWidget);
@@ -88,9 +88,10 @@ void TaskTab::buildBasicInterface()
     auto timesToRunLayout = new QHBoxLayout(m_timesToRunWidget);
     QLabel *executeLabel = new QLabel(tr("Execute "),m_timesToRunWidget);
     m_timesToRunSpinBox = new QSpinBox(m_timesToRunWidget);
-    m_timesToRunSpinBox->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_timesToRunSpinBox->setAlignment(Qt::AlignCenter);
     m_timesToRunSpinBox->setMinimum(1);
     m_timesToRunSpinBox->setMaximum(9999);
+    m_timesToRunSpinBox->setMinimumWidth(80);
     QLabel *timesLabel = new QLabel(tr(" times"),m_timesToRunWidget);
     timesToRunLayout->addWidget(executeLabel);
     timesToRunLayout->addWidget(m_timesToRunSpinBox);
@@ -109,7 +110,7 @@ void TaskTab::buildBasicInterface()
     runOptionsLayout->addWidget(m_loopButton,0,Qt::AlignLeft);
     runOptionsLayout->setSizeConstraint(QLayout::SetMinimumSize);
     m_loopedTimesLabel = new QLabel(tr("Has been executed ")+"0"+tr(" times"),topWidget);
-    m_loopedTimesLabel->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_loopedTimesLabel->setAlignment(Qt::AlignCenter);
     m_loopedTimesLabel->setContentsMargins(1,1,1,1);
     auto font = m_nameLabel->font();
     font.setBold(true);
@@ -130,13 +131,13 @@ void TaskTab::buildBasicInterface()
     topGridLayout->setContentsMargins(1,1,1,1);
     topGridLayout->setSpacing(2);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),0,0);
-    topGridLayout->addWidget(m_nameLabel,1,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
+    topGridLayout->addWidget(m_nameLabel,1,1,1,2, Qt::AlignCenter);
     topGridLayout->addWidget(m_saveButton,1,3, Qt::AlignRight | Qt::AlignVCenter);
     topGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Minimum,QSizePolicy::Minimum),2,1);
-    topGridLayout->addWidget(scheduleAndStopWidget,3,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
-    topGridLayout->addWidget(m_delayChrono,4,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
-    topGridLayout->addWidget(m_runOptionsWidget,5,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
-    topGridLayout->addWidget(m_loopedTimesLabel,6,1,1,2, Qt::AlignCenter | Qt::AlignHCenter);
+    topGridLayout->addWidget(scheduleAndStopWidget,3,1,1,2, Qt::AlignCenter);
+    topGridLayout->addWidget(m_delayChrono,4,1,1,2, Qt::AlignCenter);
+    topGridLayout->addWidget(m_runOptionsWidget,5,1,1,2, Qt::AlignCenter);
+    topGridLayout->addWidget(m_loopedTimesLabel,6,1,1,2, Qt::AlignCenter);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),7,3);
 
     //-- Middle widget with list of actions
@@ -156,7 +157,7 @@ void TaskTab::buildBasicInterface()
     font.setPointSize(14);
     font.setBold(true);
     m_addActionButton->setFont(font);
-    bottomGridLayout->addWidget(m_addActionButton,0,0,Qt::AlignCenter | Qt::AlignHCenter);
+    bottomGridLayout->addWidget(m_addActionButton,0,0,Qt::AlignCenter);
 
     m_mainWidget->layout()->addWidget(topWidget);
     m_mainWidget->layout()->addWidget(m_actionsFrame);

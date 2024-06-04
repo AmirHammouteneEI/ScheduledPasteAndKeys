@@ -8,6 +8,10 @@ KeysSequenceAction::KeysSequenceAction() : AbstractAction()
 
 void KeysSequenceAction::runAction() const
 {
+    int timesToRun = m_timesToRun;
+
+    begin:
+
     auto it = m_keysStrokeTimeline.begin();
     while(it != m_keysStrokeTimeline.end())
     {
@@ -27,12 +31,17 @@ void KeysSequenceAction::runAction() const
     }
 
     Sleep(100);
+
+    --timesToRun;
+    if(timesToRun > 0)
+        goto begin;
 }
 
 void KeysSequenceAction::setParameters(const ActionParameters &param)
 {
     m_keysSeqMap = param.m_keysSeqMap;
     m_sequenceId = param.m_dataId;
+    m_timesToRun = param.m_timesToRun;
 }
 
 KeysSequenceAction *KeysSequenceAction::deepCopy() const
@@ -41,6 +50,7 @@ KeysSequenceAction *KeysSequenceAction::deepCopy() const
     actToReturn->m_keysSeqMap = m_keysSeqMap;
     actToReturn->m_sequenceId = m_sequenceId;
     actToReturn->m_keysStrokeTimeline = m_keysStrokeTimeline;
+    actToReturn->m_timesToRun = m_timesToRun;
     actToReturn->m_refID = m_ID;
     return actToReturn;
 }
@@ -50,6 +60,7 @@ ActionParameters KeysSequenceAction::generateParameters() const
     ActionParameters param;
     param.m_keysSeqMap = m_keysSeqMap;
     param.m_dataId = m_sequenceId;
+    param.m_timesToRun = m_timesToRun;
     return param;
 }
 
@@ -94,4 +105,18 @@ void KeysSequenceAction::generateTimeline()
             m_keysStrokeTimeline.insert(releaseKey,vecToInsert);
         }
     }
+}
+
+int KeysSequenceAction::computeOneExecutionDuration()
+{
+    int returnedValue = 0;
+
+    for(auto [key,val] : m_keysSeqMap.asKeyValueRange())
+    {
+        int thisKeyStops = key + val.first;
+        if(thisKeyStops > returnedValue)
+            returnedValue = thisKeyStops;
+    }
+
+    return returnedValue;
 }

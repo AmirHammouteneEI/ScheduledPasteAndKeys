@@ -34,6 +34,7 @@ signals:
 private:
     Ui::CreateLoadTaskDialog *ui;
     void fillExistingTasksTable();
+    void createTasksFolderIfNotExist();
 };
 
 #endif // CREATELOADTASKDIALOG_H

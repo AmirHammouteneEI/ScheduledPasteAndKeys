@@ -117,6 +117,12 @@
          </item>
          <item>
           <widget class="QSpinBox" name="spinBox">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>

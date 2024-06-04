@@ -23,14 +23,12 @@ AbstractActionWidget::AbstractActionWidget(QWidget *parent)
     m_infoLabel = new QLabel("",m_centralWidget);
     m_infoLabel->setObjectName("actionSubLabel");
     m_infoLabel->setWordWrap(true);
-    m_infoLabel->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    m_infoLabel->setAlignment(Qt::AlignCenter);
     m_infoLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     m_infoLabel->setMinimumWidth(200);
 
-    //centralGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Fixed,QSizePolicy::Fixed),0,0);
-    centralGridLayout->addWidget(m_mainButton,1,1,Qt::AlignCenter | Qt::AlignHCenter);
-    centralGridLayout->addWidget(m_infoLabel,2,1,Qt::AlignCenter | Qt::AlignHCenter);
-    //centralGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Fixed,QSizePolicy::Fixed),3,2);
+    centralGridLayout->addWidget(m_mainButton,0,0,Qt::AlignCenter);
+    centralGridLayout->addWidget(m_infoLabel,1,0,Qt::AlignCenter);
 
     centralGridLayout->setContentsMargins(1,1,1,1);
     centralGridLayout->setSpacing(2);
@@ -68,7 +66,7 @@ AbstractActionWidget::AbstractActionWidget(QWidget *parent)
 
     //gridLayout->setSizeConstraint(QLayout::SetMinimumSize);
     gridLayout->addItem(new QSpacerItem(3,3,QSizePolicy::Fixed,QSizePolicy::Fixed),0,0);
-    gridLayout->addWidget(m_centralWidget,1,1,Qt::AlignCenter | Qt::AlignHCenter);
+    gridLayout->addWidget(m_centralWidget,1,1,Qt::AlignCenter);
     gridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Fixed,QSizePolicy::Fixed),1,2);
     gridLayout->addLayout(rightLayout,1,3,Qt::AlignRight | Qt::AlignTop);
     gridLayout->addItem(new QSpacerItem(3,3,QSizePolicy::Fixed,QSizePolicy::Fixed),2,2);

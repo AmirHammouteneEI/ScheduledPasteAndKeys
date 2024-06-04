@@ -35,6 +35,7 @@ CreateLoadTaskDialog::~CreateLoadTaskDialog()
 
 void CreateLoadTaskDialog::showDialog()
 {
+    createTasksFolderIfNotExist();
     fillExistingTasksTable();
     show();
 }
@@ -249,4 +250,11 @@ void CreateLoadTaskDialog::fillExistingTasksTable()
 
         ui->tableWidget->setItem(nextLineNum, nextColumnNum, new QTableWidgetItem(tasksNamesList.at(k)));
     }
+}
+
+void CreateLoadTaskDialog::createTasksFolderIfNotExist()
+{
+    QDir tasksFolder = QDir::currentPath()+"/"+s_tasksFolder;
+    if(!tasksFolder.exists())
+        tasksFolder.mkdir(QDir::currentPath()+"/"+s_tasksFolder);
 }

@@ -21,6 +21,7 @@ namespace G_Files {
     inline QString ActionDuration_KeyWord = "duration";
     inline QString ActionKeysSeqMap_KeyWord = "keysmap";
     inline QString ActionKeysSeqId_KeyWord = "keysSeqId";
+    inline QString ActionKeysSeqLoop_KeyWord = "loop";
 }
 
 namespace G_Sentences {
