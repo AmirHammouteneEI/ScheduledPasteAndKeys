@@ -3,8 +3,8 @@
 #include <QVariant>
 
 QMap<QString, WORD> ActionsTools::m_keysStrToInputWordMap = { {"CONTROL_LEFT", VK_LCONTROL},{"CONTROL_RIGHT", VK_RCONTROL},{"SHIFT_LEFT", VK_LSHIFT},{"SHIFT_RIGHT", VK_RSHIFT},
-    {"ALT_LEFT", VK_LMENU},{"ALT_GR", VK_RMENU},{"WINDOWS", VK_LWIN},{"FN", 0xFF},{"LEFT_MOUSE", VK_LBUTTON},{"RIGHT_MOUSE", VK_RBUTTON},{"MIDDLE_MOUSE", VK_MBUTTON},
-    {"XBUTTON_1", VK_XBUTTON1},{"XBUTTON_2", VK_XBUTTON2},
+    {"ALT_LEFT", VK_LMENU},{"ALT_GR", VK_RMENU},{"WINDOWS", VK_LWIN},{"FN", 0xFF},{"LEFT_MOUSE", MOUSEEVENTF_LEFTDOWN},{"RIGHT_MOUSE", MOUSEEVENTF_RIGHTDOWN},{"MIDDLE_MOUSE", MOUSEEVENTF_MIDDLEDOWN},
+    {"XBUTTON_1", MOUSEEVENTF_XDOWN},{"XBUTTON_2", MOUSEEVENTF_XDOWN},
     {"A", 0x41},{"B", 0x42},{"C", 0x43},{"D", 0x44},{"E", 0x45},{"F", 0x46},{"G", 0x47},{"H", 0x48},{"I", 0x49},{"J", 0x4A},{"K", 0x4B},{"L", 0x4C},
     {"M", 0x4D},{"N", 0x4E},{"O", 0x4F},{"P", 0x50},{"Q", 0x51},{"R", 0x52},{"S", 0x53},{"T", 0x54},{"U", 0x55},{"V", 0x56},{"W", 0x57},{"X", 0x58},
     {"Y", 0x59},{"Z", 0x5A},{"0", 0x30},{"1", 0x31},{"2", 0x32},{"3", 0x33},{"4", 0x34},{"5", 0x35},{"6", 0x36},{"7", 0x37},{"8", 0x38},{"9", 0x39},
@@ -52,6 +52,13 @@ void ActionsTools::keyStokeSimulate(const QString &keyAsStr, DWORD typeOfPress)
 {
     if(!m_keysStrToInputWordMap.contains(keyAsStr))
         return;
+
+    if(keyAsStr=="LEFT_MOUSE" || keyAsStr=="RIGHT_MOUSE" || keyAsStr=="MIDDLE_MOUSE" || keyAsStr=="XBUTTON_1" || keyAsStr=="XBUTTON_2")
+    {
+        mouseStokeSimulate(keyAsStr,typeOfPress);
+        return;
+    }
+
     INPUT ip;
     auto wVkCode = m_keysStrToInputWordMap.value(keyAsStr,VK_RETURN);
     ip.type = INPUT_KEYBOARD;
@@ -60,7 +67,48 @@ void ActionsTools::keyStokeSimulate(const QString &keyAsStr, DWORD typeOfPress)
     ip.ki.dwFlags = typeOfPress;
     ip.ki.wVk = wVkCode;
     ip.ki.wScan = MapVirtualKeyW(wVkCode, MAPVK_VK_TO_VSC_EX);;
-    SendInput(ip.type, &ip, sizeof(INPUT));
+    SendInput(1, &ip, sizeof(INPUT));
+}
+
+void ActionsTools::mouseStokeSimulate(const QString &keyAsStr, DWORD typeOfPress)
+{
+    DWORD mouseData = 0;
+    if(keyAsStr=="XBUTTON_1")
+        mouseData=XBUTTON1;
+    if(keyAsStr=="XBUTTON_2")
+        mouseData=XBUTTON2;
+
+    INPUT ip;
+    ip.type = INPUT_MOUSE;
+    ip.mi.dx = 0;
+    ip.mi.dy = 0;
+    ip.mi.mouseData = mouseData;
+    ip.mi.time = 0;
+    ip.mi.dwExtraInfo = 0;
+    ip.mi.dwFlags = mouseFlagPressReleaseConversion(m_keysStrToInputWordMap.value(keyAsStr,VK_RETURN),typeOfPress);;
+    SendInput(1, &ip, sizeof(INPUT));
+}
+
+DWORD ActionsTools::mouseFlagPressReleaseConversion(WORD keyInputWord, DWORD typeOfPress)
+{
+    if(typeOfPress == 0)
+        return keyInputWord;
+
+    switch (keyInputWord)
+    {
+    case MOUSEEVENTF_RIGHTDOWN:
+        return MOUSEEVENTF_RIGHTUP;
+        break;
+    case MOUSEEVENTF_MIDDLEDOWN:
+        return MOUSEEVENTF_MIDDLEUP;
+        break;
+    case MOUSEEVENTF_XDOWN:
+        return MOUSEEVENTF_XUP;
+        break;
+    default:
+        return MOUSEEVENTF_LEFTUP;
+        break;
+    }
 }
 
 void ActionsTools::setClipboard(const QString &str)

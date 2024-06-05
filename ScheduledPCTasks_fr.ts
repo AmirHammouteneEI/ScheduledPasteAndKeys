@@ -46,6 +46,47 @@ layout is null when affecting to ActionWidgetsManager !</translation>
     </message>
 </context>
 <context>
+    <name>CreateKeysSequenceActionDialog</name>
+    <message>
+        <source>Create/Edit a Keys Sequence Action</source>
+        <translation>Créer/Éditer une action Séquence de touches</translation>
+    </message>
+    <message>
+        <source>Select the sequence of keys you would like to apply with this action :</source>
+        <translation>Sélectionnez la séquence de touches que vous souhaitez affecter à cette action :</translation>
+    </message>
+    <message>
+        <source>Identity</source>
+        <translation>Identité</translation>
+    </message>
+    <message>
+        <source>Keys sequence</source>
+        <translation>Séquence de touches</translation>
+    </message>
+    <message>
+        <source>Note : Keys sequence actions are followed by a minimal wait of 0.1 second</source>
+        <translation>Remarque : Les actions de Séquence de touches sont suivies d&apos;une pause minimal de 0,1 seconde</translation>
+    </message>
+    <message>
+        <source>ERROR</source>
+        <translation>ERREUR</translation>
+    </message>
+    <message>
+        <source>No keys sequence selected</source>
+        <translation>Aucune séquence de touches séléctionée</translation>
+    </message>
+    <message>
+        <source>Internal Error</source>
+        <translation>Erreur Interne</translation>
+    </message>
+    <message>
+        <source>An internal error occured : err03
+item selected in CreateKeysSequenceActionDialog is null !</source>
+        <translation>Une erreur interne s&apos;est produite : err03
+item selected in SelectSentenceDialog is null !</translation>
+    </message>
+</context>
+<context>
     <name>CreateLoadTaskDialog</name>
     <message>
         <source>Open or create a task</source>
@@ -156,15 +197,15 @@ layout is null when affecting to ActionWidgetsManager !</translation>
     <name>CreatePasteActionDialog</name>
     <message>
         <source>Recommended</source>
-        <translation>Recommandé</translation>
+        <translation type="vanished">Recommandé</translation>
     </message>
     <message>
         <source>Add a minimal Wait action after this Paste text action</source>
-        <translation>Ajouter une action d&apos;Attente minime après cette action de Coller du texte</translation>
+        <translation type="vanished">Ajouter une action d&apos;Attente minime après cette action de Coller du texte</translation>
     </message>
     <message>
         <source>Wait duration in seconds</source>
-        <translation>Durée d&apos;attente en secondes</translation>
+        <translation type="vanished">Durée d&apos;attente en secondes</translation>
     </message>
     <message>
         <source>Identity</source>
@@ -176,7 +217,7 @@ layout is null when affecting to ActionWidgetsManager !</translation>
     </message>
     <message>
         <source>Select the sentence you would like to apply to this action :</source>
-        <translation>Sélectionnez la phrase que vous souhaitez affecter à cette action :</translation>
+        <translation type="vanished">Sélectionnez la phrase que vous souhaitez affecter à cette action :</translation>
     </message>
     <message>
         <source>No sentence selected</source>
@@ -194,7 +235,23 @@ item selected in CreatePasteActionDialog is null !</translation>
     </message>
     <message>
         <source>Create a Paste Text Action</source>
-        <translation>Créer une action de Coller du texte</translation>
+        <translation type="vanished">Créer une action de Coller du texte</translation>
+    </message>
+    <message>
+        <source>Create/Edit a Paste Text Action</source>
+        <translation>Créer/Éditer une action Coller du texte</translation>
+    </message>
+    <message>
+        <source>Select the sentence you would like to apply with this action :</source>
+        <translation>Sélectionnez la phrase que vous souhaitez affecter à cette action :</translation>
+    </message>
+    <message>
+        <source>Note : Paste actions are followed by a minimal wait of 0.1 second</source>
+        <translation>Remarque : Les actions de Coller du texte sont suivies d&apos;une pause minimal de 0,1 seconde</translation>
+    </message>
+    <message>
+        <source>ERROR</source>
+        <translation>ERREUR</translation>
     </message>
 </context>
 <context>
@@ -227,6 +284,10 @@ item selected in CreatePasteActionDialog is null !</translation>
         <source> hours,minutes,seconds</source>
         <translation> heures,minutes,secondes</translation>
     </message>
+    <message>
+        <source>ERROR</source>
+        <translation>ERREUR</translation>
+    </message>
 </context>
 <context>
     <name>DataEditDialog</name>
@@ -249,6 +310,194 @@ item selected in CreatePasteActionDialog is null !</translation>
     <message>
         <source>Edit Data</source>
         <translation>Éditer les données</translation>
+    </message>
+    <message>
+        <source>Keys Sequences</source>
+        <translation>Séquences de touches</translation>
+    </message>
+    <message>
+        <source>Here you can edit the keys sequences that will be used in actions :</source>
+        <translation>Vous pouvez ici modifier les séquences de touches qui seront utilisées dans les actions :</translation>
+    </message>
+</context>
+<context>
+    <name>KeysSelectorDialog</name>
+    <message>
+        <source>Select keys</source>
+        <translation>Sélectionnez les touches</translation>
+    </message>
+    <message>
+        <source>Make the list of keys concerned (double click to add or remove items) :</source>
+        <translation>Faites la liste des touches concernées (double-clic pour ajouter ou supprimer des éléments) :</translation>
+    </message>
+    <message>
+        <source>Key</source>
+        <translation>Touche</translation>
+    </message>
+    <message>
+        <source>Modifiers</source>
+        <translation>Modificateurs</translation>
+    </message>
+    <message>
+        <source>Mouse buttons</source>
+        <translation>Boutons de la souris</translation>
+    </message>
+    <message>
+        <source>Commons</source>
+        <translation>Communs</translation>
+    </message>
+    <message>
+        <source>NumPad</source>
+        <translation>Pavé numérique</translation>
+    </message>
+    <message>
+        <source>Specials</source>
+        <translation>Spéciaux</translation>
+    </message>
+    <message>
+        <source>Navigations</source>
+        <translation>Navigations</translation>
+    </message>
+    <message>
+        <source>Functions</source>
+        <translation>Fonctions</translation>
+    </message>
+    <message>
+        <source>Toggles</source>
+        <translation>Boutons de bascule</translation>
+    </message>
+    <message>
+        <source>Misc. chars. (qwerty keyboard ref.)</source>
+        <translation>Divers carac. (réf. clavier azerty)</translation>
+    </message>
+    <message>
+        <source>;:</source>
+        <translation>$£</translation>
+    </message>
+    <message>
+        <source>/?</source>
+        <translation>:/</translation>
+    </message>
+    <message>
+        <source>`~</source>
+        <translation>ù%</translation>
+    </message>
+    <message>
+        <source>[{</source>
+        <translation>)°</translation>
+    </message>
+    <message>
+        <source>\|</source>
+        <translation>*µ</translation>
+    </message>
+    <message>
+        <source>]}</source>
+        <translation>^¨</translation>
+    </message>
+    <message>
+        <source>&apos;&quot;</source>
+        <translation>²</translation>
+    </message>
+    <message>
+        <source>&lt;&gt;</source>
+        <translation>&lt;&gt;</translation>
+    </message>
+    <message>
+        <source>!§</source>
+        <translation>!§</translation>
+    </message>
+</context>
+<context>
+    <name>KeysSequenceSelectedEditDialog</name>
+    <message>
+        <source>Create/Edit/View a keys sequence</source>
+        <translation>Créer/Éditer/Voir une séquence de touches</translation>
+    </message>
+    <message>
+        <source>Keys Sequence&apos;s identity</source>
+        <translation>Identité de la séquence de touches</translation>
+    </message>
+    <message>
+        <source>Identity must be alphanumerical.
+If already exists in data, it will replace the entry.
+If identity is changed (via the Edit Data window), it will make a copy of the entry.</source>
+        <translation>L&apos;identité doit être alphanumérique.
+Si elle existe déjà dans les données, cela remplacera l&apos;entrée.
+Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela fera une copie de l&apos;entrée.</translation>
+    </message>
+    <message>
+        <source>Sequence :</source>
+        <translation>Séquence :</translation>
+    </message>
+    <message>
+        <source>Delay to press</source>
+        <translation>Délai avant appui</translation>
+    </message>
+    <message>
+        <source>Release after</source>
+        <translation>Relâcher après</translation>
+    </message>
+    <message>
+        <source>Keys</source>
+        <translation>Touches</translation>
+    </message>
+</context>
+<context>
+    <name>KeysSequenceWidget</name>
+    <message>
+        <source>Loop </source>
+        <translation>Répéter </translation>
+    </message>
+    <message>
+        <source> times</source>
+        <translation> fois</translation>
+    </message>
+    <message>
+        <source>Set how many times this keys sequence should be executed</source>
+        <translation>Déterminez combien de fois cette séquence de touches devrait être exécutée</translation>
+    </message>
+    <message>
+        <source>ERROR on access to action</source>
+        <translation>ERREUR sur l&apos;accès à l&apos;action</translation>
+    </message>
+    <message>
+        <source>ERROR</source>
+        <translation>ERREUR</translation>
+    </message>
+    <message>
+        <source>Keys sequence &gt;</source>
+        <translation>Séquence de touches &gt;</translation>
+    </message>
+    <message>
+        <source>Remaining </source>
+        <translation>Restant </translation>
+    </message>
+    <message>
+        <source> executions</source>
+        <translation> exécutions</translation>
+    </message>
+</context>
+<context>
+    <name>KeysSequencesTableWidget</name>
+    <message>
+        <source>Keys sequence has no identity</source>
+        <translation>La séquence de touches n&apos;a pas d&apos;identité</translation>
+    </message>
+    <message>
+        <source>The keys sequence you tried to add has no identity, cancelled operation.</source>
+        <translation>La séquence de touches que vous avez essayé d&apos;ajouter n&apos;a pas d&apos;identité, opération annulée.</translation>
+    </message>
+    <message>
+        <source>No keys sequence selected</source>
+        <translation>Aucune séquence de touches séléctionée</translation>
+    </message>
+    <message>
+        <source>Confirm removing keys sequence</source>
+        <translation>Confirmation de la suppression de la séquence de touches</translation>
+    </message>
+    <message>
+        <source>You are about to remove this keys sequence from data stored, are you sure ?</source>
+        <translation>Vous êtes sur le point de supprimer cette séquence de touches des données, en êtes-vous sûr ?</translation>
     </message>
 </context>
 <context>
@@ -348,12 +597,44 @@ Developed by Amir Hammoutene (contact@amirhammoutene.dev)
 initial work on February 2024
 
 version 0.1</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 0.1</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 0.2</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 0.2</translation>
+    </message>
+    <message>
+        <source>Scheduled PC Tasks is still running...</source>
+        <translation>Scheduled PC Tasks est toujours en cours d&apos;exécution...</translation>
+    </message>
+    <message>
+        <source>You can open the window by a simple click on the system tray icon.
+Right click on it to quit the application.</source>
+        <translation>Vous pouvez ouvrir la fenêtre d&apos;un simple clic sur l&apos;icône de la barre d&apos;état système.
+Clic droit dessus pour quitter l&apos;application.</translation>
+    </message>
+    <message>
+        <source>Uncheck to disable autoscrolling during task execution</source>
+        <translation>Décochez pour désactiver le défilement automatique pendant l&apos;exécution des tâches</translation>
+    </message>
+    <message>
+        <source>Check to enable autoscrolling during task execution</source>
+        <translation>Cochez pour activer le défilement automatique pendant l&apos;exécution des tâches</translation>
     </message>
 </context>
 <context>
@@ -401,37 +682,41 @@ Be sure that this program is run as administrator (right click on the executable
 
 Assurez-vous que ce programme est exécuté en tant qu&apos;administrateur (clic droit sur l&apos;exécutable ou le raccourci pour cette option).</translation>
     </message>
+    <message>
+        <source>No keys sequence has been selected. Please select one.</source>
+        <translation>Aucune séquence de touches n&apos;a été sélectionnée. Veuillez en sélectionner une.</translation>
+    </message>
 </context>
 <context>
     <name>SelectSentenceDialog</name>
     <message>
         <source>Select a sentence for this action</source>
-        <translation>Sélectionnez une phrase pour cette action</translation>
+        <translation type="vanished">Sélectionnez une phrase pour cette action</translation>
     </message>
     <message>
         <source>Identity</source>
-        <translation>Identité</translation>
+        <translation type="vanished">Identité</translation>
     </message>
     <message>
         <source>Sentence</source>
-        <translation>Phrase</translation>
+        <translation type="vanished">Phrase</translation>
     </message>
     <message>
         <source>Select the sentence you would like to apply to this action :</source>
-        <translation>Sélectionnez la phrase que vous souhaitez affecter à cette action :</translation>
+        <translation type="vanished">Sélectionnez la phrase que vous souhaitez affecter à cette action :</translation>
     </message>
     <message>
         <source>No sentence selected</source>
-        <translation>Aucune phrase séléctionée</translation>
+        <translation type="vanished">Aucune phrase séléctionée</translation>
     </message>
     <message>
         <source>Internal Error</source>
-        <translation>Erreur Interne</translation>
+        <translation type="vanished">Erreur Interne</translation>
     </message>
     <message>
         <source>An internal error occured : err03
 item selected in SelectSentenceDialog is null !</source>
-        <translation>Une erreur interne s&apos;est produite : err03
+        <translation type="vanished">Une erreur interne s&apos;est produite : err03
 item selected in SelectSentenceDialog is null !</translation>
     </message>
 </context>
@@ -447,11 +732,23 @@ item selected in SelectSentenceDialog is null !</translation>
     </message>
     <message>
         <source>Identity must be alphanumerical. If already exists in data, it will replace it.</source>
-        <translation>L&apos;identité doit être alphanumérique. S&apos;il existe déjà dans les données, il sera remplacé.</translation>
+        <translation type="vanished">L&apos;identité doit être alphanumérique. S&apos;il existe déjà dans les données, il sera remplacé.</translation>
     </message>
     <message>
         <source>Create/Edit/View sentences</source>
-        <translation>Créer/Éditer/Parcourir les phrases</translation>
+        <translation type="vanished">Créer/Éditer/Voir les phrases</translation>
+    </message>
+    <message>
+        <source>Identity must be alphanumerical.
+If already exists in data, it will replace the entry.
+If identity is changed (via the Edit Data window), it will make a copy of the entry.</source>
+        <translation>L&apos;identité doit être alphanumérique.
+Si elle existe déjà dans les données, cela remplacera l&apos;entrée.
+Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela fera une copie de l&apos;entrée.</translation>
+    </message>
+    <message>
+        <source>Create/Edit/View a sentences</source>
+        <translation>Créer/Éditer/Voir une phrase</translation>
     </message>
 </context>
 <context>
@@ -489,7 +786,7 @@ item selected in SelectSentenceDialog is null !</translation>
     </message>
     <message>
         <source>Stop the task. shortcut: Ctrl+Alt+S</source>
-        <translation>Arrêter la tâche. raccourci: Ctrl+Alt+S</translation>
+        <translation type="vanished">Arrêter la tâche. raccourci: Ctrl+Alt+S</translation>
     </message>
     <message>
         <source>not scheduled</source>
@@ -497,7 +794,7 @@ item selected in SelectSentenceDialog is null !</translation>
     </message>
     <message>
         <source>Loop OFF</source>
-        <translation>En boucle OFF</translation>
+        <translation type="vanished">En boucle OFF</translation>
     </message>
     <message>
         <source>Looped </source>
@@ -509,7 +806,7 @@ item selected in SelectSentenceDialog is null !</translation>
     </message>
     <message>
         <source>Loop ON</source>
-        <translation>En boucle ON</translation>
+        <translation type="vanished">En boucle ON</translation>
     </message>
     <message>
         <source>Running</source>
@@ -557,6 +854,26 @@ item selected in SelectSentenceDialog is null !</translation>
         <source>Has been executed </source>
         <translation>A été exécuté </translation>
     </message>
+    <message>
+        <source>Stop the task. shortcut to stop all tasks : Ctrl+Alt+S</source>
+        <translation>Arrêter la tâche. raccourci pour arrêter toutes les tâches : Ctrl+Alt+S</translation>
+    </message>
+    <message>
+        <source>Infinite loop OFF</source>
+        <translation>En boucle infinie OFF</translation>
+    </message>
+    <message>
+        <source>Check to execute the task forever. It can be stopped with the red stop button or its shortcut: Ctrl+Alt+S</source>
+        <translation>Cochez pour exécuter la tâche pour toujours. Elle peut être arrêtée avec le bouton stop rouge ou son raccourci : Ctrl+Alt+S</translation>
+    </message>
+    <message>
+        <source>Add a Keys Sequence action...</source>
+        <translation>Ajouter une action de Séquence de touches...</translation>
+    </message>
+    <message>
+        <source>Infinite loop ON</source>
+        <translation>En boucle infinie ON</translation>
+    </message>
 </context>
 <context>
     <name>TaskTabsManager</name>
@@ -593,7 +910,7 @@ mainwindow is null when affecting to TaskTabsManager !</translation>
 (alternative way to stop it is by Ctrl+Alt+S shortcut)
 
 If you want to close it, you will have to request again.</source>
-        <translation>Cette tâche est planifiée pour l&apos;éxécution ou est en cours d&apos;exécution, en appuyant sur &quot;Oui&quot;, vous allez l&apos;arrêter.
+        <translation type="vanished">Cette tâche est planifiée pour l&apos;éxécution ou est en cours d&apos;exécution, en appuyant sur &quot;Oui&quot;, vous allez l&apos;arrêter.
 (une autre façon de l&apos;arrêter est d&apos;utiliser le raccourci Ctrl+Alt+S)
 
 Si vous souhaitez la fermer, vous devrez en refaire la requête.</translation>
@@ -624,6 +941,16 @@ TaskTab or Task associated is null in TaskTabsManager !</source>
         <translation>Une erreur interne s&apos;est produite : err05
 TaskTab or Task associated is null in TaskTabsManager !</translation>
     </message>
+    <message>
+        <source>This task is scheduled for execution or is currently running, by pressing &quot;Yes&quot; you are going to stop it.
+(alternative way to stop it is with Ctrl+Alt+S shortcut)
+
+If you want to close it, you will have to request again.</source>
+        <translation>Cette tâche est programmée pour exécution ou est en cours d&apos;exécution, en appuyant sur &quot;Oui&quot;, vous allez l&apos;arrêter.
+(une autre façon de l&apos;arrêter est d&apos;utiliser le raccourci Ctrl+Alt+S)
+
+Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</translation>
+    </message>
 </context>
 <context>
     <name>WaitWidget</name>
@@ -650,7 +977,7 @@ TaskTab or Task associated is null in TaskTabsManager !</translation>
     <message>
         <source>Remaining :
 </source>
-        <translation>Restant :
+        <translation type="vanished">Restant :
 </translation>
     </message>
     <message>

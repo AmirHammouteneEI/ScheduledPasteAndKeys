@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("Scheduled PC Tasks v0.1");
+    setWindowTitle("Scheduled PC Tasks v0.2");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
     // Will also be a system tray app
@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 0.1"));
+                    "version 0.2"));
 }
 
 MainWindow::~MainWindow()
@@ -129,10 +129,10 @@ void MainWindow::geometrySet()
 void MainWindow::loadSettings()
 {
     QSettings settings(G_Files::SettingsFilePath, QSettings::IniFormat);
-    m_windowWidth = settings.value("windowWidth", 470).toInt();
+    m_windowWidth = settings.value("windowWidth", 480).toInt();
     m_windowHeight = settings.value("windowHeight", 800).toInt();
 
-    m_windowWidth = m_windowWidth < 50 ? 470 : m_windowWidth;
+    m_windowWidth = m_windowWidth < 50 ? 480 : m_windowWidth;
     m_windowHeight = m_windowHeight < 50 ? 800 : m_windowHeight;
 
     m_currentThemeName = settings.value("style", "dark").toString();

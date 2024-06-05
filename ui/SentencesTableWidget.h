@@ -13,6 +13,7 @@ public:
     explicit SentencesTableWidget(QWidget *parent = nullptr);
     void refresh();
     void selectSentenceFromIdentity(const QString & id);
+    bool m_belongsToDataEditDialog = false;
 public slots:
     void createSentenceReceived();
     void removeSentenceReceived();

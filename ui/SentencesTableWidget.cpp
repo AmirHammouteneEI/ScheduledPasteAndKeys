@@ -1,5 +1,6 @@
 #include "SentencesTableWidget.h"
 #include "globals.h"
+#include "DataEditDialog.h"
 
 #include <QSettings>
 #include <QMessageBox>
@@ -29,7 +30,7 @@ void SentencesTableWidget::editSentenceSelected(int row, int)
 
     QString trueId = idItem->text().remove(0,1);
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
-    m_sentenceEditDialog->setEditable(false);
+    m_sentenceEditDialog->setEditable(m_belongsToDataEditDialog);
     m_sentenceEditDialog->setIdentity(trueId);
     m_sentenceEditDialog->setContent(settings.value(G_Files::SentencesDataCategory + trueId).toString());
     m_sentenceEditDialog->show();

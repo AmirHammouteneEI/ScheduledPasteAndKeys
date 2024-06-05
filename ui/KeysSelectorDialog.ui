@@ -656,51 +656,51 @@
        </item>
        <item>
         <property name="text">
-         <string>Misc. chars. (qwerty keyboard reference)</string>
+         <string>Misc. chars. (qwerty keyboard ref.)</string>
         </property>
         <item>
          <property name="text">
-          <string notr="true">;:</string>
+          <string>;:</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string notr="true">/?</string>
+          <string>/?</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string notr="true">`~</string>
+          <string>`~</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string notr="true">[{</string>
+          <string>[{</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string notr="true">\|</string>
+          <string>\|</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string notr="true">]}</string>
+          <string>]}</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string notr="true">'&quot;</string>
+          <string>'&quot;</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string notr="true">&lt;&gt;</string>
+          <string>&lt;&gt;</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string notr="true">!§</string>
+          <string>!§</string>
          </property>
         </item>
        </item>

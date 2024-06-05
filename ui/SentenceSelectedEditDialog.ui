@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Create/Edit/View sentences</string>
+   <string>Create/Edit/View a sentences</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -96,7 +96,9 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Identity must be alphanumerical. If already exists in data, it will replace it.</string>
+      <string>Identity must be alphanumerical.
+If already exists in data, it will replace the entry.
+If identity is changed (via the Edit Data window), it will make a copy of the entry.</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

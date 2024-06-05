@@ -10,6 +10,9 @@ DataEditDialog::DataEditDialog(QWidget *parent)
     QFont font = ui->tabWidget->tabBar()->font();
     font.setPointSize(14);
     ui->tabWidget->tabBar()->setFont(font);
+    ui->sentencesTableWidget->m_belongsToDataEditDialog = true;
+    ui->keysSequencesTableWidget->m_belongsToDataEditDialog = true;
+
     connect(ui->addSentenceButton, &QPushButton::released, ui->sentencesTableWidget, &SentencesTableWidget::createSentenceReceived);
     connect(ui->removeSentenceButton, &QPushButton::released, ui->sentencesTableWidget, &SentencesTableWidget::removeSentenceReceived);
     connect(ui->addKeysSequenceButton, &QPushButton::released, ui->keysSequencesTableWidget, &KeysSequencesTableWidget::createKeysSequenceReceived);

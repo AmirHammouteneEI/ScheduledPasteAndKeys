@@ -41,7 +41,7 @@ QMenuBar::item:pressed
 
 QMenu
 {
-    border: 1px solid #eee;
+    border: 1px solid #111;
 }
 
 QMenu::item
@@ -102,9 +102,9 @@ QStatusBar QLabel
 }
 
 /*-----DISPLAY-----*/
-QScrollArea
+QAbstractScrollArea
 {
-	border: 1px solid #878787;
+	border: 1px solid #555;
 }
 
 QLabel
@@ -170,7 +170,18 @@ QGroupBox::title
 
 QAbstractItemView  
 {
+	background-color: #ccc;
     show-decoration-selected: 1;
+}
+
+QAbstractItemView::item 
+{
+	background-color: #ddd;
+}
+
+QAbstractItemView::item:alternate 
+{
+    background-color: #ccc;
 }
 
 QAbstractItemView::item:selected 
@@ -251,6 +262,7 @@ QTabBar QToolButton::left-arrow
 QHeaderView::section
 {
 	border: 1px outset #ddd;
+	background-color: #efefef;
 }
 
 QHeaderView::section:disabled

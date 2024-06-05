@@ -29,7 +29,7 @@ void KeysSequencesTableWidget::editKeysSequenceSelected(int row, int)
 
     QString trueId = idItem->text().remove(0,1);
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
-    m_keysSequenceEditDialog->setEditable(false);
+    m_keysSequenceEditDialog->setEditable(m_belongsToDataEditDialog);
     m_keysSequenceEditDialog->setIdentity(trueId);
     auto readMap = settings.value(G_Files::KeysSequencesDataCategory + trueId).toMap();
     m_keysSequenceEditDialog->setTableKeysSequence(ActionsTools::fromStandardQMapToKeysSeqMap(readMap));

@@ -118,5 +118,5 @@ int KeysSequenceAction::computeOneExecutionDuration()
             returnedValue = thisKeyStops;
     }
 
-    return returnedValue;
+    return returnedValue+100; // 0.1 second as the minimal time wait for each execution
 }

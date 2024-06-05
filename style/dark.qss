@@ -106,7 +106,7 @@ QStatusBar QLabel
 }
 
 /*-----DISPLAY-----*/
-QScrollArea
+QAbstractScrollArea
 {
 	border: 1px solid #787878;
 }

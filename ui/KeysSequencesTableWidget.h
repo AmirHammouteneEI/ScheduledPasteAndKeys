@@ -13,6 +13,7 @@ public:
     explicit KeysSequencesTableWidget(QWidget *parent = nullptr);
     void refresh();
     void selectKeysSequenceFromIdentity(const QString & id);
+    bool m_belongsToDataEditDialog = false;
 public slots:
     void createKeysSequenceReceived();
     void removeKeysSequenceReceived();
