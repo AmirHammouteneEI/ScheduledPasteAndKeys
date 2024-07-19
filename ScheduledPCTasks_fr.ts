@@ -686,6 +686,42 @@ Assurez-vous que ce programme est exécuté en tant qu&apos;administrateur (clic
         <source>No keys sequence has been selected. Please select one.</source>
         <translation>Aucune séquence de touches n&apos;a été sélectionnée. Veuillez en sélectionner une.</translation>
     </message>
+    <message>
+        <source>;:</source>
+        <translation type="vanished">$£</translation>
+    </message>
+    <message>
+        <source>/?</source>
+        <translation type="vanished">:/</translation>
+    </message>
+    <message>
+        <source>`~</source>
+        <translation type="vanished">ù%</translation>
+    </message>
+    <message>
+        <source>[{</source>
+        <translation type="vanished">)°</translation>
+    </message>
+    <message>
+        <source>\|</source>
+        <translation type="vanished">*µ</translation>
+    </message>
+    <message>
+        <source>]}</source>
+        <translation type="vanished">^¨</translation>
+    </message>
+    <message>
+        <source>&apos;&quot;</source>
+        <translation type="vanished">²</translation>
+    </message>
+    <message>
+        <source>!§</source>
+        <translation type="vanished">!§</translation>
+    </message>
+    <message>
+        <source>&lt;&gt;</source>
+        <translation type="vanished">&lt;&gt;</translation>
+    </message>
 </context>
 <context>
     <name>SelectSentenceDialog</name>
