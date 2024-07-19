@@ -17,8 +17,8 @@ QMap<QString, WORD> ActionsTools::m_keysStrToInputWordMap = { {"CONTROL_LEFT", V
     {"VOLUME_MUTE", VK_VOLUME_MUTE},{"NEXT_TRACK", VK_MEDIA_NEXT_TRACK},{"PREVIOUS_TRACK", VK_MEDIA_PREV_TRACK},{"CAPS_LOCK", VK_CAPITAL},{"SCROLL_LOCK", VK_SCROLL},
     {"UP_ARROW", VK_UP},{"DOWN_ARROW", VK_DOWN},{"LEFT_ARROW", VK_LEFT},{"RIGHT_ARROW", VK_RIGHT},{"HOME", VK_HOME},{"END", VK_END},
     {"PAGE_UP", VK_PRIOR},{"PAGE_DOWN", VK_NEXT},{"TAB", VK_TAB},
-    {";:", VK_OEM_1},{"/?", VK_OEM_2},{"`~", VK_OEM_3},{"[{", VK_OEM_4},{"\\|", VK_OEM_5},{"]}", VK_OEM_6},{"]}", VK_OEM_6},{"'\"", VK_OEM_7},{"!§", VK_OEM_8},{"<>", VK_OEM_102}
-
+    {";:", VK_OEM_1},{"/?", VK_OEM_2},{"`~", VK_OEM_3},{"[{", VK_OEM_4},{"\\|", VK_OEM_5},{"]}", VK_OEM_6},{"'\"", VK_OEM_7},{"!§", VK_OEM_8},{"<>", VK_OEM_102},
+    {"$£", VK_OEM_1},{":/", VK_OEM_2},{"ù%", VK_OEM_3},{")°", VK_OEM_4},{"*µ", VK_OEM_5},{"^¨", VK_OEM_6},{"²", VK_OEM_7},
 };
 
 ActionsTools::ActionsTools()
