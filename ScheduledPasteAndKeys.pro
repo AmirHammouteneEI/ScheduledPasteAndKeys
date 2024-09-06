@@ -17,6 +17,7 @@ SOURCES += \
     actions/ActionsTools.cpp \
     actions/KeysSequenceAction.cpp \
     actions/PasteAction.cpp \
+    actions/SystemCommandsAction.cpp \
     actions/WaitAction.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -47,6 +48,7 @@ HEADERS += \
     actions/ActionsTools.h \
     actions/KeysSequenceAction.h \
     actions/PasteAction.h \
+    actions/SystemCommandsAction.h \
     actions/WaitAction.h \
     globals.h \
     mainwindow.h \

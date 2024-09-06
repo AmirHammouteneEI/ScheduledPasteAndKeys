@@ -41,11 +41,15 @@ void ActionsTools::pasteKeystrokeSimulate()
     ip.ki.wVk = 'V';
     SendInput(ip.type, &ip, sizeof(INPUT));
 
+    Sleep(100);
+
     ip.ki.dwFlags = KEYEVENTF_KEYUP;
     SendInput(ip.type, &ip, sizeof(INPUT));
 
     ip.ki.wVk = VK_CONTROL;
     SendInput(ip.type, &ip, sizeof(INPUT));
+
+    Sleep(100);
 }
 
 void ActionsTools::keyStokeSimulate(const QString &keyAsStr, DWORD typeOfPress)

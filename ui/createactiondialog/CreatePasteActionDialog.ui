@@ -97,7 +97,7 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Note : Paste actions are followed by a minimal wait of 0.1 second</string>
+          <string>Note : Paste actions are followed by a minimal wait of 0.2 second</string>
          </property>
         </widget>
        </item>

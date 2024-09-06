@@ -24,6 +24,8 @@ void TaskThread::copyActionsList(Task *task)
 
     for(auto it = task->m_actionsOrderedList.begin(); it != task->m_actionsOrderedList.end(); ++it)
     {
+        if((*it) == nullptr)
+            continue;
         m_actionsList.append((*it)->deepCopy());
     }
 }

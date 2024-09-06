@@ -380,7 +380,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
     return jsonToReturn;
 }
 
-AbstractAction *TaskTabsManager::jsonToAction(const QJsonObject &jobj)
+AbstractAction* TaskTabsManager::jsonToAction(const QJsonObject &jobj)
 {
     AbstractAction* actionToReturn = nullptr;
     ActionParameters params;

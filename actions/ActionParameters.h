@@ -25,6 +25,7 @@ public:
     // map with key = delay of key simulated pressed in milisecond, value = pair of release delay (ms) and list of keys label
     PressedReleaseDelaysKeysMap m_keysSeqMap;
     int m_timesToRun = 1;
+    QList<QPair<QString, QString>> m_commands; // list of ordered commands and their options
 };
 
 Q_DECLARE_METATYPE(ActionParameters);

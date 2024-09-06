@@ -548,11 +548,11 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Some Tasks have been modified since the last save of each, would you like to save all changes ?</source>
-        <translation>Certaines Tâches ont été modifiées depuis la dernière sauvegarde de chacune, souhaitez-vous sauvegarder toutes les modifications ?</translation>
+        <translation type="unfinished">Certaines tâches ont été modifiées depuis la dernière sauvegarde de chacune, souhaitez-vous sauvegarder toutes les modifications ?</translation>
     </message>
     <message>
         <source>Click to unpin the window so it won&apos;t stay on top</source>
-        <translation>Cliquez pour détacher la fenêtre afin qu&apos;elle ne reste pas toujours visible</translation>
+        <translation type="unfinished">Cliquer pour détacher la fenêtre afin qu&apos;elle ne reste pas toujours visible</translation>
     </message>
     <message>
         <source>Rename...</source>
@@ -630,11 +630,11 @@ Clic droit dessus pour quitter l&apos;application.</translation>
     </message>
     <message>
         <source>Uncheck to disable autoscrolling during task execution</source>
-        <translation>Décochez pour désactiver le défilement automatique pendant l&apos;exécution des tâches</translation>
+        <translation type="unfinished">Décocher pour désactiver le défilement automatique pendant l&apos;exécution des tâches</translation>
     </message>
     <message>
         <source>Check to enable autoscrolling during task execution</source>
-        <translation>Cochez pour activer le défilement automatique pendant l&apos;exécution des tâches</translation>
+        <translation type="unfinished">Cocher pour activer le défilement automatique pendant l&apos;exécution des tâches</translation>
     </message>
 </context>
 <context>
@@ -900,7 +900,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Check to execute the task forever. It can be stopped with the red stop button or its shortcut: Ctrl+Alt+S</source>
-        <translation>Cochez pour exécuter la tâche pour toujours. Elle peut être arrêtée avec le bouton stop rouge ou son raccourci : Ctrl+Alt+S</translation>
+        <translation type="unfinished">Cocher pour exécuter la tâche pour toujours. Elle peut être arrêtée avec le bouton stop rouge ou son raccourci : Ctrl+Alt+S</translation>
     </message>
     <message>
         <source>Add a Keys Sequence action...</source>
@@ -939,7 +939,7 @@ mainwindow is null when affecting to TaskTabsManager !</translation>
     </message>
     <message>
         <source>Task is scheduled or is running</source>
-        <translation>La Tâche est planifiée ou est en cours d&apos;exécution</translation>
+        <translation type="unfinished">La tâche est planifiée ou est en cours d&apos;exécution</translation>
     </message>
     <message>
         <source>This task is scheduled for execution or is currently running, by pressing &quot;Yes&quot; you are going to stop it.
@@ -957,7 +957,7 @@ Si vous souhaitez la fermer, vous devrez en refaire la requête.</translation>
     </message>
     <message>
         <source>This Task has been modified since the last save, would you like to save changes ?</source>
-        <translation>Cette Tâches a été modifiée depuis la dernière sauvegarde, souhaitez-vous sauvegarder les modifications ?</translation>
+        <translation type="unfinished">Cette tâche a été modifiée depuis la dernière sauvegarde, souhaitez-vous sauvegarder les modifications ?</translation>
     </message>
     <message>
         <source>The file is not in the good format, no action can&apos;t be loaded.</source>
@@ -1037,7 +1037,7 @@ Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</transla
     </message>
     <message>
         <source>Choose a delay to run of the Task :</source>
-        <translation>Choisissez un délai pour l&apos;exécution de la Tâche :</translation>
+        <translation type="unfinished">Choisissez un délai pour l&apos;exécution de la tâche :</translation>
     </message>
     <message>
         <source>by delay</source>

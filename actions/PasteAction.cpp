@@ -12,7 +12,6 @@ void PasteAction::runAction() const
 {
     ActionsTools::setClipboard(m_content);
     ActionsTools::pasteKeystrokeSimulate();
-    Sleep(100);
 }
 
 void PasteAction::setParameters(const ActionParameters &param)

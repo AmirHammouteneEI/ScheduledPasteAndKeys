@@ -7,7 +7,8 @@ enum class ActionType {
     Undefined,
     Paste,
     Wait,
-    KeysSequence
+    KeysSequence,
+    SystemCommands
 };
 
 class AbstractAction
