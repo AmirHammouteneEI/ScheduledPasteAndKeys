@@ -3,10 +3,12 @@
 #include "ui/actionwidgets/PasteWidget.h"
 #include "ui/actionwidgets/WaitWidget.h"
 #include "ui/actionwidgets/KeysSequenceWidget.h"
+#include "ui/actionwidgets/SystemCommandWidget.h"
 #include "globals.h"
 #include "actions/PasteAction.h"
 #include "actions/WaitAction.h"
 #include "actions/KeysSequenceAction.h"
+#include "actions/SystemCommandsAction.h"
 #include "actions/ActionsTools.h"
 
 #include <QGridLayout>
@@ -251,6 +253,9 @@ AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
         break;
         case ActionType::KeysSequence:
             actWidgToCreate = new KeysSequenceWidget(m_actionsFrame);
+            break;
+        case ActionType::SystemCommand:
+            actWidgToCreate = new SystemCommandWidget(m_actionsFrame);
             break;
         default:
             return nullptr;
@@ -592,4 +597,17 @@ void TaskTab::createKeysSequenceActionRequest(QString keysSequenceIdentity)
     keysSeqAct->generateTimeline();
 
     appendAction(keysSeqAct);
+}
+
+void TaskTab::createSystemCommandActionRequest(QString sysCmdType, QString param1, QString param2)
+{
+    ActionParameters paramSysCmd;
+    paramSysCmd.m_sysCmdTypeStr = sysCmdType;
+    paramSysCmd.m_sysCmdParam1 = param1;
+    paramSysCmd.m_sysCmdParam2 = param2;
+
+    SystemCommandAction *sysCmdAct = new SystemCommandAction();
+    sysCmdAct->setParameters(paramSysCmd);
+
+    appendAction(sysCmdAct);
 }

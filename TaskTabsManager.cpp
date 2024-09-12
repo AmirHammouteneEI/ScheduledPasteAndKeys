@@ -4,6 +4,7 @@
 #include "actions/PasteAction.h"
 #include "actions/WaitAction.h"
 #include "actions/KeysSequenceAction.h"
+#include "actions/SystemCommandsAction.h"
 
 #include <QApplication>
 #include <QMessageBox>
@@ -330,7 +331,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
     switch(act->e_type)
     {
         case ActionType::Paste:
-          {
+        {
             jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionPasteType_Value));
             auto pasteaction =  dynamic_cast<PasteAction*>(act);
             if(pasteaction != nullptr)
@@ -339,19 +340,19 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
                 jsonToReturn.insert(G_Files::ActionContent_KeyWord, QJsonValue::fromVariant(params.m_pasteContent));
                 jsonToReturn.insert(G_Files::ActionContentId_KeyWord, QJsonValue::fromVariant(params.m_dataId));
             }
-          }
-          break;
+        }
+        break;
         case ActionType::Wait:
-          {
-              jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionWaitType_Value));
-              auto waitaction =  dynamic_cast<WaitAction*>(act);
-              if(waitaction != nullptr)
-              {
-                  auto params = waitaction->generateParameters();
-                  jsonToReturn.insert(G_Files::ActionDuration_KeyWord, QJsonValue::fromVariant((double)params.m_waitDuration));
-              }
-          }
-          break;
+        {
+            jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionWaitType_Value));
+            auto waitaction =  dynamic_cast<WaitAction*>(act);
+            if(waitaction != nullptr)
+            {
+              auto params = waitaction->generateParameters();
+              jsonToReturn.insert(G_Files::ActionDuration_KeyWord, QJsonValue::fromVariant((double)params.m_waitDuration));
+            }
+        }
+        break;
         case ActionType::KeysSequence:
         {
             jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionKeysSequenceType_Value));
@@ -370,6 +371,19 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
                 jsonToReturn.insert(G_Files::ActionKeysSeqMap_KeyWord, writtenMapJObj);
                 jsonToReturn.insert(G_Files::ActionKeysSeqId_KeyWord, QJsonValue::fromVariant(params.m_dataId));
                 jsonToReturn.insert(G_Files::ActionKeysSeqLoop_KeyWord, QJsonValue::fromVariant(params.m_timesToRun));
+            }
+        }
+        break;
+        case ActionType::SystemCommand:
+        {
+            jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionSystemCommandeType_Value));
+            auto sysCmdaction =  dynamic_cast<SystemCommandAction*>(act);
+            if(sysCmdaction != nullptr)
+            {
+                auto params = sysCmdaction->generateParameters();
+                jsonToReturn.insert(G_Files::ActionSysCommandType_KeyWord, QJsonValue::fromVariant(params.m_sysCmdTypeStr));
+                jsonToReturn.insert(G_Files::ActionSysCommandParam1_KeyWord, QJsonValue::fromVariant(params.m_sysCmdParam1));
+                jsonToReturn.insert(G_Files::ActionSysCommandParam2_KeyWord, QJsonValue::fromVariant(params.m_sysCmdParam2));
             }
         }
         break;
@@ -415,6 +429,13 @@ AbstractAction* TaskTabsManager::jsonToAction(const QJsonObject &jobj)
         params.m_keysSeqMap = actMap;
         params.m_dataId = jobj.value(G_Files::ActionKeysSeqId_KeyWord).toString();
         params.m_timesToRun = jobj.value(G_Files::ActionKeysSeqLoop_KeyWord).toInt();
+    }
+    else if(type == G_Files::ActionSystemCommandeType_Value)
+    {
+        actionToReturn = new SystemCommandAction();
+        params.m_sysCmdTypeStr = jobj.value(G_Files::ActionSysCommandType_KeyWord).toString();
+        params.m_sysCmdParam1 = jobj.value(G_Files::ActionSysCommandParam1_KeyWord).toString();
+        params.m_sysCmdParam2 = jobj.value(G_Files::ActionSysCommandParam2_KeyWord).toString();
     }
     else
         return nullptr;

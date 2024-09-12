@@ -79,7 +79,7 @@ void WaitWidget::durationReceived(long double dur)
     auto waitaction =  dynamic_cast<WaitAction*>(m_action);
     if(waitaction == nullptr)
     {
-        m_mainButton->setToolTip("ERROR seconds");
+        m_mainButton->setToolTip("ERROR on access to action");
         m_mainButton->setText("Wait for ERROR secs");
         return;
     }

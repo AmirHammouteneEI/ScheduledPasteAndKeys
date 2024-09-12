@@ -8,7 +8,7 @@ enum class ActionType {
     Paste,
     Wait,
     KeysSequence,
-    SystemCommands
+    SystemCommand
 };
 
 class AbstractAction

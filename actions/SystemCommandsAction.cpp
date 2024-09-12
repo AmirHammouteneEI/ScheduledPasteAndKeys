@@ -5,7 +5,7 @@
 
 SystemCommandAction::SystemCommandAction() : AbstractAction()
 {
-    e_type = ActionType::SystemCommands;
+    e_type = ActionType::SystemCommand;
     e_sysCommandType = SystemCommandType::Undefined;
 }
 

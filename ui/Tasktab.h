@@ -80,9 +80,10 @@ public slots:
     void moveToBottomActionReceived(unsigned int actId);
     void moveUpActionReceived(unsigned int actId);
     void moveDownActionReceived(unsigned int actId);
-    void createPasteActionRequest(QString sentenceIdentity);
+    void createPasteActionRequest(QString sentenceIdentity); // not const & because it's a slot, will make copy evenif
     void createWaitActionRequest(long double duration);
-    void createKeysSequenceActionRequest(QString keysSequenceIdentity);
+    void createKeysSequenceActionRequest(QString keysSequenceIdentity); // not const & because it's a slot, will make copy evenif
+    void createSystemCommandActionRequest(QString sysCmdType, QString param1, QString param2); // not const & because it's a slot, will make copy evenif
 signals:
     void saveTaskRequest(int taskId, bool verb);
 

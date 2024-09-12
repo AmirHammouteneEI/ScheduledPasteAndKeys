@@ -32,6 +32,7 @@ SOURCES += \
     ui/actionwidgets/AbstractActionWidget.cpp \
     ui/actionwidgets/KeysSequenceWidget.cpp \
     ui/actionwidgets/PasteWidget.cpp \
+    ui/actionwidgets/SystemCommandWidget.cpp \
     ui/actionwidgets/WaitWidget.cpp \
     ui/createactiondialog/CreateKeysSequenceActionDialog.cpp \
     ui/createactiondialog/CreatePasteActionDialog.cpp \
@@ -63,6 +64,7 @@ HEADERS += \
     ui/actionwidgets/AbstractActionWidget.h \
     ui/actionwidgets/KeysSequenceWidget.h \
     ui/actionwidgets/PasteWidget.h \
+    ui/actionwidgets/SystemCommandWidget.h \
     ui/actionwidgets/WaitWidget.h \
     ui/createactiondialog/CreateKeysSequenceActionDialog.h \
     ui/createactiondialog/CreatePasteActionDialog.h \
