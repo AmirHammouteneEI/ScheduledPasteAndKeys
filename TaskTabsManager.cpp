@@ -327,7 +327,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
 {
     QJsonObject jsonToReturn;
 
-    switch(act->m_type)
+    switch(act->e_type)
     {
         case ActionType::Paste:
           {

@@ -29,7 +29,7 @@ public:
     virtual ActionParameters generateParameters() const = 0;
     virtual void optionalProcesses() = 0;
 
-    ActionType m_type;
+    ActionType e_type;
     unsigned int getID() const {return m_ID;}
     unsigned int getRefID() const {return m_refID;}
 };

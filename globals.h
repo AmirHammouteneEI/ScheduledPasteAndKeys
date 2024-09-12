@@ -15,6 +15,7 @@ namespace G_Files {
     inline QString ActionType_KeyWord = "type";
     inline QString ActionPasteType_Value = "paste";
     inline QString ActionWaitType_Value = "wait";
+    inline QString ActionSystemCommandeType_Value = "systemcommand";
     inline QString ActionKeysSequenceType_Value = "keyssequence";
     inline QString ActionContent_KeyWord = "content";
     inline QString ActionContentId_KeyWord = "contentId";
@@ -22,6 +23,9 @@ namespace G_Files {
     inline QString ActionKeysSeqMap_KeyWord = "keysmap";
     inline QString ActionKeysSeqId_KeyWord = "keysSeqId";
     inline QString ActionKeysSeqLoop_KeyWord = "loop";
+    inline QString ActionSysCommandType_KeyWord = "sysCommandType";
+    inline QString ActionSysCommandParam1_KeyWord = "sysCommandParam1";
+    inline QString ActionSysCommandParam2_KeyWord = "sysCommandParam2";
 }
 
 namespace G_Sentences {
@@ -31,6 +35,24 @@ namespace G_Sentences {
     static QString FileParsingError() {return QObject::tr("The file is not in the correct format for this software : parse error.");}
     static QString NoSetenceSelected() {return QObject::tr("No sentence has been selected. Please select one.");}
     static QString NoKeysSequenceSelected() {return QObject::tr("No keys sequence has been selected. Please select one.");}
+}
+
+namespace G_SystemCommands {
+    inline QString UndefinedType = "undefined";
+    inline QString ShutDownType = "shutdown";
+    inline QString RestartType = "restart";
+    inline QString LogOffType = "logoff";
+    inline QString PutIntoSleepModeType = "sleepmode";
+    inline QString ChangeAudioVolumeType = "changevolume";
+    inline QString ChangeDefaultAudioDeviceType = "changeaudiodevice";
+    inline QString KillProcessType = "killprocess";
+    inline QString FocusWindowType = "focuswindow";
+    inline QString CreateFolderType = "createfolder";
+    inline QString DeleteFolderType = "deletefolder";
+    inline QString CreateFileType = "createfile";
+    inline QString DeleteFileType = "deletefile";
+    inline QString TakeScreenshotType = "screenshot";
+    inline QString PrintActualScreenType = "printscreen";
 }
 
 struct G_Parameters {

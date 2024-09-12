@@ -5,7 +5,7 @@
 
 WaitAction::WaitAction()
 {
-    m_type = ActionType::Wait;
+    e_type = ActionType::Wait;
 }
 
 void WaitAction::runAction() const

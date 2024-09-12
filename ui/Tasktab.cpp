@@ -241,7 +241,7 @@ AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
         return nullptr;
 
     AbstractActionWidget *actWidgToCreate = nullptr;
-    switch (act->m_type)
+    switch (act->e_type)
     {
         case ActionType::Paste:
             actWidgToCreate = new PasteWidget(m_actionsFrame);

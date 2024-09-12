@@ -3,7 +3,7 @@
 
 KeysSequenceAction::KeysSequenceAction() : AbstractAction()
 {
-    m_type = ActionType::KeysSequence;
+    e_type = ActionType::KeysSequence;
 }
 
 void KeysSequenceAction::runAction() const

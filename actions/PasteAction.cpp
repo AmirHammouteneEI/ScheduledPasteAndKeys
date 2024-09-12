@@ -5,7 +5,7 @@
 
 PasteAction::PasteAction() : AbstractAction()
 {
-    m_type = ActionType::Paste;
+    e_type = ActionType::Paste;
 }
 
 void PasteAction::runAction() const
