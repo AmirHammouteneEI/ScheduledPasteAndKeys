@@ -7,6 +7,7 @@
 #include "ui/createactiondialog/CreatePasteActionDialog.h"
 #include "ui/createactiondialog/CreateWaitActionDialog.h"
 #include "ui/createactiondialog/CreateKeysSequenceActionDialog.h"
+#include "ui/createactiondialog/CreateSystemCommandActionDialog.h"
 
 #include <QFrame>
 #include <QScrollArea>
@@ -49,6 +50,7 @@ protected:
     QTimer *m_scheduleTimer;
     CreatePasteActionDialog *m_createPasteActionDialog;
     CreateWaitActionDialog *m_createWaitActionDialog;
+    CreateSystemCommandActionDialog *m_createSystemCommandActionDialog;
     CreateKeysSequenceActionDialog *m_m_createKeysSequenceActionDialog;
     void buildAddButtonMenu();
     void appendAction(AbstractAction *act);

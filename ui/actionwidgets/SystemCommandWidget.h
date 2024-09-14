@@ -3,12 +3,13 @@
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
 #include "actions/SystemCommandsAction.h"
+#include "ui/createactiondialog/CreateSystemCommandActionDialog.h"
 
 class SystemCommandWidget : public AbstractActionWidget
 {
     Q_OBJECT
     void changedRunningState() override;
-    //TODO CreateWaitActionDialog *m_editDurationDialog;
+    CreateSystemCommandActionDialog *m_editSysCmdDialog;
 public:
     explicit SystemCommandWidget(QWidget *parent = nullptr);
     ~SystemCommandWidget() = default;

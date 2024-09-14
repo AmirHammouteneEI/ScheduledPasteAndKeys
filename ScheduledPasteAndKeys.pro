@@ -36,8 +36,10 @@ SOURCES += \
     ui/actionwidgets/WaitWidget.cpp \
     ui/createactiondialog/CreateKeysSequenceActionDialog.cpp \
     ui/createactiondialog/CreatePasteActionDialog.cpp \
+    ui/createactiondialog/CreateSystemCommandActionDialog.cpp \
     ui/createactiondialog/CreateWaitActionDialog.cpp \
-    ui/getDelayDialog.cpp
+    ui/getDelayDialog.cpp \
+    ui/getFolderPathDialog.cpp
 
 HEADERS += \
     ActionWidgetsManager.h \
@@ -68,8 +70,10 @@ HEADERS += \
     ui/actionwidgets/WaitWidget.h \
     ui/createactiondialog/CreateKeysSequenceActionDialog.h \
     ui/createactiondialog/CreatePasteActionDialog.h \
+    ui/createactiondialog/CreateSystemCommandActionDialog.h \
     ui/createactiondialog/CreateWaitActionDialog.h \
-    ui/getDelayDialog.h
+    ui/getDelayDialog.h \
+    ui/getFolderPathDialog.h
 
 FORMS += \
     mainwindow.ui \
@@ -80,8 +84,10 @@ FORMS += \
     ui/SentenceSelectedEditDialog.ui \
     ui/createactiondialog/CreateKeysSequenceActionDialog.ui \
     ui/createactiondialog/CreatePasteActionDialog.ui \
+    ui/createactiondialog/CreateSystemCommandActionDialog.ui \
     ui/createactiondialog/CreateWaitActionDialog.ui \
-    ui/getDelayDialog.ui
+    ui/getDelayDialog.ui \
+    ui/getFolderPathDialog.ui
 
 LIBS += -luser32
 

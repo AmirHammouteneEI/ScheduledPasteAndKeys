@@ -1,5 +1,6 @@
 #include "SystemCommandsAction.h"
 #include "globals.h"
+#include <QDir>
 
 //#include "actions/ActionsTools.h"
 
@@ -13,9 +14,13 @@ void SystemCommandAction::runAction() const
 {
     switch(e_sysCommandType)
     {
-    case SystemCommandType::ShutDown:
+        case SystemCommandType::CreateFolder:
+        {
+            QDir d;
+            d.mkpath(m_param1+"/"+m_param2);
+        }
         break;
-    default:
+        default:
         break;
     }
 }

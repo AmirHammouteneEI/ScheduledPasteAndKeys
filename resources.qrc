@@ -43,5 +43,6 @@
         <file>img/down_arrow.png</file>
         <file>img/key.png</file>
         <file>img/systemCommand.png</file>
+        <file>img/browseFolder.png</file>
     </qresource>
 </RCC>

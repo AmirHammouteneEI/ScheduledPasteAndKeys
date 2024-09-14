@@ -18,21 +18,22 @@ void SystemCommandWidget::buildWidget()
     {
         sysCmdTypeStr = fromSysCmdTypeToDiplayedStr(sysCmdaction->e_sysCommandType);
 
-        m_mainButton->setToolTip(sysCmdTypeStr + "\n\nArgument 1 : "+sysCmdaction->m_param1+ "\n\nArgument 2 : "+sysCmdaction->m_param2);
+        m_mainButton->setToolTip(sysCmdTypeStr + "\nOption 1 : "+sysCmdaction->m_param1+ "\nOption 2 : "+sysCmdaction->m_param2);
 
         ActionParameters params = sysCmdaction->generateParameters();
         m_mainButton->setProperty("type", params.m_sysCmdTypeStr);
         m_mainButton->setProperty("param1", params.m_sysCmdParam1);
         m_mainButton->setProperty("param2", params.m_sysCmdParam2);
+        m_mainButton->setProperty("displayedStr", sysCmdTypeStr);
     }
 
     m_mainButton->setIcon(QIcon(":/img/systemCommand.png"));
     m_mainButton->setText(sysCmdTypeStr);
 
-    //TODO m_editSystemCommandDialog = new CreateSystemCommandActionDialog(this);
+    m_editSysCmdDialog = new CreateSystemCommandActionDialog(this);
 
-    //connect(m_mainButton, &QPushButton::released, m_editDurationDialog, &CreateWaitActionDialog::showDialog);
-    //connect(m_editDurationDialog, &CreateWaitActionDialog::sendDuration, this, &WaitWidget::durationReceived);
+    connect(m_mainButton, &QPushButton::released, m_editSysCmdDialog, &CreateSystemCommandActionDialog::showDialog);
+    connect(m_editSysCmdDialog, &CreateSystemCommandActionDialog::sendSystemCommand, this, &SystemCommandWidget::systemCommandReceived);
 }
 
 void SystemCommandWidget::systemCommandReceived(QString sysCmdType, QString param1, QString param2)
@@ -53,7 +54,7 @@ void SystemCommandWidget::systemCommandReceived(QString sysCmdType, QString para
     sysCmdaction->setParameters(params);
     QString displayedStr = fromSysCmdTypeToDiplayedStr(sysCmdaction->e_sysCommandType);
     m_mainButton->setText(displayedStr);
-    m_mainButton->setToolTip(displayedStr + "\n\nArgument 1 : "+param1+ "\n\nArgument 2 : "+param2);
+    m_mainButton->setToolTip(displayedStr + "\n\nOption 1 : "+param1+ "\nOption 2 : "+param2);
     m_mainButton->setProperty("type", params.m_sysCmdTypeStr);
     m_mainButton->setProperty("param1", params.m_sysCmdParam1);
     m_mainButton->setProperty("param2", params.m_sysCmdParam2);
