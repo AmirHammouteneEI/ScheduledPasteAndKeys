@@ -132,8 +132,8 @@ void CreateSystemCommandActionDialog::showDialog()
 
 void CreateSystemCommandActionDialog::activateButtons()
 {
-    //TODO : unlock options buttons for all implemented sysyem commands
-    if(m_type == G_SystemCommands::CreateFolderType)
+    //TODO : unlock options buttons for all implemented system commands
+    if(m_type == G_SystemCommands::CreateFileType || m_type == G_SystemCommands::DeleteFileType)
     {
         m_option1Button->setEnabled(true);
         m_option2Button->setEnabled(true);
@@ -147,11 +147,21 @@ void CreateSystemCommandActionDialog::activateButtons()
         connect(m_option2Button,&QPushButton::released, this, [=]()
                 {
                     bool ok;
-                    QString val = QInputDialog::getText(this,tr("Set the option text"),tr("Set the folder/file name for the operation you would like to proceed :"),QLineEdit::Normal,m_option2Button->text(),&ok);
+                    QString val = QInputDialog::getText(this,tr("Set the filename"),tr("Set the filename (existing or not) for the operation you would like to proceed :"),QLineEdit::Normal,m_option2Button->text(),&ok);
                     if(!ok)
                         return;
                     m_option2Button->setText(val);
                     m_option2Button->setToolTip(val);
+                });
+    }
+    else if(m_type == G_SystemCommands::CreateFolderType || m_type == G_SystemCommands::DeleteFolderType)
+    {
+        m_option1Button->setEnabled(true);
+        connect(m_option1Button,&QPushButton::released, m_folderPathDialog, &getFolderPathDialog::showDialog);
+        connect(m_folderPathDialog, &getFolderPathDialog::sendDirectory,this,[=](QString dir)
+                {
+                    m_option1Button->setText(dir);
+                    m_option1Button->setToolTip(dir);
                 });
     }
 }

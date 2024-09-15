@@ -32,7 +32,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Set the directory were you would like the operation to proceed :</string>
+      <string>Set the directory (existing or not) on which you would like the operation to proceed :</string>
      </property>
     </widget>
    </item>

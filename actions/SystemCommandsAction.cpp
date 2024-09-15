@@ -1,6 +1,7 @@
 #include "SystemCommandsAction.h"
 #include "globals.h"
 #include <QDir>
+#include <QFile>
 
 //#include "actions/ActionsTools.h"
 
@@ -13,11 +14,32 @@ SystemCommandAction::SystemCommandAction() : AbstractAction()
 void SystemCommandAction::runAction() const
 {
     switch(e_sysCommandType)
-    {
+    {//TODO : implement process for all system commands
         case SystemCommandType::CreateFolder:
         {
             QDir d;
-            d.mkpath(m_param1+"/"+m_param2);
+            d.mkpath(m_param1);
+        }
+        break;
+        case SystemCommandType::DeleteFolder:
+        {
+            QDir d(m_param1);
+            d.removeRecursively();
+        }
+        break;
+        case SystemCommandType::CreateFile:
+        {
+            QDir d;
+            d.mkpath(m_param1);
+            QFile f(m_param1+"/"+m_param2);
+            f.open(QIODevice::WriteOnly);
+            f.close();
+        }
+        break;
+        case SystemCommandType::DeleteFile:
+        {
+            QFile f(m_param1+"/"+m_param2);
+            f.remove();
         }
         break;
         default:
