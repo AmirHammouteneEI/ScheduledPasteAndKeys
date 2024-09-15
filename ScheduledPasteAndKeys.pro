@@ -39,6 +39,7 @@ SOURCES += \
     ui/createactiondialog/CreateSystemCommandActionDialog.cpp \
     ui/createactiondialog/CreateWaitActionDialog.cpp \
     ui/getDelayDialog.cpp \
+    ui/getFilePathDialog.cpp \
     ui/getFolderPathDialog.cpp
 
 HEADERS += \
@@ -73,6 +74,7 @@ HEADERS += \
     ui/createactiondialog/CreateSystemCommandActionDialog.h \
     ui/createactiondialog/CreateWaitActionDialog.h \
     ui/getDelayDialog.h \
+    ui/getFilePathDialog.h \
     ui/getFolderPathDialog.h
 
 FORMS += \
@@ -87,6 +89,7 @@ FORMS += \
     ui/createactiondialog/CreateSystemCommandActionDialog.ui \
     ui/createactiondialog/CreateWaitActionDialog.ui \
     ui/getDelayDialog.ui \
+    ui/getFilePathDialog.ui \
     ui/getFolderPathDialog.ui
 
 LIBS += -luser32
@@ -98,7 +101,7 @@ RESOURCES += \
 
 RC_ICONS = img/programIcon.ico
 
-VERSION = 0.1.0
+VERSION = 0.3.0
 QMAKE_TARGET_COMPANY = "Amir Hammoutene"
 QMAKE_TARGET_COPYRIGHT = "GNU general public license version 3"
 

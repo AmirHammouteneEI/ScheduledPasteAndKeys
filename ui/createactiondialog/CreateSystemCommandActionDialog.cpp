@@ -12,17 +12,16 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     ui->shutdownButton->setProperty("type", "shutdown");
     ui->restartButton->setProperty("type", "restart");
     ui->logoffButton->setProperty("type", "logoff");
-    ui->sleepmodeButton->setProperty("type", "sleepmode");
-    ui->changevolumeButton->setProperty("type", "changevolume");
-    ui->changeaudiodeviceButton->setProperty("type", "changeaudiodevice");
     ui->killprocessButton->setProperty("type", "killprocess");
-    ui->focuswindowButton->setProperty("type", "focuswindow");
+    ui->quitselfprogramButton->setProperty("type", "quitselfprogram");
     ui->createfolderButton->setProperty("type", "createfolder");
     ui->deletefolderButton->setProperty("type", "deletefolder");
     ui->createfileButton->setProperty("type", "createfile");
     ui->deletefileButton->setProperty("type", "deletefile");
-    ui->screenshotButton->setProperty("type", "screenshot");
-    ui->printscreenButton->setProperty("type", "printscreen");
+    ui->openfileButton->setProperty("type", "openfile");
+    ui->executeprogramButton->setProperty("type", "executeprogram");
+    ui->openurlButton->setProperty("type", "openurl");
+    ui->openfolderButton->setProperty("type", "openfolder");
 
     m_option1Button = new QPushButton(this);
     m_option2Button = new QPushButton(this);
@@ -34,21 +33,21 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     ui->tableWidget->item(0,0)->setTextAlignment(Qt::AlignCenter);
 
     m_folderPathDialog = new getFolderPathDialog(this);
+    m_filePathDialog = new getFilePathDialog(this);
 
     connect(ui->shutdownButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->restartButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->logoffButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
-    connect(ui->sleepmodeButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
-    connect(ui->changevolumeButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
-    connect(ui->changeaudiodeviceButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->killprocessButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
-    connect(ui->focuswindowButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
+    connect(ui->quitselfprogramButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->createfolderButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->deletefolderButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->createfileButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->deletefileButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
-    connect(ui->screenshotButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
-    connect(ui->printscreenButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
+    connect(ui->openfileButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
+    connect(ui->executeprogramButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
+    connect(ui->openurlButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
+    connect(ui->openfolderButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
 }
 
 CreateSystemCommandActionDialog::~CreateSystemCommandActionDialog()
@@ -59,7 +58,8 @@ CreateSystemCommandActionDialog::~CreateSystemCommandActionDialog()
 void CreateSystemCommandActionDialog::accept()
 {
     if((m_option1Button->isEnabled() && m_option1Button->text().isEmpty())
-        || (m_option2Button->isEnabled() && m_option2Button->text().isEmpty()))
+        || ( m_option2Button->isEnabled() && m_option2Button->text().isEmpty()
+            && (m_type != G_SystemCommands::ExecuteProgramType) ))
     {
         QMessageBox::warning(this, tr("Empty options"), tr("Option 1 or Option 2 is empty but they are required.\nPlease provide all necessary information."));
         return;
@@ -132,7 +132,6 @@ void CreateSystemCommandActionDialog::showDialog()
 
 void CreateSystemCommandActionDialog::activateButtons()
 {
-    //TODO : unlock options buttons for all implemented system commands
     if(m_type == G_SystemCommands::CreateFileType || m_type == G_SystemCommands::DeleteFileType)
     {
         m_option1Button->setEnabled(true);
@@ -154,7 +153,7 @@ void CreateSystemCommandActionDialog::activateButtons()
                     m_option2Button->setToolTip(val);
                 });
     }
-    else if(m_type == G_SystemCommands::CreateFolderType || m_type == G_SystemCommands::DeleteFolderType)
+    else if(m_type == G_SystemCommands::CreateFolderType || m_type == G_SystemCommands::DeleteFolderType || m_type == G_SystemCommands::OpenFolderType)
     {
         m_option1Button->setEnabled(true);
         connect(m_option1Button,&QPushButton::released, m_folderPathDialog, &getFolderPathDialog::showDialog);
@@ -164,4 +163,64 @@ void CreateSystemCommandActionDialog::activateButtons()
                     m_option1Button->setToolTip(dir);
                 });
     }
+    else if(m_type == G_SystemCommands::KillProcessType)
+    {
+        m_option1Button->setEnabled(true);
+
+        connect(m_option1Button,&QPushButton::released, this, [=]()
+                {
+                    bool ok;
+                    QString val = QInputDialog::getText(this,tr("Set the process name"),tr("Set the process name (including .exe) you would like to schedule to kill :"),QLineEdit::Normal,m_option1Button->text(),&ok);
+                    if(!ok)
+                        return;
+                    m_option1Button->setText(val);
+                    m_option1Button->setToolTip(val);
+                });
+    }
+    else if(m_type == G_SystemCommands::OpenFileType)
+    {
+        m_option1Button->setEnabled(true);
+        connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);
+        connect(m_filePathDialog, &getFilePathDialog::sendFile,this,[=](QString dir)
+                {
+                    m_option1Button->setText(dir);
+                    m_option1Button->setToolTip(dir);
+                });
+    }
+    if(m_type == G_SystemCommands::ExecuteProgramType)
+    {
+        m_option1Button->setEnabled(true);
+        m_option2Button->setEnabled(true);
+        connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);
+        connect(m_filePathDialog, &getFilePathDialog::sendFile,this,[=](QString dir)
+                {
+                    m_option1Button->setText(dir);
+                    m_option1Button->setToolTip(dir);
+                });
+
+        connect(m_option2Button,&QPushButton::released, this, [=]()
+                {
+                    bool ok;
+                    QString val = QInputDialog::getText(this,tr("Set optional arguments"),tr("If needed, set arguments for the execution of the program you would like to run :"),QLineEdit::Normal,m_option2Button->text(),&ok);
+                    if(!ok)
+                        return;
+                    m_option2Button->setText(val);
+                    m_option2Button->setToolTip(val);
+                });
+    }
+    else if(m_type == G_SystemCommands::OpenUrlType)
+    {
+        m_option1Button->setEnabled(true);
+
+        connect(m_option1Button,&QPushButton::released, this, [=]()
+                {
+                    bool ok;
+                    QString val = QInputDialog::getText(this,tr("Set the URL"),tr("Set the URL you would like to open :"),QLineEdit::Normal,m_option1Button->text(),&ok);
+                    if(!ok)
+                        return;
+                    m_option1Button->setText(val);
+                    m_option1Button->setToolTip(val);
+                });
+    }
+    // if QuitSelfProgramType,ShutDownType,RestartType,LogOffType no need of option
 }

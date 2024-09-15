@@ -66,33 +66,39 @@ QString SystemCommandWidget::fromSysCmdTypeToDiplayedStr(SystemCommandType t)
 {
     QString sysCmdTypeStr;
     if(t == SystemCommandType::ShutDown)
-        sysCmdTypeStr = tr("Shutting down the PC");
+        sysCmdTypeStr = tr("Shut down the PC");
     else if(t == SystemCommandType::Restart)
-        sysCmdTypeStr = tr("Restarting the PC");
+        sysCmdTypeStr = tr("Restart the PC");
     else if(t == SystemCommandType::LogOff)
-        sysCmdTypeStr = tr("Logout of user session");
-    else if(t == SystemCommandType::PutIntoSleepMode)
-        sysCmdTypeStr = tr("Putting the PC into sleep mode");
+        sysCmdTypeStr = tr("Log off user session ");
     else if(t == SystemCommandType::ChangeAudioVolume)
-        sysCmdTypeStr = tr("Changing the audio volume");
+        sysCmdTypeStr = tr("Change the audio volume");
     else if(t == SystemCommandType::ChangeDefaultAudioDevice)
-        sysCmdTypeStr = tr("Changing the default audio device");
+        sysCmdTypeStr = tr("Change the default audio device");
     else if(t == SystemCommandType::KillProcess)
-        sysCmdTypeStr = tr("Killing a process");
-    else if(t == SystemCommandType::FocusWindow)
-        sysCmdTypeStr = tr("Focusing on a window");
+        sysCmdTypeStr = tr("Kill a process");
+    else if(t == SystemCommandType::QuitSelfProgram)
+        sysCmdTypeStr = tr("Quit Scheduled PC Tasks");
     else if(t == SystemCommandType::CreateFolder)
-        sysCmdTypeStr = tr("Creating a folder");
+        sysCmdTypeStr = tr("Create a folder");
     else if(t == SystemCommandType::DeleteFolder)
-        sysCmdTypeStr = tr("Deleting a folder");
-    else if(t == SystemCommandType::CreateFile)
-        sysCmdTypeStr = tr("Creating a file");
-    else if(t == SystemCommandType::DeleteFile)
-        sysCmdTypeStr = tr("Deleting a file");
+        sysCmdTypeStr = tr("Delete a folder");
+    else if(t == SystemCommandType::CreateOneFile)
+        sysCmdTypeStr = tr("Create a file");
+    else if(t == SystemCommandType::DeleteOneFile)
+        sysCmdTypeStr = tr("Delete a file");
     else if(t == SystemCommandType::TakeScreenshot)
-        sysCmdTypeStr = tr("Taking a screenshot");
+        sysCmdTypeStr = tr("Take a screenshot");
     else if(t == SystemCommandType::PrintActualScreen)
-        sysCmdTypeStr = tr("Printing the actual screen display");
+        sysCmdTypeStr = tr("Print the actual screen display");
+    else if(t == SystemCommandType::OpenFile)
+        sysCmdTypeStr = tr("Open a file");
+    else if(t == SystemCommandType::ExecuteProgram)
+        sysCmdTypeStr = tr("Execute a program");
+    else if(t == SystemCommandType::OpenUrl)
+        sysCmdTypeStr = tr("Open an URL");
+    else if(t == SystemCommandType::OpenFolder)
+        sysCmdTypeStr = tr("Open a folder");
 
     return sysCmdTypeStr;
 }

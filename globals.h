@@ -42,17 +42,20 @@ namespace G_SystemCommands {
     inline QString ShutDownType = "shutdown";
     inline QString RestartType = "restart";
     inline QString LogOffType = "logoff";
-    inline QString PutIntoSleepModeType = "sleepmode";
     inline QString ChangeAudioVolumeType = "changevolume";
     inline QString ChangeDefaultAudioDeviceType = "changeaudiodevice";
     inline QString KillProcessType = "killprocess";
-    inline QString FocusWindowType = "focuswindow";
+    inline QString QuitSelfProgramType = "quitselfprogram";
     inline QString CreateFolderType = "createfolder";
     inline QString DeleteFolderType = "deletefolder";
     inline QString CreateFileType = "createfile";
     inline QString DeleteFileType = "deletefile";
     inline QString TakeScreenshotType = "screenshot";
     inline QString PrintActualScreenType = "printscreen";
+    inline QString OpenFileType = "openfile";
+    inline QString ExecuteProgramType = "executeprogram";
+    inline QString OpenUrlType = "openurl";
+    inline QString OpenFolderType = "openfolder";
 }
 
 struct G_Parameters {

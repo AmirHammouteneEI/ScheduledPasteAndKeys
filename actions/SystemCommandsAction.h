@@ -8,17 +8,20 @@ enum class SystemCommandType {
     ShutDown,
     Restart,
     LogOff,
-    PutIntoSleepMode,
     ChangeAudioVolume,
     ChangeDefaultAudioDevice,
     KillProcess,
-    FocusWindow,
+    QuitSelfProgram,
     CreateFolder,
     DeleteFolder,
-    CreateFile,
-    DeleteFile,
+    CreateOneFile,
+    DeleteOneFile,
     TakeScreenshot,
-    PrintActualScreen
+    PrintActualScreen,
+    OpenFile,
+    ExecuteProgram,
+    OpenUrl,
+    OpenFolder
 };
 
 class SystemCommandAction : public AbstractAction

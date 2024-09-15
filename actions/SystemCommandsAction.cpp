@@ -1,7 +1,12 @@
 #include "SystemCommandsAction.h"
+//#include "ActionsTools.h"
 #include "globals.h"
 #include <QDir>
 #include <QFile>
+#include <QApplication>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QProcess>
 
 //#include "actions/ActionsTools.h"
 
@@ -27,7 +32,7 @@ void SystemCommandAction::runAction() const
             d.removeRecursively();
         }
         break;
-        case SystemCommandType::CreateFile:
+        case SystemCommandType::CreateOneFile:
         {
             QDir d;
             d.mkpath(m_param1);
@@ -36,10 +41,55 @@ void SystemCommandAction::runAction() const
             f.close();
         }
         break;
-        case SystemCommandType::DeleteFile:
+        case SystemCommandType::DeleteOneFile:
         {
             QFile f(m_param1+"/"+m_param2);
             f.remove();
+        }
+        break;
+        case SystemCommandType::KillProcess:
+        {
+            std::system(("taskkill /im "+m_param1+" /f").toLatin1());
+        }
+        break;
+        case SystemCommandType::QuitSelfProgram:
+        {
+            qApp->quit();
+        }
+        break;
+        case SystemCommandType::ShutDown:
+        {
+            std::system("shutdown -s -f -t 00");
+        }
+        break;
+        case SystemCommandType::Restart:
+        {
+            std::system("shutdown -r -f -t 00");
+        }
+        break;
+        case SystemCommandType::LogOff:
+        {
+            std::system("shutdown -l -f");
+        }
+        break;
+        case SystemCommandType::OpenFile:
+        {
+            QDesktopServices::openUrl(QUrl("file:///"+m_param1, QUrl::TolerantMode));
+        }
+        break;
+        case SystemCommandType::ExecuteProgram:
+        {
+            QProcess::startDetached(m_param1+" "+m_param2);
+        }
+        break;
+        case SystemCommandType::OpenUrl:
+        {
+            QDesktopServices::openUrl(QUrl(m_param1));
+        }
+        break;
+        case SystemCommandType::OpenFolder:
+        {
+            QDesktopServices::openUrl(QUrl::fromLocalFile(m_param1));
         }
         break;
         default:
@@ -55,28 +105,34 @@ void SystemCommandAction::setParameters(const ActionParameters &param)
         e_sysCommandType = SystemCommandType::Restart;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::LogOffType)
         e_sysCommandType = SystemCommandType::LogOff;
-    else if(param.m_sysCmdTypeStr == G_SystemCommands::PutIntoSleepModeType)
-        e_sysCommandType = SystemCommandType::PutIntoSleepMode;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::ChangeAudioVolumeType)
         e_sysCommandType = SystemCommandType::ChangeAudioVolume;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::ChangeDefaultAudioDeviceType)
         e_sysCommandType = SystemCommandType::ChangeDefaultAudioDevice;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::KillProcessType)
         e_sysCommandType = SystemCommandType::KillProcess;
-    else if(param.m_sysCmdTypeStr == G_SystemCommands::FocusWindowType)
-        e_sysCommandType = SystemCommandType::FocusWindow;
+    else if(param.m_sysCmdTypeStr == G_SystemCommands::QuitSelfProgramType)
+        e_sysCommandType = SystemCommandType::QuitSelfProgram;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::CreateFolderType)
         e_sysCommandType = SystemCommandType::CreateFolder;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::DeleteFolderType)
         e_sysCommandType = SystemCommandType::DeleteFolder;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::CreateFileType)
-        e_sysCommandType = SystemCommandType::CreateFile;
+        e_sysCommandType = SystemCommandType::CreateOneFile;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::DeleteFileType)
-        e_sysCommandType = SystemCommandType::DeleteFile;
+        e_sysCommandType = SystemCommandType::DeleteOneFile;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::TakeScreenshotType)
         e_sysCommandType = SystemCommandType::TakeScreenshot;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::PrintActualScreenType)
         e_sysCommandType = SystemCommandType::PrintActualScreen;
+    else if(param.m_sysCmdTypeStr == G_SystemCommands::OpenFileType)
+        e_sysCommandType = SystemCommandType::OpenFile;
+    else if(param.m_sysCmdTypeStr == G_SystemCommands::ExecuteProgramType)
+        e_sysCommandType = SystemCommandType::ExecuteProgram;
+    else if(param.m_sysCmdTypeStr == G_SystemCommands::OpenUrlType)
+        e_sysCommandType = SystemCommandType::OpenUrl;
+    else if(param.m_sysCmdTypeStr == G_SystemCommands::OpenFolderType)
+        e_sysCommandType = SystemCommandType::OpenFolder;
     else
         e_sysCommandType = SystemCommandType::Undefined;
 
@@ -104,28 +160,34 @@ ActionParameters SystemCommandAction::generateParameters() const
         param.m_sysCmdTypeStr = G_SystemCommands::RestartType;
     else if(e_sysCommandType == SystemCommandType::LogOff)
         param.m_sysCmdTypeStr = G_SystemCommands::LogOffType;
-    else if(e_sysCommandType == SystemCommandType::PutIntoSleepMode)
-        param.m_sysCmdTypeStr = G_SystemCommands::PutIntoSleepModeType;
     else if(e_sysCommandType == SystemCommandType::ChangeAudioVolume)
         param.m_sysCmdTypeStr = G_SystemCommands::ChangeAudioVolumeType;
     else if(e_sysCommandType == SystemCommandType::ChangeDefaultAudioDevice)
         param.m_sysCmdTypeStr = G_SystemCommands::ChangeDefaultAudioDeviceType;
     else if(e_sysCommandType == SystemCommandType::KillProcess)
         param.m_sysCmdTypeStr = G_SystemCommands::KillProcessType;
-    else if(e_sysCommandType == SystemCommandType::FocusWindow)
-        param.m_sysCmdTypeStr = G_SystemCommands::FocusWindowType;
+    else if(e_sysCommandType == SystemCommandType::QuitSelfProgram)
+        param.m_sysCmdTypeStr = G_SystemCommands::QuitSelfProgramType;
     else if(e_sysCommandType == SystemCommandType::CreateFolder)
         param.m_sysCmdTypeStr = G_SystemCommands::CreateFolderType;
     else if(e_sysCommandType == SystemCommandType::DeleteFolder)
         param.m_sysCmdTypeStr = G_SystemCommands::DeleteFolderType;
-    else if(e_sysCommandType == SystemCommandType::CreateFile)
+    else if(e_sysCommandType == SystemCommandType::CreateOneFile)
         param.m_sysCmdTypeStr = G_SystemCommands::CreateFileType;
-    else if(e_sysCommandType == SystemCommandType::DeleteFile)
+    else if(e_sysCommandType == SystemCommandType::DeleteOneFile)
         param.m_sysCmdTypeStr = G_SystemCommands::DeleteFileType;
     else if(e_sysCommandType == SystemCommandType::TakeScreenshot)
         param.m_sysCmdTypeStr = G_SystemCommands::TakeScreenshotType;
     else if(e_sysCommandType == SystemCommandType::PrintActualScreen)
         param.m_sysCmdTypeStr = G_SystemCommands::PrintActualScreenType;
+    else if(e_sysCommandType == SystemCommandType::OpenFile)
+        param.m_sysCmdTypeStr = G_SystemCommands::OpenFileType;
+    else if(e_sysCommandType == SystemCommandType::ExecuteProgram)
+        param.m_sysCmdTypeStr = G_SystemCommands::ExecuteProgramType;
+    else if(e_sysCommandType == SystemCommandType::OpenUrl)
+        param.m_sysCmdTypeStr = G_SystemCommands::OpenUrlType;
+    else if(e_sysCommandType == SystemCommandType::OpenFolder)
+        param.m_sysCmdTypeStr = G_SystemCommands::OpenFolderType;
     else
         param.m_sysCmdTypeStr = G_SystemCommands::UndefinedType;
 
