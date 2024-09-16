@@ -1,6 +1,6 @@
 # Scheduled PC Tasks
 
-version 0.2 (June 2024)
+version 0.3 (September 2024)
 
 Automatically schedule the actions you would perform on your PC.
 
@@ -12,7 +12,7 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 0.2:
+Details of version 0.3:
 
 Fully functional, next version will include other types of actions
 
@@ -21,13 +21,13 @@ For the moment, those actions are available :
    - Keys sequence
    - Paste text
    - Wait
+   - Open files, folders, executables, url
+   - Run Windows system specific command (shut down, reboot, kill processes, create files...)
 
 The goal in future versions is to include those actions :
 
    - Mouve Cursor (to destination and in circle)
    - Play sounds
-   - Open files, folders, executables, url
-   - Run Windows system specific command (shut down, reboot, switch audio device...)
 
 Feebacks and idea of other actions are very welcome !
 
@@ -38,10 +38,8 @@ https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 Needs 30 Mo disk space, available for Windows systems only
    
 ----------
-A serie of videos explaining, step by step, how I developed this program is available on Youtube :
-https://www.youtube.com/watch?v=QmSNdI0Id6c&list=PLtgI97zcoKTaHE3xgl9k1xTTHprcufgvl
-
-Audio in French language, autosubtitles are available for any language
+Presentation video is available on Youtube :
+https://www.youtube.com/watch?v=ue6FPNrjD4c
 
 ----------
 Has been developed in C++ language, using Qt (6.7.1) framework 

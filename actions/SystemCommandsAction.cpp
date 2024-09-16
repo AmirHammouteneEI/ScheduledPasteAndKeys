@@ -1,5 +1,5 @@
 #include "SystemCommandsAction.h"
-//#include "ActionsTools.h"
+#include "ActionsTools.h"
 #include "globals.h"
 #include <QDir>
 #include <QFile>
@@ -19,7 +19,7 @@ SystemCommandAction::SystemCommandAction() : AbstractAction()
 void SystemCommandAction::runAction() const
 {
     switch(e_sysCommandType)
-    {//TODO : implement process for all system commands
+    {
         case SystemCommandType::CreateFolder:
         {
             QDir d;
@@ -43,7 +43,7 @@ void SystemCommandAction::runAction() const
         break;
         case SystemCommandType::DeleteOneFile:
         {
-            QFile f(m_param1+"/"+m_param2);
+            QFile f(m_param1);
             f.remove();
         }
         break;
@@ -95,6 +95,8 @@ void SystemCommandAction::runAction() const
         default:
         break;
     }
+
+    Sleep(500);
 }
 
 void SystemCommandAction::setParameters(const ActionParameters &param)

@@ -132,7 +132,7 @@ void CreateSystemCommandActionDialog::showDialog()
 
 void CreateSystemCommandActionDialog::activateButtons()
 {
-    if(m_type == G_SystemCommands::CreateFileType || m_type == G_SystemCommands::DeleteFileType)
+    if(m_type == G_SystemCommands::CreateFileType)
     {
         m_option1Button->setEnabled(true);
         m_option2Button->setEnabled(true);
@@ -177,7 +177,7 @@ void CreateSystemCommandActionDialog::activateButtons()
                     m_option1Button->setToolTip(val);
                 });
     }
-    else if(m_type == G_SystemCommands::OpenFileType)
+    else if(m_type == G_SystemCommands::OpenFileType || m_type == G_SystemCommands::DeleteFileType)
     {
         m_option1Button->setEnabled(true);
         connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);

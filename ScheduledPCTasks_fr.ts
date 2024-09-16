@@ -247,11 +247,140 @@ item selected in CreatePasteActionDialog is null !</translation>
     </message>
     <message>
         <source>Note : Paste actions are followed by a minimal wait of 0.1 second</source>
-        <translation>Remarque : Les actions de Coller du texte sont suivies d&apos;une pause minimal de 0,1 seconde</translation>
+        <translation type="vanished">Remarque : Les actions de Coller du texte sont suivies d&apos;une pause minimal de 0,1 seconde</translation>
     </message>
     <message>
         <source>ERROR</source>
         <translation>ERREUR</translation>
+    </message>
+    <message>
+        <source>Note : Paste actions are followed by a minimal wait of 0.2 second</source>
+        <translation>Remarque : Les actions de Coller du texte sont suivies d&apos;une pause minimal de 0,2 seconde</translation>
+    </message>
+</context>
+<context>
+    <name>CreateSystemCommandActionDialog</name>
+    <message>
+        <source>Create/Edit a System Command Action</source>
+        <translation>Créer/Éditer une action Commande système</translation>
+    </message>
+    <message>
+        <source>Select the system command you would like to apply to this action and set its options if needed :</source>
+        <translation>Sélectionnez la commande système que vous souhaitez affecter à cette action et définissez ses options si besoin :</translation>
+    </message>
+    <message>
+        <source>Restart the PC</source>
+        <translation>Redémarrer le PC</translation>
+    </message>
+    <message>
+        <source>Kill a process</source>
+        <translation>Arrêter un processus</translation>
+    </message>
+    <message>
+        <source>Open a file</source>
+        <translation>Ouvrir un fichier</translation>
+    </message>
+    <message>
+        <source>Delete a folder</source>
+        <translation>Supprimer un dossier</translation>
+    </message>
+    <message>
+        <source>Shut down the PC</source>
+        <translation>Éteindre le PC</translation>
+    </message>
+    <message>
+        <source>Quit Scheduled PC Tasks</source>
+        <translation>Quitter Scheduled PC Tasks</translation>
+    </message>
+    <message>
+        <source>Log off user session</source>
+        <translation>Déconnecter la session utilisateur</translation>
+    </message>
+    <message>
+        <source>Create a file</source>
+        <translation>Créer un fichier</translation>
+    </message>
+    <message>
+        <source>Create a folder</source>
+        <translation>Créer un dossier</translation>
+    </message>
+    <message>
+        <source>Open a folder</source>
+        <translation>Ouvrir un dossier</translation>
+    </message>
+    <message>
+        <source>Delete a file</source>
+        <translation>Supprimer un fichier</translation>
+    </message>
+    <message>
+        <source>Execute a program</source>
+        <translation>Exécuter un programme</translation>
+    </message>
+    <message>
+        <source>Open an URL</source>
+        <translation>Ouvrir une URL</translation>
+    </message>
+    <message>
+        <source>System command</source>
+        <translation>Commande système</translation>
+    </message>
+    <message>
+        <source>Option 1</source>
+        <translation>Option 1</translation>
+    </message>
+    <message>
+        <source>Option 2</source>
+        <translation>Option 2</translation>
+    </message>
+    <message>
+        <source>Note : System command actions are followed by a minimal wait of 0.5 second</source>
+        <translation>Remarque : Les actions de Commande système sont suivies d&apos;une pause minimal de 0,5 seconde</translation>
+    </message>
+    <message>
+        <source>Empty options</source>
+        <translation>Options vides</translation>
+    </message>
+    <message>
+        <source>Option 1 or Option 2 is empty but they are required.
+Please provide all necessary information.</source>
+        <translation>L&apos;Option 1 ou l&apos;Option 2 est vide mais elles sont requises.
+Veuillez fournir toutes les informations nécessaires.</translation>
+    </message>
+    <message>
+        <source>ERROR</source>
+        <translation>ERREUR</translation>
+    </message>
+    <message>
+        <source>Set the filename</source>
+        <translation>Définir le nom de fichier</translation>
+    </message>
+    <message>
+        <source>Set the filename (existing or not) for the operation you would like to proceed :</source>
+        <translation>Définissez le nom du fichier (existant ou non) pour l&apos;opération que vous souhaitez effectuer :</translation>
+    </message>
+    <message>
+        <source>Set the process name</source>
+        <translation>Définir le nom du processus</translation>
+    </message>
+    <message>
+        <source>Set the process name (including .exe) you would like to schedule to kill :</source>
+        <translation>Définissez le nom du processus (incluant .exe) que vous souhaitez programmer pour qu&apos;il s&apos;arrête :</translation>
+    </message>
+    <message>
+        <source>Set optional arguments</source>
+        <translation>Définir les arguments optionnels</translation>
+    </message>
+    <message>
+        <source>If needed, set arguments for the execution of the program you would like to run :</source>
+        <translation>Si besoin, définissez les arguments pour l&apos;exécution du programme que vous souhaitez exécuter :</translation>
+    </message>
+    <message>
+        <source>Set the URL</source>
+        <translation>Définir l&apos;URL</translation>
+    </message>
+    <message>
+        <source>Set the URL you would like to open :</source>
+        <translation>Définissez l&apos;URL que vous souhaitez ouvrir :</translation>
     </message>
 </context>
 <context>
@@ -548,11 +677,11 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Some Tasks have been modified since the last save of each, would you like to save all changes ?</source>
-        <translation type="unfinished">Certaines tâches ont été modifiées depuis la dernière sauvegarde de chacune, souhaitez-vous sauvegarder toutes les modifications ?</translation>
+        <translation>Certaines tâches ont été modifiées depuis la dernière sauvegarde de chacune, souhaitez-vous sauvegarder toutes les modifications ?</translation>
     </message>
     <message>
         <source>Click to unpin the window so it won&apos;t stay on top</source>
-        <translation type="unfinished">Cliquer pour détacher la fenêtre afin qu&apos;elle ne reste pas toujours visible</translation>
+        <translation>Cliquer pour détacher la fenêtre afin qu&apos;elle ne reste pas toujours visible</translation>
     </message>
     <message>
         <source>Rename...</source>
@@ -611,7 +740,7 @@ Developed by Amir Hammoutene (contact@amirhammoutene.dev)
 initial work on February 2024
 
 version 0.2</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
@@ -630,11 +759,25 @@ Clic droit dessus pour quitter l&apos;application.</translation>
     </message>
     <message>
         <source>Uncheck to disable autoscrolling during task execution</source>
-        <translation type="unfinished">Décocher pour désactiver le défilement automatique pendant l&apos;exécution des tâches</translation>
+        <translation>Décocher pour désactiver le défilement automatique pendant l&apos;exécution des tâches</translation>
     </message>
     <message>
         <source>Check to enable autoscrolling during task execution</source>
-        <translation type="unfinished">Cocher pour activer le défilement automatique pendant l&apos;exécution des tâches</translation>
+        <translation>Cocher pour activer le défilement automatique pendant l&apos;exécution des tâches</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 0.3</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 0.3</translation>
     </message>
 </context>
 <context>
@@ -811,6 +954,85 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
 </context>
 <context>
+    <name>SystemCommandWidget</name>
+    <message>
+        <source>ERROR</source>
+        <translation>ERREUR</translation>
+    </message>
+    <message>
+        <source>Shut down the PC</source>
+        <translation>Éteindre le PC</translation>
+    </message>
+    <message>
+        <source>Restart the PC</source>
+        <translation>Redémarrer le PC</translation>
+    </message>
+    <message>
+        <source>Log off user session </source>
+        <translation type="vanished">Déconnecter la session utilisateur </translation>
+    </message>
+    <message>
+        <source>Change the audio volume</source>
+        <translation>Changer le volume audio</translation>
+    </message>
+    <message>
+        <source>Change the default audio device</source>
+        <translation>Changer le périphérique audio par défaut</translation>
+    </message>
+    <message>
+        <source>Kill a process</source>
+        <translation>Arrêter un processus</translation>
+    </message>
+    <message>
+        <source>Quit Scheduled PC Tasks</source>
+        <translation>Quitter Scheduled PC Tasks</translation>
+    </message>
+    <message>
+        <source>Create a folder</source>
+        <translation>Créer un dossier</translation>
+    </message>
+    <message>
+        <source>Delete a folder</source>
+        <translation>Supprimer un dossier</translation>
+    </message>
+    <message>
+        <source>Create a file</source>
+        <translation>Créer un fichier</translation>
+    </message>
+    <message>
+        <source>Delete a file</source>
+        <translation>Supprimer un fichier</translation>
+    </message>
+    <message>
+        <source>Take a screenshot</source>
+        <translation>Prendre une capture d&apos;écran</translation>
+    </message>
+    <message>
+        <source>Print the actual screen display</source>
+        <translation>Imprimer l&apos;affichage réel de l&apos;écran</translation>
+    </message>
+    <message>
+        <source>Open a file</source>
+        <translation>Ouvrir un fichier</translation>
+    </message>
+    <message>
+        <source>Execute a program</source>
+        <translation>Exécuter un programme</translation>
+    </message>
+    <message>
+        <source>Open an URL</source>
+        <translation>Ouvrir une URL</translation>
+    </message>
+    <message>
+        <source>Open a folder</source>
+        <translation>Ouvrir un dossier</translation>
+    </message>
+    <message>
+        <source>Log off user session</source>
+        <translation>Déconnecter la session utilisateur</translation>
+    </message>
+</context>
+<context>
     <name>TaskTab</name>
     <message>
         <source>Save changes</source>
@@ -900,7 +1122,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Check to execute the task forever. It can be stopped with the red stop button or its shortcut: Ctrl+Alt+S</source>
-        <translation type="unfinished">Cocher pour exécuter la tâche pour toujours. Elle peut être arrêtée avec le bouton stop rouge ou son raccourci : Ctrl+Alt+S</translation>
+        <translation>Cocher pour exécuter la tâche pour toujours. Elle peut être arrêtée avec le bouton stop rouge ou son raccourci : Ctrl+Alt+S</translation>
     </message>
     <message>
         <source>Add a Keys Sequence action...</source>
@@ -909,6 +1131,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>Infinite loop ON</source>
         <translation>En boucle infinie ON</translation>
+    </message>
+    <message>
+        <source>Add a System Command action...</source>
+        <translation>Ajouter une action de Commande système...</translation>
     </message>
 </context>
 <context>
@@ -939,7 +1165,7 @@ mainwindow is null when affecting to TaskTabsManager !</translation>
     </message>
     <message>
         <source>Task is scheduled or is running</source>
-        <translation type="unfinished">La tâche est planifiée ou est en cours d&apos;exécution</translation>
+        <translation>La tâche est planifiée ou est en cours d&apos;exécution</translation>
     </message>
     <message>
         <source>This task is scheduled for execution or is currently running, by pressing &quot;Yes&quot; you are going to stop it.
@@ -957,7 +1183,7 @@ Si vous souhaitez la fermer, vous devrez en refaire la requête.</translation>
     </message>
     <message>
         <source>This Task has been modified since the last save, would you like to save changes ?</source>
-        <translation type="unfinished">Cette tâche a été modifiée depuis la dernière sauvegarde, souhaitez-vous sauvegarder les modifications ?</translation>
+        <translation>Cette tâche a été modifiée depuis la dernière sauvegarde, souhaitez-vous sauvegarder les modifications ?</translation>
     </message>
     <message>
         <source>The file is not in the good format, no action can&apos;t be loaded.</source>
@@ -1037,7 +1263,7 @@ Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</transla
     </message>
     <message>
         <source>Choose a delay to run of the Task :</source>
-        <translation type="unfinished">Choisissez un délai pour l&apos;exécution de la tâche :</translation>
+        <translation>Choisissez un délai pour l&apos;exécution de la tâche :</translation>
     </message>
     <message>
         <source>by delay</source>
@@ -1094,6 +1320,52 @@ Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</transla
     <message>
         <source> secs </source>
         <translation> secs </translation>
+    </message>
+</context>
+<context>
+    <name>getFilePathDialog</name>
+    <message>
+        <source>Set the file option</source>
+        <translation>Définir l&apos;option de fichier</translation>
+    </message>
+    <message>
+        <source>Set the file (existing or not) on which you would like the operation to proceed :</source>
+        <translation>Définissez le fichier (existant ou non) sur lequel vous souhaitez que l&apos;opération se déroule :</translation>
+    </message>
+    <message>
+        <source>C:/...</source>
+        <translation>C:/...</translation>
+    </message>
+    <message>
+        <source>Browse a directory in order to help to set the path...</source>
+        <translation>Parcourir un répertoire afin d&apos;aider à définir le chemin...</translation>
+    </message>
+    <message>
+        <source>Select a file</source>
+        <translation>Sélectionner un fichier</translation>
+    </message>
+</context>
+<context>
+    <name>getFolderPathDialog</name>
+    <message>
+        <source>Set the directory option</source>
+        <translation>Définir l&apos;option de répertoire</translation>
+    </message>
+    <message>
+        <source>Set the directory (existing or not) on which you would like the operation to proceed :</source>
+        <translation>Définissez le répertoire (existant ou non) sur lequel vous souhaitez que l&apos;opération se déroule :</translation>
+    </message>
+    <message>
+        <source>C:/...</source>
+        <translation>C:/...</translation>
+    </message>
+    <message>
+        <source>Browse a directory in order to help to set the path...</source>
+        <translation>Parcourir un répertoire afin d&apos;aider à définir le chemin...</translation>
+    </message>
+    <message>
+        <source>Select a directory</source>
+        <translation>Sélectionner un répertoire</translation>
     </message>
 </context>
 </TS>
