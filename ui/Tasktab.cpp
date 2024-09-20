@@ -4,11 +4,13 @@
 #include "ui/actionwidgets/WaitWidget.h"
 #include "ui/actionwidgets/KeysSequenceWidget.h"
 #include "ui/actionwidgets/SystemCommandWidget.h"
+#include "ui/actionwidgets/CursorMovementsWidget.h"
 #include "globals.h"
 #include "actions/PasteAction.h"
 #include "actions/WaitAction.h"
 #include "actions/KeysSequenceAction.h"
 #include "actions/SystemCommandsAction.h"
+#include "actions/CursorMovementsAction.h"
 #include "actions/ActionsTools.h"
 
 #include <QGridLayout>
@@ -51,7 +53,7 @@ void TaskTab::buildBasicInterface()
 {
     m_createPasteActionDialog = new CreatePasteActionDialog(this);
     m_createWaitActionDialog = new CreateWaitActionDialog(this);
-    m_m_createKeysSequenceActionDialog = new CreateKeysSequenceActionDialog(this);
+    m_createKeysSequenceActionDialog = new CreateKeysSequenceActionDialog(this);
     m_createSystemCommandActionDialog = new CreateSystemCommandActionDialog(this);
 
     setWidgetResizable(true);
@@ -183,7 +185,7 @@ void TaskTab::buildBasicInterface()
 
     connect(m_createPasteActionDialog, &CreatePasteActionDialog::sendSentence, this, &TaskTab::createPasteActionRequest);
     connect(m_createWaitActionDialog, &CreateWaitActionDialog::sendDuration, this, &TaskTab::createWaitActionRequest);
-    connect(m_m_createKeysSequenceActionDialog, &CreateKeysSequenceActionDialog::sendKeysSequence, this, &TaskTab::createKeysSequenceActionRequest);
+    connect(m_createKeysSequenceActionDialog, &CreateKeysSequenceActionDialog::sendKeysSequence, this, &TaskTab::createKeysSequenceActionRequest);
     connect(m_createSystemCommandActionDialog, &CreateSystemCommandActionDialog::sendSystemCommand, this, &TaskTab::createSystemCommandActionRequest);
 
     connect(m_saveButton, &QPushButton::released, this, [=](){ emit saveTaskRequest(m_ID, true); });
@@ -202,7 +204,7 @@ void TaskTab::buildAddButtonMenu()
     menu->addAction(creaWaitAct);
     connect(creaPasteAct, &QAction::triggered, m_createPasteActionDialog, &CreatePasteActionDialog::showDialog);
     connect(creaWaitAct, &QAction::triggered, m_createWaitActionDialog, &CreateWaitActionDialog::showDialog);
-    connect(creaKeysSeqAct, &QAction::triggered, m_m_createKeysSequenceActionDialog, &CreateKeysSequenceActionDialog::showDialog);
+    connect(creaKeysSeqAct, &QAction::triggered, m_createKeysSequenceActionDialog, &CreateKeysSequenceActionDialog::showDialog);
     connect(creaSysCmdAct, &QAction::triggered, m_createSystemCommandActionDialog, &CreateSystemCommandActionDialog::showDialog);
 
     m_addActionButton->setMenu(menu);
@@ -258,13 +260,15 @@ AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
         break;
         case ActionType::KeysSequence:
             actWidgToCreate = new KeysSequenceWidget(m_actionsFrame);
-            break;
+        break;
         case ActionType::SystemCommand:
             actWidgToCreate = new SystemCommandWidget(m_actionsFrame);
-            break;
+        break;
+        case ActionType::CursorMovements:
+            actWidgToCreate = new CursorMovementsWidget(m_actionsFrame);
+        break;
         default:
             return nullptr;
-        break;
     }
 
     actWidgToCreate->setAction(act);
@@ -615,4 +619,18 @@ void TaskTab::createSystemCommandActionRequest(QString sysCmdType, QString param
     sysCmdAct->setParameters(paramSysCmd);
 
     appendAction(sysCmdAct);
+}
+
+void TaskTab::createCursorMovementsActionRequest(QString cursorMovementsIdentity)
+{
+    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    auto cursorMovementsFromSettings = settings.value(G_Files::CursorMovementsDataCategory+cursorMovementsIdentity).toMap();
+    ActionParameters paramKeysSeq;
+    paramKeysSeq.m_cursorMovementsMap = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
+    paramKeysSeq.m_dataId = cursorMovementsIdentity;
+
+    CursorMovementsAction *cursorMovsAct = new CursorMovementsAction();
+    cursorMovsAct->setParameters(paramKeysSeq);
+
+    appendAction(cursorMovsAct);
 }

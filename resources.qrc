@@ -44,5 +44,6 @@
         <file>img/key.png</file>
         <file>img/systemCommand.png</file>
         <file>img/browseFolder.png</file>
+        <file>img/cursor.png</file>
     </qresource>
 </RCC>

@@ -51,7 +51,8 @@ protected:
     CreatePasteActionDialog *m_createPasteActionDialog;
     CreateWaitActionDialog *m_createWaitActionDialog;
     CreateSystemCommandActionDialog *m_createSystemCommandActionDialog;
-    CreateKeysSequenceActionDialog *m_m_createKeysSequenceActionDialog;
+    CreateKeysSequenceActionDialog *m_createKeysSequenceActionDialog;
+    //TODO CreateCursorMovementsActionDialog
     void buildAddButtonMenu();
     void appendAction(AbstractAction *act);
     unsigned int m_loopedTimes = 0;
@@ -86,6 +87,7 @@ public slots:
     void createWaitActionRequest(long double duration);
     void createKeysSequenceActionRequest(QString keysSequenceIdentity); // not const & because it's a slot, will make copy evenif
     void createSystemCommandActionRequest(QString sysCmdType, QString param1, QString param2); // not const & because it's a slot, will make copy evenif
+    void createCursorMovementsActionRequest(QString cursorMovementsIdentity); // not const & because it's a slot, will make copy evenif
 signals:
     void saveTaskRequest(int taskId, bool verb);
 

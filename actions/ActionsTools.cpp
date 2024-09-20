@@ -129,7 +129,7 @@ void ActionsTools::setClipboard(const QString &str)
     }
 }
 
-PressedReleaseDelaysKeysMap ActionsTools::fromStandardQMapToKeysSeqMap(const QMap<QString, QVariant> standardMap)
+PressedReleaseDelaysKeysMap ActionsTools::fromStandardQMapToKeysSeqMap(const QMap<QString, QVariant> &standardMap)
 {
     PressedReleaseDelaysKeysMap keysMap;
     for(auto [key,val] : standardMap.asKeyValueRange())
@@ -153,4 +153,30 @@ QString ActionsTools::fromKeysSeqMapToPrintedString(const PressedReleaseDelaysKe
     }
 
     return contentList.join("\n");
+}
+
+QString ActionsTools::fromCursorMovsMapToPrintedString(const DelaysMovementsMap &map)
+{
+    QStringList contentList;
+    for(auto [key,val] : map.asKeyValueRange())
+    {
+        QString oneLineInfo = QString::number(key)+" ms delay (after previous movement), during "+
+                              QString::number(val.first)+" ms) : ";
+        oneLineInfo+= "["+QString::number(val.second.first)+","+QString::number(val.second.second)+"]";
+        contentList.append(oneLineInfo);
+    }
+
+    return contentList.join("\n");
+}
+
+DelaysMovementsMap ActionsTools::fromStandardQMapToCursorMovsMap(const QMap<QString, QVariant> &standardMap)
+{
+    DelaysMovementsMap keysMap;
+    for(auto [key,val] : standardMap.asKeyValueRange())
+    {
+        MovementPair movpair = val.value<MovementPair>();
+        keysMap.insert(key.toInt(),movpair);
+    }
+
+    return keysMap;
 }

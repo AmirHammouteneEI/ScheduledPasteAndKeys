@@ -5,6 +5,7 @@
 #include "actions/WaitAction.h"
 #include "actions/KeysSequenceAction.h"
 #include "actions/SystemCommandsAction.h"
+#include "actions/CursorMovementsAction.h"
 
 #include <QApplication>
 #include <QMessageBox>
@@ -387,6 +388,28 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
             }
         }
         break;
+        case ActionType::CursorMovements:
+        {
+            jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionCursorMovementsType_Value));
+            auto cursorMovsaction =  dynamic_cast<CursorMovementsAction*>(act);
+            if(cursorMovsaction != nullptr)
+            {
+                auto params = cursorMovsaction->generateParameters();
+                QJsonObject writtenMapJObj;
+                for(auto [key,val] : params.m_cursorMovementsMap.asKeyValueRange())
+                {
+                    QJsonArray jarr;
+                    jarr.append(val.first);
+                    jarr.append(val.second.first);
+                    jarr.append(val.second.second);
+                    writtenMapJObj.insert(QString::number(key),jarr);
+                }
+                jsonToReturn.insert(G_Files::ActionCursorMovsMap_KeyWord, writtenMapJObj);
+                jsonToReturn.insert(G_Files::ActionCursorMovsId_KeyWord, QJsonValue::fromVariant(params.m_dataId));
+                jsonToReturn.insert(G_Files::ActionCursorMovsLoop_KeyWord, QJsonValue::fromVariant(params.m_timesToRun));
+            }
+        }
+        break;
         default:
           break;
     }
@@ -436,6 +459,28 @@ AbstractAction* TaskTabsManager::jsonToAction(const QJsonObject &jobj)
         params.m_sysCmdTypeStr = jobj.value(G_Files::ActionSysCommandType_KeyWord).toString();
         params.m_sysCmdParam1 = jobj.value(G_Files::ActionSysCommandParam1_KeyWord).toString();
         params.m_sysCmdParam2 = jobj.value(G_Files::ActionSysCommandParam2_KeyWord).toString();
+    }
+    else if(type == G_Files::ActionCursorMovementsType_Value)
+    {
+        actionToReturn = new CursorMovementsAction();
+        auto readMap = jobj.value(G_Files::ActionCursorMovsMap_KeyWord).toVariant().toMap();
+        DelaysMovementsMap actMap;
+        for(auto [key,val] : readMap.asKeyValueRange())
+        {
+            auto jarr = val.toJsonArray();
+            if(jarr.size()<3)
+                continue;
+            CoordinatesPair coordPair;
+            MovementPair movPair;
+            movPair.first = jarr[0].toInt();
+            coordPair.first = jarr[1].toInt();
+            coordPair.second = jarr[2].toInt();
+            movPair.second = coordPair;
+            actMap.insert(key.toInt(),movPair);
+        }
+        params.m_cursorMovementsMap = actMap;
+        params.m_dataId = jobj.value(G_Files::ActionCursorMovsId_KeyWord).toString();
+        params.m_timesToRun = jobj.value(G_Files::ActionCursorMovsLoop_KeyWord).toInt();
     }
     else
         return nullptr;

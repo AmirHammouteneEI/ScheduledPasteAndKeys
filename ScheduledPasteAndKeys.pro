@@ -15,6 +15,7 @@ SOURCES += \
     TaskThread.cpp \
     actions/AbstractAction.cpp \
     actions/ActionsTools.cpp \
+    actions/CursorMovementsAction.cpp \
     actions/KeysSequenceAction.cpp \
     actions/PasteAction.cpp \
     actions/SystemCommandsAction.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
     ui/SentencesTableWidget.cpp \
     ui/TaskTab.cpp \
     ui/actionwidgets/AbstractActionWidget.cpp \
+    ui/actionwidgets/CursorMovementsWidget.cpp \
     ui/actionwidgets/KeysSequenceWidget.cpp \
     ui/actionwidgets/PasteWidget.cpp \
     ui/actionwidgets/SystemCommandWidget.cpp \
@@ -50,6 +52,7 @@ HEADERS += \
     actions/AbstractAction.h \
     actions/ActionParameters.h \
     actions/ActionsTools.h \
+    actions/CursorMovementsAction.h \
     actions/KeysSequenceAction.h \
     actions/PasteAction.h \
     actions/SystemCommandsAction.h \
@@ -65,6 +68,7 @@ HEADERS += \
     ui/SentencesTableWidget.h \
     ui/TaskTab.h \
     ui/actionwidgets/AbstractActionWidget.h \
+    ui/actionwidgets/CursorMovementsWidget.h \
     ui/actionwidgets/KeysSequenceWidget.h \
     ui/actionwidgets/PasteWidget.h \
     ui/actionwidgets/SystemCommandWidget.h \

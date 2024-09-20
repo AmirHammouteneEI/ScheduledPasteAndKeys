@@ -2,9 +2,6 @@
 #define KEYSSEQUENCEACTION_H
 
 #include "AbstractAction.h"
-#include <QStringList>
-#include <QMap>
-#include <QPair>
 
 class KeysSequenceAction : public AbstractAction
 {

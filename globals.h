@@ -8,6 +8,7 @@ namespace G_Files {
     inline QString DataFilePath = "programData.ini";
     inline QString SentencesDataCategory = "sentences/";
     inline QString KeysSequencesDataCategory = "keyssequences/";
+    inline QString CursorMovementsDataCategory = "cursormovements/";
     inline QString DocumentIdentification_KeyWord = "docType";
     inline QString DocumentIdentification_Value = "ScheduleTask File";
     inline QString DocumentTaskName_KeyWord = "taskName";
@@ -17,6 +18,7 @@ namespace G_Files {
     inline QString ActionWaitType_Value = "wait";
     inline QString ActionSystemCommandeType_Value = "systemcommand";
     inline QString ActionKeysSequenceType_Value = "keyssequence";
+    inline QString ActionCursorMovementsType_Value = "cursormovements";
     inline QString ActionContent_KeyWord = "content";
     inline QString ActionContentId_KeyWord = "contentId";
     inline QString ActionDuration_KeyWord = "duration";
@@ -26,6 +28,9 @@ namespace G_Files {
     inline QString ActionSysCommandType_KeyWord = "sysCommandType";
     inline QString ActionSysCommandParam1_KeyWord = "sysCommandParam1";
     inline QString ActionSysCommandParam2_KeyWord = "sysCommandParam2";
+    inline QString ActionCursorMovsMap_KeyWord = "cursormovsmap";
+    inline QString ActionCursorMovsId_KeyWord = "cursorMovsId";
+    inline QString ActionCursorMovsLoop_KeyWord = "loop";
 }
 
 namespace G_Sentences {
@@ -35,6 +40,7 @@ namespace G_Sentences {
     static QString FileParsingError() {return QObject::tr("The file is not in the correct format for this software : parse error.");}
     static QString NoSetenceSelected() {return QObject::tr("No sentence has been selected. Please select one.");}
     static QString NoKeysSequenceSelected() {return QObject::tr("No keys sequence has been selected. Please select one.");}
+    static QString NoCursorMovementsSelected() {return QObject::tr("No cursor movements set has been selected. Please select one.");}
 }
 
 namespace G_SystemCommands {
