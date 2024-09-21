@@ -43,24 +43,24 @@ void CursorMovementsWidget::buildWidget()
 
     auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action);
 
-    QString seqStr = tr("ERROR on access to action");
+    QString movsStr = tr("ERROR on access to action");
     QString id = tr("ERROR");
     if(cursormovsaction != nullptr)
     {
         id = cursormovsaction->m_movementsId;
-        seqStr = ActionsTools::fromCursorMovsMapToPrintedString(cursormovsaction->m_cursorMovementsMap);
+        movsStr = ActionsTools::fromCursorMovsMapToPrintedString(cursormovsaction->m_cursorMovementsList);
         m_loopSpin->setValue(cursormovsaction->m_timesToRun);
     }
 
-    m_mainButton->setIcon(QIcon(":/img/key.png"));
+    m_mainButton->setIcon(QIcon(":/img/cursor.png"));
     m_mainButton->setText(tr("Cursor movements ~")+id);
-    m_mainButton->setToolTip(seqStr);
+    m_mainButton->setToolTip(movsStr);
     m_mainButton->setProperty("cursorMovsId", id);
 
-    //m_createKeysSeqActionDialog = new CreateKeysSequenceActionDialog(m_centralWidget);
+    m_createCursorMovsActionDialog = new CreateCursorMovementsActionDialog(m_centralWidget);
 
-    //connect(m_mainButton, &QPushButton::released, m_createKeysSeqActionDialog, &CreateKeysSequenceActionDialog::showDialog);
-    //connect(m_createKeysSeqActionDialog, &CreateKeysSequenceActionDialog::sendKeysSequence, this, &KeysSequenceWidget::keysSeqIdentityReceived);
+    connect(m_mainButton, &QPushButton::released, m_createCursorMovsActionDialog, &CreateCursorMovementsActionDialog::showDialog);
+    connect(m_createCursorMovsActionDialog, &CreateCursorMovementsActionDialog::sendCursorMovements, this, &CursorMovementsWidget::cursorMovsIdentityReceived);
     connect(m_loopSpin, &QSpinBox::valueChanged, this, &CursorMovementsWidget::timesToRunChanged);
 
 }
@@ -75,12 +75,12 @@ void CursorMovementsWidget::cursorMovsIdentityReceived(QString id)
         return;
     }
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
-    auto cursorMovementsFromSettings = settings.value(G_Files::CursorMovementsDataCategory+id).toMap();
-    DelaysMovementsMap movsMap = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
-    cursormovsaction->m_cursorMovementsMap = movsMap;
+    auto cursorMovementsFromSettings = settings.value(G_Files::CursorMovementsDataCategory+id).toList();
+    CursorMovementsList movsList = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
+    cursormovsaction->m_cursorMovementsList = movsList;
     cursormovsaction->m_movementsId = id;
     m_mainButton->setText(tr("Cursor movements ~")+id);
-    m_mainButton->setToolTip(ActionsTools::fromCursorMovsMapToPrintedString(movsMap));
+    m_mainButton->setToolTip(ActionsTools::fromCursorMovsMapToPrintedString(movsList));
     m_mainButton->setProperty("cursorMovsId", id);
 
     emit anyParamChanged();

@@ -8,6 +8,7 @@
 
 class ActionsTools
 {
+    static const int s_cursorFrequency = 20;
 public:
     ActionsTools();
     ~ActionsTools() = default;
@@ -20,8 +21,9 @@ public:
     static PressedReleaseDelaysKeysMap fromStandardQMapToKeysSeqMap(const QMap<QString,QVariant> &standardMap);
     static QString fromKeysSeqMapToPrintedString(const PressedReleaseDelaysKeysMap &map);
     static QMap<QString, WORD> m_keysStrToInputWordMap;
-    static QString fromCursorMovsMapToPrintedString(const DelaysMovementsMap &map);
-    static DelaysMovementsMap fromStandardQMapToCursorMovsMap(const QMap<QString,QVariant> &standardMap);
+    static QString fromCursorMovsMapToPrintedString(const CursorMovementsList &map);
+    static CursorMovementsList fromStandardQMapToCursorMovsMap(const QList<QVariant> &standardList);
+    static void moveCursorSimulate(int xPos, int yPos, int time);
 };
 
 #endif // ACTIONSTOOLS_H

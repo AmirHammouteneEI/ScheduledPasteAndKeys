@@ -18,6 +18,9 @@ int main(int argc, char *argv[])
     qRegisterMetaType<ActionParameters>();
     qRegisterMetaType<ReleaseDelayKeysPair>();
     qRegisterMetaType<PressedReleaseDelaysKeysMap>();
+    qRegisterMetaType<MovementList>();
+    qRegisterMetaType<CursorMovementsList>();
+
     a.setWindowIcon(QIcon(":/img/programIcon.png"));
 
     QString locale = QLocale::system().name().section('_', 0, 0);

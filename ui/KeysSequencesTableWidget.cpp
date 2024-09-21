@@ -65,7 +65,7 @@ void KeysSequencesTableWidget::removeKeysSequenceReceived()
     QItemSelectionModel *selection = selectionModel();
     if(!selection->hasSelection())
     {
-        QMessageBox::warning(this, tr("No keys sequence selected"),G_Sentences::NoSetenceSelected());
+        QMessageBox::warning(this, tr("No keys sequence selected"),G_Sentences::NoKeysSequenceSelected());
         return;
     }
 

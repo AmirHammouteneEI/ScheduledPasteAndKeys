@@ -12,11 +12,14 @@ DataEditDialog::DataEditDialog(QWidget *parent)
     ui->tabWidget->tabBar()->setFont(font);
     ui->sentencesTableWidget->m_belongsToDataEditDialog = true;
     ui->keysSequencesTableWidget->m_belongsToDataEditDialog = true;
+    ui->cursorMovementsTableWidget->m_belongsToDataEditDialog = true;
 
     connect(ui->addSentenceButton, &QPushButton::released, ui->sentencesTableWidget, &SentencesTableWidget::createSentenceReceived);
     connect(ui->removeSentenceButton, &QPushButton::released, ui->sentencesTableWidget, &SentencesTableWidget::removeSentenceReceived);
     connect(ui->addKeysSequenceButton, &QPushButton::released, ui->keysSequencesTableWidget, &KeysSequencesTableWidget::createKeysSequenceReceived);
     connect(ui->removeKeysSequenceButton, &QPushButton::released, ui->keysSequencesTableWidget, &KeysSequencesTableWidget::removeKeysSequenceReceived);
+    connect(ui->addCursorMovementsButton, &QPushButton::released, ui->cursorMovementsTableWidget, &CursorMovementsTableWidget::createCursorMovementsReceived);
+    connect(ui->removeCursorMovementsButton, &QPushButton::released, ui->cursorMovementsTableWidget, &CursorMovementsTableWidget::removeCursorMovementsReceived);
 }
 
 DataEditDialog::~DataEditDialog()
@@ -28,5 +31,6 @@ void DataEditDialog::showDialog()
 {
     ui->sentencesTableWidget->refresh();
     ui->keysSequencesTableWidget->refresh();
+    ui->cursorMovementsTableWidget->refresh();
     show();
 }

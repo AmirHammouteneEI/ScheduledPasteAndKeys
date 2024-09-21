@@ -155,28 +155,51 @@ QString ActionsTools::fromKeysSeqMapToPrintedString(const PressedReleaseDelaysKe
     return contentList.join("\n");
 }
 
-QString ActionsTools::fromCursorMovsMapToPrintedString(const DelaysMovementsMap &map)
+QString ActionsTools::fromCursorMovsMapToPrintedString(const CursorMovementsList &map)
 {
     QStringList contentList;
-    for(auto [key,val] : map.asKeyValueRange())
+    for(auto el : map)
     {
-        QString oneLineInfo = QString::number(key)+" ms delay (after previous movement), during "+
-                              QString::number(val.first)+" ms) : ";
-        oneLineInfo+= "["+QString::number(val.second.first)+","+QString::number(val.second.second)+"]";
+        if(el.size() < 4)
+            continue;
+        QString oneLineInfo = QString::number(el[0])+" ms delay (after previous move), during "+
+                              QString::number(el[1])+" ms : ";
+        oneLineInfo+= "["+QString::number(el[2])+","+QString::number(el[3])+"]";
         contentList.append(oneLineInfo);
     }
 
     return contentList.join("\n");
 }
 
-DelaysMovementsMap ActionsTools::fromStandardQMapToCursorMovsMap(const QMap<QString, QVariant> &standardMap)
+CursorMovementsList ActionsTools::fromStandardQMapToCursorMovsMap(const QList<QVariant> &standardList)
 {
-    DelaysMovementsMap keysMap;
-    for(auto [key,val] : standardMap.asKeyValueRange())
+    CursorMovementsList curmovsList;
+    for(auto el : standardList)
     {
-        MovementPair movpair = val.value<MovementPair>();
-        keysMap.insert(key.toInt(),movpair);
+        MovementList movlist = el.value<MovementList>();
+        if(movlist.size() >= 4)
+            curmovsList.append(movlist);
     }
 
-    return keysMap;
+    return curmovsList;
+}
+
+void ActionsTools::moveCursorSimulate(int xPos, int yPos, int time)
+{
+    POINT origin;
+    bool successGet = GetCursorPos(&origin);
+    if(time<= 0 || !successGet)
+        return;
+
+    auto timesToMove = time / s_cursorFrequency;
+    int movedTimes = 1;
+    while(movedTimes < timesToMove)
+    {
+        int curX = (movedTimes*(xPos-origin.x) + timesToMove*origin.x)/timesToMove;
+        int curY = (movedTimes*(yPos-origin.y) + timesToMove*origin.y)/timesToMove;
+        SetCursorPos(curX,curY);
+        Sleep(s_cursorFrequency);
+        ++movedTimes;
+    }
+    SetCursorPos(xPos,yPos);
 }

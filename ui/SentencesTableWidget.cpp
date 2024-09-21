@@ -1,6 +1,5 @@
 #include "SentencesTableWidget.h"
 #include "globals.h"
-#include "DataEditDialog.h"
 
 #include <QSettings>
 #include <QMessageBox>

@@ -2,13 +2,14 @@
 #define CURSORMOVEMENTSWIDGET_H
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
+#include "ui/createactiondialog/CreateCursorMovementsActionDialog.h"
 #include <QSpinBox>
 #include <QDateTime>
 
 class CursorMovementsWidget : public AbstractActionWidget
 {
     Q_OBJECT
-    //TODO CreateCursorMovementsActionDialog
+    CreateCursorMovementsActionDialog *m_createCursorMovsActionDialog;
     QSpinBox *m_loopSpin;
     void changedRunningState() override;
 public:

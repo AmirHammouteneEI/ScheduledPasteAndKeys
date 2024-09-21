@@ -8,6 +8,7 @@
 #include "ui/createactiondialog/CreateWaitActionDialog.h"
 #include "ui/createactiondialog/CreateKeysSequenceActionDialog.h"
 #include "ui/createactiondialog/CreateSystemCommandActionDialog.h"
+#include "ui/createactiondialog/CreateCursorMovementsActionDialog.h"
 
 #include <QFrame>
 #include <QScrollArea>
@@ -52,6 +53,7 @@ protected:
     CreateWaitActionDialog *m_createWaitActionDialog;
     CreateSystemCommandActionDialog *m_createSystemCommandActionDialog;
     CreateKeysSequenceActionDialog *m_createKeysSequenceActionDialog;
+    CreateCursorMovementsActionDialog *m_createCursorMovementsActionDialog;
     //TODO CreateCursorMovementsActionDialog
     void buildAddButtonMenu();
     void appendAction(AbstractAction *act);

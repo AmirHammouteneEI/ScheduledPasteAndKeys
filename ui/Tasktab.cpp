@@ -55,6 +55,7 @@ void TaskTab::buildBasicInterface()
     m_createWaitActionDialog = new CreateWaitActionDialog(this);
     m_createKeysSequenceActionDialog = new CreateKeysSequenceActionDialog(this);
     m_createSystemCommandActionDialog = new CreateSystemCommandActionDialog(this);
+    m_createCursorMovementsActionDialog = new CreateCursorMovementsActionDialog(this);
 
     setWidgetResizable(true);
     new QVBoxLayout(this);
@@ -187,6 +188,7 @@ void TaskTab::buildBasicInterface()
     connect(m_createWaitActionDialog, &CreateWaitActionDialog::sendDuration, this, &TaskTab::createWaitActionRequest);
     connect(m_createKeysSequenceActionDialog, &CreateKeysSequenceActionDialog::sendKeysSequence, this, &TaskTab::createKeysSequenceActionRequest);
     connect(m_createSystemCommandActionDialog, &CreateSystemCommandActionDialog::sendSystemCommand, this, &TaskTab::createSystemCommandActionRequest);
+    connect(m_createCursorMovementsActionDialog, &CreateCursorMovementsActionDialog::sendCursorMovements, this, &TaskTab::createCursorMovementsActionRequest);
 
     connect(m_saveButton, &QPushButton::released, this, [=](){ emit saveTaskRequest(m_ID, true); });
 }
@@ -194,18 +196,21 @@ void TaskTab::buildBasicInterface()
 void TaskTab::buildAddButtonMenu()
 {
     auto menu = new QMenu(m_addActionButton);
-    auto creaKeysSeqAct = new QAction(tr("Add a Keys Sequence action..."), menu);
     auto creaPasteAct = new QAction(tr("Add a Paste text action..."),menu);
+    auto creaKeysSeqAct = new QAction(tr("Add a Keys Sequence action..."), menu);
+    auto creaCursorMovsAct = new QAction(tr("Add a Cursor Movements action..."), menu);
     auto creaSysCmdAct = new QAction(tr("Add a System Command action..."),menu);
     auto creaWaitAct = new QAction(tr("Add a Wait action..."), menu);
-    menu->addAction(creaKeysSeqAct);
     menu->addAction(creaPasteAct);
+    menu->addAction(creaKeysSeqAct);
+    menu->addAction(creaCursorMovsAct);
     menu->addAction(creaSysCmdAct);
     menu->addAction(creaWaitAct);
     connect(creaPasteAct, &QAction::triggered, m_createPasteActionDialog, &CreatePasteActionDialog::showDialog);
     connect(creaWaitAct, &QAction::triggered, m_createWaitActionDialog, &CreateWaitActionDialog::showDialog);
     connect(creaKeysSeqAct, &QAction::triggered, m_createKeysSequenceActionDialog, &CreateKeysSequenceActionDialog::showDialog);
     connect(creaSysCmdAct, &QAction::triggered, m_createSystemCommandActionDialog, &CreateSystemCommandActionDialog::showDialog);
+    connect(creaCursorMovsAct, &QAction::triggered, m_createCursorMovementsActionDialog, &CreateCursorMovementsActionDialog::showDialog);
 
     m_addActionButton->setMenu(menu);
     m_addActionButton->setPopupMode(QToolButton::InstantPopup);
@@ -624,9 +629,9 @@ void TaskTab::createSystemCommandActionRequest(QString sysCmdType, QString param
 void TaskTab::createCursorMovementsActionRequest(QString cursorMovementsIdentity)
 {
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
-    auto cursorMovementsFromSettings = settings.value(G_Files::CursorMovementsDataCategory+cursorMovementsIdentity).toMap();
+    auto cursorMovementsFromSettings = settings.value(G_Files::CursorMovementsDataCategory+cursorMovementsIdentity).toList();
     ActionParameters paramKeysSeq;
-    paramKeysSeq.m_cursorMovementsMap = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
+    paramKeysSeq.m_cursorMovementsList = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
     paramKeysSeq.m_dataId = cursorMovementsIdentity;
 
     CursorMovementsAction *cursorMovsAct = new CursorMovementsAction();

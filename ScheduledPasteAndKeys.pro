@@ -23,6 +23,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     ui/CreateLoadTaskDialog.cpp \
+    ui/CursorMovementsSelectedEditDialog.cpp \
+    ui/CursorMovementsTableWidget.cpp \
     ui/DataEditDialog.cpp \
     ui/KeysSelectorDialog.cpp \
     ui/KeysSequenceSelectedEditDialog.cpp \
@@ -36,6 +38,7 @@ SOURCES += \
     ui/actionwidgets/PasteWidget.cpp \
     ui/actionwidgets/SystemCommandWidget.cpp \
     ui/actionwidgets/WaitWidget.cpp \
+    ui/createactiondialog/CreateCursorMovementsActionDialog.cpp \
     ui/createactiondialog/CreateKeysSequenceActionDialog.cpp \
     ui/createactiondialog/CreatePasteActionDialog.cpp \
     ui/createactiondialog/CreateSystemCommandActionDialog.cpp \
@@ -60,6 +63,8 @@ HEADERS += \
     globals.h \
     mainwindow.h \
     ui/CreateLoadTaskDialog.h \
+    ui/CursorMovementsSelectedEditDialog.h \
+    ui/CursorMovementsTableWidget.h \
     ui/DataEditDialog.h \
     ui/KeysSelectorDialog.h \
     ui/KeysSequenceSelectedEditDialog.h \
@@ -73,6 +78,7 @@ HEADERS += \
     ui/actionwidgets/PasteWidget.h \
     ui/actionwidgets/SystemCommandWidget.h \
     ui/actionwidgets/WaitWidget.h \
+    ui/createactiondialog/CreateCursorMovementsActionDialog.h \
     ui/createactiondialog/CreateKeysSequenceActionDialog.h \
     ui/createactiondialog/CreatePasteActionDialog.h \
     ui/createactiondialog/CreateSystemCommandActionDialog.h \
@@ -84,10 +90,12 @@ HEADERS += \
 FORMS += \
     mainwindow.ui \
     ui/CreateLoadTaskDialog.ui \
+    ui/CursorMovementsSelectedEditDialog.ui \
     ui/DataEditDialog.ui \
     ui/KeysSelectorDialog.ui \
     ui/KeysSequenceSelectedEditDialog.ui \
     ui/SentenceSelectedEditDialog.ui \
+    ui/createactiondialog/CreateCursorMovementsActionDialog.ui \
     ui/createactiondialog/CreateKeysSequenceActionDialog.ui \
     ui/createactiondialog/CreatePasteActionDialog.ui \
     ui/createactiondialog/CreateSystemCommandActionDialog.ui \

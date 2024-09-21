@@ -395,16 +395,19 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
             if(cursorMovsaction != nullptr)
             {
                 auto params = cursorMovsaction->generateParameters();
-                QJsonObject writtenMapJObj;
-                for(auto [key,val] : params.m_cursorMovementsMap.asKeyValueRange())
+                QJsonArray writtenListJArr;
+                for(auto mov : params.m_cursorMovementsList)
                 {
+                    if(mov.size() < 4)
+                        continue;
                     QJsonArray jarr;
-                    jarr.append(val.first);
-                    jarr.append(val.second.first);
-                    jarr.append(val.second.second);
-                    writtenMapJObj.insert(QString::number(key),jarr);
+                    jarr.append(mov[0]);
+                    jarr.append(mov[1]);
+                    jarr.append(mov[2]);
+                    jarr.append(mov[3]);
+                    writtenListJArr.append(jarr);
                 }
-                jsonToReturn.insert(G_Files::ActionCursorMovsMap_KeyWord, writtenMapJObj);
+                jsonToReturn.insert(G_Files::ActionCursorMovsMap_KeyWord, writtenListJArr);
                 jsonToReturn.insert(G_Files::ActionCursorMovsId_KeyWord, QJsonValue::fromVariant(params.m_dataId));
                 jsonToReturn.insert(G_Files::ActionCursorMovsLoop_KeyWord, QJsonValue::fromVariant(params.m_timesToRun));
             }
@@ -463,22 +466,18 @@ AbstractAction* TaskTabsManager::jsonToAction(const QJsonObject &jobj)
     else if(type == G_Files::ActionCursorMovementsType_Value)
     {
         actionToReturn = new CursorMovementsAction();
-        auto readMap = jobj.value(G_Files::ActionCursorMovsMap_KeyWord).toVariant().toMap();
-        DelaysMovementsMap actMap;
-        for(auto [key,val] : readMap.asKeyValueRange())
+        auto readList = jobj.value(G_Files::ActionCursorMovsMap_KeyWord).toVariant().toList();
+        CursorMovementsList actList;
+        for(auto el : readList)
         {
-            auto jarr = val.toJsonArray();
-            if(jarr.size()<3)
+            auto jarr = el.toJsonArray();
+            if(jarr.size()<4)
                 continue;
-            CoordinatesPair coordPair;
-            MovementPair movPair;
-            movPair.first = jarr[0].toInt();
-            coordPair.first = jarr[1].toInt();
-            coordPair.second = jarr[2].toInt();
-            movPair.second = coordPair;
-            actMap.insert(key.toInt(),movPair);
+            MovementList movList;
+            movList<< jarr[0].toInt() << jarr[1].toInt() << jarr[2].toInt() << jarr[3].toInt();
+            actList.append(movList);
         }
-        params.m_cursorMovementsMap = actMap;
+        params.m_cursorMovementsList = actList;
         params.m_dataId = jobj.value(G_Files::ActionCursorMovsId_KeyWord).toString();
         params.m_timesToRun = jobj.value(G_Files::ActionCursorMovsLoop_KeyWord).toInt();
     }

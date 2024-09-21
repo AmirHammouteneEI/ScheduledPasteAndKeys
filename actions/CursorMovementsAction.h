@@ -6,7 +6,7 @@
 class CursorMovementsAction : public AbstractAction
 {
 private:
-    DelaysMovementsMap m_cursorMovementsMap;
+    CursorMovementsList m_cursorMovementsList;
     QString m_movementsId;
     int m_timesToRun = 1;
 public:
