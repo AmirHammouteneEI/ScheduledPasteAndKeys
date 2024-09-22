@@ -174,7 +174,7 @@ QString ActionsTools::fromCursorMovsMapToPrintedString(const CursorMovementsList
 CursorMovementsList ActionsTools::fromStandardQMapToCursorMovsMap(const QList<QVariant> &standardList)
 {
     CursorMovementsList curmovsList;
-    for(auto el : standardList)
+    for(auto &el : standardList)
     {
         MovementList movlist = el.value<MovementList>();
         if(movlist.size() >= 4)
@@ -189,7 +189,10 @@ void ActionsTools::moveCursorSimulate(int xPos, int yPos, int time)
     POINT origin;
     bool successGet = GetCursorPos(&origin);
     if(time<= 0 || !successGet)
+    {
+        SetCursorPos(xPos,yPos);
         return;
+    }
 
     auto timesToMove = time / s_cursorFrequency;
     int movedTimes = 1;

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>626</width>
-    <height>484</height>
+    <width>862</width>
+    <height>453</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -143,7 +143,7 @@ If identity is changed (via the Edit Data window), it will make a copy of the en
       <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>150</number>
+      <number>200</number>
      </attribute>
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>true</bool>

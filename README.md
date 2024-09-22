@@ -1,6 +1,6 @@
 # Scheduled PC Tasks
 
-version 0.3 (June 2024)
+version 0.4 (June 2024)
 
 Automatically schedule the actions you would perform on your PC.
 
@@ -12,7 +12,7 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 0.3:
+Details of version 0.4:
 
 Fully functional, next version will include other types of actions
 
@@ -23,11 +23,13 @@ For the moment, those actions are available :
    - Wait
    - Open files, folders, executables, url
    - Run Windows system specific command (shut down, reboot, kill processes, create files...)
-
+   - Mouve Cursor
+   
 The goal in future versions is to include those actions :
 
-   - Mouve Cursor (to destination and in circle)
+   - Assistance functionality to define coordinates for Mouve Cursor
    - Play sounds
+   - Add more Windows system specific command
 
 Feebacks and idea of other actions are very welcome !
 

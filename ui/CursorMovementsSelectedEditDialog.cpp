@@ -115,7 +115,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
 
     QSpinBox *xCoordSpin = new QSpinBox(this);
     xCoordSpin->setMinimum(0);
-    xCoordSpin->setMaximum(9999);//TODO check screen width
+    xCoordSpin->setMaximum(9999);//TODO check screens max width
     xCoordSpin->setSingleStep(1);
     xCoordSpin->setAlignment(Qt::AlignCenter);
     xCoordSpin->setLocale(QLocale::English);
@@ -123,7 +123,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
 
     QSpinBox *yCoordSpin = new QSpinBox(this);
     yCoordSpin->setMinimum(0);
-    yCoordSpin->setMaximum(9999);//TODO check screen height
+    yCoordSpin->setMaximum(9999);//TODO check screens max height
     yCoordSpin->setSingleStep(1);
     yCoordSpin->setAlignment(Qt::AlignCenter);
     yCoordSpin->setLocale(QLocale::English);

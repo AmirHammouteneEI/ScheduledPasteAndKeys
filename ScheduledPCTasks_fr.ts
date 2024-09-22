@@ -46,6 +46,43 @@ layout is null when affecting to ActionWidgetsManager !</translation>
     </message>
 </context>
 <context>
+    <name>CreateCursorMovementsActionDialog</name>
+    <message>
+        <source>Create/Edit a Cursor Movements Action</source>
+        <translation>Créer/Éditer une action Mouvements de curseur</translation>
+    </message>
+    <message>
+        <source>Select the cursor movements set you would like to apply with this action :</source>
+        <translation>Sélectionnez l&apos;ensemble de mouvements de curseur que vous souhaitez affecter à cette action :</translation>
+    </message>
+    <message>
+        <source>Identity</source>
+        <translation>Identité</translation>
+    </message>
+    <message>
+        <source>Cursor movements</source>
+        <translation>Mouvements de curseur</translation>
+    </message>
+    <message>
+        <source>ERROR</source>
+        <translation>ERREUR</translation>
+    </message>
+    <message>
+        <source>No cursor movements set selected</source>
+        <translation>Aucun ensemble de mouvements de curseur sélectionné</translation>
+    </message>
+    <message>
+        <source>Internal Error</source>
+        <translation>Erreur Interne</translation>
+    </message>
+    <message>
+        <source>An internal error occured : err06
+item selected in CreateCursorMovementsActionDialog is null !</source>
+        <translation>Une erreur interne s&apos;est produite : err06
+item selected in CreateCursorMovementsActionDialog is null !</translation>
+    </message>
+</context>
+<context>
     <name>CreateKeysSequenceActionDialog</name>
     <message>
         <source>Create/Edit a Keys Sequence Action</source>
@@ -419,6 +456,103 @@ Veuillez fournir toutes les informations nécessaires.</translation>
     </message>
 </context>
 <context>
+    <name>CursorMovementsSelectedEditDialog</name>
+    <message>
+        <source>Create/Edit/View a cursor movements set</source>
+        <translation>Créer/Éditer/Voir un ensemble de mouvements de curseur</translation>
+    </message>
+    <message>
+        <source>Cursor Movements set&apos;s identity</source>
+        <translation>Identité de l&apos;ensemble de mouvements de curseur</translation>
+    </message>
+    <message>
+        <source>Identity must be alphanumerical.
+If already exists in data, it will replace the entry.
+If identity is changed (via the Edit Data window), it will make a copy of the entry.</source>
+        <translation>L&apos;identité doit être alphanumérique.
+Si elle existe déjà dans les données, cela remplacera l&apos;entrée.
+Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela fera une copie de l&apos;entrée.</translation>
+    </message>
+    <message>
+        <source>Cursor movements :</source>
+        <translation>Mouvements de curseur :</translation>
+    </message>
+    <message>
+        <source>Delay after previous move</source>
+        <translation>Délai après le précédent mouvement</translation>
+    </message>
+    <message>
+        <source>Moving time</source>
+        <translation>Durée de mouvement</translation>
+    </message>
+    <message>
+        <source>Screen x coordinate</source>
+        <translation>Coordonnée x de l&apos;écran</translation>
+    </message>
+    <message>
+        <source>Screen y coordinate</source>
+        <translation>Coordonnée y de l&apos;écran</translation>
+    </message>
+</context>
+<context>
+    <name>CursorMovementsTableWidget</name>
+    <message>
+        <source>Cursor movements set has no identity</source>
+        <translation>L&apos;ensemble de mouvements de curseur n&apos;a pas d&apos;identité</translation>
+    </message>
+    <message>
+        <source>The cursor movement set you tried to add has no identity, cancelled operation.</source>
+        <translation>L&apos;ensemble de mouvements de curseur que vous avez essayé d&apos;ajouter n&apos;a pas d&apos;identité, opération annulée.</translation>
+    </message>
+    <message>
+        <source>No cursor movements set selected</source>
+        <translation>Aucun ensemble de mouvements de curseur sélectionné</translation>
+    </message>
+    <message>
+        <source>Confirm removing cursor movements set</source>
+        <translation>Confirmation de la suppression de l&apos;ensemble de mouvements de curseur</translation>
+    </message>
+    <message>
+        <source>You are about to remove this cursor movements set from data stored, are you sure ?</source>
+        <translation>Vous êtes sur le point de supprimer cet ensemble de mouvements de curseur des données, en êtes-vous sûr ?</translation>
+    </message>
+</context>
+<context>
+    <name>CursorMovementsWidget</name>
+    <message>
+        <source>Loop </source>
+        <translation>Répéter </translation>
+    </message>
+    <message>
+        <source> times</source>
+        <translation> fois</translation>
+    </message>
+    <message>
+        <source>Set how many times this cursor movements should be executed</source>
+        <translation>Déterminez combien de fois ces mouvements de curseur devraient être exécutés</translation>
+    </message>
+    <message>
+        <source>ERROR on access to action</source>
+        <translation>ERREUR sur l&apos;accès à l&apos;action</translation>
+    </message>
+    <message>
+        <source>ERROR</source>
+        <translation>ERREUR</translation>
+    </message>
+    <message>
+        <source>Cursor movements ~</source>
+        <translation>Mouvements de curseur ~</translation>
+    </message>
+    <message>
+        <source>Remaining </source>
+        <translation>Restant </translation>
+    </message>
+    <message>
+        <source> executions</source>
+        <translation> exécutions</translation>
+    </message>
+</context>
+<context>
     <name>DataEditDialog</name>
     <message>
         <source>Sentences</source>
@@ -447,6 +581,18 @@ Veuillez fournir toutes les informations nécessaires.</translation>
     <message>
         <source>Here you can edit the keys sequences that will be used in actions :</source>
         <translation>Vous pouvez ici modifier les séquences de touches qui seront utilisées dans les actions :</translation>
+    </message>
+    <message>
+        <source>Cursor Movements</source>
+        <translation>Mouvements de Curseur</translation>
+    </message>
+    <message>
+        <source>Here you can edit the cursor movements sets that will be used in actions :</source>
+        <translation>Vous pouvez ici modifier les ensembles de mouvements de curseur qui seront utilisés dans les actions :</translation>
+    </message>
+    <message>
+        <source>Cursor movements</source>
+        <translation>Mouvements de curseur</translation>
     </message>
 </context>
 <context>
@@ -772,12 +918,26 @@ Developed by Amir Hammoutene (contact@amirhammoutene.dev)
 initial work on February 2024
 
 version 0.3</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 0.3</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 0.4</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 0.4</translation>
     </message>
 </context>
 <context>
@@ -864,6 +1024,10 @@ Assurez-vous que ce programme est exécuté en tant qu&apos;administrateur (clic
     <message>
         <source>&lt;&gt;</source>
         <translation type="vanished">&lt;&gt;</translation>
+    </message>
+    <message>
+        <source>No cursor movements set has been selected. Please select one.</source>
+        <translation>Aucun ensemble de mouvements de curseur n&apos;a été sélectionné. Veuillez en sélectionner un.</translation>
     </message>
 </context>
 <context>
@@ -1135,6 +1299,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>Add a System Command action...</source>
         <translation>Ajouter une action de Commande système...</translation>
+    </message>
+    <message>
+        <source>Add a Cursor Movements action...</source>
+        <translation>Ajouter une action de Mouvements de curseur...</translation>
     </message>
 </context>
 <context>

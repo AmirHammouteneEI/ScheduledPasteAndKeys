@@ -32,7 +32,7 @@ void CursorMovementsTableWidget::editFromDialogReceived()
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
     auto receivedList = m_cursorMovementsEditDialog->tableCursorMovements();
     QList<QVariant> writtenList;
-    for(auto el : receivedList)
+    for(auto &el : receivedList)
     {
         QVariant variant = QVariant::fromValue(el);
         writtenList.append(variant);
@@ -102,7 +102,7 @@ void CursorMovementsTableWidget::refresh()
             QTableWidgetItem *contentItem = new QTableWidgetItem();
             auto readList = settings.value(G_Files::CursorMovementsDataCategory + id).toList();
             QStringList contentList;
-            for(auto el : readList)
+            for(auto &el : readList)
             {
                 MovementList movelist = el.value<MovementList>();
                 if(movelist.size() >= 4)

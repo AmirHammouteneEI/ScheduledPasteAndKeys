@@ -25,7 +25,7 @@ private slots:
     void onOpenFilename();
     void onDeleteFilename();
     void onRenameFilename();
-
+    //TODO onDuplicateFilename()
 signals:
     void requestOpenNewTab(QString);
     void requestRefreshTabsName();

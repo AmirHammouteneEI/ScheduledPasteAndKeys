@@ -22,8 +22,6 @@ void CursorMovementsAction::runAction() const
         ++it;
     }
 
-    Sleep(100);
-
     --timesToRun;
     if(timesToRun > 0)
         goto begin;
@@ -65,6 +63,6 @@ int CursorMovementsAction::computeOneExecutionDuration()
             returnedValue += mov[0] + mov[1];
     }
 
-    return returnedValue+100; // 0.1 second as the minimal time wait for each execution
+    return returnedValue;
 
 }

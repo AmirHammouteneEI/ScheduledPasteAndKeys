@@ -52,7 +52,7 @@ void KeysSequenceWidget::buildWidget()
         m_loopSpin->setValue(keysseqaction->m_timesToRun);
     }
 
-    m_mainButton->setIcon(QIcon(":/img/cursor.png"));
+    m_mainButton->setIcon(QIcon(":/img/key.png"));
     m_mainButton->setText(tr("Keys sequence >")+id);
     m_mainButton->setToolTip(seqStr);
     m_mainButton->setProperty("keysSeqId", id);

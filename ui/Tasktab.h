@@ -54,7 +54,6 @@ protected:
     CreateSystemCommandActionDialog *m_createSystemCommandActionDialog;
     CreateKeysSequenceActionDialog *m_createKeysSequenceActionDialog;
     CreateCursorMovementsActionDialog *m_createCursorMovementsActionDialog;
-    //TODO CreateCursorMovementsActionDialog
     void buildAddButtonMenu();
     void appendAction(AbstractAction *act);
     unsigned int m_loopedTimes = 0;

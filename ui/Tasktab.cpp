@@ -159,7 +159,9 @@ void TaskTab::buildBasicInterface()
     m_addActionButton->setObjectName("addActionButton");
     m_addActionButton->setText("+");
     m_addActionButton->setStyleSheet("QToolButton{font-size:42px;font-weight:bold;text-align:center;padding:-10px -5px 5px -5px;}");
+
     buildAddButtonMenu();
+
     font.setPointSize(14);
     font.setBold(true);
     m_addActionButton->setFont(font);
@@ -196,11 +198,11 @@ void TaskTab::buildBasicInterface()
 void TaskTab::buildAddButtonMenu()
 {
     auto menu = new QMenu(m_addActionButton);
-    auto creaPasteAct = new QAction(tr("Add a Paste text action..."),menu);
-    auto creaKeysSeqAct = new QAction(tr("Add a Keys Sequence action..."), menu);
-    auto creaCursorMovsAct = new QAction(tr("Add a Cursor Movements action..."), menu);
-    auto creaSysCmdAct = new QAction(tr("Add a System Command action..."),menu);
-    auto creaWaitAct = new QAction(tr("Add a Wait action..."), menu);
+    auto creaPasteAct = new QAction(QIcon(":/img/text.png"),tr("Add a Paste text action..."),menu);
+    auto creaKeysSeqAct = new QAction(QIcon(":/img/key.png"),tr("Add a Keys Sequence action..."), menu);
+    auto creaCursorMovsAct = new QAction(QIcon(":/img/cursor.png"),tr("Add a Cursor Movements action..."), menu);
+    auto creaSysCmdAct = new QAction(QIcon(":/img/systemCommand.png"),tr("Add a System Command action..."),menu);
+    auto creaWaitAct = new QAction(QIcon(":/img/wait.png"),tr("Add a Wait action..."), menu);
     menu->addAction(creaPasteAct);
     menu->addAction(creaKeysSeqAct);
     menu->addAction(creaCursorMovsAct);
