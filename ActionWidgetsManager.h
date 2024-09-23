@@ -17,6 +17,7 @@ public:
     explicit ActionWidgetsManager(QVBoxLayout *parent = nullptr);
     ~ActionWidgetsManager();
     int appendWidget(AbstractActionWidget* actionWidget);
+    void clear();
     void taskStopped();
     void taskScheduled();
 public slots:

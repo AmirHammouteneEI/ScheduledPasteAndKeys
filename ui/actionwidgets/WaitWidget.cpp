@@ -13,7 +13,6 @@ WaitWidget::WaitWidget(QWidget *parent)
 
 void WaitWidget::buildWidget()
 {
-
     if(m_centralWidget == nullptr)
         return;
 

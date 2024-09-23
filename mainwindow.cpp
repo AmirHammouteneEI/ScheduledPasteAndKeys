@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_tasktabsManager = new TaskTabsManager(this);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestOpenNewTab, m_tasktabsManager, &TaskTabsManager::onOpenNewTabRequest);
     connect(ui->tabWidget, &QTabWidget::tabCloseRequested, m_tasktabsManager, &TaskTabsManager::onTabCloseRequest);
-    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabsName, m_tasktabsManager, &TaskTabsManager::onRefreshTabsNameRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager, &TaskTabsManager::onRefreshTabsRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager, &TaskTabsManager::onTaskfilePathChanged);
     connect(ui->pushButton, &QPushButton::released, m_createLoadTaskDialog, &CreateLoadTaskDialog::showDialog);
 
@@ -129,10 +129,10 @@ void MainWindow::geometrySet()
 void MainWindow::loadSettings()
 {
     QSettings settings(G_Files::SettingsFilePath, QSettings::IniFormat);
-    m_windowWidth = settings.value("windowWidth", 480).toInt();
+    m_windowWidth = settings.value("windowWidth", 510).toInt();
     m_windowHeight = settings.value("windowHeight", 800).toInt();
 
-    m_windowWidth = m_windowWidth < 50 ? 480 : m_windowWidth;
+    m_windowWidth = m_windowWidth < 50 ? 510 : m_windowWidth;
     m_windowHeight = m_windowHeight < 50 ? 800 : m_windowHeight;
 
     m_currentThemeName = settings.value("style", "dark").toString();

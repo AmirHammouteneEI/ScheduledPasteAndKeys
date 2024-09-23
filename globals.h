@@ -11,7 +11,7 @@ namespace G_Files {
     inline QString CursorMovementsDataCategory = "cursormovements/";
     inline QString DocumentIdentification_KeyWord = "docType";
     inline QString DocumentIdentification_Value = "ScheduleTask File";
-    inline QString DocumentTaskName_KeyWord = "taskName";
+    inline QString DocumentTaskDescription_KeyWord = "description";
     inline QString DocumentActionsArray_KeyWord = "actions";
     inline QString ActionType_KeyWord = "type";
     inline QString ActionPasteType_Value = "paste";
@@ -62,6 +62,7 @@ namespace G_SystemCommands {
     inline QString ExecuteProgramType = "executeprogram";
     inline QString OpenUrlType = "openurl";
     inline QString OpenFolderType = "openfolder";
+    inline QString CopyFileType = "copyfile";
 }
 
 struct G_Parameters {

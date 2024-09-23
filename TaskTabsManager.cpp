@@ -13,6 +13,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QTabBar>
+#include <QFileInfo>
 
 TaskTabsManager::TaskTabsManager(MainWindow *parent)
     : QObject{parent}, m_mainwindow(parent)
@@ -59,7 +60,8 @@ void TaskTabsManager::onOpenNewTabRequest(QString path)
         return;
     }
 
-    QString taskName = jsonContent.value(G_Files::DocumentTaskName_KeyWord).toString();
+    QFileInfo finfo(fileToOpen.fileName());
+    QString taskName = finfo.fileName().chopped(5);
 
     int tabIfAlreadyOpen = getTabIndexfomId(getIdfromTaskName(taskName));
     if(tabIfAlreadyOpen != -1)
@@ -166,41 +168,27 @@ void TaskTabsManager::forceCloseTask(int id)
 
 }
 
-void TaskTabsManager::onRefreshTabsNameRequest()
+void TaskTabsManager::onRefreshTabsRequest()
 {
     for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd();)
     {
-        QFile fileToOpen(m_taskFilePathsMap.value(it->first));
-        if(!fileToOpen.open(QIODevice::ReadOnly | QIODevice::Text))
+        QFile fileToCheck(m_taskFilePathsMap.value(it->first));
+
+        if(!fileToCheck.exists())
         {
             forceCloseTask((it++)->first);
             continue;
         }
 
-        QString fileContent = fileToOpen.readAll();
-        fileToOpen.close();
-
-        QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
-        if(jsonDoc.isNull())
-        {
-            forceCloseTask((it++)->first);
-            continue;
-        }
-
-        QJsonObject jsonContent = jsonDoc.object();
-
-        if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
-            != G_Files::DocumentIdentification_Value)
-        {
-            forceCloseTask((it++)->first);
-            continue;
-        }
-
-        QString taskName = jsonContent.value(G_Files::DocumentTaskName_KeyWord).toString();
+        QFileInfo finfo(fileToCheck.fileName());
+        QString taskName = finfo.fileName().chopped(5);
 
         it->second->setName(taskName);
 
         m_mainwindow->getTabWidget()->setTabText(getTabIndexfomId(it->first), taskName);
+
+        if(!it->second->m_taskModifiedFromLastSave)
+            createAndLoadTaskObject(it->first);
 
         ++it;
     }
@@ -267,6 +255,8 @@ void TaskTabsManager::createAndLoadTaskObject(int id)
         }
     }
 
+    m_taskTabsMap.value(id)->setDescription(jsonContent.value(G_Files::DocumentTaskDescription_KeyWord).toString());
+
     m_taskTabsMap.value(id)->setTask(task);
 }
 
@@ -317,6 +307,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     }
 
     jsonContent.insert(G_Files::DocumentActionsArray_KeyWord, emptyArray);
+    jsonContent.insert(G_Files::DocumentTaskDescription_KeyWord, task->m_description);
 
     QJsonDocument newJsondoc(jsonContent);
     fileToModify.write(newJsondoc.toJson());
@@ -468,7 +459,7 @@ AbstractAction* TaskTabsManager::jsonToAction(const QJsonObject &jobj)
         actionToReturn = new CursorMovementsAction();
         auto readList = jobj.value(G_Files::ActionCursorMovsMap_KeyWord).toVariant().toList();
         CursorMovementsList actList;
-        for(auto el : readList)
+        for(auto &el : readList)
         {
             auto jarr = el.toJsonArray();
             if(jarr.size()<4)

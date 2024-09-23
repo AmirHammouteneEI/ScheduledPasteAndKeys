@@ -195,7 +195,7 @@ void ActionsTools::moveCursorSimulate(int xPos, int yPos, int time)
     }
 
     auto timesToMove = time / s_cursorFrequency;
-    int movedTimes = 1;
+    int movedTimes = 0;
     while(movedTimes < timesToMove)
     {
         int curX = (movedTimes*(xPos-origin.x) + timesToMove*origin.x)/timesToMove;

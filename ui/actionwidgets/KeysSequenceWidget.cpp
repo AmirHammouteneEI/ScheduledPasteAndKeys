@@ -16,8 +16,10 @@ KeysSequenceWidget::KeysSequenceWidget(QWidget *parent)
 
 void KeysSequenceWidget::buildWidget()
 {
+    if(m_centralWidget == nullptr)
+        return;
     auto centralGridLayout = qobject_cast<QGridLayout*>(m_centralWidget->layout());
-    if(m_centralWidget == nullptr || centralGridLayout == nullptr)
+    if(centralGridLayout == nullptr)
         return;
 
     auto loopFrame = new QFrame(m_centralWidget);

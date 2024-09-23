@@ -19,6 +19,7 @@ class CreateSystemCommandActionDialog : public QDialog
     QPushButton *m_option2Button;
     getFolderPathDialog *m_folderPathDialog;
     getFilePathDialog *m_filePathDialog;
+    getFilePathDialog *m_filePathDialog2;
     void activateButtons();
 public:
     explicit CreateSystemCommandActionDialog(QWidget *parent = nullptr);
