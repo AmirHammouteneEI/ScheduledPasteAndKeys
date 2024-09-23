@@ -197,7 +197,7 @@ item selected in SelectSentenceDialog is null !</translation>
     </message>
     <message>
         <source>You are trying to rename this file with the same old name. Canceled operation.</source>
-        <translation>Vous tentez de renommer ce fichier avec le même ancien nom. Opération annulée.</translation>
+        <translation type="vanished">Vous tentez de renommer ce fichier avec le même ancien nom. Opération annulée.</translation>
     </message>
     <message>
         <source>Cannot delete file with same name</source>
@@ -209,11 +209,11 @@ item selected in SelectSentenceDialog is null !</translation>
     </message>
     <message>
         <source>Cannot open file to rename</source>
-        <translation>Impossible d&apos;ouvrir le fichier pour le renommer</translation>
+        <translation type="vanished">Impossible d&apos;ouvrir le fichier pour le renommer</translation>
     </message>
     <message>
         <source>File format error</source>
-        <translation>Erreur de format de fichier</translation>
+        <translation type="vanished">Erreur de format de fichier</translation>
     </message>
     <message>
         <source>Confirm deleting file</source>
@@ -228,6 +228,30 @@ item selected in SelectSentenceDialog is null !</translation>
     <message>
         <source>Cannot delete file</source>
         <translation>Impossible de supprimer le fichier</translation>
+    </message>
+    <message>
+        <source>duplicate...</source>
+        <translation>dupliquer...</translation>
+    </message>
+    <message>
+        <source>rename</source>
+        <translation>renomer</translation>
+    </message>
+    <message>
+        <source>duplicate</source>
+        <translation>dupliquer</translation>
+    </message>
+    <message>
+        <source>You are trying to </source>
+        <translation>Vous essayez de </translation>
+    </message>
+    <message>
+        <source> this file with the same old name. Canceled operation.</source>
+        <translation> ce fichier avec le même ancien nom. Opération annulée.</translation>
+    </message>
+    <message>
+        <source>Cannot duplicate this file</source>
+        <translation>Impossible de dupliquer le fichier</translation>
     </message>
 </context>
 <context>
@@ -418,6 +442,10 @@ Veuillez fournir toutes les informations nécessaires.</translation>
     <message>
         <source>Set the URL you would like to open :</source>
         <translation>Définissez l&apos;URL que vous souhaitez ouvrir :</translation>
+    </message>
+    <message>
+        <source>Copy a file</source>
+        <translation>Copier un fichier</translation>
     </message>
 </context>
 <context>
@@ -1195,6 +1223,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
         <source>Log off user session</source>
         <translation>Déconnecter la session utilisateur</translation>
     </message>
+    <message>
+        <source>Copy a file</source>
+        <translation>Copier un fichier</translation>
+    </message>
 </context>
 <context>
     <name>TaskTab</name>
@@ -1303,6 +1335,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>Add a Cursor Movements action...</source>
         <translation>Ajouter une action de Mouvements de curseur...</translation>
+    </message>
+    <message>
+        <source>description...</source>
+        <translation>description...</translation>
     </message>
 </context>
 <context>

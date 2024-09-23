@@ -26,6 +26,7 @@ CreateLoadTaskDialog::CreateLoadTaskDialog(QWidget *parent)
 
     connect(ui->renameButton, &QPushButton::released, this, &CreateLoadTaskDialog::onRenameFilename);
     connect(ui->deleteButton, &QPushButton::released, this, &CreateLoadTaskDialog::onDeleteFilename);
+    connect(ui->duplicateButton, &QPushButton::released, this, &CreateLoadTaskDialog::onDuplicateFilename);
 }
 
 CreateLoadTaskDialog::~CreateLoadTaskDialog()
@@ -67,7 +68,6 @@ void CreateLoadTaskDialog::accept()
 
     QJsonObject newContentJson;
     newContentJson.insert(G_Files::DocumentIdentification_KeyWord,QJsonValue::fromVariant(G_Files::DocumentIdentification_Value));
-    newContentJson.insert(G_Files::DocumentTaskName_KeyWord,QJsonValue::fromVariant(ui->lineEdit->text()));
     QJsonArray emptyArray;
     newContentJson.insert(G_Files::DocumentActionsArray_KeyWord, emptyArray);
 
@@ -110,8 +110,25 @@ void CreateLoadTaskDialog::onRenameFilename()
     renameFilename(oldFileName, oldFilePath);
 }
 
-void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QString &oldFilePath)
+void CreateLoadTaskDialog::onDuplicateFilename()
 {
+    if(ui->tableWidget->selectedItems().count() == 0)
+    {
+        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected());
+        return;
+    }
+
+    QString oldFileName = ui->tableWidget->selectedItems().at(0)->text();
+    QString oldFilePath = QDir::currentPath()+"/"+s_tasksFolder+oldFileName;
+
+    renameFilename(oldFileName, oldFilePath, true);
+}
+
+void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QString &oldFilePath, bool duplicate)
+{
+    QString actionName = tr("rename");
+    if(duplicate)
+        actionName = tr("duplicate");
 
     bool okButPushed;
     QString newFileName = QInputDialog::getText(this, tr("New name for this file"),tr("Please choose a new name for this file : \n")+oldFileName.chopped(5),
@@ -130,7 +147,7 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
     if(newFileName == oldFileName.chopped(5))
     {
         QMessageBox::warning(this, tr("Same filename"),
-          tr("You are trying to rename this file with the same old name. Canceled operation."));
+          tr("You are trying to ")+actionName+tr(" this file with the same old name. Canceled operation."));
         return;
     }
 
@@ -152,48 +169,28 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
         }
     }
 
-    if(!QFile::rename(oldFilePath, filePathChosen))
+    if(!duplicate)
     {
-        QMessageBox::warning(this, tr("Cannot rename this file"), G_Sentences::OperationInterference());
-        return;
+        if(!QFile::rename(oldFilePath, filePathChosen))
+        {
+            QMessageBox::warning(this, tr("Cannot rename this file"), G_Sentences::OperationInterference());
+            return;
+        }
     }
-
-    QFile fileToModify(filePathChosen);
-    if(!fileToModify.open(QIODevice::ReadWrite | QIODevice::Text))
+    else
     {
-        QMessageBox::warning(this, tr("Cannot open file to rename"), G_Sentences::OperationInterference());
-        return;
+        if(!QFile::copy(oldFilePath, filePathChosen))
+        {
+            QMessageBox::warning(this, tr("Cannot duplicate this file"), G_Sentences::OperationInterference());
+            return;
+        }
     }
-
-    QString fileContent = fileToModify.readAll();
-
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
-    if(jsonDoc.isNull())
-    {
-        QMessageBox::warning(this, tr("File format error"), G_Sentences::FileParsingError());
-        return;
-    }
-
-    QJsonObject jsonContent = jsonDoc.object();
-
-    if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
-        != G_Files::DocumentIdentification_Value)
-    {
-        QMessageBox::warning(this, tr("File format error"), G_Sentences::FileParsingError());
-        return;
-    }
-
-    fileToModify.resize(0);
-
-    jsonContent.insert(G_Files::DocumentTaskName_KeyWord,QJsonValue::fromVariant(newFileName)) ;
-
-    jsonDoc.setObject(jsonContent);
-    fileToModify.write(jsonDoc.toJson());
-    fileToModify.close();
 
     fillExistingTasksTable();
-    emit taskfilePathChanged(oldFilePath,filePathChosen);
-    emit requestRefreshTabsName();
+    if(!duplicate)
+        emit taskfilePathChanged(oldFilePath,filePathChosen);
+
+    emit requestRefreshTabs();
 }
 
 void CreateLoadTaskDialog::onDeleteFilename()
@@ -227,7 +224,7 @@ void CreateLoadTaskDialog::onDeleteFilename()
 
     fillExistingTasksTable();
 
-    emit requestRefreshTabsName();
+    emit requestRefreshTabs();
 }
 
 

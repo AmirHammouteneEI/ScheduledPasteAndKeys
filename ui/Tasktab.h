@@ -18,6 +18,7 @@
 #include <QToolButton>
 #include <QTimer>
 #include <QSpinBox>
+#include <QPlainTextEdit>
 
 enum class ScheduleState{
     NotScheduled,
@@ -31,6 +32,7 @@ class TaskTab : public QScrollArea
 protected:
     QString m_name;
     int m_ID;
+    QString m_description;
     QWidget *m_mainWidget;
     QFrame *m_actionsFrame;
     QVBoxLayout *m_actionsLayout;
@@ -39,12 +41,14 @@ protected:
     void setTask(Task *task);
     AbstractActionWidget *createActionWidget(AbstractAction *act);
     QLabel *m_nameLabel;
+    QPlainTextEdit *m_descriptionEdit;
     QPushButton *m_scheduleButton;
     QPushButton *m_stopButton;
     QToolButton *m_addActionButton;
     QToolButton *m_loopButton;
     QLabel *m_delayChrono;
     void setName(const QString & newname);
+    void setDescription(const QString & newdescription);
     getDelayDialog *m_getDelayDialog;
     QDateTime m_datetimeOfRun;
     ActionWidgetsManager *m_actionWidgetsManager;

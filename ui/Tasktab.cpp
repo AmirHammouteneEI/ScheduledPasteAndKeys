@@ -37,16 +37,12 @@ TaskTab::TaskTab(QWidget *parent, const QString &name)
 
 TaskTab::~TaskTab()
 {
+    m_actionWidgetsManager->deleteLater();
     if(m_task != nullptr)
     {
         delete m_task;
         m_task = nullptr;
     }
-
-    m_getDelayDialog->deleteLater();
-    m_mainWidget->deleteLater();
-    layout()->deleteLater();
-    m_actionWidgetsManager->deleteLater();
 }
 
 void TaskTab::buildBasicInterface()
@@ -66,7 +62,6 @@ void TaskTab::buildBasicInterface()
     //-- Top widget with Schedule button
     auto topWidget = new QFrame(m_mainWidget);
     auto topGridLayout = new QGridLayout(topWidget);
-    topGridLayout->setSizeConstraint(QLayout::SetMinimumSize);
     m_nameLabel = new QLabel(m_name,topWidget);
     m_nameLabel->setWordWrap(true);
     m_nameLabel->setAlignment(Qt::AlignCenter);
@@ -74,6 +69,11 @@ void TaskTab::buildBasicInterface()
     m_saveButton = new QPushButton(QIcon(":/img/save.png"),"", topWidget);
     m_saveButton->setFlat(true);
     m_saveButton->setToolTip(tr("Save changes"));
+    m_descriptionEdit = new QPlainTextEdit(topWidget);
+    m_descriptionEdit->setPlaceholderText(tr("description..."));
+    m_descriptionEdit->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    m_descriptionEdit->setMinimumWidth(300);
+    m_descriptionEdit->setMaximumHeight(60);
     auto scheduleAndStopWidget = new QWidget(topWidget);
     auto scheduleAndStopLayout = new QHBoxLayout(scheduleAndStopWidget);
     m_scheduleButton = new QPushButton(tr("Schedule the Task"), topWidget);
@@ -136,15 +136,17 @@ void TaskTab::buildBasicInterface()
     m_delayChrono->setFont(font);
     topGridLayout->setContentsMargins(1,1,1,1);
     topGridLayout->setSpacing(2);
-    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),0,0);
+    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::Minimum,QSizePolicy::Minimum),0,0);
     topGridLayout->addWidget(m_nameLabel,1,1,1,2, Qt::AlignCenter);
-    topGridLayout->addWidget(m_saveButton,1,3, Qt::AlignRight | Qt::AlignVCenter);
-    topGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Minimum,QSizePolicy::Minimum),2,1);
-    topGridLayout->addWidget(scheduleAndStopWidget,3,1,1,2, Qt::AlignCenter);
-    topGridLayout->addWidget(m_delayChrono,4,1,1,2, Qt::AlignCenter);
-    topGridLayout->addWidget(m_runOptionsWidget,5,1,1,2, Qt::AlignCenter);
-    topGridLayout->addWidget(m_loopedTimesLabel,6,1,1,2, Qt::AlignCenter);
-    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),7,3);
+    topGridLayout->addWidget(m_saveButton,1,2, Qt::AlignCenter);
+    topGridLayout->addWidget(m_descriptionEdit,2,1,1,2, Qt::AlignCenter);
+    topGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Minimum,QSizePolicy::Minimum),3,1);
+    topGridLayout->addWidget(scheduleAndStopWidget,4,1,1,2, Qt::AlignCenter);
+    topGridLayout->addWidget(m_delayChrono,5,1,1,2, Qt::AlignCenter);
+    topGridLayout->addWidget(m_runOptionsWidget,6,1,1,2, Qt::AlignCenter);
+    topGridLayout->addWidget(m_loopedTimesLabel,7,1,1,2, Qt::AlignCenter);
+    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::Minimum,QSizePolicy::Minimum),8,3);
+    topGridLayout->setSizeConstraint(QLayout::SetMinimumSize);
 
     //-- Middle widget with list of actions
     m_actionsFrame = new QFrame(m_mainWidget);
@@ -170,7 +172,8 @@ void TaskTab::buildBasicInterface()
     m_mainWidget->layout()->addWidget(topWidget);
     m_mainWidget->layout()->addWidget(m_actionsFrame);
     m_mainWidget->layout()->addWidget(bottomWidget);
-    m_mainWidget->layout()->addItem(new QSpacerItem(20,20,QSizePolicy::Expanding,QSizePolicy::Expanding));
+    m_mainWidget->layout()->addItem(new QSpacerItem(20,20,QSizePolicy::Minimum,QSizePolicy::Expanding));
+    m_mainWidget->layout()->setSizeConstraint(QLayout::SetMinimumSize);
 
     setWidget(m_mainWidget);
 
@@ -192,7 +195,9 @@ void TaskTab::buildBasicInterface()
     connect(m_createSystemCommandActionDialog, &CreateSystemCommandActionDialog::sendSystemCommand, this, &TaskTab::createSystemCommandActionRequest);
     connect(m_createCursorMovementsActionDialog, &CreateCursorMovementsActionDialog::sendCursorMovements, this, &TaskTab::createCursorMovementsActionRequest);
 
-    connect(m_saveButton, &QPushButton::released, this, [=](){ emit saveTaskRequest(m_ID, true); });
+    connect(m_saveButton, &QPushButton::released, this, [&](){ emit saveTaskRequest(m_ID, true); });
+
+    connect(m_descriptionEdit, &QPlainTextEdit::textChanged, this, &TaskTab::anyActionChangedParam);
 }
 
 void TaskTab::buildAddButtonMenu()
@@ -226,6 +231,7 @@ void TaskTab::setTask(Task *task)
         m_task = nullptr;
     }
 
+    m_actionWidgetsManager->clear();
     m_task = task;
 
     for(auto it = m_task->m_actionsOrderedList.begin(); it != m_task->m_actionsOrderedList.end(); ++it)
@@ -296,6 +302,12 @@ void TaskTab::setName(const QString &newname)
     m_nameLabel->setText(m_name);
 }
 
+void TaskTab::setDescription(const QString &newdescription)
+{
+    m_description = newdescription;
+    m_descriptionEdit->setPlainText(newdescription);
+}
+
 void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
 {
     m_datetimeOfRun = QDateTime::currentDateTime().addSecs(delayInSeconds);
@@ -303,6 +315,8 @@ void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
     m_scheduleTimer->start();
     m_scheduleState = ScheduleState::ScheduledInDelay;
 
+    m_descriptionEdit->setEnabled(false);
+    m_descriptionEdit->setToolTip(m_descriptionEdit->toPlainText());
     m_scheduleButton->setEnabled(false);
     m_stopButton->setEnabled(true);
     m_addActionButton->setEnabled(false);
@@ -349,6 +363,7 @@ void TaskTab::stopPushed()
     // Stop button is also connect to quitting the thread in TaskTab::runTaskThread()
     m_scheduleTimer->stop();
     m_scheduleState = ScheduleState::NotScheduled;
+    m_descriptionEdit->setEnabled(true);
     m_scheduleButton->setEnabled(true);
     m_stopButton->setEnabled(false);
     m_addActionButton->setEnabled(true);
@@ -420,6 +435,7 @@ void TaskTab::refreshScheduleText()
 
 void TaskTab::anyActionChangedParam()
 {
+    m_description = m_descriptionEdit->toPlainText();
     setTaskModified(true);
 }
 

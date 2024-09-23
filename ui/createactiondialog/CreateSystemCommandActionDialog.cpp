@@ -22,6 +22,7 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     ui->executeprogramButton->setProperty("type", "executeprogram");
     ui->openurlButton->setProperty("type", "openurl");
     ui->openfolderButton->setProperty("type", "openfolder");
+    ui->copyfileButton->setProperty("type", "copyfile");
 
     m_option1Button = new QPushButton(this);
     m_option2Button = new QPushButton(this);
@@ -34,6 +35,7 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
 
     m_folderPathDialog = new getFolderPathDialog(this);
     m_filePathDialog = new getFilePathDialog(this);
+    m_filePathDialog2 = new getFilePathDialog(this);
 
     connect(ui->shutdownButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->restartButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
@@ -48,6 +50,7 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     connect(ui->executeprogramButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->openurlButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->openfolderButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
+    connect(ui->copyfileButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
 }
 
 CreateSystemCommandActionDialog::~CreateSystemCommandActionDialog()
@@ -137,13 +140,13 @@ void CreateSystemCommandActionDialog::activateButtons()
         m_option1Button->setEnabled(true);
         m_option2Button->setEnabled(true);
         connect(m_option1Button,&QPushButton::released, m_folderPathDialog, &getFolderPathDialog::showDialog);
-        connect(m_folderPathDialog, &getFolderPathDialog::sendDirectory,this,[=](QString dir)
+        connect(m_folderPathDialog, &getFolderPathDialog::sendDirectory,this,[&](const QString &dir)
                 {
                     m_option1Button->setText(dir);
                     m_option1Button->setToolTip(dir);
                 });
 
-        connect(m_option2Button,&QPushButton::released, this, [=]()
+        connect(m_option2Button,&QPushButton::released, this, [&]()
                 {
                     bool ok;
                     QString val = QInputDialog::getText(this,tr("Set the filename"),tr("Set the filename (existing or not) for the operation you would like to proceed :"),QLineEdit::Normal,m_option2Button->text(),&ok);
@@ -157,7 +160,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
         connect(m_option1Button,&QPushButton::released, m_folderPathDialog, &getFolderPathDialog::showDialog);
-        connect(m_folderPathDialog, &getFolderPathDialog::sendDirectory,this,[=](QString dir)
+        connect(m_folderPathDialog, &getFolderPathDialog::sendDirectory,this,[&](const QString & dir)
                 {
                     m_option1Button->setText(dir);
                     m_option1Button->setToolTip(dir);
@@ -167,7 +170,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
 
-        connect(m_option1Button,&QPushButton::released, this, [=]()
+        connect(m_option1Button,&QPushButton::released, this, [&]()
                 {
                     bool ok;
                     QString val = QInputDialog::getText(this,tr("Set the process name"),tr("Set the process name (including .exe) you would like to schedule to kill :"),QLineEdit::Normal,m_option1Button->text(),&ok);
@@ -181,7 +184,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
         connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);
-        connect(m_filePathDialog, &getFilePathDialog::sendFile,this,[=](QString dir)
+        connect(m_filePathDialog, &getFilePathDialog::sendFile,this,[&](const QString & dir)
                 {
                     m_option1Button->setText(dir);
                     m_option1Button->setToolTip(dir);
@@ -192,13 +195,13 @@ void CreateSystemCommandActionDialog::activateButtons()
         m_option1Button->setEnabled(true);
         m_option2Button->setEnabled(true);
         connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);
-        connect(m_filePathDialog, &getFilePathDialog::sendFile,this,[=](QString dir)
+        connect(m_filePathDialog, &getFilePathDialog::sendFile,this,[&](const QString & dir)
                 {
                     m_option1Button->setText(dir);
                     m_option1Button->setToolTip(dir);
                 });
 
-        connect(m_option2Button,&QPushButton::released, this, [=]()
+        connect(m_option2Button,&QPushButton::released, this, [&]()
                 {
                     bool ok;
                     QString val = QInputDialog::getText(this,tr("Set optional arguments"),tr("If needed, set arguments for the execution of the program you would like to run :"),QLineEdit::Normal,m_option2Button->text(),&ok);
@@ -212,7 +215,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
 
-        connect(m_option1Button,&QPushButton::released, this, [=]()
+        connect(m_option1Button,&QPushButton::released, this, [&]()
                 {
                     bool ok;
                     QString val = QInputDialog::getText(this,tr("Set the URL"),tr("Set the URL you would like to open :"),QLineEdit::Normal,m_option1Button->text(),&ok);
@@ -222,5 +225,23 @@ void CreateSystemCommandActionDialog::activateButtons()
                     m_option1Button->setToolTip(val);
                 });
     }
-    // if QuitSelfProgramType,ShutDownType,RestartType,LogOffType no need of option
+    if(m_type == G_SystemCommands::CopyFileType)
+    {
+        m_option1Button->setEnabled(true);
+        m_option2Button->setEnabled(true);
+        connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);
+        connect(m_filePathDialog, &getFilePathDialog::sendFile,this,[&](const QString &dir)
+                {
+                    m_option1Button->setText(dir);
+                    m_option1Button->setToolTip(dir);
+                });
+
+        connect(m_option2Button,&QPushButton::released, m_filePathDialog2, &getFilePathDialog::showDialog);
+        connect(m_filePathDialog2, &getFilePathDialog::sendFile,this,[&](const QString &dir)
+                {
+                    m_option2Button->setText(dir);
+                    m_option2Button->setToolTip(dir);
+                });
+    }
+    // if QuitSelfProgramType,ShutDownType,RestartType,LogOffType no need of any option
 }

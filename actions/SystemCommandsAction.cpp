@@ -92,6 +92,11 @@ void SystemCommandAction::runAction() const
             QDesktopServices::openUrl(QUrl::fromLocalFile(m_param1));
         }
         break;
+        case SystemCommandType::CopyOneFile:
+        {
+            QFile::copy(m_param1,m_param2);
+        }
+        break;
         default:
         break;
     }
@@ -135,6 +140,8 @@ void SystemCommandAction::setParameters(const ActionParameters &param)
         e_sysCommandType = SystemCommandType::OpenUrl;
     else if(param.m_sysCmdTypeStr == G_SystemCommands::OpenFolderType)
         e_sysCommandType = SystemCommandType::OpenFolder;
+    else if(param.m_sysCmdTypeStr == G_SystemCommands::CopyFileType)
+        e_sysCommandType = SystemCommandType::CopyOneFile;
     else
         e_sysCommandType = SystemCommandType::Undefined;
 
@@ -190,6 +197,8 @@ ActionParameters SystemCommandAction::generateParameters() const
         param.m_sysCmdTypeStr = G_SystemCommands::OpenUrlType;
     else if(e_sysCommandType == SystemCommandType::OpenFolder)
         param.m_sysCmdTypeStr = G_SystemCommands::OpenFolderType;
+    else if(e_sysCommandType == SystemCommandType::CopyOneFile)
+        param.m_sysCmdTypeStr = G_SystemCommands::CopyFileType;
     else
         param.m_sysCmdTypeStr = G_SystemCommands::UndefinedType;
 

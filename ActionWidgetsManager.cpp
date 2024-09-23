@@ -17,7 +17,7 @@ ActionWidgetsManager::ActionWidgetsManager(QVBoxLayout *parent)
 
 ActionWidgetsManager::~ActionWidgetsManager()
 {
-    qDeleteAll(m_actionWidgetsMap);
+    clear();
 }
 
 int ActionWidgetsManager::appendWidget(AbstractActionWidget *actionWidget)
@@ -29,6 +29,13 @@ int ActionWidgetsManager::appendWidget(AbstractActionWidget *actionWidget)
     //m_layout->addWidget(actionWidget);
     m_actionWidgetsDisplayOrderedList.append(actionWidget);
     return m_actionWidgetsMap.count();
+}
+
+void ActionWidgetsManager::clear()
+{
+    qDeleteAll(m_actionWidgetsMap);
+    m_actionWidgetsMap.clear();
+    m_actionWidgetsDisplayOrderedList.clear();
 }
 
 void ActionWidgetsManager::fullRefreshActionWidgets()

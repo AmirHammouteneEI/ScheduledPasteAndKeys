@@ -99,6 +99,8 @@ QString SystemCommandWidget::fromSysCmdTypeToDiplayedStr(SystemCommandType t)
         sysCmdTypeStr = tr("Open an URL");
     else if(t == SystemCommandType::OpenFolder)
         sysCmdTypeStr = tr("Open a folder");
+    else if(t == SystemCommandType::CopyOneFile)
+        sysCmdTypeStr = tr("Copy a file");
 
     return sysCmdTypeStr;
 }

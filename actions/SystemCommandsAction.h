@@ -19,6 +19,7 @@ enum class SystemCommandType {
     TakeScreenshot,
     PrintActualScreen,
     OpenFile,
+    CopyOneFile,
     ExecuteProgram,
     OpenUrl,
     OpenFolder

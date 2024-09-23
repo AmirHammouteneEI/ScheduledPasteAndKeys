@@ -19,16 +19,16 @@ public:
     void showDialog();
 
 public:
-    void renameFilename(const QString &oldFileName, const QString &oldFilePath);
+    void renameFilename(const QString &oldFileName, const QString &oldFilePath, bool duplicate = false);
 private slots:
     void accept() override;
     void onOpenFilename();
     void onDeleteFilename();
     void onRenameFilename();
-    //TODO onDuplicateFilename()
+    void onDuplicateFilename();
 signals:
     void requestOpenNewTab(QString);
-    void requestRefreshTabsName();
+    void requestRefreshTabs();
     void taskfilePathChanged(QString,QString);
 
 private:
