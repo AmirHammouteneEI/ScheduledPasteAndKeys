@@ -95,6 +95,7 @@ public slots:
     void createCursorMovementsActionRequest(QString cursorMovementsIdentity); // not const & because it's a slot, will make copy evenif
 signals:
     void saveTaskRequest(int taskId, bool verb);
+    void refreshTabRunIconRequest();
 
     friend class TaskTabsManager;
 };
