@@ -6,6 +6,7 @@
 #include "actions/KeysSequenceAction.h"
 #include "actions/SystemCommandsAction.h"
 #include "actions/CursorMovementsAction.h"
+#include <qt_windows.h>
 
 #include <QApplication>
 #include <QMessageBox>
@@ -174,7 +175,7 @@ void TaskTabsManager::onRefreshTabsRequest()
     {
         QFile fileToCheck(m_taskFilePathsMap.value(it->first));
 
-        if(!fileToCheck.exists())
+        if(!fileToCheck.exists() && !it->second->m_taskModifiedFromLastSave && it->second->m_scheduleState == ScheduleState::NotScheduled)
         {
             forceCloseTask((it++)->first);
             continue;
@@ -187,8 +188,11 @@ void TaskTabsManager::onRefreshTabsRequest()
 
         m_mainwindow->getTabWidget()->setTabText(getTabIndexfomId(it->first), taskName);
 
-        if(!it->second->m_taskModifiedFromLastSave)
+        if(!it->second->m_taskModifiedFromLastSave && it->second->m_scheduleState == ScheduleState::NotScheduled)
+        {
+            it->second->m_stopButton->animateClick();
             createAndLoadTaskObject(it->first);
+        }
 
         ++it;
     }

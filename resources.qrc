@@ -45,5 +45,6 @@
         <file>img/systemCommand.png</file>
         <file>img/browseFolder.png</file>
         <file>img/cursor.png</file>
+        <file>img/play.png</file>
     </qresource>
 </RCC>

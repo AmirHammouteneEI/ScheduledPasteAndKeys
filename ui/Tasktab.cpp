@@ -18,6 +18,7 @@
 #include <QApplication>
 #include <QMenu>
 #include <QSettings>
+#include "mainwindow.h"
 
 TaskTab::TaskTab(QWidget *parent, const QString &name)
     : QScrollArea{parent},m_name(name)
@@ -33,6 +34,17 @@ TaskTab::TaskTab(QWidget *parent, const QString &name)
     m_scheduleTimer = new QTimer(this);
     m_scheduleTimer->setSingleShot(true);
     connect(m_scheduleTimer, &QTimer::timeout, this, &TaskTab::runTaskThread);
+
+    connect(this,&TaskTab::refreshTabRunIconRequest, [=](){
+        auto mainWindow = qobject_cast<MainWindow*>(parent);
+        if(mainWindow == nullptr || mainWindow->getTabWidget() == nullptr)
+            return;
+
+        if(m_scheduleState == ScheduleState::NotScheduled)
+            mainWindow->getTabWidget()->setTabIcon(mainWindow->getTabWidget()->indexOf(this),QIcon());
+        else
+            mainWindow->getTabWidget()->setTabIcon(mainWindow->getTabWidget()->indexOf(this),QIcon(":/img/play.png"));
+    });
 }
 
 TaskTab::~TaskTab()
@@ -71,7 +83,7 @@ void TaskTab::buildBasicInterface()
     m_saveButton->setToolTip(tr("Save changes"));
     m_descriptionEdit = new QPlainTextEdit(topWidget);
     m_descriptionEdit->setPlaceholderText(tr("description..."));
-    m_descriptionEdit->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    m_descriptionEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::MinimumExpanding);
     m_descriptionEdit->setMinimumWidth(300);
     m_descriptionEdit->setMaximumHeight(60);
     auto scheduleAndStopWidget = new QWidget(topWidget);
@@ -137,8 +149,8 @@ void TaskTab::buildBasicInterface()
     topGridLayout->setContentsMargins(1,1,1,1);
     topGridLayout->setSpacing(2);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::Minimum,QSizePolicy::Minimum),0,0);
-    topGridLayout->addWidget(m_nameLabel,1,1,1,2, Qt::AlignCenter);
-    topGridLayout->addWidget(m_saveButton,1,2, Qt::AlignCenter);
+    topGridLayout->addWidget(m_nameLabel,1,1,1,1, Qt::AlignRight);
+    topGridLayout->addWidget(m_saveButton,1,2, Qt::AlignRight);
     topGridLayout->addWidget(m_descriptionEdit,2,1,1,2, Qt::AlignCenter);
     topGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Minimum,QSizePolicy::Minimum),3,1);
     topGridLayout->addWidget(scheduleAndStopWidget,4,1,1,2, Qt::AlignCenter);
@@ -324,6 +336,7 @@ void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
     m_loopedTimes = 0;
     m_loopedTimesLabel->setText(tr("Looped ")+"0"+tr(" times"));
     refreshScheduleText();
+    emit refreshTabRunIconRequest();
 
     m_actionWidgetsManager->taskScheduled();
 }
@@ -371,6 +384,7 @@ void TaskTab::stopPushed()
     if(m_loopButton->isChecked())
         m_timesToRunWidget->setEnabled(false);
     refreshScheduleText();
+    emit refreshTabRunIconRequest();
     m_actionWidgetsManager->taskStopped();
 }
 
