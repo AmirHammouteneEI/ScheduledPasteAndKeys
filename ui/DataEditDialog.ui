@@ -797,14 +797,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KeysSequencesTableWidget</class>
-   <extends>QTableWidget</extends>
-   <header location="global">ui/KeysSequencesTableWidget.h</header>
-  </customwidget>
-  <customwidget>
    <class>CursorMovementsTableWidget</class>
    <extends>QTableWidget</extends>
    <header location="global">ui/CursorMovementsTableWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KeysSequencesTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header location="global">ui/KeysSequencesTableWidget.h</header>
   </customwidget>
   <customwidget>
    <class>SentencesTableWidget</class>

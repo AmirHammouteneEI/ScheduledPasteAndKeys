@@ -77,10 +77,12 @@ void TaskTab::buildBasicInterface()
     m_nameLabel = new QLabel(m_name,topWidget);
     m_nameLabel->setWordWrap(true);
     m_nameLabel->setAlignment(Qt::AlignCenter);
-    m_nameLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+    m_nameLabel->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
+    m_nameLabel->setMinimumWidth(400);
     m_saveButton = new QPushButton(QIcon(":/img/save.png"),"", topWidget);
     m_saveButton->setFlat(true);
     m_saveButton->setToolTip(tr("Save changes"));
+    m_saveButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     m_descriptionEdit = new QPlainTextEdit(topWidget);
     m_descriptionEdit->setPlaceholderText(tr("description..."));
     m_descriptionEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::MinimumExpanding);
@@ -149,10 +151,10 @@ void TaskTab::buildBasicInterface()
     topGridLayout->setContentsMargins(1,1,1,1);
     topGridLayout->setSpacing(2);
     topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::Minimum,QSizePolicy::Minimum),0,0);
-    topGridLayout->addWidget(m_nameLabel,1,1,1,1, Qt::AlignRight);
+    topGridLayout->addWidget(m_nameLabel,1,1, Qt::AlignCenter);
     topGridLayout->addWidget(m_saveButton,1,2, Qt::AlignRight);
     topGridLayout->addWidget(m_descriptionEdit,2,1,1,2, Qt::AlignCenter);
-    topGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Minimum,QSizePolicy::Minimum),3,1);
+    topGridLayout->addItem(new QSpacerItem(5,5,QSizePolicy::Fixed,QSizePolicy::Fixed),3,1);
     topGridLayout->addWidget(scheduleAndStopWidget,4,1,1,2, Qt::AlignCenter);
     topGridLayout->addWidget(m_delayChrono,5,1,1,2, Qt::AlignCenter);
     topGridLayout->addWidget(m_runOptionsWidget,6,1,1,2, Qt::AlignCenter);

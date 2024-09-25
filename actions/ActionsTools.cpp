@@ -188,7 +188,7 @@ void ActionsTools::moveCursorSimulate(int xPos, int yPos, int time)
 {
     POINT origin;
     bool successGet = GetCursorPos(&origin);
-    if(time<= 0 || !successGet)
+    if(time< s_cursorFrequency || !successGet)
     {
         SetCursorPos(xPos,yPos);
         return;
