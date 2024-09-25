@@ -1,6 +1,6 @@
 # Scheduled PC Tasks
 
-version 0.4 (June 2024)
+version 1.0 (September 2024)
 
 Automatically schedule the actions you would perform on your PC.
 
@@ -12,26 +12,25 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 0.4:
+Details of version 1.0:
 
-Fully functional, next version will include other types of actions
+Official release, fully functional
 
-For the moment, those actions are available :
+Those actions simulation are available :
 
    - Keys sequence
+   - Mouve Cursor
    - Paste text
-   - Wait
    - Open files, folders, executables, url
    - Run Windows system specific command (shut down, reboot, kill processes, create files...)
-   - Mouve Cursor
+   - Wait
    
 The goal in future versions is to include those actions :
 
-   - Assistance functionality to define coordinates for Mouve Cursor
    - Play sounds
    - Add more Windows system specific command
 
-Feebacks and idea of other actions are very welcome !
+Feedbacks and ideas for other actions are very welcome !
 
 ----------
 Available for install on Microsoft Store : 

@@ -46,5 +46,7 @@
         <file>img/browseFolder.png</file>
         <file>img/cursor.png</file>
         <file>img/play.png</file>
+        <file>img/cursor-cross.png</file>
+        <file>img/crosshair.png</file>
     </qresource>
 </RCC>

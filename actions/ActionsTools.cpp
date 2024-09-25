@@ -206,3 +206,16 @@ void ActionsTools::moveCursorSimulate(int xPos, int yPos, int time)
     }
     SetCursorPos(xPos,yPos);
 }
+
+QPair<int, int> ActionsTools::getCursorPos()
+{
+    QPair<int, int> returnedVal(0,0);
+    POINT posPoint;
+    bool successGet = GetCursorPos(&posPoint);
+    if(successGet)
+    {
+        returnedVal.first = posPoint.x;
+        returnedVal.second = posPoint.y;
+    }
+    return returnedVal;
+}

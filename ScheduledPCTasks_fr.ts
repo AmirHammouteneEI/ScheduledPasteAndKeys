@@ -521,6 +521,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
         <source>Screen y coordinate</source>
         <translation>Coordonnée y de l&apos;écran</translation>
     </message>
+    <message>
+        <source>Capture coordinates</source>
+        <translation>Capturer les coordonnées</translation>
+    </message>
 </context>
 <context>
     <name>CursorMovementsTableWidget</name>
@@ -960,12 +964,26 @@ Developed by Amir Hammoutene (contact@amirhammoutene.dev)
 initial work on February 2024
 
 version 0.4</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 0.4</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.0</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.0</translation>
     </message>
 </context>
 <context>

@@ -24,6 +24,7 @@ public:
     static QString fromCursorMovsMapToPrintedString(const CursorMovementsList &map);
     static CursorMovementsList fromStandardQMapToCursorMovsMap(const QList<QVariant> &standardList);
     static void moveCursorSimulate(int xPos, int yPos, int time);
+    static QPair<int,int> getCursorPos();
 };
 
 #endif // ACTIONSTOOLS_H

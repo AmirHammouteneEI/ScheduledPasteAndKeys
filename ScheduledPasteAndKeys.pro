@@ -43,6 +43,7 @@ SOURCES += \
     ui/createactiondialog/CreatePasteActionDialog.cpp \
     ui/createactiondialog/CreateSystemCommandActionDialog.cpp \
     ui/createactiondialog/CreateWaitActionDialog.cpp \
+    ui/getCursorCoordinatesWidget.cpp \
     ui/getDelayDialog.cpp \
     ui/getFilePathDialog.cpp \
     ui/getFolderPathDialog.cpp
@@ -83,6 +84,7 @@ HEADERS += \
     ui/createactiondialog/CreatePasteActionDialog.h \
     ui/createactiondialog/CreateSystemCommandActionDialog.h \
     ui/createactiondialog/CreateWaitActionDialog.h \
+    ui/getCursorCoordinatesWidget.h \
     ui/getDelayDialog.h \
     ui/getFilePathDialog.h \
     ui/getFolderPathDialog.h
@@ -113,7 +115,7 @@ RESOURCES += \
 
 RC_ICONS = img/programIcon.ico
 
-VERSION = 0.4.0
+VERSION = 1.0.0
 QMAKE_TARGET_COMPANY = "Amir Hammoutene"
 QMAKE_TARGET_COPYRIGHT = "GNU general public license version 3"
 

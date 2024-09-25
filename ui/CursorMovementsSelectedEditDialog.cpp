@@ -3,16 +3,19 @@
 
 #include <QDoubleSpinBox>
 #include <QSpinBox>
+#include <QPushButton>
 
 CursorMovementsSelectedEditDialog::CursorMovementsSelectedEditDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::CursorMovementsSelectedEditDialog)
 {
     ui->setupUi(this);
+    ui->tableWidget->horizontalHeader()->resizeSection(0,220);
     ui->lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("\\w+"), this));
+    m_getCursorCoordinatesWidget = new getCursorCoordinatesWidget(this);
+
     connect(ui->addMovsButton, &QPushButton::released, this,&CursorMovementsSelectedEditDialog::addMovsRow);
     connect(ui->removeMovsButton, &QPushButton::released, this,&CursorMovementsSelectedEditDialog::removeLastMovsRow);
-
 }
 
 CursorMovementsSelectedEditDialog::~CursorMovementsSelectedEditDialog()
@@ -46,7 +49,7 @@ void CursorMovementsSelectedEditDialog::setTableCursorMovements(const CursorMove
             continue;
 
         QList<QWidget*> widgetsList = addMovsRow();
-        if(widgetsList.size() != 4)
+        if(widgetsList.size() < 4)
             break;
 
         auto delaySpin = qobject_cast<QDoubleSpinBox*>(widgetsList.at(0));
@@ -129,14 +132,22 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
     yCoordSpin->setLocale(QLocale::English);
     yCoordSpin->setValue(0);
 
+    QPushButton *captureCoordsButton = new QPushButton(this);
+    captureCoordsButton->setFlat(true);
+    captureCoordsButton->setIcon(QIcon(":/img/cursor-cross.png"));
+    captureCoordsButton->setProperty("index",index);
+    connect(captureCoordsButton,&QPushButton::released, m_getCursorCoordinatesWidget,&getCursorCoordinatesWidget::showWidget);
+    connect(m_getCursorCoordinatesWidget,&getCursorCoordinatesWidget::sendCoordinates, this,&CursorMovementsSelectedEditDialog::coordinatesReceived);
+
     ui->tableWidget->insertRow(index);
     ui->tableWidget->setCellWidget(index,0,delaySpin);
     ui->tableWidget->setCellWidget(index,1,movingTimeSpin);
     ui->tableWidget->setCellWidget(index,2,xCoordSpin);
     ui->tableWidget->setCellWidget(index,3,yCoordSpin);
+    ui->tableWidget->setCellWidget(index,4,captureCoordsButton);
 
     QList<QWidget*> returnedList;
-    returnedList << delaySpin << movingTimeSpin << xCoordSpin << yCoordSpin;
+    returnedList << delaySpin << movingTimeSpin << xCoordSpin << yCoordSpin << captureCoordsButton;
 
     return returnedList;
 }
@@ -145,4 +156,14 @@ void CursorMovementsSelectedEditDialog::removeLastMovsRow()
 {
     if(ui->tableWidget->rowCount() > 0)
         ui->tableWidget->removeRow(ui->tableWidget->rowCount()-1);
+}
+
+void CursorMovementsSelectedEditDialog::coordinatesReceived(int index, int x, int y)
+{
+    auto xCoordSpin = qobject_cast<QSpinBox*>(ui->tableWidget->cellWidget(index, 2));
+    auto yCoordSpin = qobject_cast<QSpinBox*>(ui->tableWidget->cellWidget(index, 3));
+    if(xCoordSpin == nullptr  || yCoordSpin == nullptr)
+        return;
+    xCoordSpin->setValue(x);
+    yCoordSpin->setValue(y);
 }

@@ -6,14 +6,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>862</width>
-    <height>453</height>
+    <width>797</width>
+    <height>389</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Create/Edit/View a cursor movements set</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>1</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>1</number>
+   </property>
+   <property name="bottomMargin">
+    <number>1</number>
+   </property>
    <item>
     <spacer name="verticalSpacer_3">
      <property name="orientation">
@@ -142,8 +157,11 @@ If identity is changed (via the Edit Data window), it will make a copy of the en
      <property name="selectionBehavior">
       <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
      </property>
+     <property name="columnCount">
+      <number>5</number>
+     </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>200</number>
+      <number>140</number>
      </attribute>
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>true</bool>
@@ -169,6 +187,11 @@ If identity is changed (via the Edit Data window), it will make a copy of the en
      <column>
       <property name="text">
        <string>Screen y coordinate</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Capture coordinates</string>
       </property>
      </column>
     </widget>
