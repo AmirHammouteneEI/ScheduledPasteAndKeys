@@ -6,14 +6,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>662</width>
-    <height>330</height>
+    <width>492</width>
+    <height>272</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Create/Edit a Cursor Movements Action</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>1</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>1</number>
+   </property>
+   <property name="bottomMargin">
+    <number>1</number>
+   </property>
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <property name="spacing">
