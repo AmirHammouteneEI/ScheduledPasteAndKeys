@@ -21,6 +21,7 @@ namespace G_Files {
     inline QString ActionCursorMovementsType_Value = "cursormovements";
     inline QString ActionContent_KeyWord = "content";
     inline QString ActionContentId_KeyWord = "contentId";
+    inline QString ActionPasteTextLoop_KeyWord = "loop";
     inline QString ActionDuration_KeyWord = "duration";
     inline QString ActionKeysSeqMap_KeyWord = "keysmap";
     inline QString ActionKeysSeqId_KeyWord = "keysSeqId";

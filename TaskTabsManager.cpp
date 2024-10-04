@@ -334,7 +334,8 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
             {
                 auto params = pasteaction->generateParameters();
                 jsonToReturn.insert(G_Files::ActionContent_KeyWord, QJsonValue::fromVariant(params.m_pasteContent));
-                jsonToReturn.insert(G_Files::ActionContentId_KeyWord, QJsonValue::fromVariant(params.m_dataId));
+                jsonToReturn.insert(G_Files::ActionContentId_KeyWord, QJsonValue::fromVariant(params.m_dataId));;
+                jsonToReturn.insert(G_Files::ActionPasteTextLoop_KeyWord, QJsonValue::fromVariant(params.m_timesToRun));
             }
         }
         break;
@@ -426,6 +427,7 @@ AbstractAction* TaskTabsManager::jsonToAction(const QJsonObject &jobj)
         actionToReturn = new PasteAction();
         params.m_pasteContent = jobj.value(G_Files::ActionContent_KeyWord).toString();
         params.m_dataId = jobj.value(G_Files::ActionContentId_KeyWord).toString();
+        params.m_timesToRun = jobj.value(G_Files::ActionPasteTextLoop_KeyWord).toInt(1);
     }
     else if(type == G_Files::ActionWaitType_Value)
     {

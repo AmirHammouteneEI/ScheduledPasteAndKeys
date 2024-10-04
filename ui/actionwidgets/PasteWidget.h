@@ -3,19 +3,24 @@
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
 #include "ui/createactiondialog/CreatePasteActionDialog.h"
+#include <QSpinBox>
+#include <QDateTime>
 
 class PasteWidget : public AbstractActionWidget
 {
     Q_OBJECT
     CreatePasteActionDialog *m_createPasteActionDialog;
+    QSpinBox *m_loopSpin;
+    void changedRunningState() override;
 public:
     explicit PasteWidget(QWidget *parent = nullptr);
     ~PasteWidget() = default;
     void buildWidget() override;
 private slots:
     void sentenceIdentityReceived(QString id); // not const & because it's a slot, will make copy evenif
+    void timesToRunChanged(int times);
 private:
-    void changeContentInfo(const QString & content);
+    void refreshLoopsRemainingText(const QDateTime& departureDate);
 signals:
 };
 

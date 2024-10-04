@@ -5,6 +5,7 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <QSettings>
+#include <QTimer>
 
 PasteWidget::PasteWidget(QWidget *parent)
     : AbstractActionWidget{parent}
@@ -16,6 +17,30 @@ void PasteWidget::buildWidget()
 {
     if(m_centralWidget == nullptr)
         return;
+    auto centralGridLayout = qobject_cast<QGridLayout*>(m_centralWidget->layout());
+    if(centralGridLayout == nullptr)
+        return;
+
+    auto loopFrame = new QFrame(m_centralWidget);
+    auto loopLabel = new QLabel(tr("Loop "),loopFrame);
+    m_loopSpin = new QSpinBox(loopFrame);
+    auto looptimesLabel = new QLabel(tr(" times"),loopFrame);
+    m_loopSpin->setAlignment(Qt::AlignCenter);
+    m_loopSpin->setMinimum(1);
+    m_loopSpin->setMaximum(9999);
+    m_loopSpin->setMinimumWidth(60);
+    m_loopSpin->setToolTip(tr("Set how many times this paste text should be executed"));
+
+    auto loopLayout = new QHBoxLayout(loopFrame);
+    loopLayout->addWidget(loopLabel,0,Qt::AlignVCenter | Qt::AlignRight);
+    loopLayout->addWidget(m_loopSpin,0,Qt::AlignCenter);
+    loopLayout->addWidget(looptimesLabel,0,Qt::AlignVCenter | Qt::AlignLeft);
+    loopLayout->setContentsMargins(1,1,1,1);
+    loopLayout->setSpacing(2);
+
+    centralGridLayout->removeWidget(m_infoLabel);
+    centralGridLayout->addWidget(loopFrame,1,0,Qt::AlignCenter);
+    centralGridLayout->addWidget(m_infoLabel,2,0,Qt::AlignCenter);
 
     auto pasteaction =  dynamic_cast<PasteAction*>(m_action);
 
@@ -25,6 +50,7 @@ void PasteWidget::buildWidget()
     {
         content = pasteaction->m_content;
         id = pasteaction->m_contentId;
+        m_loopSpin->setValue(pasteaction->m_timesToRun);
     }
 
     m_mainButton->setIcon(QIcon(":/img/text.png"));
@@ -32,12 +58,11 @@ void PasteWidget::buildWidget()
     m_mainButton->setToolTip(content);
     m_mainButton->setProperty("contentId", id);
 
-    changeContentInfo(content);
-
     m_createPasteActionDialog = new CreatePasteActionDialog(m_centralWidget);
 
     connect(m_mainButton, &QPushButton::released, m_createPasteActionDialog, &CreatePasteActionDialog::showDialog);
     connect(m_createPasteActionDialog, &CreatePasteActionDialog::sendSentence, this, &PasteWidget::sentenceIdentityReceived);
+    connect(m_loopSpin, &QSpinBox::valueChanged, this, &PasteWidget::timesToRunChanged);
 }
 
 void PasteWidget::sentenceIdentityReceived(QString id)
@@ -58,21 +83,47 @@ void PasteWidget::sentenceIdentityReceived(QString id)
     m_mainButton->setToolTip(content);
     m_mainButton->setProperty("contentId", id);
 
-    changeContentInfo(content);
-
     emit anyParamChanged();
 }
 
-void PasteWidget::changeContentInfo(const QString &content)
+void PasteWidget::timesToRunChanged(int times)
 {
-    m_infoLabel->setToolTip(content);
-    QString simpliTruncContent = content.simplified();
-    if(simpliTruncContent.size() > 60)
-    {
-        simpliTruncContent.truncate(55);
-        simpliTruncContent+="[...]";
-    }
-
-    m_infoLabel->setText(simpliTruncContent);
-    m_infoLabel->setFixedSize(m_infoLabel->sizeHint());
+    auto pasteaction =  dynamic_cast<PasteAction*>(m_action);
+    if(pasteaction == nullptr)
+        return;
+    pasteaction->m_timesToRun = times;
+    emit anyParamChanged();
 }
+
+void PasteWidget::changedRunningState()
+{
+    refreshLoopsRemainingText(QDateTime::currentDateTime());
+}
+
+void PasteWidget::refreshLoopsRemainingText(const QDateTime &departureDate)
+{
+    m_infoLabel->setText("");
+
+    if(m_runningState == RunningState::NotExecuted || m_runningState == RunningState::Done)
+        return;
+
+    auto pasteaction =  dynamic_cast<PasteAction*>(m_action);
+    if(pasteaction == nullptr)
+        return;
+
+    int oneExecutionDuration = pasteaction->computeOneExecutionDuration();
+    if(oneExecutionDuration == 0)
+        return;
+
+    qint64 timelaps = departureDate.msecsTo(QDateTime::currentDateTime());
+    int timesExecuted = timelaps / oneExecutionDuration;
+    auto remainningTimes = pasteaction->m_timesToRun - timesExecuted;
+    if(remainningTimes < 1)
+        return;
+
+    m_infoLabel->setText(tr("Remaining ")+QString::number(remainningTimes)+tr(" executions"));
+
+    QTimer::singleShot(200, this, [=]() {refreshLoopsRemainingText(departureDate);});
+
+}
+

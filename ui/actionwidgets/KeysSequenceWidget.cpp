@@ -91,6 +91,8 @@ void KeysSequenceWidget::keysSeqIdentityReceived(QString id)
 void KeysSequenceWidget::timesToRunChanged(int times)
 {
     auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action);
+    if(keysseqaction == nullptr)
+        return;
     keysseqaction->m_timesToRun = times;
     emit anyParamChanged();
 }
@@ -102,11 +104,9 @@ void KeysSequenceWidget::changedRunningState()
 
 void KeysSequenceWidget::refreshLoopsRemainingText(const QDateTime &departureDate)
 {
+    m_infoLabel->setText("");
     if(m_runningState == RunningState::NotExecuted || m_runningState == RunningState::Done)
-    {
-        m_infoLabel->setText("");
         return;
-    }
 
     auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action);
     if(keysseqaction == nullptr)
@@ -118,8 +118,11 @@ void KeysSequenceWidget::refreshLoopsRemainingText(const QDateTime &departureDat
 
     qint64 timelaps = departureDate.msecsTo(QDateTime::currentDateTime());
     int timesExecuted = timelaps / oneExecutionDuration;
+    auto remainningTimes = keysseqaction->m_timesToRun - timesExecuted;
+    if(remainningTimes < 1)
+        return;
 
-    m_infoLabel->setText(tr("Remaining ")+QString::number(keysseqaction->m_timesToRun - timesExecuted)+tr(" executions"));
+    m_infoLabel->setText(tr("Remaining ")+QString::number(remainningTimes)+tr(" executions"));
 
     QTimer::singleShot(200, this, [=]() {refreshLoopsRemainingText(departureDate);});
 }

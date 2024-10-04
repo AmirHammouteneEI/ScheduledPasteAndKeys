@@ -978,12 +978,26 @@ Developed by Amir Hammoutene (contact@amirhammoutene.dev)
 initial work on February 2024
 
 version 1.0</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 1.0</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.1</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.1</translation>
     </message>
 </context>
 <context>
@@ -999,6 +1013,26 @@ version 1.0</translation>
     <message>
         <source>ERROR on access to action</source>
         <translation>ERREUR sur l&apos;accès à l&apos;action</translation>
+    </message>
+    <message>
+        <source>Loop </source>
+        <translation>Répéter </translation>
+    </message>
+    <message>
+        <source> times</source>
+        <translation> fois</translation>
+    </message>
+    <message>
+        <source>Set how many times this paste text should be executed</source>
+        <translation>Déterminez combien de fois ce collage de texte devrait être exécuté</translation>
+    </message>
+    <message>
+        <source>Remaining </source>
+        <translation>Restant </translation>
+    </message>
+    <message>
+        <source> executions</source>
+        <translation> exécutions</translation>
     </message>
 </context>
 <context>

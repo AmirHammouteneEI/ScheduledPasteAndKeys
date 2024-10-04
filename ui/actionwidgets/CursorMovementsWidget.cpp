@@ -91,6 +91,8 @@ void CursorMovementsWidget::cursorMovsIdentityReceived(QString id)
 void CursorMovementsWidget::timesToRunChanged(int times)
 {
     auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action);
+    if(cursormovsaction == nullptr)
+        return;
     cursormovsaction->m_timesToRun = times;
     emit anyParamChanged();
 }
@@ -102,11 +104,10 @@ void CursorMovementsWidget::changedRunningState()
 
 void CursorMovementsWidget::refreshLoopsRemainingText(const QDateTime &departureDate)
 {
+    m_infoLabel->setText("");
+
     if(m_runningState == RunningState::NotExecuted || m_runningState == RunningState::Done)
-    {
-        m_infoLabel->setText("");
         return;
-    }
 
     auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action);
     if(cursormovsaction == nullptr)
@@ -118,8 +119,11 @@ void CursorMovementsWidget::refreshLoopsRemainingText(const QDateTime &departure
 
     qint64 timelaps = departureDate.msecsTo(QDateTime::currentDateTime());
     int timesExecuted = timelaps / oneExecutionDuration;
+    auto remainningTimes = cursormovsaction->m_timesToRun - timesExecuted;
+    if(remainningTimes < 1)
+        return;
 
-    m_infoLabel->setText(tr("Remaining ")+QString::number(cursormovsaction->m_timesToRun - timesExecuted)+tr(" executions"));
+    m_infoLabel->setText(tr("Remaining ")+QString::number(remainningTimes)+tr(" executions"));
 
     QTimer::singleShot(200, this, [=]() {refreshLoopsRemainingText(departureDate);});
 

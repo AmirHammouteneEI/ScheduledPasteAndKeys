@@ -1,6 +1,6 @@
 # Scheduled PC Tasks
 
-version 1.0 (September 2024)
+version 1.1 (October 2024)
 
 Automatically schedule the actions you would perform on your PC.
 
@@ -16,10 +16,10 @@ Details of version 1.0:
 
 Official release, fully functional
 
-Those actions simulation are available :
+Those actions simulations are available :
 
    - Keys sequence
-   - Mouve Cursor
+   - Move Cursor
    - Paste text
    - Open files, folders, executables, url
    - Run Windows system specific command (shut down, reboot, kill processes, create files...)
