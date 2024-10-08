@@ -47,16 +47,18 @@ void CursorMovementsWidget::buildWidget()
 
     QString movsStr = tr("ERROR on access to action");
     QString id = tr("ERROR");
+    QStringList optKeysStroke;
     if(cursormovsaction != nullptr)
     {
         id = cursormovsaction->m_movementsId;
         movsStr = ActionsTools::fromCursorMovsMapToPrintedString(cursormovsaction->m_cursorMovementsList);
+        optKeysStroke = cursormovsaction->m_cursorMovementsOptionalKeysStroke;
         m_loopSpin->setValue(cursormovsaction->m_timesToRun);
     }
 
     m_mainButton->setIcon(QIcon(":/img/cursor.png"));
     m_mainButton->setText(tr("Cursor movements ~")+id);
-    m_mainButton->setToolTip(movsStr);
+    m_mainButton->setToolTip(movsStr+"\nKeys stroke : "+optKeysStroke.join("+"));
     m_mainButton->setProperty("cursorMovsId", id);
 
     m_createCursorMovsActionDialog = new CreateCursorMovementsActionDialog(m_centralWidget);
@@ -81,8 +83,10 @@ void CursorMovementsWidget::cursorMovsIdentityReceived(QString id)
     CursorMovementsList movsList = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
     cursormovsaction->m_cursorMovementsList = movsList;
     cursormovsaction->m_movementsId = id;
+    cursormovsaction->m_cursorMovementsOptionalKeysStroke = cursorMovementsFromSettings.last().toStringList();
     m_mainButton->setText(tr("Cursor movements ~")+id);
-    m_mainButton->setToolTip(ActionsTools::fromCursorMovsMapToPrintedString(movsList));
+    m_mainButton->setToolTip(ActionsTools::fromCursorMovsMapToPrintedString(movsList)+
+                            "\nKeys stroke : "+cursorMovementsFromSettings.last().toStringList().join("+"));
     m_mainButton->setProperty("cursorMovsId", id);
 
     emit anyParamChanged();

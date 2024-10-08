@@ -17,6 +17,7 @@ void CursorMovementsTableWidget::createCursorMovementsReceived()
     m_cursorMovementsEditDialog->setEditable(true);
     m_cursorMovementsEditDialog->setIdentity("");
     m_cursorMovementsEditDialog->setTableCursorMovements(CursorMovementsList());
+    m_cursorMovementsEditDialog->setOptionalKeysStroke(QStringList());
     m_cursorMovementsEditDialog->exec();
 }
 
@@ -37,6 +38,7 @@ void CursorMovementsTableWidget::editFromDialogReceived()
         QVariant variant = QVariant::fromValue(el);
         writtenList.append(variant);
     }
+    writtenList.append(m_cursorMovementsEditDialog->optionalKeysStroke());
     settings.setValue(G_Files::CursorMovementsDataCategory+m_cursorMovementsEditDialog->identity(),writtenList);
     refresh();
 
@@ -56,6 +58,7 @@ void CursorMovementsTableWidget::editCursorMovementsSelected(int row, int)
     m_cursorMovementsEditDialog->setIdentity(trueId);
     auto readList = settings.value(G_Files::CursorMovementsDataCategory + trueId).toList();
     m_cursorMovementsEditDialog->setTableCursorMovements(ActionsTools::fromStandardQMapToCursorMovsMap(readList));
+    m_cursorMovementsEditDialog->setOptionalKeysStroke(readList.last().toStringList());
     m_cursorMovementsEditDialog->show();
 }
 
@@ -104,13 +107,16 @@ void CursorMovementsTableWidget::refresh()
             QStringList contentList;
             for(auto &el : readList)
             {
+                if(el==readList.last())
+                    break;
                 MovementList movelist = el.value<MovementList>();
                 if(movelist.size() >= 4)
                     contentList.append("["+QString::number(movelist[2])+","+QString::number(movelist[3])+"]");
             }
-            QString fullContent = contentList.join(" ; ");
+            QString fullContent = contentList.join(" ; ") + " (Keys stroke : "+readList.last().toStringList().join("+")+")";
             contentItem->setText(fullContent);
-            contentItem->setToolTip(ActionsTools::fromCursorMovsMapToPrintedString(ActionsTools::fromStandardQMapToCursorMovsMap(readList)));
+            contentItem->setToolTip(ActionsTools::fromCursorMovsMapToPrintedString(ActionsTools::fromStandardQMapToCursorMovsMap(readList))+
+                                    "\nKeys stroke : "+readList.last().toStringList().join("+"));
             setItem(rowCount()-1,1,contentItem);
         }
     }

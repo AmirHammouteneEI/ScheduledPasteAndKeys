@@ -9,6 +9,7 @@ private:
     CursorMovementsList m_cursorMovementsList;
     QString m_movementsId;
     int m_timesToRun = 1;
+    QStringList m_cursorMovementsOptionalKeysStroke;
 public:
     CursorMovementsAction();
     ~CursorMovementsAction() = default;

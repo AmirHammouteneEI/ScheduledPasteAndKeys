@@ -19,8 +19,18 @@ void CursorMovementsAction::runAction() const
             break;
         Sleep(it->at(0));
         ActionsTools::moveCursorSimulate(it->at(2),it->at(3),it->at(1));
+
+        if(it == m_cursorMovementsList.begin())
+        {
+            for(auto& pressStr : m_cursorMovementsOptionalKeysStroke)
+                ActionsTools::keyStokeSimulate(pressStr, 0);
+        }
+
         ++it;
     }
+
+    for(auto& releaseStr : m_cursorMovementsOptionalKeysStroke)
+        ActionsTools::keyStokeSimulate(releaseStr, KEYEVENTF_KEYUP);
 
     --timesToRun;
     if(timesToRun > 0)
@@ -32,6 +42,7 @@ void CursorMovementsAction::setParameters(const ActionParameters &param)
     m_cursorMovementsList = param.m_cursorMovementsList;
     m_movementsId = param.m_dataId;
     m_timesToRun = param.m_timesToRun;
+    m_cursorMovementsOptionalKeysStroke = param.m_cursorMovementsOptionalKeysStroke;;
 }
 
 CursorMovementsAction *CursorMovementsAction::deepCopy() const
@@ -40,6 +51,7 @@ CursorMovementsAction *CursorMovementsAction::deepCopy() const
     actToReturn->m_cursorMovementsList = m_cursorMovementsList;
     actToReturn->m_movementsId = m_movementsId;
     actToReturn->m_timesToRun = m_timesToRun;
+    actToReturn->m_cursorMovementsOptionalKeysStroke = m_cursorMovementsOptionalKeysStroke;
     actToReturn->m_refID = m_ID;
     return actToReturn;
 }
@@ -50,6 +62,7 @@ ActionParameters CursorMovementsAction::generateParameters() const
     param.m_cursorMovementsList = m_cursorMovementsList;
     param.m_dataId = m_movementsId;
     param.m_timesToRun = m_timesToRun;
+    param.m_cursorMovementsOptionalKeysStroke = m_cursorMovementsOptionalKeysStroke;
     return param;
 }
 
