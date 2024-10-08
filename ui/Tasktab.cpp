@@ -664,12 +664,13 @@ void TaskTab::createCursorMovementsActionRequest(QString cursorMovementsIdentity
 {
     QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
     auto cursorMovementsFromSettings = settings.value(G_Files::CursorMovementsDataCategory+cursorMovementsIdentity).toList();
-    ActionParameters paramKeysSeq;
-    paramKeysSeq.m_cursorMovementsList = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
-    paramKeysSeq.m_dataId = cursorMovementsIdentity;
+    ActionParameters paramCurMovs;
+    paramCurMovs.m_cursorMovementsList = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
+    paramCurMovs.m_dataId = cursorMovementsIdentity;
+    paramCurMovs.m_cursorMovementsOptionalKeysStroke = cursorMovementsFromSettings.last().toStringList();
 
     CursorMovementsAction *cursorMovsAct = new CursorMovementsAction();
-    cursorMovsAct->setParameters(paramKeysSeq);
+    cursorMovsAct->setParameters(paramCurMovs);
 
     appendAction(cursorMovsAct);
 }

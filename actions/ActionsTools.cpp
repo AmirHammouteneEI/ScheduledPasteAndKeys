@@ -176,6 +176,8 @@ CursorMovementsList ActionsTools::fromStandardQMapToCursorMovsMap(const QList<QV
     CursorMovementsList curmovsList;
     for(auto &el : standardList)
     {
+        if(el == standardList.last())
+            break;
         MovementList movlist = el.value<MovementList>();
         if(movlist.size() >= 4)
             curmovsList.append(movlist);

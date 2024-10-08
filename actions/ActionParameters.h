@@ -34,6 +34,7 @@ public:
     QString m_sysCmdParam1;
     QString m_sysCmdParam2;
     CursorMovementsList m_cursorMovementsList;
+    QStringList m_cursorMovementsOptionalKeysStroke;
 };
 
 Q_DECLARE_METATYPE(ActionParameters);

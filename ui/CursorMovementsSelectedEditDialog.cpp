@@ -13,9 +13,16 @@ CursorMovementsSelectedEditDialog::CursorMovementsSelectedEditDialog(QWidget *pa
     ui->tableWidget->horizontalHeader()->resizeSection(0,220);
     ui->lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("\\w+"), this));
     m_getCursorCoordinatesWidget = new getCursorCoordinatesWidget(this);
+    m_keySelectorDialog = new KeysSelectorDialog(ui->keysStrokeButton);
 
     connect(ui->addMovsButton, &QPushButton::released, this,&CursorMovementsSelectedEditDialog::addMovsRow);
     connect(ui->removeMovsButton, &QPushButton::released, this,&CursorMovementsSelectedEditDialog::removeLastMovsRow);
+    connect(ui->keysStrokeButton, &QPushButton::released, m_keySelectorDialog, &KeysSelectorDialog::showDialog);
+    connect(m_keySelectorDialog, &KeysSelectorDialog::sendKeysList, this,[=](QStringList keysList)
+            {
+                ui->keysStrokeButton->setProperty("keys", keysList);
+                ui->keysStrokeButton->setText(keysList.join("+"));
+            });
 }
 
 CursorMovementsSelectedEditDialog::~CursorMovementsSelectedEditDialog()
@@ -91,6 +98,17 @@ CursorMovementsList CursorMovementsSelectedEditDialog::tableCursorMovements()
         returnedList.append(movlist);
     }
     return returnedList;
+}
+
+void CursorMovementsSelectedEditDialog::setOptionalKeysStroke(const QStringList &keysStroke)
+{
+    ui->keysStrokeButton->setProperty("keys", keysStroke);
+    ui->keysStrokeButton->setText(keysStroke.join("+"));
+}
+
+QStringList CursorMovementsSelectedEditDialog::optionalKeysStroke()
+{
+    return ui->keysStrokeButton->property("keys").toStringList();
 }
 
 QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()

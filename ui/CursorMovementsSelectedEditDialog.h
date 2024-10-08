@@ -4,6 +4,7 @@
 #include "actions/ActionParameters.h"
 #include <QDialog>
 #include "ui/getCursorCoordinatesWidget.h"
+#include "KeysSelectorDialog.h"
 
 namespace Ui {
 class CursorMovementsSelectedEditDialog;
@@ -13,6 +14,7 @@ class CursorMovementsSelectedEditDialog : public QDialog
 {
     Q_OBJECT
     getCursorCoordinatesWidget *m_getCursorCoordinatesWidget;
+    KeysSelectorDialog *m_keySelectorDialog;
 public:
     explicit CursorMovementsSelectedEditDialog(QWidget *parent = nullptr);
     ~CursorMovementsSelectedEditDialog();
@@ -21,6 +23,8 @@ public:
     QString identity();
     void setTableCursorMovements(const CursorMovementsList &tableContent);
     CursorMovementsList tableCursorMovements();
+    void setOptionalKeysStroke(const QStringList &keysStroke);
+    QStringList optionalKeysStroke();
 public slots:
     QList<QWidget*> addMovsRow();
     void removeLastMovsRow();

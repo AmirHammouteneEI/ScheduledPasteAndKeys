@@ -32,6 +32,7 @@ namespace G_Files {
     inline QString ActionCursorMovsMap_KeyWord = "cursormovsmap";
     inline QString ActionCursorMovsId_KeyWord = "cursorMovsId";
     inline QString ActionCursorMovsLoop_KeyWord = "loop";
+    inline QString ActionCursorMovsOptKeysStroke_KeyWord = "optionalkeysstroke";
 }
 
 namespace G_Sentences {

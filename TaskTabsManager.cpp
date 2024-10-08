@@ -406,6 +406,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
                 jsonToReturn.insert(G_Files::ActionCursorMovsMap_KeyWord, writtenListJArr);
                 jsonToReturn.insert(G_Files::ActionCursorMovsId_KeyWord, QJsonValue::fromVariant(params.m_dataId));
                 jsonToReturn.insert(G_Files::ActionCursorMovsLoop_KeyWord, QJsonValue::fromVariant(params.m_timesToRun));
+                jsonToReturn.insert(G_Files::ActionCursorMovsOptKeysStroke_KeyWord, QJsonValue::fromVariant(params.m_cursorMovementsOptionalKeysStroke));
             }
         }
         break;
@@ -477,6 +478,7 @@ AbstractAction* TaskTabsManager::jsonToAction(const QJsonObject &jobj)
         params.m_cursorMovementsList = actList;
         params.m_dataId = jobj.value(G_Files::ActionCursorMovsId_KeyWord).toString();
         params.m_timesToRun = jobj.value(G_Files::ActionCursorMovsLoop_KeyWord).toInt();
+        params.m_cursorMovementsOptionalKeysStroke = jobj.value(G_Files::ActionCursorMovsOptKeysStroke_KeyWord).toVariant().toStringList();
     }
     else
         return nullptr;
