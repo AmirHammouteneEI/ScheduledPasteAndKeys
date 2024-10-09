@@ -2,7 +2,7 @@
 
 version 1.1 (October 2024)
 
-Automatically schedule the actions you would perform on your PC.
+Schedule automated simulations of actions you would perform on your PC.
 
 
 Under GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
@@ -12,7 +12,7 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 1.0:
+Details of version 1.1:
 
 Official release, fully functional
 

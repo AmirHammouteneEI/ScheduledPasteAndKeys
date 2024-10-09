@@ -527,7 +527,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Keys to stroke during those cursor movements (optional) :</source>
-        <translation type="unfinished">Touches à appuyer durant ces mouvements de curseur (optionnel) :</translation>
+        <translation>Touches à appuyer durant ces mouvements de curseur (optionnel) :</translation>
     </message>
 </context>
 <context>
