@@ -11,6 +11,7 @@ CursorMovementsSelectedEditDialog::CursorMovementsSelectedEditDialog(QWidget *pa
 {
     ui->setupUi(this);
     ui->tableWidget->horizontalHeader()->resizeSection(0,220);
+    ui->tableWidget->horizontalHeader()->resizeSection(4,40);
     ui->lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("\\w+"), this));
     m_getCursorCoordinatesWidget = new getCursorCoordinatesWidget(this);
     m_keySelectorDialog = new KeysSelectorDialog(ui->keysStrokeButton);
