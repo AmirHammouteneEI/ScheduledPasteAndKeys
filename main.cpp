@@ -32,6 +32,17 @@ int main(int argc, char *argv[])
     a.installTranslator(&baseTranslator);
 
     MainWindow w;
-    w.showWindow();
+
+    if(argc == 3)
+    {
+        int delay = atoi(argv[2]);
+        if(delay != 0)
+            w.autoRun(QString(argv[1]), delay);
+        else
+            w.showWindow();
+    }
+    else
+        w.showWindow();
+
     return a.exec();
 }

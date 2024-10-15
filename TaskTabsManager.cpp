@@ -32,14 +32,14 @@ TaskTabsManager::~TaskTabsManager()
 {
 }
 
-void TaskTabsManager::onOpenNewTabRequest(QString path)
+int TaskTabsManager::onOpenNewTabRequest(const QString &path)
 {
     QFile fileToOpen(path);
     if(!fileToOpen.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QMessageBox::warning(m_mainwindow, tr("Cannot open file"), tr("Trying to open file located in :\n")+
           path+"\n"+G_Sentences::OperationInterference());
-        return;
+        return -1;
     }
 
     QString fileContent = fileToOpen.readAll();
@@ -49,7 +49,7 @@ void TaskTabsManager::onOpenNewTabRequest(QString path)
     if(jsonDoc.isNull())
     {
         QMessageBox::warning(m_mainwindow, tr("File format error"),G_Sentences::FileParsingError());
-        return;
+        return -1;
     }
 
     QJsonObject jsonContent = jsonDoc.object();
@@ -58,7 +58,7 @@ void TaskTabsManager::onOpenNewTabRequest(QString path)
         != G_Files::DocumentIdentification_Value)
     {
         QMessageBox::warning(m_mainwindow, tr("File format error"), G_Sentences::FileParsingError());
-        return;
+        return -1;
     }
 
     QFileInfo finfo(fileToOpen.fileName());
@@ -68,7 +68,7 @@ void TaskTabsManager::onOpenNewTabRequest(QString path)
     if(tabIfAlreadyOpen != -1)
     {
         m_mainwindow->getTabWidget()->setCurrentIndex(tabIfAlreadyOpen);
-        return;
+        return -1;
     }
 
     int id = appendTaskInMap(createEmptyTaskAndOpenTab(taskName));
@@ -76,6 +76,8 @@ void TaskTabsManager::onOpenNewTabRequest(QString path)
     m_taskFilePathsMap.insert(id, path);
 
     createAndLoadTaskObject(id);
+
+    return id;
 }
 
 TaskTab* TaskTabsManager::createEmptyTaskAndOpenTab(const QString &name)
@@ -167,6 +169,19 @@ void TaskTabsManager::forceCloseTask(int id)
     auto task = m_taskTabsMap.take(id);
     task->deleteLater();
 
+}
+
+void TaskTabsManager::scheduleTaskFromId(int id, qint64 delay)
+{
+    if(!m_taskTabsMap.contains(id))
+        return;
+
+    auto taskTab = m_taskTabsMap.value(id, nullptr);
+
+    if(taskTab == nullptr)
+        return;
+
+    taskTab->scheduleTaskAfterDelay(delay);
 }
 
 void TaskTabsManager::onRefreshTabsRequest()

@@ -20,8 +20,9 @@ public:
     explicit TaskTabsManager(MainWindow *parent = nullptr);
     ~TaskTabsManager();
     void forceCloseTask(int id);
+    void scheduleTaskFromId(int id, qint64 delay);
 public slots:
-    void onOpenNewTabRequest(QString path);
+    int onOpenNewTabRequest(const QString & path);
     void onTabCloseRequest(int index);
     void onRefreshTabsRequest();
     void onTaskfilePathChanged(QString oldpath, QString newpath);

@@ -996,12 +996,26 @@ Developed by Amir Hammoutene (contact@amirhammoutene.dev)
 initial work on February 2024
 
 version 1.1</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 1.1</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.2</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.2</translation>
     </message>
 </context>
 <context>
@@ -1416,7 +1430,7 @@ mainwindow is null when affecting to TaskTabsManager !</translation>
     <message>
         <source>Trying to open file located in :
 </source>
-        <translation>Tentative d&apos;ouvrir un fichier situé dans ::
+        <translation>Tentative d&apos;ouvrir un fichier situé dans :
 </translation>
     </message>
     <message>

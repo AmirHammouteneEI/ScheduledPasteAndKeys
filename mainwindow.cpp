@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QShortcut>
 #include <QMessageBox>
+#include <QDir>
 
 bool G_Parameters::AutoScrollTask = true;
 
@@ -20,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("Scheduled PC Tasks v1.1");
+    setWindowTitle("Scheduled PC Tasks v1.2");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
     // Will also be a system tray app
@@ -61,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 1.1"));
+                    "version 1.2"));
 }
 
 MainWindow::~MainWindow()
@@ -83,6 +84,16 @@ MainWindow::~MainWindow()
 QTabWidget *MainWindow::getTabWidget()
 {
     return ui->tabWidget;
+}
+
+void MainWindow::autoRun(const QString &filename, int delay)
+{
+    if(m_tasktabsManager == nullptr)
+        return;
+    hide();
+    auto taskid = m_tasktabsManager->onOpenNewTabRequest(QDir::currentPath()+"/"+CreateLoadTaskDialog::s_tasksFolder+filename+CreateLoadTaskDialog::s_tasksFileExtension);
+    if(taskid > -1)
+        m_tasktabsManager->scheduleTaskFromId(taskid, delay);
 }
 
 void MainWindow::buildSystemTrayMenu()

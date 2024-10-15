@@ -324,6 +324,9 @@ void TaskTab::setDescription(const QString &newdescription)
 
 void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
 {
+    if(delayInSeconds <0 )
+        return;
+
     m_datetimeOfRun = QDateTime::currentDateTime().addSecs(delayInSeconds);
     m_scheduleTimer->setInterval((std::chrono::milliseconds)(delayInSeconds*1000));
     m_scheduleTimer->start();
