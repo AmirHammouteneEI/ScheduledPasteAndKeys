@@ -14,8 +14,6 @@ class CreateLoadTaskDialog : public QDialog
 public:
     explicit CreateLoadTaskDialog(QWidget *parent = nullptr);
     ~CreateLoadTaskDialog();
-    static const QString s_tasksFolder;
-    static const QString s_tasksFileExtension;
     void showDialog();
 
 public:

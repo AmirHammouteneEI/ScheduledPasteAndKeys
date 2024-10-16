@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_sticon->setToolTip("Scheduled PC Tasks");
     m_sticon->show();
 
+    m_startupTasksDialog = new StartupTasksDialog(this);
     m_dataEditDialog = new DataEditDialog(this);
     buildToolBar();
 
@@ -68,17 +69,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    m_stopAllTasksShortcut->deleteLater();
-    m_dataEditDialog->deleteLater();
-    m_createLoadTaskDialog->deleteLater();
-    m_toolBar->deleteLater();
-    m_stayOnTopAction->deleteLater();
-    m_lightThemeAction->deleteLater();
-    m_penombraThemeAction->deleteLater();
-    m_darkThemeAction->deleteLater();
-    m_tasktabsManager->deleteLater();
-    m_stmenu->deleteLater();
-    m_sticon->deleteLater();
 }
 
 QTabWidget *MainWindow::getTabWidget()
@@ -91,7 +81,7 @@ void MainWindow::autoRun(const QString &filename, int delay)
     if(m_tasktabsManager == nullptr)
         return;
     hide();
-    auto taskid = m_tasktabsManager->onOpenNewTabRequest(QDir::currentPath()+"/"+CreateLoadTaskDialog::s_tasksFolder+filename+CreateLoadTaskDialog::s_tasksFileExtension);
+    auto taskid = m_tasktabsManager->onOpenNewTabRequest(QDir::currentPath()+"/"+G_Files::TasksFolder+filename+G_Files::TasksFileExtension);
     if(taskid > -1)
         m_tasktabsManager->scheduleTaskFromId(taskid, delay);
 }
@@ -167,11 +157,14 @@ void MainWindow::buildToolBar()
     m_toolBar->setFloatable(false);
     m_toolBar->setFixedHeight(30);
 
+    QAction *startupTasksAction = new QAction(QIcon(":/img/startup.png"),"",this);
+    startupTasksAction->setToolTip(tr("Edit tasks scheduled at system startup..."));
+    connect(startupTasksAction, &QAction::triggered, m_startupTasksDialog, &StartupTasksDialog::showDialog);
+
     QWidget* spacer0 = new QWidget(m_toolBar);
     spacer0->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     QAction *dataEditAction = new QAction("▤",this);
-    dataEditAction->setObjectName("dataEditButton");
     QFont font = dataEditAction->font();
     font.setBold(true);
     font.setPointSize(21);
@@ -213,6 +206,7 @@ void MainWindow::buildToolBar()
     m_stayOnTopAction->setToolTip(tr("Click to pin the window so it will stay on top"));
     connect(m_stayOnTopAction, &QAction::triggered, this, &MainWindow::swapStayOnTop);
 
+    m_toolBar->addAction(startupTasksAction);
     m_toolBar->addWidget(spacer0);
     m_toolBar->addAction(dataEditAction);
     m_toolBar->addWidget(spacer1);

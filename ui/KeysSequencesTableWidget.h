@@ -11,6 +11,7 @@ class KeysSequencesTableWidget : public QTableWidget
     KeysSequenceSelectedEditDialog *m_keysSequenceEditDialog;
 public:
     explicit KeysSequencesTableWidget(QWidget *parent = nullptr);
+    ~KeysSequencesTableWidget() = default;
     void refresh();
     void selectKeysSequenceFromIdentity(const QString & id);
     bool m_belongsToDataEditDialog = false;

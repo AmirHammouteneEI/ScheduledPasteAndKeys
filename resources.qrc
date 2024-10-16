@@ -48,5 +48,6 @@
         <file>img/play.png</file>
         <file>img/cursor-cross.png</file>
         <file>img/crosshair.png</file>
+        <file>img/startup.png</file>
     </qresource>
 </RCC>

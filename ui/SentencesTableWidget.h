@@ -11,6 +11,7 @@ class SentencesTableWidget : public QTableWidget
     SentenceSelectedEditDialog *m_sentenceEditDialog;
 public:
     explicit SentencesTableWidget(QWidget *parent = nullptr);
+    ~SentencesTableWidget() = default;
     void refresh();
     void selectSentenceFromIdentity(const QString & id);
     bool m_belongsToDataEditDialog = false;

@@ -33,16 +33,21 @@ namespace G_Files {
     inline QString ActionCursorMovsId_KeyWord = "cursorMovsId";
     inline QString ActionCursorMovsLoop_KeyWord = "loop";
     inline QString ActionCursorMovsOptKeysStroke_KeyWord = "optionalkeysstroke";
+    inline QString TasksFolder = "saved_tasks/";
+    inline QString TasksFileExtension = ".scht";
+    inline QString StartupTasksParams_KeyWord = "startupTasksParams";
 }
 
 namespace G_Sentences {
     static QString AlreadyExists() {return QObject::tr("A task file with the chosen name already exists, do you confirm that you would like to overwrite this one ?");}
     static QString NoFileSelected() {return QObject::tr("No file has been selected from the table of saved files above. Please select one.");}
     static QString OperationInterference() {return QObject::tr("Some system or user action interferes with this operation, sorry for the inconvenience.");}
+    static QString ForbiddenCharacter() {return QObject::tr("The filename contains some forbidden characters (<>:/\"|?*\\), please change it.");}
     static QString FileParsingError() {return QObject::tr("The file is not in the correct format for this software : parse error.");}
     static QString NoSetenceSelected() {return QObject::tr("No sentence has been selected. Please select one.");}
     static QString NoKeysSequenceSelected() {return QObject::tr("No keys sequence has been selected. Please select one.");}
     static QString NoCursorMovementsSelected() {return QObject::tr("No cursor movements set has been selected. Please select one.");}
+    static QString NoStartupTaskSelected() {return QObject::tr("No startup task has been selected. Please select one.");}
 }
 
 namespace G_SystemCommands {

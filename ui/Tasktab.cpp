@@ -196,7 +196,6 @@ void TaskTab::buildBasicInterface()
     m_stopButton->setEnabled(false);
 
     m_getDelayDialog = new getDelayDialog(this);
-    m_getDelayDialog->m_savedDelayTimePart = QTime(0,1,0);
 
     connect(m_scheduleButton,&QPushButton::released, m_getDelayDialog, &getDelayDialog::showDialog);
     connect(m_stopButton,&QPushButton::released, this, &TaskTab::stopPushed);

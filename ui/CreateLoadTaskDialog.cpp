@@ -11,9 +11,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-const QString CreateLoadTaskDialog::s_tasksFolder = "saved_tasks/";
-const QString CreateLoadTaskDialog::s_tasksFileExtension = ".scht";
-
 CreateLoadTaskDialog::CreateLoadTaskDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::CreateLoadTaskDialog)
@@ -43,13 +40,22 @@ void CreateLoadTaskDialog::showDialog()
 
 void CreateLoadTaskDialog::accept()
 {
-    if(ui->lineEdit->text().isEmpty())
+    auto filenameText = ui->lineEdit->text();
+    if(filenameText.isEmpty())
     {
         QMessageBox::warning(this, tr("Empty filename"), tr("Task file must have a name."));
         return;
     }
 
-    QString filePathChosen = QDir::currentPath()+"/"+s_tasksFolder+ui->lineEdit->text()+s_tasksFileExtension;
+    if(filenameText.contains("<") || filenameText.contains(">") || filenameText.contains(":")
+         || filenameText.contains("\\") || filenameText.contains("\"") || filenameText.contains("|")
+         || filenameText.contains("?") || filenameText.contains("*") || filenameText.contains("/"))
+    {
+        QMessageBox::warning(this, tr("Forbidden character"), G_Sentences::ForbiddenCharacter());
+        return;
+    }
+
+    QString filePathChosen = QDir::currentPath()+"/"+G_Files::TasksFolder+filenameText+G_Files::TasksFileExtension;
     QFileInfo fileChosen(filePathChosen);
 
     if(fileChosen.exists() && fileChosen.isFile())
@@ -89,7 +95,7 @@ void CreateLoadTaskDialog::onOpenFilename()
     }
 
 
-    QString filePathSelected = QDir::currentPath()+"/"+s_tasksFolder+ui->tableWidget->selectedItems().at(0)->text();
+    QString filePathSelected = QDir::currentPath()+"/"+G_Files::TasksFolder+ui->tableWidget->selectedItems().at(0)->text();
 
     emit requestOpenNewTab(filePathSelected);
     QDialog::accept();
@@ -105,7 +111,7 @@ void CreateLoadTaskDialog::onRenameFilename()
     }
 
     QString oldFileName = ui->tableWidget->selectedItems().at(0)->text();
-    QString oldFilePath = QDir::currentPath()+"/"+s_tasksFolder+oldFileName;
+    QString oldFilePath = QDir::currentPath()+"/"+G_Files::TasksFolder+oldFileName;
 
     renameFilename(oldFileName, oldFilePath);
 }
@@ -119,7 +125,7 @@ void CreateLoadTaskDialog::onDuplicateFilename()
     }
 
     QString oldFileName = ui->tableWidget->selectedItems().at(0)->text();
-    QString oldFilePath = QDir::currentPath()+"/"+s_tasksFolder+oldFileName;
+    QString oldFilePath = QDir::currentPath()+"/"+G_Files::TasksFolder+oldFileName;
 
     renameFilename(oldFileName, oldFilePath, true);
 }
@@ -151,7 +157,7 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
         return;
     }
 
-    QString filePathChosen = QDir::currentPath()+"/"+s_tasksFolder+newFileName+s_tasksFileExtension;
+    QString filePathChosen = QDir::currentPath()+"/"+G_Files::TasksFolder+newFileName+G_Files::TasksFileExtension;
     QFileInfo fileChosen(filePathChosen);
 
     if(fileChosen.exists() && fileChosen.isFile())
@@ -202,7 +208,7 @@ void CreateLoadTaskDialog::onDeleteFilename()
     }
 
     QString fileName = ui->tableWidget->selectedItems().at(0)->text();
-    QString filePath = QDir::currentPath()+"/"+s_tasksFolder+fileName;
+    QString filePath = QDir::currentPath()+"/"+G_Files::TasksFolder+fileName;
 
     QFileInfo fileChosen(filePath);
 
@@ -230,8 +236,8 @@ void CreateLoadTaskDialog::onDeleteFilename()
 
 void CreateLoadTaskDialog::fillExistingTasksTable()
 {
-    QDir tasksFolder = QDir::currentPath()+"/"+s_tasksFolder;
-    QStringList tasksNamesList = tasksFolder.entryList(QStringList() << "*"+s_tasksFileExtension, QDir::Files);
+    QDir tasksFolder = QDir::currentPath()+"/"+G_Files::TasksFolder;
+    QStringList tasksNamesList = tasksFolder.entryList(QStringList() << "*"+G_Files::TasksFileExtension, QDir::Files);
 
     int nextLineNum, nextColumnNum;
 
@@ -251,7 +257,7 @@ void CreateLoadTaskDialog::fillExistingTasksTable()
 
 void CreateLoadTaskDialog::createTasksFolderIfNotExist()
 {
-    QDir tasksFolder = QDir::currentPath()+"/"+s_tasksFolder;
+    QDir tasksFolder = QDir::currentPath()+"/"+G_Files::TasksFolder;
     if(!tasksFolder.exists())
-        tasksFolder.mkdir(QDir::currentPath()+"/"+s_tasksFolder);
+        tasksFolder.mkdir(QDir::currentPath()+"/"+G_Files::TasksFolder);
 }

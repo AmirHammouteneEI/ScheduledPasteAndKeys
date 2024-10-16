@@ -86,12 +86,6 @@ AbstractActionWidget::AbstractActionWidget(QWidget *parent)
 
 AbstractActionWidget::~AbstractActionWidget()
 {
-    m_centralWidget->deleteLater();
-    m_removeButton->deleteLater();
-    m_moveToTopButton->deleteLater();
-    m_moveToBottomButton->deleteLater();
-    m_moveUpButton->deleteLater();
-    m_moveDownButton->deleteLater();
     layout()->deleteLater();
 }
 

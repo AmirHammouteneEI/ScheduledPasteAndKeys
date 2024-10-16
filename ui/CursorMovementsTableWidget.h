@@ -10,6 +10,7 @@ class CursorMovementsTableWidget : public QTableWidget
     CursorMovementsSelectedEditDialog *m_cursorMovementsEditDialog;
 public:
     explicit CursorMovementsTableWidget(QWidget *parent = nullptr);
+    ~CursorMovementsTableWidget() = default;
     void refresh();
     void selectCursorMovementsFromIdentity(const QString & id);
     bool m_belongsToDataEditDialog = false;

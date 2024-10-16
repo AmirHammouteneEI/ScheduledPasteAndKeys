@@ -8,6 +8,7 @@
 #include "ui/CreateLoadTaskDialog.h"
 #include "TaskTabsManager.h"
 #include "ui/DataEditDialog.h"
+#include "ui/StartupTasksDialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -52,6 +53,7 @@ protected :
     void setTheme();
     CreateLoadTaskDialog *m_createLoadTaskDialog;
     DataEditDialog *m_dataEditDialog;
+    StartupTasksDialog *m_startupTasksDialog;
     TaskTabsManager* m_tasktabsManager;
     QMenu *m_stmenu;
     QShortcut *m_stopAllTasksShortcut;

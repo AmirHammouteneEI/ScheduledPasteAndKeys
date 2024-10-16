@@ -31,6 +31,9 @@ SOURCES += \
     ui/KeysSequencesTableWidget.cpp \
     ui/SentenceSelectedEditDialog.cpp \
     ui/SentencesTableWidget.cpp \
+    ui/StartupTaskEditDialog.cpp \
+    ui/StartupTasksDialog.cpp \
+    ui/StartupTasksTableWidget.cpp \
     ui/TaskTab.cpp \
     ui/actionwidgets/AbstractActionWidget.cpp \
     ui/actionwidgets/CursorMovementsWidget.cpp \
@@ -72,6 +75,9 @@ HEADERS += \
     ui/KeysSequencesTableWidget.h \
     ui/SentenceSelectedEditDialog.h \
     ui/SentencesTableWidget.h \
+    ui/StartupTaskEditDialog.h \
+    ui/StartupTasksDialog.h \
+    ui/StartupTasksTableWidget.h \
     ui/TaskTab.h \
     ui/actionwidgets/AbstractActionWidget.h \
     ui/actionwidgets/CursorMovementsWidget.h \
@@ -97,6 +103,8 @@ FORMS += \
     ui/KeysSelectorDialog.ui \
     ui/KeysSequenceSelectedEditDialog.ui \
     ui/SentenceSelectedEditDialog.ui \
+    ui/StartupTaskEditDialog.ui \
+    ui/StartupTasksDialog.ui \
     ui/createactiondialog/CreateCursorMovementsActionDialog.ui \
     ui/createactiondialog/CreateKeysSequenceActionDialog.ui \
     ui/createactiondialog/CreatePasteActionDialog.ui \

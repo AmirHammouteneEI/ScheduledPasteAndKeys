@@ -867,9 +867,3 @@ QLabel::disabled#actionSubLabel
 {
 	color: #eee; 
 }
-
-QAbstractButton#dataEditButton
-{
-	padding: -6px -6px -6px -6px;
-	margin: -6px -6px -6px -6px;
-}
