@@ -3,7 +3,7 @@
 
 #include <QSettings>
 #include <QMessageBox>
-
+#include <QApplication>
 
 SentencesTableWidget::SentencesTableWidget(QWidget *parent)
     : QTableWidget{parent}
@@ -28,7 +28,7 @@ void SentencesTableWidget::editSentenceSelected(int row, int)
         return;
 
     QString trueId = idItem->text().remove(0,1);
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     m_sentenceEditDialog->setEditable(m_belongsToDataEditDialog);
     m_sentenceEditDialog->setIdentity(trueId);
     m_sentenceEditDialog->setContent(settings.value(G_Files::SentencesDataCategory + trueId).toString());
@@ -44,7 +44,7 @@ void SentencesTableWidget::editFromDialogReceived()
         return;
     }
 
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     settings.setValue(G_Files::SentencesDataCategory+m_sentenceEditDialog->identity(),
                       m_sentenceEditDialog->content());
     refresh();
@@ -70,7 +70,7 @@ void SentencesTableWidget::removeSentenceReceived()
     if(idItem == nullptr)
         return;
     QString trueId = idItem->text().remove(0,1);
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     settings.remove(G_Files::SentencesDataCategory + trueId);
 
     refresh();
@@ -80,7 +80,7 @@ void SentencesTableWidget::refresh()
 {
     clearContents();
     setRowCount(0);
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     QStringList keys = settings.allKeys();
     for(const auto &key : keys)
     {

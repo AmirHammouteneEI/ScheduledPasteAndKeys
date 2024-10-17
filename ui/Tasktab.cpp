@@ -610,7 +610,7 @@ void TaskTab::moveDownActionReceived(unsigned int actId)
 
 void TaskTab::createPasteActionRequest(QString sentenceIdentity)
 {
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     QString content = settings.value(G_Files::SentencesDataCategory+sentenceIdentity).toString();
 
     ActionParameters paramPaste;
@@ -636,7 +636,7 @@ void TaskTab::createWaitActionRequest(long double duration)
 
 void TaskTab::createKeysSequenceActionRequest(QString keysSequenceIdentity)
 {
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     auto keysSequenceFromSettings = settings.value(G_Files::KeysSequencesDataCategory+keysSequenceIdentity).toMap();
     ActionParameters paramKeysSeq;
     paramKeysSeq.m_keysSeqMap = ActionsTools::fromStandardQMapToKeysSeqMap(keysSequenceFromSettings);
@@ -664,7 +664,7 @@ void TaskTab::createSystemCommandActionRequest(QString sysCmdType, QString param
 
 void TaskTab::createCursorMovementsActionRequest(QString cursorMovementsIdentity)
 {
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     auto cursorMovementsFromSettings = settings.value(G_Files::CursorMovementsDataCategory+cursorMovementsIdentity).toList();
     ActionParameters paramCurMovs;
     paramCurMovs.m_cursorMovementsList = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);

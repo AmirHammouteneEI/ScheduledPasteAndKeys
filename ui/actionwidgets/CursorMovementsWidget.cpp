@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QTimer>
+#include <QApplication>
 
 CursorMovementsWidget::CursorMovementsWidget(QWidget *parent)
     : AbstractActionWidget{parent}
@@ -78,7 +79,7 @@ void CursorMovementsWidget::cursorMovsIdentityReceived(QString id)
         m_mainButton->setText("Cursor movements ~ERROR");
         return;
     }
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     auto cursorMovementsFromSettings = settings.value(G_Files::CursorMovementsDataCategory+id).toList();
     CursorMovementsList movsList = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
     cursormovsaction->m_cursorMovementsList = movsList;

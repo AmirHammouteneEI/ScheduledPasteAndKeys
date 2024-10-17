@@ -25,6 +25,8 @@ Those actions simulations are available :
    - Run Windows system specific command (shut down, reboot, kill processes, create files...)
    - Wait
    
+And others functionalities like data management, system startup scheduled tasks...
+
 The goal in future versions is to include those actions :
 
    - Play sounds

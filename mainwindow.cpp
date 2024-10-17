@@ -81,7 +81,7 @@ void MainWindow::autoRun(const QString &filename, int delay)
     if(m_tasktabsManager == nullptr)
         return;
     hide();
-    auto taskid = m_tasktabsManager->onOpenNewTabRequest(QDir::currentPath()+"/"+G_Files::TasksFolder+filename+G_Files::TasksFileExtension);
+    auto taskid = m_tasktabsManager->onOpenNewTabRequest(QApplication::applicationDirPath()+"/"+G_Files::TasksFolder+filename+G_Files::TasksFileExtension);
     if(taskid > -1)
         m_tasktabsManager->scheduleTaskFromId(taskid, delay);
 }
@@ -129,7 +129,7 @@ void MainWindow::geometrySet()
 
 void MainWindow::loadSettings()
 {
-    QSettings settings(G_Files::SettingsFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::SettingsFilePath, QSettings::IniFormat);
     m_windowWidth = settings.value("windowWidth", 510).toInt();
     m_windowHeight = settings.value("windowHeight", 800).toInt();
 
@@ -143,7 +143,7 @@ void MainWindow::loadSettings()
 
 void MainWindow::saveSettings()
 {
-    QSettings settings(G_Files::SettingsFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::SettingsFilePath, QSettings::IniFormat);
     settings.setValue("windowWidth", width());
     settings.setValue("windowHeight", height());
     settings.setValue("style", m_currentThemeName);

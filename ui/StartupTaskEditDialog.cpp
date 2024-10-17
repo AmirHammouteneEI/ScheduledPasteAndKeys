@@ -32,6 +32,11 @@ void StartupTaskEditDialog::accept()
         QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected());
         return;
     };
+    if(ui->timeEdit->time() == QTime(0,0,0))
+    {
+        QMessageBox::warning(this, tr("Delay can't be set to 0"), tr("The delay for the task to run after system startup can't be set to zero."));
+        return;
+    }
 
     m_filename = ui->tableWidget->selectedItems().at(0)->text().chopped(5);
     m_delay = QTime(0,0,0).secsTo(ui->timeEdit->time());
@@ -42,7 +47,7 @@ void StartupTaskEditDialog::accept()
 
 void StartupTaskEditDialog::fillExistingTasksTable()
 {
-    QDir tasksFolder = QDir::currentPath()+"/"+G_Files::TasksFolder;
+    QDir tasksFolder = QApplication::applicationDirPath()+"/"+G_Files::TasksFolder;
     if(!tasksFolder.exists())
         return;
 

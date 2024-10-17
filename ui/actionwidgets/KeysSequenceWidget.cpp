@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QTimer>
+#include <QApplication>
 
 KeysSequenceWidget::KeysSequenceWidget(QWidget *parent)
     : AbstractActionWidget{parent}
@@ -75,7 +76,7 @@ void KeysSequenceWidget::keysSeqIdentityReceived(QString id)
         m_mainButton->setText("Keys sequence >ERROR");
         return;
     }
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     auto keysSequenceFromSettings = settings.value(G_Files::KeysSequencesDataCategory+id).toMap();
     PressedReleaseDelaysKeysMap keysMap = ActionsTools::fromStandardQMapToKeysSeqMap(keysSequenceFromSettings);
     keysseqaction->m_keysSeqMap = keysMap;

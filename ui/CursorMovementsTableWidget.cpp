@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "actions/ActionsTools.h"
 
+#include <QApplication>
 #include <QSettings>
 #include <QMessageBox>
 
@@ -30,7 +31,7 @@ void CursorMovementsTableWidget::editFromDialogReceived()
         return;
     }
 
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     auto receivedList = m_cursorMovementsEditDialog->tableCursorMovements();
     QList<QVariant> writtenList;
     for(auto &el : receivedList)
@@ -52,7 +53,7 @@ void CursorMovementsTableWidget::editCursorMovementsSelected(int row, int)
         return;
 
     QString trueId = idItem->text().remove(0,1);
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
 
     m_cursorMovementsEditDialog->setEditable(m_belongsToDataEditDialog);
     m_cursorMovementsEditDialog->setIdentity(trueId);
@@ -80,7 +81,7 @@ void CursorMovementsTableWidget::removeCursorMovementsReceived()
     if(idItem == nullptr)
         return;
     QString trueId = idItem->text().remove(0,1);
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     settings.remove(G_Files::CursorMovementsDataCategory + trueId);
 
     refresh();
@@ -90,7 +91,7 @@ void CursorMovementsTableWidget::refresh()
 {
     clearContents();
     setRowCount(0);
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     QStringList keys = settings.allKeys();
     for(const auto &key : keys)
     {

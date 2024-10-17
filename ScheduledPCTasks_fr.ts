@@ -253,6 +253,10 @@ item selected in SelectSentenceDialog is null !</translation>
         <source>Cannot duplicate this file</source>
         <translation>Impossible de dupliquer le fichier</translation>
     </message>
+    <message>
+        <source>Forbidden character</source>
+        <translation>Caractère interdit</translation>
+    </message>
 </context>
 <context>
     <name>CreatePasteActionDialog</name>
@@ -1017,6 +1021,10 @@ premiers travaux en février 2024
 
 version 1.2</translation>
     </message>
+    <message>
+        <source>Edit tasks scheduled at system startup...</source>
+        <translation>Éditer les tâches planifiées au démarrage du système...</translation>
+    </message>
 </context>
 <context>
     <name>PasteWidget</name>
@@ -1127,6 +1135,14 @@ Assurez-vous que ce programme est exécuté en tant qu&apos;administrateur (clic
         <source>No cursor movements set has been selected. Please select one.</source>
         <translation>Aucun ensemble de mouvements de curseur n&apos;a été sélectionné. Veuillez en sélectionner un.</translation>
     </message>
+    <message>
+        <source>The filename contains some forbidden characters (&lt;&gt;:/&quot;|?*\), please change it.</source>
+        <translation>Le nom de fichier contient des caractères interdits (&lt;&gt;:/&quot;|?*\), veuillez le changer.</translation>
+    </message>
+    <message>
+        <source>No startup task has been selected. Please select one.</source>
+        <translation>Aucune tâche de démarrage n&apos;a été sélectionnée. Veuillez en sélectionner une.</translation>
+    </message>
 </context>
 <context>
     <name>SelectSentenceDialog</name>
@@ -1213,6 +1229,79 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>You are about to remove this sentence from data stored, are you sure ?</source>
         <translation>Vous êtes sur le point de supprimer cette phrase des données, en êtes-vous sûr ?</translation>
+    </message>
+</context>
+<context>
+    <name>StartupTaskEditDialog</name>
+    <message>
+        <source>Add a task scheduled on system startup</source>
+        <translation>Ajouter une tâche planifiée au démarrage du système</translation>
+    </message>
+    <message>
+        <source>Select the task to be run :</source>
+        <translation>Sélectionnez la tâche à être exécutée :</translation>
+    </message>
+    <message>
+        <source>Set the delay for the task to be executed after system startup :</source>
+        <translation>Déterminez le délai pour la tâche à être exécutée après le démarrage du système :</translation>
+    </message>
+    <message>
+        <source> days and </source>
+        <translation> jours et </translation>
+    </message>
+    <message>
+        <source> hours,minutes,seconds</source>
+        <translation> heures,minutes,secondes</translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation>Aucun fichier séléctionné</translation>
+    </message>
+    <message>
+        <source>Delay can&apos;t be set to 0</source>
+        <translation>Le délai ne peut être fixé à 0</translation>
+    </message>
+    <message>
+        <source>The delay for the task to run after system startup can&apos;t be set to zero.</source>
+        <translation>Le délai pour que la tâche soit exécutée après le démarrage du système ne peut être fixé à zéro.</translation>
+    </message>
+</context>
+<context>
+    <name>StartupTasksDialog</name>
+    <message>
+        <source>Tasks scheduled at system startup</source>
+        <translation>Tâches planifiées au démarrage du système</translation>
+    </message>
+    <message>
+        <source>Those are the tasks you saved to be run at each system startup :</source>
+        <translation>Voici les tâche que vous avez sauvegardées à être exécutées à chaque démarrage du système :</translation>
+    </message>
+    <message>
+        <source>Filename</source>
+        <translation>Nom de fichier</translation>
+    </message>
+    <message>
+        <source>Delay</source>
+        <translation>Délai</translation>
+    </message>
+    <message>
+        <source>Activated</source>
+        <translation>Activé</translation>
+    </message>
+</context>
+<context>
+    <name>StartupTasksTableWidget</name>
+    <message>
+        <source>No startup task selected</source>
+        <translation>Aucune tâche de démarrage séléctionée</translation>
+    </message>
+    <message>
+        <source>Entry already exists</source>
+        <translation>L&apos;entrée existe déjà</translation>
+    </message>
+    <message>
+        <source>This entry already exists in tasks to be executed at system startup.</source>
+        <translation>Cette entrée existe déjà dans les tâches à être exécutées au démarrage du système.</translation>
     </message>
 </context>
 <context>
@@ -1339,7 +1428,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>Scheduled to run in :
 </source>
-        <translation>Planifié à être executé dans :
+        <translation>Planifié à être exécuté dans :
 </translation>
     </message>
     <message>

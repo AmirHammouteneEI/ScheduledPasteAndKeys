@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QTimer>
+#include <QApplication>
 
 PasteWidget::PasteWidget(QWidget *parent)
     : AbstractActionWidget{parent}
@@ -67,7 +68,7 @@ void PasteWidget::buildWidget()
 
 void PasteWidget::sentenceIdentityReceived(QString id)
 {
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     QString content = settings.value(G_Files::SentencesDataCategory+id).toString();
 
     auto pasteaction =  dynamic_cast<PasteAction*>(m_action);

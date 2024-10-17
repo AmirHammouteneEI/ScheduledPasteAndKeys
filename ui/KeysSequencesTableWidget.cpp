@@ -4,6 +4,7 @@
 
 #include <QSettings>
 #include <QMessageBox>
+#include <QApplication>
 
 KeysSequencesTableWidget::KeysSequencesTableWidget(QWidget *parent)
     : QTableWidget{parent}
@@ -28,7 +29,7 @@ void KeysSequencesTableWidget::editKeysSequenceSelected(int row, int)
         return;
 
     QString trueId = idItem->text().remove(0,1);
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     m_keysSequenceEditDialog->setEditable(m_belongsToDataEditDialog);
     m_keysSequenceEditDialog->setIdentity(trueId);
     auto readMap = settings.value(G_Files::KeysSequencesDataCategory + trueId).toMap();
@@ -45,7 +46,7 @@ void KeysSequencesTableWidget::editFromDialogReceived()
         return;
     }
 
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     auto receivedMap = m_keysSequenceEditDialog->tableKeysSequence();
     QMap<QString, QVariant> writtenMap;
     for(auto [key,val] : receivedMap.asKeyValueRange())
@@ -78,7 +79,7 @@ void KeysSequencesTableWidget::removeKeysSequenceReceived()
     if(idItem == nullptr)
         return;
     QString trueId = idItem->text().remove(0,1);
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     settings.remove(G_Files::KeysSequencesDataCategory + trueId);
 
     refresh();
@@ -88,7 +89,7 @@ void KeysSequencesTableWidget::refresh()
 {
     clearContents();
     setRowCount(0);
-    QSettings settings(G_Files::DataFilePath, QSettings::IniFormat);
+    QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     QStringList keys = settings.allKeys();
     for(const auto &key : keys)
     {

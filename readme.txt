@@ -24,6 +24,8 @@ Those actions simulations are available :
    - Open files, folders, executables, url
    - Run Windows system specific command (shut down, reboot, kill processes, create files...)
    - Wait
+
+And others functionalities like data management, system startup scheduled tasks...
    
 The goal in future versions is to include those actions :
 
