@@ -23,23 +23,25 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QTabWidget * getTabWidget();
-    void autoRun(const QString & filename, int delay);
+    QTabWidget * getTabWidget(); // ui container of TaskTabs
+    void autoRun(const QString & filename, int delay); // automatically run a task in silent mode (no window appears)
 public slots:
-    void showWindow(QSystemTrayIcon::ActivationReason reason = QSystemTrayIcon::Trigger);
+    void showWindow(QSystemTrayIcon::ActivationReason reason = QSystemTrayIcon::Trigger); // show mainwindow or systemtray icon menu (if right click on icon)
 private slots:
-    void quitApp();
+    void quitApp(); // stops all running tasks (forced), asks to saved modified tasks and quit the program
     void swapStayOnTop(bool state);
-    void swapAutoscrollMode(bool state);
-    void switchTheme();
+    void swapAutoscrollMode(bool state); // autoscroll force the action widget visible when running the action
+    void switchTheme(); // set stylesheet
     void taskTabPageClicked(int newIndex);
     void taskTabContextMenuRequest(QPoint point);
 protected :
     QSystemTrayIcon* m_sticon;
+    void setTheme(); // simulate trigger on the appropriate theme button
+    void buildToolBar();
     void buildSystemTrayMenu();
     void closeEvent(QCloseEvent *event) override;
-    int m_windowWidth = 300;
-    int m_windowHeight = 900;
+    int m_windowWidth = 510;
+    int m_windowHeight = 800;
     void geometrySet();
     void loadSettings();
     void saveSettings();
@@ -48,9 +50,7 @@ protected :
     QAction * m_penombraThemeAction;
     QAction * m_darkThemeAction;
     QAction * m_scrollAction;
-    void buildToolBar();
     QString m_currentThemeName;
-    void setTheme();
     CreateLoadTaskDialog *m_createLoadTaskDialog;
     DataEditDialog *m_dataEditDialog;
     StartupTasksDialog *m_startupTasksDialog;

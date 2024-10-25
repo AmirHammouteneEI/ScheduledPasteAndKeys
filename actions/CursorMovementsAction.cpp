@@ -42,7 +42,7 @@ void CursorMovementsAction::setParameters(const ActionParameters &param)
     m_cursorMovementsList = param.m_cursorMovementsList;
     m_movementsId = param.m_dataId;
     m_timesToRun = param.m_timesToRun;
-    m_cursorMovementsOptionalKeysStroke = param.m_cursorMovementsOptionalKeysStroke;;
+    m_cursorMovementsOptionalKeysStroke = param.m_cursorMovementsOptionalKeysStroke;
 }
 
 CursorMovementsAction *CursorMovementsAction::deepCopy() const

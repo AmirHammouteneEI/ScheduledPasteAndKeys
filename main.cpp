@@ -14,7 +14,8 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication a(argc, argv); // Application as a Qt ui-framework object
+    // Registering metatype to be used in signals/slots of Qt mecanism
     qRegisterMetaType<ActionParameters>();
     qRegisterMetaType<ReleaseDelayKeysPair>();
     qRegisterMetaType<PressedReleaseDelaysKeysMap>();
@@ -23,6 +24,7 @@ int main(int argc, char *argv[])
 
     a.setWindowIcon(QIcon(":/img/programIcon.png"));
 
+    // Get local system language to apply translations is exists
     QString locale = QLocale::system().name().section('_', 0, 0);
     QTranslator translator;
     translator.load(QString("ScheduledPCTasks_") + locale);
@@ -31,12 +33,14 @@ int main(int argc, char *argv[])
     a.installTranslator(&translator);
     a.installTranslator(&baseTranslator);
 
+    // Main ui window
     MainWindow w;
 
+    // In case of program used with correct arguments, automatically run the task (usage : ScheduledPCTasks.exe "TaskFileName" <DelayInSeconds>)
     if(argc == 3)
     {
         int delay = atoi(argv[2]);
-        if(delay != 0)
+        if(delay > 0)
             w.autoRun(QString(argv[1]), delay);
         else
             w.showWindow();

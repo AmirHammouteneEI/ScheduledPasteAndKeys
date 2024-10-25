@@ -70,7 +70,7 @@ void ActionsTools::keyStokeSimulate(const QString &keyAsStr, DWORD typeOfPress)
     ip.ki.dwExtraInfo = 0;
     ip.ki.dwFlags = typeOfPress;
     ip.ki.wVk = wVkCode;
-    ip.ki.wScan = MapVirtualKeyW(wVkCode, MAPVK_VK_TO_VSC_EX);;
+    ip.ki.wScan = MapVirtualKeyW(wVkCode, MAPVK_VK_TO_VSC_EX);
     SendInput(1, &ip, sizeof(INPUT));
 }
 
@@ -89,7 +89,7 @@ void ActionsTools::mouseStokeSimulate(const QString &keyAsStr, DWORD typeOfPress
     ip.mi.mouseData = mouseData;
     ip.mi.time = 0;
     ip.mi.dwExtraInfo = 0;
-    ip.mi.dwFlags = mouseFlagPressReleaseConversion(m_keysStrToInputWordMap.value(keyAsStr,VK_RETURN),typeOfPress);;
+    ip.mi.dwFlags = mouseFlagPressReleaseConversion(m_keysStrToInputWordMap.value(keyAsStr,VK_RETURN),typeOfPress);
     SendInput(1, &ip, sizeof(INPUT));
 }
 

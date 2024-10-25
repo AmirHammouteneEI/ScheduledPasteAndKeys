@@ -3,7 +3,7 @@
 
 #include <QThread>
 
-WaitAction::WaitAction()
+WaitAction::WaitAction() : AbstractAction()
 {
     e_type = ActionType::Wait;
 }

@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("Scheduled PC Tasks v1.2");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
+
     // Will also be a system tray app
     m_sticon = new QSystemTrayIcon(QIcon(":/img/programIcon.png"),this);
     buildSystemTrayMenu();
@@ -45,18 +46,19 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->tabWidget, &QTabWidget::tabBarClicked, this, &MainWindow::taskTabPageClicked);
 
     ui->tabWidget->tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
-
     connect(ui->tabWidget->tabBar(), &QTabBar::customContextMenuRequested, this, &MainWindow::taskTabContextMenuRequest);
 
     setTheme();
 
     m_tasktabsManager = new TaskTabsManager(this);
-    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestOpenNewTab, m_tasktabsManager, &TaskTabsManager::onOpenNewTabRequest);
+
     connect(ui->tabWidget, &QTabWidget::tabCloseRequested, m_tasktabsManager, &TaskTabsManager::onTabCloseRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestOpenNewTab, m_tasktabsManager, &TaskTabsManager::onOpenNewTabRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager, &TaskTabsManager::onRefreshTabsRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager, &TaskTabsManager::onTaskfilePathChanged);
     connect(ui->pushButton, &QPushButton::released, m_createLoadTaskDialog, &CreateLoadTaskDialog::showDialog);
 
+    // Global shortcut to stop all running tasks
     m_stopAllTasksShortcut = new QShortcut(QKeySequence("Ctrl+Alt+S"), this);
     connect(m_stopAllTasksShortcut, &QShortcut::activated, m_tasktabsManager, &TaskTabsManager::stopAllRunningTasksReceived);
 
@@ -78,7 +80,7 @@ QTabWidget *MainWindow::getTabWidget()
 
 void MainWindow::autoRun(const QString &filename, int delay)
 {
-    if(m_tasktabsManager == nullptr)
+    if(m_tasktabsManager == nullptr || delay<0)
         return;
     hide();
     auto taskid = m_tasktabsManager->onOpenNewTabRequest(QApplication::applicationDirPath()+"/"+G_Files::TasksFolder+filename+G_Files::TasksFileExtension);
@@ -137,7 +139,6 @@ void MainWindow::loadSettings()
     m_windowHeight = m_windowHeight < 50 ? 800 : m_windowHeight;
 
     m_currentThemeName = settings.value("style", "dark").toString();
-
     swapAutoscrollMode(settings.value("autoscroll", true).toBool());
 }
 
@@ -327,7 +328,6 @@ void MainWindow::taskTabPageClicked(int index)
 {
     if(index == ui->tabWidget->count()-1) //the last tab should always be the "+" tab
         m_createLoadTaskDialog->showDialog();
-
 }
 
 void MainWindow::taskTabContextMenuRequest(QPoint point)
@@ -344,7 +344,7 @@ void MainWindow::taskTabContextMenuRequest(QPoint point)
     connect(renameAct, &QAction::triggered, this, [=]()
         {
             QString taskName = ui->tabWidget->tabBar()->tabText(index);
-        m_createLoadTaskDialog->renameFilename(taskName+".scht",m_tasktabsManager->m_taskFilePathsMap.value(m_tasktabsManager->getIdfromTaskName(taskName)));
+            m_createLoadTaskDialog->renameFilename(taskName+".scht",m_tasktabsManager->m_taskFilePathsMap.value(m_tasktabsManager->getIdfromTaskName(taskName)));
         });
     connect(closeAct, &QAction::triggered, this, [=](){ m_tasktabsManager->onTabCloseRequest(index); });
 

@@ -43,7 +43,7 @@ void TaskThread::run()
 
     for(auto it = m_actionsList.begin(); it != m_actionsList.end(); ++it)
     {
-        if(m_haveToStop == true)
+        if(m_haveToStop)
             return;
 
         if((*it) == nullptr)

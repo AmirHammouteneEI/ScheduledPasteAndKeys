@@ -24,15 +24,17 @@ Those actions simulations are available :
    - Open files, folders, executables, url
    - Run Windows system specific command (shut down, reboot, kill processes, create files...)
    - Wait
-   
-And others functionalities like data management, system startup scheduled tasks...
 
+And other features like data management, scheduled tasks at system startup...
+   
 The goal in future versions is to include those actions :
 
    - Play sounds
    - Add more Windows system specific command
 
-Feedbacks and ideas for other actions are very welcome !
+Working on a Linux system version.
+
+Feedbacks and ideas for further actions are very welcome !
 
 ----------
 Available for install on Microsoft Store : 

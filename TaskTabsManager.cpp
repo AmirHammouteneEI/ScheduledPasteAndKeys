@@ -349,7 +349,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
             {
                 auto params = pasteaction->generateParameters();
                 jsonToReturn.insert(G_Files::ActionContent_KeyWord, QJsonValue::fromVariant(params.m_pasteContent));
-                jsonToReturn.insert(G_Files::ActionContentId_KeyWord, QJsonValue::fromVariant(params.m_dataId));;
+                jsonToReturn.insert(G_Files::ActionContentId_KeyWord, QJsonValue::fromVariant(params.m_dataId));
                 jsonToReturn.insert(G_Files::ActionPasteTextLoop_KeyWord, QJsonValue::fromVariant(params.m_timesToRun));
             }
         }
