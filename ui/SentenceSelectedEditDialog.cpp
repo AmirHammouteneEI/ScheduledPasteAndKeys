@@ -3,6 +3,7 @@
 
 #include <QPushButton>
 #include <QRegularExpressionValidator>
+#include <QMessageBox>
 
 SentenceSelectedEditDialog::SentenceSelectedEditDialog(QWidget *parent)
     : QDialog(parent)
@@ -40,4 +41,15 @@ void SentenceSelectedEditDialog::setContent(const QString &content)
 QString SentenceSelectedEditDialog::content()
 {
     return ui->plainTextEdit->toPlainText();
+}
+
+void SentenceSelectedEditDialog::accept()
+{
+    if(ui->lineEdit->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Sentence has no identity"),
+                             tr("The sentence you tried to add has no identity, please define one."));
+        return;
+    }
+    QDialog::accept();
 }

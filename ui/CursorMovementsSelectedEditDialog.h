@@ -29,6 +29,8 @@ public slots:
     QList<QWidget*> addMovsRow();
     void removeLastMovsRow();
     void coordinatesReceived(int index, int x, int y);
+private slots:
+    void accept() override;
 private:
     Ui::CursorMovementsSelectedEditDialog *ui;
 };

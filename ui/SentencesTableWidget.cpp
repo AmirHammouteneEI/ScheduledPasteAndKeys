@@ -37,13 +37,6 @@ void SentencesTableWidget::editSentenceSelected(int row, int)
 
 void SentencesTableWidget::editFromDialogReceived()
 {
-    if(m_sentenceEditDialog->identity().isEmpty())
-    {
-        QMessageBox::warning(this, tr("Sentence has no identity"),
-                             tr("The sentence you tried to add has no identity, cancelled operation."));
-        return;
-    }
-
     QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     settings.setValue(G_Files::SentencesDataCategory+m_sentenceEditDialog->identity(),
                       m_sentenceEditDialog->content());

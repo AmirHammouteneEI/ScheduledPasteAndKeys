@@ -49,7 +49,8 @@ SOURCES += \
     ui/getCursorCoordinatesWidget.cpp \
     ui/getDelayDialog.cpp \
     ui/getFilePathDialog.cpp \
-    ui/getFolderPathDialog.cpp
+    ui/getFolderPathDialog.cpp \
+    ui/getImagePathDialog.cpp
 
 HEADERS += \
     ActionWidgetsManager.h \
@@ -93,7 +94,8 @@ HEADERS += \
     ui/getCursorCoordinatesWidget.h \
     ui/getDelayDialog.h \
     ui/getFilePathDialog.h \
-    ui/getFolderPathDialog.h
+    ui/getFolderPathDialog.h \
+    ui/getImagePathDialog.h
 
 FORMS += \
     mainwindow.ui \
@@ -112,7 +114,8 @@ FORMS += \
     ui/createactiondialog/CreateWaitActionDialog.ui \
     ui/getDelayDialog.ui \
     ui/getFilePathDialog.ui \
-    ui/getFolderPathDialog.ui
+    ui/getFolderPathDialog.ui \
+    ui/getImagePathDialog.ui
 
 LIBS += -luser32
 
@@ -123,7 +126,7 @@ RESOURCES += \
 
 RC_ICONS = img/programIcon.ico
 
-VERSION = 1.2.0
+VERSION = 1.2.1
 QMAKE_TARGET_COMPANY = "Amir Hammoutene"
 QMAKE_TARGET_COPYRIGHT = "GNU general public license version 3"
 
