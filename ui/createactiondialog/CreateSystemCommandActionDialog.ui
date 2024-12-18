@@ -76,17 +76,10 @@
       <property name="spacing">
        <number>2</number>
       </property>
-      <item row="2" column="1" colspan="2">
-       <widget class="QPushButton" name="executeprogramButton">
+      <item row="4" column="3" colspan="2">
+       <widget class="QPushButton" name="deletefileButton">
         <property name="text">
-         <string>Execute a program</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="3" colspan="2">
-       <widget class="QPushButton" name="openurlButton">
-        <property name="text">
-         <string>Open an URL</string>
+         <string>Delete a file</string>
         </property>
        </widget>
       </item>
@@ -97,13 +90,6 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="3" colspan="2">
-       <widget class="QPushButton" name="createfileButton">
-        <property name="text">
-         <string>Create a file</string>
-        </property>
-       </widget>
-      </item>
       <item row="4" column="1" colspan="2">
        <widget class="QPushButton" name="copyfileButton">
         <property name="text">
@@ -111,10 +97,38 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="3" colspan="2">
-       <widget class="QPushButton" name="deletefileButton">
+      <item row="3" column="3" colspan="2">
+       <widget class="QPushButton" name="createfileButton">
         <property name="text">
-         <string>Delete a file</string>
+         <string>Create a file</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QPushButton" name="openfolderButton">
+        <property name="text">
+         <string>Open a folder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="4" colspan="2">
+       <widget class="QPushButton" name="logoffButton">
+        <property name="text">
+         <string>Log off user session</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1" colspan="2">
+       <widget class="QPushButton" name="killprocessButton">
+        <property name="text">
+         <string>Kill a process</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="2" colspan="2">
+       <widget class="QPushButton" name="restartButton">
+        <property name="text">
+         <string>Restart the PC</string>
         </property>
        </widget>
       </item>
@@ -132,10 +146,17 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0" colspan="2">
-       <widget class="QPushButton" name="openfolderButton">
+      <item row="8" column="0" colspan="2">
+       <widget class="QPushButton" name="shutdownButton">
         <property name="text">
-         <string>Open a folder</string>
+         <string>Shut down the PC</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3" colspan="2">
+       <widget class="QPushButton" name="openurlButton">
+        <property name="text">
+         <string>Open an URL</string>
         </property>
        </widget>
       </item>
@@ -146,31 +167,17 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="1" colspan="2">
-       <widget class="QPushButton" name="killprocessButton">
+      <item row="2" column="1" colspan="2">
+       <widget class="QPushButton" name="executeprogramButton">
         <property name="text">
-         <string>Kill a process</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="4" colspan="2">
-       <widget class="QPushButton" name="logoffButton">
-        <property name="text">
-         <string>Log off user session</string>
+         <string>Execute a program</string>
         </property>
        </widget>
       </item>
       <item row="7" column="2" colspan="2">
-       <widget class="QPushButton" name="restartButton">
+       <widget class="QPushButton" name="takescreenshotButton">
         <property name="text">
-         <string>Restart the PC</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0" colspan="2">
-       <widget class="QPushButton" name="shutdownButton">
-        <property name="text">
-         <string>Shut down the PC</string>
+         <string>Take a screenshot</string>
         </property>
        </widget>
       </item>

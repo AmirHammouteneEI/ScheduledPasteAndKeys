@@ -24,13 +24,6 @@ void CursorMovementsTableWidget::createCursorMovementsReceived()
 
 void CursorMovementsTableWidget::editFromDialogReceived()
 {
-    if(m_cursorMovementsEditDialog->identity().isEmpty())
-    {
-        QMessageBox::warning(this, tr("Cursor movements set has no identity"),
-                             tr("The cursor movement set you tried to add has no identity, cancelled operation."));
-        return;
-    }
-
     QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     auto receivedList = m_cursorMovementsEditDialog->tableCursorMovements();
     QList<QVariant> writtenList;

@@ -39,13 +39,6 @@ void KeysSequencesTableWidget::editKeysSequenceSelected(int row, int)
 
 void KeysSequencesTableWidget::editFromDialogReceived()
 {
-    if(m_keysSequenceEditDialog->identity().isEmpty())
-    {
-        QMessageBox::warning(this, tr("Keys sequence has no identity"),
-                             tr("The keys sequence you tried to add has no identity, cancelled operation."));
-        return;
-    }
-
     QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     auto receivedMap = m_keysSequenceEditDialog->tableKeysSequence();
     QMap<QString, QVariant> writtenMap;
@@ -54,8 +47,7 @@ void KeysSequencesTableWidget::editFromDialogReceived()
         QVariant variant = QVariant::fromValue(val);
         writtenMap.insert(QString::number(key),variant);
     }
-    settings.setValue(G_Files::KeysSequencesDataCategory+m_keysSequenceEditDialog->identity(),
-                      writtenMap);
+    settings.setValue(G_Files::KeysSequencesDataCategory+m_keysSequenceEditDialog->identity(), writtenMap);
     refresh();
 
     selectKeysSequenceFromIdentity(m_keysSequenceEditDialog->identity());

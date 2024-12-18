@@ -451,6 +451,10 @@ Veuillez fournir toutes les informations nécessaires.</translation>
         <source>Copy a file</source>
         <translation>Copier un fichier</translation>
     </message>
+    <message>
+        <source>Take a screenshot</source>
+        <translation>Prendre une capture d&apos;écran</translation>
+    </message>
 </context>
 <context>
     <name>CreateWaitActionDialog</name>
@@ -533,16 +537,24 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
         <source>Keys to stroke during those cursor movements (optional) :</source>
         <translation>Touches à appuyer durant ces mouvements de curseur (optionnel) :</translation>
     </message>
-</context>
-<context>
-    <name>CursorMovementsTableWidget</name>
     <message>
         <source>Cursor movements set has no identity</source>
         <translation>L&apos;ensemble de mouvements de curseur n&apos;a pas d&apos;identité</translation>
     </message>
     <message>
+        <source>The cursor movement set you tried to add has no identity, please define one.</source>
+        <translation>L&apos;ensemble de mouvements du curseur que vous avez essayé d&apos;ajouter n&apos;a pas d&apos;identité, veuillez en définir une.</translation>
+    </message>
+</context>
+<context>
+    <name>CursorMovementsTableWidget</name>
+    <message>
+        <source>Cursor movements set has no identity</source>
+        <translation type="vanished">L&apos;ensemble de mouvements de curseur n&apos;a pas d&apos;identité</translation>
+    </message>
+    <message>
         <source>The cursor movement set you tried to add has no identity, cancelled operation.</source>
-        <translation>L&apos;ensemble de mouvements de curseur que vous avez essayé d&apos;ajouter n&apos;a pas d&apos;identité, opération annulée.</translation>
+        <translation type="vanished">L&apos;ensemble de mouvements de curseur que vous avez essayé d&apos;ajouter n&apos;a pas d&apos;identité, opération annulée.</translation>
     </message>
     <message>
         <source>No cursor movements set selected</source>
@@ -756,6 +768,22 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
         <source>Keys</source>
         <translation>Touches</translation>
     </message>
+    <message>
+        <source>Keys sequence has no identity</source>
+        <translation>La séquence de touches n&apos;a pas d&apos;identité</translation>
+    </message>
+    <message>
+        <source>The keys sequence you tried to add has no identity, please define one.</source>
+        <translation>La séquence de touches que vous avez essayée d&apos;ajouter n&apos;a pas d&apos;identité, veuillez en définir une.</translation>
+    </message>
+    <message>
+        <source>Delay rehearsal</source>
+        <translation>Répétition de délai</translation>
+    </message>
+    <message>
+        <source>Delays before press must be unique, but some of them have the same value, please modify the entries.</source>
+        <translation>Les délais avant appui doivent être unique, mais certains ont la même valeur, veuillez modifier les entrées.</translation>
+    </message>
 </context>
 <context>
     <name>KeysSequenceWidget</name>
@@ -796,11 +824,11 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <name>KeysSequencesTableWidget</name>
     <message>
         <source>Keys sequence has no identity</source>
-        <translation>La séquence de touches n&apos;a pas d&apos;identité</translation>
+        <translation type="vanished">La séquence de touches n&apos;a pas d&apos;identité</translation>
     </message>
     <message>
         <source>The keys sequence you tried to add has no identity, cancelled operation.</source>
-        <translation>La séquence de touches que vous avez essayé d&apos;ajouter n&apos;a pas d&apos;identité, opération annulée.</translation>
+        <translation type="vanished">La séquence de touches que vous avez essayé d&apos;ajouter n&apos;a pas d&apos;identité, opération annulée.</translation>
     </message>
     <message>
         <source>No keys sequence selected</source>
@@ -1014,7 +1042,7 @@ Developed by Amir Hammoutene (contact@amirhammoutene.dev)
 initial work on February 2024
 
 version 1.2</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
@@ -1024,6 +1052,20 @@ version 1.2</translation>
     <message>
         <source>Edit tasks scheduled at system startup...</source>
         <translation>Éditer les tâches planifiées au démarrage du système...</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.2.1</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.2.1</translation>
     </message>
 </context>
 <context>
@@ -1207,16 +1249,24 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
         <source>Create/Edit/View a sentences</source>
         <translation>Créer/Éditer/Voir une phrase</translation>
     </message>
-</context>
-<context>
-    <name>SentencesTableWidget</name>
     <message>
         <source>Sentence has no identity</source>
         <translation>La phrase n&apos;a pas d&apos;identité</translation>
     </message>
     <message>
+        <source>The sentence you tried to add has no identity, please define one.</source>
+        <translation>La phrase que vous avez essayée d&apos;ajouter n&apos;a pas d&apos;identité, veuillez en définir une.</translation>
+    </message>
+</context>
+<context>
+    <name>SentencesTableWidget</name>
+    <message>
+        <source>Sentence has no identity</source>
+        <translation type="vanished">La phrase n&apos;a pas d&apos;identité</translation>
+    </message>
+    <message>
         <source>The sentence you tried to add has no identity, cancelled operation.</source>
-        <translation>La phrase que vous avez essayé d&apos;ajouter n&apos;a pas d&apos;identité, opération annulée.</translation>
+        <translation type="vanished">La phrase que vous avez essayé d&apos;ajouter n&apos;a pas d&apos;identité, opération annulée.</translation>
     </message>
     <message>
         <source>No sentence selected</source>
@@ -1274,7 +1324,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Those are the tasks you saved to be run at each system startup :</source>
-        <translation>Voici les tâche que vous avez sauvegardées à être exécutées à chaque démarrage du système :</translation>
+        <translation>Voici les tâches que vous avez sauvegardées à être exécutées à chaque démarrage du système :</translation>
     </message>
     <message>
         <source>Filename</source>
@@ -1729,6 +1779,33 @@ Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</transla
     <message>
         <source>Select a directory</source>
         <translation>Sélectionner un répertoire</translation>
+    </message>
+</context>
+<context>
+    <name>getImagePathDialog</name>
+    <message>
+        <source>Set the file where the screenshot image will be saved :</source>
+        <translation>Définissez le fichier dans lequel la capture d&apos;écran va être sauvegardée :</translation>
+    </message>
+    <message>
+        <source>C:/...</source>
+        <translation>C:/...</translation>
+    </message>
+    <message>
+        <source>Browse a directory in order to help to set the path...</source>
+        <translation>Parcourir un répertoire afin d&apos;aider à définir le chemin...</translation>
+    </message>
+    <message>
+        <source>Define the image file path</source>
+        <translation>Définir le chemin du fichier image</translation>
+    </message>
+    <message>
+        <source>PNG (*.png)</source>
+        <translation>PNG (*.png)</translation>
+    </message>
+    <message>
+        <source>Set the image file option</source>
+        <translation>Définir l&apos;option de fichier image</translation>
     </message>
 </context>
 </TS>

@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include "ui/getFolderPathDialog.h"
 #include "ui/getFilePathDialog.h"
+#include "ui/getImagePathDialog.h"
 
 namespace Ui {
 class CreateSystemCommandActionDialog;
@@ -19,7 +20,8 @@ class CreateSystemCommandActionDialog : public QDialog
     QPushButton *m_option2Button;
     getFolderPathDialog *m_folderPathDialog;
     getFilePathDialog *m_filePathDialog;
-    getFilePathDialog *m_filePathDialog2;
+    getFilePathDialog *m_savedFilePathDialog;
+    getImagePathDialog *m_imagePathDialog;
     void activateButtons();
 public:
     explicit CreateSystemCommandActionDialog(QWidget *parent = nullptr);

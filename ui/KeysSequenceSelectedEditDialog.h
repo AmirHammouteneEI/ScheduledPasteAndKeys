@@ -23,6 +23,8 @@ public:
 public slots:
     QList<QWidget*> addKeysRow();
     void removeLastKeysRow();
+private slots:
+    void accept() override;
 
 private:
     Ui::KeysSequenceSelectedEditDialog *ui;

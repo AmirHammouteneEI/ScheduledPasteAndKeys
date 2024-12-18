@@ -7,8 +7,8 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QProcess>
-
-//#include "actions/ActionsTools.h"
+#include <QScreen>
+#include <QPainter>
 
 SystemCommandAction::SystemCommandAction() : AbstractAction()
 {
@@ -95,6 +95,34 @@ void SystemCommandAction::runAction() const
         case SystemCommandType::CopyOneFile:
         {
             QFile::copy(m_param1,m_param2);
+        }
+        break;
+        case SystemCommandType::TakeScreenshot:
+        {
+            QFileInfo finfo(m_param1);
+            QDir d;
+            d.mkpath(finfo.absolutePath());
+            QList<QPixmap> pixmaps;
+            int width = 0;
+            int height = 0;
+            for(auto &screen : QApplication::screens())
+            {
+                width+=screen->geometry().width();
+                if(height < screen->geometry().height())
+                    height = screen->geometry().height();
+                pixmaps << screen->grabWindow(0);
+            }
+
+            QPixmap globalPix(width, height);
+            QPainter painter(&globalPix);
+            globalPix.fill(Qt::white);
+            int drawOrigin = 0;
+            for(auto &pix : pixmaps)
+            {
+                painter.drawPixmap(QPoint(drawOrigin, 0), pix);
+                drawOrigin += pix.width();
+            }
+            globalPix.save(m_param1,"PNG");
         }
         break;
         default:

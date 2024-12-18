@@ -3,8 +3,8 @@
 #include <QFileDialog>
 #include <QApplication>
 
-getFilePathDialog::getFilePathDialog(QWidget *parent)
-    : QDialog(parent)
+getFilePathDialog::getFilePathDialog(QWidget *parent, bool getSaved)
+    : QDialog(parent), m_getSavedFileName(getSaved)
     , ui(new Ui::getFilePathDialog)
 {
     ui->setupUi(this);
@@ -18,7 +18,11 @@ getFilePathDialog::~getFilePathDialog()
 
 void getFilePathDialog::showBrowseFilesDialog()
 {
-    QString dir = QFileDialog::getOpenFileName(this, tr("Select a file"),ui->lineEdit->text());
+    QString dir;
+    if(m_getSavedFileName)
+        dir = QFileDialog::getSaveFileName(this, tr("Select a file"),ui->lineEdit->text());
+    else
+        dir = QFileDialog::getOpenFileName(this, tr("Select a file"),ui->lineEdit->text());
 
     ui->lineEdit->setText(dir);
 }

@@ -10,9 +10,9 @@ class getFilePathDialog;
 class getFilePathDialog : public QDialog
 {
     Q_OBJECT
-
+    bool m_getSavedFileName = false;
 public:
-    explicit getFilePathDialog(QWidget *parent = nullptr);
+    explicit getFilePathDialog(QWidget *parent = nullptr, bool getSaved = false);
     ~getFilePathDialog();
 private slots:
     void showBrowseFilesDialog();

@@ -4,6 +4,7 @@
 #include <QDoubleSpinBox>
 #include <QSpinBox>
 #include <QPushButton>
+#include <QMessageBox>
 
 CursorMovementsSelectedEditDialog::CursorMovementsSelectedEditDialog(QWidget *parent)
     : QDialog(parent)
@@ -185,4 +186,15 @@ void CursorMovementsSelectedEditDialog::coordinatesReceived(int index, int x, in
         return;
     xCoordSpin->setValue(x);
     yCoordSpin->setValue(y);
+}
+
+void CursorMovementsSelectedEditDialog::accept()
+{
+    if(ui->lineEdit->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Cursor movements set has no identity"),
+                             tr("The cursor movement set you tried to add has no identity, please define one."));
+        return;
+    }
+    QDialog::accept();
 }

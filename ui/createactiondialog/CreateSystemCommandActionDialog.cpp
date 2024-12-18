@@ -23,6 +23,7 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     ui->openurlButton->setProperty("type", "openurl");
     ui->openfolderButton->setProperty("type", "openfolder");
     ui->copyfileButton->setProperty("type", "copyfile");
+    ui->takescreenshotButton->setProperty("type", "screenshot");
 
     m_option1Button = new QPushButton(this);
     m_option2Button = new QPushButton(this);
@@ -35,7 +36,8 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
 
     m_folderPathDialog = new getFolderPathDialog(this);
     m_filePathDialog = new getFilePathDialog(this);
-    m_filePathDialog2 = new getFilePathDialog(this);
+    m_savedFilePathDialog = new getFilePathDialog(this,true);
+    m_imagePathDialog = new getImagePathDialog(this);
 
     connect(ui->shutdownButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->restartButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
@@ -51,6 +53,7 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     connect(ui->openurlButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->openfolderButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->copyfileButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
+    connect(ui->takescreenshotButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
 }
 
 CreateSystemCommandActionDialog::~CreateSystemCommandActionDialog()
@@ -236,11 +239,21 @@ void CreateSystemCommandActionDialog::activateButtons()
                     m_option1Button->setToolTip(dir);
                 });
 
-        connect(m_option2Button,&QPushButton::released, m_filePathDialog2, &getFilePathDialog::showDialog);
-        connect(m_filePathDialog2, &getFilePathDialog::sendFile,this,[&](const QString &dir)
+        connect(m_option2Button,&QPushButton::released, m_savedFilePathDialog, &getFilePathDialog::showDialog);
+        connect(m_savedFilePathDialog, &getFilePathDialog::sendFile,this,[&](const QString &dir)
                 {
                     m_option2Button->setText(dir);
                     m_option2Button->setToolTip(dir);
+                });
+    }
+    else if(m_type == G_SystemCommands::TakeScreenshotType)
+    {
+        m_option1Button->setEnabled(true);
+        connect(m_option1Button,&QPushButton::released, m_imagePathDialog, &getImagePathDialog::showDialog);
+        connect(m_imagePathDialog, &getImagePathDialog::sendImage,this,[&](const QString & dir)
+                {
+                    m_option1Button->setText(dir);
+                    m_option1Button->setToolTip(dir);
                 });
     }
     // if QuitSelfProgramType,ShutDownType,RestartType,LogOffType no need of any option

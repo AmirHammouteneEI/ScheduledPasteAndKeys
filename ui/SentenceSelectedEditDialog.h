@@ -19,7 +19,8 @@ public:
     QString identity();
     void setContent(const QString & content);
     QString content();
-
+private slots:
+    void accept() override;
 private:
     Ui::SentenceSelectedEditDialog *ui;
 };

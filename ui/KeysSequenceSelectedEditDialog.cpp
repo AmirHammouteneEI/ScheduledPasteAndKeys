@@ -3,6 +3,7 @@
 #include "KeysSelectorDialog.h"
 #include <QDoubleSpinBox>
 #include <QPushButton>
+#include <QMessageBox>
 
 KeysSequenceSelectedEditDialog::KeysSequenceSelectedEditDialog(QWidget *parent)
     : QDialog(parent)
@@ -84,6 +85,7 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
     int index = ui->tableWidget->rowCount();
     QDoubleSpinBox *pressedDelaySpin = new QDoubleSpinBox(this);
     pressedDelaySpin->setDecimals(2);
+    pressedDelaySpin->setMaximum(0.);
     pressedDelaySpin->setMaximum(999999999999.);
     pressedDelaySpin->setSingleStep(0.1);
     pressedDelaySpin->setAlignment(Qt::AlignCenter);
@@ -97,7 +99,7 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
     {
         auto previousSpin = qobject_cast<QDoubleSpinBox*>(ui->tableWidget->cellWidget(index-1,0));
         if(previousSpin!= nullptr)
-            pressedDelaySpin->setMinimum(previousSpin->value()+0.1);
+            pressedDelaySpin->setValue(previousSpin->value()+0.1);
     }
 
     QDoubleSpinBox *releasedDelaySpin = new QDoubleSpinBox(this);
@@ -133,4 +135,32 @@ void KeysSequenceSelectedEditDialog::removeLastKeysRow()
 {
     if(ui->tableWidget->rowCount() > 0)
         ui->tableWidget->removeRow(ui->tableWidget->rowCount()-1);
+}
+
+void KeysSequenceSelectedEditDialog::accept()
+{
+    if(ui->lineEdit->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Keys sequence has no identity"),
+                             tr("The keys sequence you tried to add has no identity, please define one."));
+        return;
+    }
+
+    QList<int> delaysList;
+    for(int row = 0; row < ui->tableWidget->rowCount(); ++row)
+    {
+        auto pressedDelaySpin = qobject_cast<QDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 0));
+        if(pressedDelaySpin == nullptr)
+            continue;
+        int delay = pressedDelaySpin->value()*1000;
+        if(delaysList.contains(delay))
+        {
+            QMessageBox::warning(this, tr("Delay rehearsal"),
+                                 tr("Delays before press must be unique, but some of them have the same value, please modify the entries."));
+            return;
+        }
+        delaysList.append(delay);
+    }
+
+    QDialog::accept();
 }
