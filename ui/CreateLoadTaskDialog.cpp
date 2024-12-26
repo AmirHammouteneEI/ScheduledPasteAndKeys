@@ -251,7 +251,10 @@ void CreateLoadTaskDialog::fillExistingTasksTable()
         if(nextColumnNum == 0)
             ui->tableWidget->insertRow(ui->tableWidget->rowCount());
 
-        ui->tableWidget->setItem(nextLineNum, nextColumnNum, new QTableWidgetItem(tasksNamesList.at(k)));
+        auto * item = new QTableWidgetItem(tasksNamesList.at(k));
+        item->setToolTip(tasksNamesList.at(k));
+
+        ui->tableWidget->setItem(nextLineNum, nextColumnNum, item);
     }
 }
 

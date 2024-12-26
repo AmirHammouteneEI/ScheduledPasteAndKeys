@@ -188,10 +188,17 @@ void TaskTabsManager::onRefreshTabsRequest()
 {
     for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd();)
     {
+        if(it->second == nullptr)
+        {
+            forceCloseTask((it++)->first);
+            continue;
+        }
+
         QFile fileToCheck(m_taskFilePathsMap.value(it->first));
 
-        if(!fileToCheck.exists() && !it->second->m_taskModifiedFromLastSave && it->second->m_scheduleState == ScheduleState::NotScheduled)
+        if(!fileToCheck.exists())
         {
+            it->second->m_stopButton->animateClick();
             forceCloseTask((it++)->first);
             continue;
         }
@@ -204,10 +211,7 @@ void TaskTabsManager::onRefreshTabsRequest()
         m_mainwindow->getTabWidget()->setTabText(getTabIndexfomId(it->first), taskName);
 
         if(!it->second->m_taskModifiedFromLastSave && it->second->m_scheduleState == ScheduleState::NotScheduled)
-        {
-            it->second->m_stopButton->animateClick();
             createAndLoadTaskObject(it->first);
-        }
 
         ++it;
     }

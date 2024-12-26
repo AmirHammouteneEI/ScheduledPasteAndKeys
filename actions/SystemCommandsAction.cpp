@@ -10,6 +10,8 @@
 #include <QScreen>
 #include <QPainter>
 
+#include "mainwindow.h"
+
 SystemCommandAction::SystemCommandAction() : AbstractAction()
 {
     e_type = ActionType::SystemCommand;
@@ -54,7 +56,25 @@ void SystemCommandAction::runAction() const
         break;
         case SystemCommandType::QuitSelfProgram:
         {
-            qApp->quit();
+            MainWindow* myMainWindow = nullptr;
+            auto wList = qApp->topLevelWidgets();
+            for(auto * w : wList)
+            {
+                if(w->inherits("MainWindow"))
+                {
+                    auto *mainW = qobject_cast<MainWindow*>(w);
+                    if(mainW != nullptr)
+                    {
+                        myMainWindow = mainW;
+                        break;
+                    }
+                }
+            }
+            if(myMainWindow != nullptr)
+            {
+                emit myMainWindow->m_stopAllTasksShortcut->activated();
+            }
+            QApplication::quit();
         }
         break;
         case SystemCommandType::ShutDown:
