@@ -14,7 +14,7 @@ enum class ActionType {
 
 class AbstractAction
 {
-    static unsigned int m_idCounter;
+    static unsigned int s_idCounter;
 protected:
     unsigned int m_ID = 0;
     unsigned int m_refID = 0;

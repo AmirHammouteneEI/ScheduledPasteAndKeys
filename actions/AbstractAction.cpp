@@ -1,9 +1,9 @@
 #include "AbstractAction.h"
 
-unsigned int AbstractAction::m_idCounter = 0;
+unsigned int AbstractAction::s_idCounter = 0;
 
 AbstractAction::AbstractAction()
 {
     e_type = ActionType::Undefined;
-    m_ID = ++m_idCounter; // No action with id = 0
+    m_ID = ++s_idCounter; // No action with id = 0
 }
