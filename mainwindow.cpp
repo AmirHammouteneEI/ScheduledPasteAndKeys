@@ -138,7 +138,7 @@ void MainWindow::loadSettings()
     m_windowWidth = m_windowWidth < 50 ? 510 : m_windowWidth;
     m_windowHeight = m_windowHeight < 50 ? 800 : m_windowHeight;
 
-    m_currentThemeName = settings.value("style", "dark").toString();
+    m_currentThemeName = settings.value("style", "penombra").toString();
     swapAutoscrollMode(settings.value("autoscroll", true).toBool());
 }
 
@@ -225,10 +225,10 @@ void MainWindow::setTheme()
 {
     if(m_currentThemeName == "light")
         m_lightThemeAction->trigger();
-    else if(m_currentThemeName == "penombra")
-        m_penombraThemeAction->trigger();
-    else
+    else if(m_currentThemeName == "dark")
         m_darkThemeAction->trigger();
+    else
+        m_penombraThemeAction->trigger();
 }
 
 void MainWindow::quitApp()
@@ -303,17 +303,17 @@ void MainWindow::switchTheme()
         m_lightThemeAction->setChecked(true);
         m_currentThemeName = "light";
     }
-    else if(objName=="penombraAction")
-    {
-        qssFileName = ":/style/penombra.qss";
-        m_penombraThemeAction->setChecked(true);
-        m_currentThemeName = "penombra";
-    }
-    else
+    else if(objName=="darkAction")
     {
         qssFileName = ":/style/dark.qss";
         m_darkThemeAction->setChecked(true);
         m_currentThemeName = "dark";
+    }
+    else
+    {
+        qssFileName = ":/style/penombra.qss";
+        m_penombraThemeAction->setChecked(true);
+        m_currentThemeName = "penombra";
     }
 
     QFile qss(qssFileName);
