@@ -46,11 +46,13 @@ SOURCES += \
     ui/createactiondialog/CreatePasteActionDialog.cpp \
     ui/createactiondialog/CreateSystemCommandActionDialog.cpp \
     ui/createactiondialog/CreateWaitActionDialog.cpp \
+    ui/getAutoRenameOptionDialog.cpp \
     ui/getCursorCoordinatesWidget.cpp \
     ui/getDelayDialog.cpp \
     ui/getFilePathDialog.cpp \
     ui/getFolderPathDialog.cpp \
-    ui/getImagePathDialog.cpp
+    ui/getImagePathDialog.cpp \
+    ui/getProgramPathDialog.cpp
 
 HEADERS += \
     ActionWidgetsManager.h \
@@ -91,11 +93,13 @@ HEADERS += \
     ui/createactiondialog/CreatePasteActionDialog.h \
     ui/createactiondialog/CreateSystemCommandActionDialog.h \
     ui/createactiondialog/CreateWaitActionDialog.h \
+    ui/getAutoRenameOptionDialog.h \
     ui/getCursorCoordinatesWidget.h \
     ui/getDelayDialog.h \
     ui/getFilePathDialog.h \
     ui/getFolderPathDialog.h \
-    ui/getImagePathDialog.h
+    ui/getImagePathDialog.h \
+    ui/getProgramPathDialog.h
 
 FORMS += \
     mainwindow.ui \
@@ -112,12 +116,14 @@ FORMS += \
     ui/createactiondialog/CreatePasteActionDialog.ui \
     ui/createactiondialog/CreateSystemCommandActionDialog.ui \
     ui/createactiondialog/CreateWaitActionDialog.ui \
+    ui/getAutoRenameOptionDialog.ui \
     ui/getDelayDialog.ui \
     ui/getFilePathDialog.ui \
     ui/getFolderPathDialog.ui \
-    ui/getImagePathDialog.ui
+    ui/getImagePathDialog.ui \
+    ui/getProgramPathDialog.ui
 
-LIBS += -luser32
+LIBS += -luser32 -lole32
 
 TRANSLATIONS = ScheduledPCTasks_fr.ts
 
@@ -126,7 +132,7 @@ RESOURCES += \
 
 RC_ICONS = img/programIcon.ico
 
-VERSION = 1.2.2
+VERSION = 1.3.0
 QMAKE_TARGET_COMPANY = "Amir Hammoutene"
 QMAKE_TARGET_COPYRIGHT = "GNU general public license version 3"
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>683</width>
-    <height>384</height>
+    <width>686</width>
+    <height>387</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,80 +76,59 @@
       <property name="spacing">
        <number>2</number>
       </property>
-      <item row="4" column="3" colspan="2">
-       <widget class="QPushButton" name="deletefileButton">
-        <property name="text">
-         <string>Delete a file</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1" colspan="2">
-       <widget class="QPushButton" name="openfileButton">
-        <property name="text">
-         <string>Open a file</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1" colspan="2">
-       <widget class="QPushButton" name="copyfileButton">
-        <property name="text">
-         <string>Copy a file</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3" colspan="2">
-       <widget class="QPushButton" name="createfileButton">
-        <property name="text">
-         <string>Create a file</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0" colspan="2">
+      <item row="8" column="0" colspan="2">
        <widget class="QPushButton" name="openfolderButton">
         <property name="text">
          <string>Open a folder</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="4" colspan="2">
-       <widget class="QPushButton" name="logoffButton">
+      <item row="0" column="0" colspan="2">
+       <widget class="QPushButton" name="shutdownButton">
         <property name="text">
-         <string>Log off user session</string>
+         <string>Shut down the PC</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="1" colspan="2">
+      <item row="2" column="1" colspan="2">
+       <widget class="QPushButton" name="executeprogramButton">
+        <property name="text">
+         <string>Execute a program</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="2">
        <widget class="QPushButton" name="killprocessButton">
         <property name="text">
          <string>Kill a process</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="2" colspan="2">
+      <item row="7" column="1" colspan="2">
+       <widget class="QPushButton" name="copyfileButton">
+        <property name="text">
+         <string>Copy a file</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2" colspan="2">
+       <widget class="QPushButton" name="takescreenshotButton">
+        <property name="text">
+         <string>Take a screenshot</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2" colspan="2">
        <widget class="QPushButton" name="restartButton">
         <property name="text">
          <string>Restart the PC</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="4" colspan="2">
-       <widget class="QPushButton" name="deletefolderButton">
+      <item row="3" column="3" colspan="2">
+       <widget class="QPushButton" name="quitselfprogramButton">
         <property name="text">
-         <string>Delete a folder</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2" colspan="2">
-       <widget class="QPushButton" name="createfolderButton">
-        <property name="text">
-         <string>Create a folder</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="0" colspan="2">
-       <widget class="QPushButton" name="shutdownButton">
-        <property name="text">
-         <string>Shut down the PC</string>
+         <string>Quit Scheduled PC Tasks</string>
         </property>
        </widget>
       </item>
@@ -161,23 +140,51 @@
        </widget>
       </item>
       <item row="6" column="3" colspan="2">
-       <widget class="QPushButton" name="quitselfprogramButton">
+       <widget class="QPushButton" name="createfileButton">
         <property name="text">
-         <string>Quit Scheduled PC Tasks</string>
+         <string>Create a file</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1" colspan="2">
-       <widget class="QPushButton" name="executeprogramButton">
+      <item row="8" column="4" colspan="2">
+       <widget class="QPushButton" name="deletefolderButton">
         <property name="text">
-         <string>Execute a program</string>
+         <string>Delete a folder</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="2" colspan="2">
-       <widget class="QPushButton" name="takescreenshotButton">
+      <item row="6" column="1" colspan="2">
+       <widget class="QPushButton" name="openfileButton">
         <property name="text">
-         <string>Take a screenshot</string>
+         <string>Open a file</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="2" colspan="2">
+       <widget class="QPushButton" name="createfolderButton">
+        <property name="text">
+         <string>Create a folder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="3" colspan="2">
+       <widget class="QPushButton" name="deletefileButton">
+        <property name="text">
+         <string>Delete a file</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4" colspan="2">
+       <widget class="QPushButton" name="logoffButton">
+        <property name="text">
+         <string>Log off user session</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2" colspan="2">
+       <widget class="QPushButton" name="changevolume">
+        <property name="text">
+         <string>Change PC audio volume</string>
         </property>
        </widget>
       </item>

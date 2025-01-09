@@ -44,6 +44,8 @@ public:
     SystemCommandType e_sysCommandType;
     QString m_param1;
     QString m_param2;
+
+    QString incrementFilenameIfExists(const QString & path) const;
 };
 
 #endif // SYSTEMCOMMANDSACTION_H

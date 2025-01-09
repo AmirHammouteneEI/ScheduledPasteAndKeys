@@ -47,9 +47,7 @@ void CreateLoadTaskDialog::accept()
         return;
     }
 
-    if(filenameText.contains("<") || filenameText.contains(">") || filenameText.contains(":")
-         || filenameText.contains("\\") || filenameText.contains("\"") || filenameText.contains("|")
-         || filenameText.contains("?") || filenameText.contains("*") || filenameText.contains("/"))
+    if(doesFilenameContainForbiddenChar(filenameText))
     {
         QMessageBox::warning(this, tr("Forbidden character"), G_Sentences::ForbiddenCharacter());
         return;
@@ -147,6 +145,12 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
     {
         QMessageBox::warning(this, tr("Empty filename"),
           tr("Task file must have a name."));
+        return;
+    }
+
+    if(doesFilenameContainForbiddenChar(newFileName))
+    {
+        QMessageBox::warning(this, tr("Forbidden character"), G_Sentences::ForbiddenCharacter());
         return;
     }
 
@@ -263,4 +267,15 @@ void CreateLoadTaskDialog::createTasksFolderIfNotExist()
     QDir tasksFolder = QApplication::applicationDirPath()+"/"+G_Files::TasksFolder;
     if(!tasksFolder.exists())
         tasksFolder.mkdir(QApplication::applicationDirPath()+"/"+G_Files::TasksFolder);
+}
+
+bool CreateLoadTaskDialog::doesFilenameContainForbiddenChar(const QString &filename)
+{
+    if(filename.contains("<") || filename.contains(">") || filename.contains(":")
+        || filename.contains("\\") || filename.contains("\"") || filename.contains("|")
+        || filename.contains("?") || filename.contains("*") || filename.contains("/"))
+    {
+        return true;
+    }
+    return false;
 }
