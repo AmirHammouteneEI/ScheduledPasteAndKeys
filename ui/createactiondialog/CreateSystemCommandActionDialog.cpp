@@ -24,6 +24,7 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     ui->openfolderButton->setProperty("type", "openfolder");
     ui->copyfileButton->setProperty("type", "copyfile");
     ui->takescreenshotButton->setProperty("type", "screenshot");
+    ui->changevolume->setProperty("type", "changevolume");
 
     m_option1Button = new QPushButton(this);
     m_option2Button = new QPushButton(this);
@@ -34,10 +35,12 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     ui->tableWidget->setCellWidget(0,2,m_option2Button);
     ui->tableWidget->item(0,0)->setTextAlignment(Qt::AlignCenter);
 
-    m_folderPathDialog = new getFolderPathDialog(this);
+    m_programPathDialog = new getProgramPathDialog(this);
     m_filePathDialog = new getFilePathDialog(this);
+    m_folderPathDialog = new getFolderPathDialog(this);
     m_savedFilePathDialog = new getFilePathDialog(this,true);
     m_imagePathDialog = new getImagePathDialog(this);
+    m_autorenameDialog = new getAutoRenameOptionDialog(this);
 
     connect(ui->shutdownButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->restartButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
@@ -54,6 +57,7 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     connect(ui->openfolderButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->copyfileButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->takescreenshotButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
+    connect(ui->changevolume,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
 }
 
 CreateSystemCommandActionDialog::~CreateSystemCommandActionDialog()
@@ -89,6 +93,8 @@ void CreateSystemCommandActionDialog::commandButtonPushed()
     m_option2Button->setEnabled(false);
     m_option1Button->setText("");
     m_option2Button->setText("");
+    m_option1Button->setToolTip("");
+    m_option2Button->setToolTip("");
     m_option1Button->disconnect();
     m_option2Button->disconnect();
 
@@ -180,7 +186,6 @@ void CreateSystemCommandActionDialog::activateButtons()
                     if(!ok)
                         return;
                     m_option1Button->setText(val);
-                    m_option1Button->setToolTip(val);
                 });
     }
     else if(m_type == G_SystemCommands::OpenFileType || m_type == G_SystemCommands::DeleteFileType)
@@ -197,8 +202,8 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
         m_option2Button->setEnabled(true);
-        connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);
-        connect(m_filePathDialog, &getFilePathDialog::sendFile,this,[&](const QString & dir)
+        connect(m_option1Button,&QPushButton::released, m_programPathDialog, &getProgramPathDialog::showDialog);
+        connect(m_programPathDialog, &getProgramPathDialog::sendProgram,this,[&](const QString & dir)
                 {
                     m_option1Button->setText(dir);
                     m_option1Button->setToolTip(dir);
@@ -249,11 +254,39 @@ void CreateSystemCommandActionDialog::activateButtons()
     else if(m_type == G_SystemCommands::TakeScreenshotType)
     {
         m_option1Button->setEnabled(true);
+        m_option2Button->setEnabled(true);
         connect(m_option1Button,&QPushButton::released, m_imagePathDialog, &getImagePathDialog::showDialog);
         connect(m_imagePathDialog, &getImagePathDialog::sendImage,this,[&](const QString & dir)
                 {
                     m_option1Button->setText(dir);
                     m_option1Button->setToolTip(dir);
+                });
+
+        connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
+        connect(m_autorenameDialog, &getAutoRenameOptionDialog::sendAutorename,this,[&](bool autorename)
+                {
+                    if(autorename)
+                        {
+                            m_option2Button->setText("Auto-rename if exists");
+                            m_option2Button->setToolTip(tr("If the file already exists, a new file will be created with another filename."));
+                        }
+                    else
+                        {
+                            m_option2Button->setText("Erase if exists");
+                            m_option2Button->setToolTip(tr("If the file already exists, it will be erased to save the new file."));
+                        }
+                });
+    }
+    else if(m_type == G_SystemCommands::ChangeAudioVolumeType)
+    {
+        m_option1Button->setEnabled(true);
+        connect(m_option1Button,&QPushButton::released, this, [&]()
+                {
+                    bool ok;
+                    int val = QInputDialog::getInt(this,tr("Set the new volume"),tr("Set the new audio volume :"),50,0,100,1,&ok);
+                    if(!ok)
+                        return;
+                    m_option1Button->setText(QString::number(val));
                 });
     }
     // if QuitSelfProgramType,ShutDownType,RestartType,LogOffType no need of any option

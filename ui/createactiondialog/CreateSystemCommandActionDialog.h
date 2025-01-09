@@ -3,9 +3,11 @@
 
 #include <QDialog>
 #include <QPushButton>
-#include "ui/getFolderPathDialog.h"
+#include "ui/getProgramPathDialog.h"
 #include "ui/getFilePathDialog.h"
+#include "ui/getFolderPathDialog.h"
 #include "ui/getImagePathDialog.h"
+#include "ui/getAutoRenameOptionDialog.h"
 
 namespace Ui {
 class CreateSystemCommandActionDialog;
@@ -18,10 +20,12 @@ class CreateSystemCommandActionDialog : public QDialog
     QString m_type;
     QPushButton *m_option1Button;
     QPushButton *m_option2Button;
-    getFolderPathDialog *m_folderPathDialog;
+    getProgramPathDialog *m_programPathDialog;
     getFilePathDialog *m_filePathDialog;
+    getFolderPathDialog *m_folderPathDialog;
     getFilePathDialog *m_savedFilePathDialog;
     getImagePathDialog *m_imagePathDialog;
+    getAutoRenameOptionDialog *m_autorenameDialog;
     void activateButtons();
 public:
     explicit CreateSystemCommandActionDialog(QWidget *parent = nullptr);

@@ -3,6 +3,8 @@
 
 #include <qt_windows.h>
 #include <winuser.h>
+#include <mmdeviceapi.h>
+#include <endpointvolume.h>
 #include <QString>
 #include "actions/ActionParameters.h"
 

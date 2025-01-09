@@ -33,6 +33,7 @@ private:
     Ui::CreateLoadTaskDialog *ui;
     void fillExistingTasksTable();
     void createTasksFolderIfNotExist();
+    bool doesFilenameContainForbiddenChar(const QString & filename);
 };
 
 #endif // CREATELOADTASKDIALOG_H

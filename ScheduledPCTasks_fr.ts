@@ -455,6 +455,26 @@ Veuillez fournir toutes les informations nécessaires.</translation>
         <source>Take a screenshot</source>
         <translation>Prendre une capture d&apos;écran</translation>
     </message>
+    <message>
+        <source>Change PC audio volume</source>
+        <translation>Changer le volume audio du PC</translation>
+    </message>
+    <message>
+        <source>If the file already exists, a new file will be created with another filename.</source>
+        <translation>Si le fichier existe déjà, un nouveau fichier sera créé avec un autre nom.</translation>
+    </message>
+    <message>
+        <source>If the file already exists, it will be erased to save the new file.</source>
+        <translation>Si le fichier existe déjà, il sera écrasé pour sauvegarder le nouveau fichier.</translation>
+    </message>
+    <message>
+        <source>Set the new volume</source>
+        <translation>Définir le nouveau volume</translation>
+    </message>
+    <message>
+        <source>Set the new audio volume :</source>
+        <translation>Définissez le nouveau volume :</translation>
+    </message>
 </context>
 <context>
     <name>CreateWaitActionDialog</name>
@@ -1074,12 +1094,38 @@ Developed by Amir Hammoutene (contact@amirhammoutene.dev)
 initial work on February 2024
 
 version 1.2.2</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 1.2.2</translation>
+    </message>
+    <message>
+        <source>version 1.3 (January 2025)</source>
+        <translation>version 1.3 (janvier 2025)</translation>
+    </message>
+    <message>
+        <source>Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.3 (January 2025)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.3 (janvier 2025)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>
 </context>
 <context>
@@ -1388,7 +1434,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Change the audio volume</source>
-        <translation>Changer le volume audio</translation>
+        <translation type="vanished">Changer le volume audio</translation>
     </message>
     <message>
         <source>Change the default audio device</source>
@@ -1449,6 +1495,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>Copy a file</source>
         <translation>Copier un fichier</translation>
+    </message>
+    <message>
+        <source>Change PC audio volume</source>
+        <translation>Changer le volume audio du PC</translation>
     </message>
 </context>
 <context>
@@ -1683,6 +1733,17 @@ Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</transla
     </message>
 </context>
 <context>
+    <name>getAutoRenameOptionDialog</name>
+    <message>
+        <source>Set if new file should be created if file already exists</source>
+        <translation>Définir si un nouveau fichier doit être créé si le fichier existe déjà</translation>
+    </message>
+    <message>
+        <source>Automatically rename for a new filename if file already exists</source>
+        <translation>Renommer automatiquement pour un nouveau nom de fichier si le fichier existe déjà</translation>
+    </message>
+</context>
+<context>
     <name>getDelayDialog</name>
     <message>
         <source>Choose a delay</source>
@@ -1820,6 +1881,29 @@ Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</transla
     <message>
         <source>Set the image file option</source>
         <translation>Définir l&apos;option de fichier image</translation>
+    </message>
+</context>
+<context>
+    <name>getProgramPathDialog</name>
+    <message>
+        <source>Set the program on which you would like the operation to proceed :</source>
+        <translation>Définissez le programme sur lequel vous souhaitez que l&apos;opération se déroule :</translation>
+    </message>
+    <message>
+        <source>C:/...</source>
+        <translation>C:/...</translation>
+    </message>
+    <message>
+        <source>Browse a directory in order to help to set the path...</source>
+        <translation>Parcourir un répertoire afin d&apos;aider à définir le chemin...</translation>
+    </message>
+    <message>
+        <source>Select a program</source>
+        <translation>Sélectionner un programme</translation>
+    </message>
+    <message>
+        <source>Set the program option</source>
+        <translation>Définir l&apos;option de programme</translation>
     </message>
 </context>
 </TS>

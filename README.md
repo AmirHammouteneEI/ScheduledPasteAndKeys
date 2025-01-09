@@ -1,6 +1,6 @@
 # Scheduled PC Tasks
 
-version 1.2.2 (December 2024)
+version 1.3 (January 2024)
 
 Schedule automated simulations of actions you would perform on your PC.
 
@@ -12,9 +12,9 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 1.2.2:
+Details of version 1.3:
 
-Official release, fully functional
+Stable version, fully functional
 
 Those actions simulations are available :
 

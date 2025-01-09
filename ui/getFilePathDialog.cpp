@@ -1,7 +1,6 @@
 #include "getFilePathDialog.h"
 #include "ui_getFilePathDialog.h"
 #include <QFileDialog>
-#include <QApplication>
 
 getFilePathDialog::getFilePathDialog(QWidget *parent, bool getSaved)
     : QDialog(parent), m_getSavedFileName(getSaved)

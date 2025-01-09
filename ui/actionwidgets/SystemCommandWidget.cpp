@@ -72,7 +72,7 @@ QString SystemCommandWidget::fromSysCmdTypeToDiplayedStr(SystemCommandType t)
     else if(t == SystemCommandType::LogOff)
         sysCmdTypeStr = tr("Log off user session");
     else if(t == SystemCommandType::ChangeAudioVolume)
-        sysCmdTypeStr = tr("Change the audio volume");
+        sysCmdTypeStr = tr("Change PC audio volume");
     else if(t == SystemCommandType::ChangeDefaultAudioDevice)
         sysCmdTypeStr = tr("Change the default audio device");
     else if(t == SystemCommandType::KillProcess)

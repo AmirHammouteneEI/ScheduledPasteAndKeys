@@ -142,7 +142,34 @@ void SystemCommandAction::runAction() const
                 painter.drawPixmap(QPoint(drawOrigin, 0), pix);
                 drawOrigin += pix.width();
             }
-            globalPix.save(m_param1,"PNG");
+            auto pathToSave = m_param2 == "Auto-rename if exists" ? incrementFilenameIfExists(m_param1) : m_param1;
+            globalPix.save(pathToSave,"PNG");
+        }
+        break;
+        case SystemCommandType::ChangeAudioVolume:
+        {
+            float volumeVal = m_param1.toInt()/100.0;
+            if(volumeVal <0.0 || volumeVal >1.0)
+                volumeVal = 0.5;
+
+            CoInitialize(NULL);
+            IMMDeviceEnumerator *deviceEnumerator = NULL;
+            CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_INPROC_SERVER,__uuidof(IMMDeviceEnumerator), (LPVOID *)&deviceEnumerator);
+            IMMDevice *defaultDevice = NULL;
+            deviceEnumerator->GetDefaultAudioEndpoint(eRender, eConsole, &defaultDevice);
+            deviceEnumerator->Release();
+            deviceEnumerator = NULL;
+            IAudioEndpointVolume *endpointVolume = NULL;
+            defaultDevice->Activate(__uuidof(IAudioEndpointVolume),
+                                         CLSCTX_INPROC_SERVER, NULL, (LPVOID *)&endpointVolume);
+            defaultDevice->Release();
+            defaultDevice = NULL;
+
+            endpointVolume->SetMasterVolumeLevelScalar(volumeVal, NULL);
+
+            endpointVolume->Release();
+            endpointVolume = NULL;
+            CoUninitialize();
         }
         break;
         default:
@@ -254,4 +281,25 @@ ActionParameters SystemCommandAction::generateParameters() const
     param.m_sysCmdParam2 = m_param2;
 
     return param;
+}
+
+QString SystemCommandAction::incrementFilenameIfExists(const QString &path) const
+{
+    QFileInfo finfo(path);
+    if(!finfo.exists())
+        return path;
+
+    auto filename = finfo.fileName();
+    auto ext = finfo.suffix();
+    auto name = filename.chopped(ext.size()+1);
+
+    auto lastDigits = name.last(4);
+
+    if(lastDigits.size() == 4 && lastDigits[0].isDigit() && lastDigits[1].isDigit() && lastDigits[2].isDigit() && lastDigits[3].isDigit() && lastDigits != "9999")
+        name = name.chopped(4)+(QString::number(lastDigits.toInt()+1).rightJustified(4,'0'));
+    else
+        name.append("-0000");
+
+    auto newPath = (path.chopped(filename.size()))+name+"."+ext;
+    return incrementFilenameIfExists(newPath);
 }
