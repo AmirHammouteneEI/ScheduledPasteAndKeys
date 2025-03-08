@@ -303,3 +303,40 @@ QString SystemCommandAction::incrementFilenameIfExists(const QString &path) cons
     auto newPath = (path.chopped(filename.size()))+name+"."+ext;
     return incrementFilenameIfExists(newPath);
 }
+
+QString SystemCommandAction::incrementFilenameIfExists(const QString &path, unsigned char ndigits) const
+{
+    QFileInfo finfo(path);
+    if(!finfo.exists() || ndigits == 0)
+        return path;
+
+    auto filename = finfo.fileName();
+    auto ext = finfo.suffix();
+    auto name = filename.chopped(ext.size()+1);
+
+    auto lastDigits = name.last(ndigits);
+
+    bool aredigits = true;
+    for(QChar &c : lastDigits)
+    {
+        if(!c.isDigit())
+        {
+            aredigits = false;
+            break;
+        }
+    }
+
+    QString zeros = "0";
+    zeros = ("-")+(zeros.rightJustified(ndigits,'0'));
+    QString nines = "9";
+    nines = nines.rightJustified(ndigits,'9');
+
+    if(lastDigits.size() == ndigits && aredigits && lastDigits != nines)
+        name = name.chopped(ndigits)+(QString::number(lastDigits.toInt()+1).rightJustified(ndigits,'0'));
+
+    else
+        name.append(zeros);
+
+    auto newPath = (path.chopped(filename.size()))+name+"."+ext;
+    return incrementFilenameIfExists(newPath,ndigits);
+}

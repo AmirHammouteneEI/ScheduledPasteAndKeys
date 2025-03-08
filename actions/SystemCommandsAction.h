@@ -46,6 +46,7 @@ public:
     QString m_param2;
 
     QString incrementFilenameIfExists(const QString & path) const;
+    QString incrementFilenameIfExists(const QString & path, unsigned char ndigits) const;
 };
 
 #endif // SYSTEMCOMMANDSACTION_H
