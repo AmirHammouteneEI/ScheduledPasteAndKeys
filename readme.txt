@@ -40,6 +40,9 @@ Feedbacks and ideas for further actions are very welcome !
 Available for install on Microsoft Store : 
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
+Available as a portable version :
+https://files.amirhammoutene.dev/ScheduledPCTasks/1.3/Scheduled_PC_Tasks_v1.3.zip
+
 Needs 30 Mo disk space, available for Windows systems only
    
 ----------
