@@ -74,6 +74,7 @@ public:
     ScheduleState m_scheduleState;
     void setTaskModified(bool val);
     bool taskIsModified() const {return m_taskModifiedFromLastSave;}
+    void setTimesToRunValue(int timesToRun);
 private slots:
     void stopPushed();
     void loopToggled(bool state);
@@ -96,6 +97,7 @@ public slots:
 signals:
     void saveTaskRequest(int taskId, bool verb);
     void refreshTabRunIconRequest();
+    void forceStopThread();
 
     friend class TaskTabsManager;
 };

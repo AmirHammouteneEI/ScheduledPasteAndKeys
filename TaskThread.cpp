@@ -45,13 +45,14 @@ void TaskThread::run()
     {
         if(m_haveToStop)
             return;
-
         if((*it) == nullptr)
             continue;
         emit sendRunningStateAct((*it)->getRefID());
 
         (*it)->runAction();
 
+        if(m_haveToStop)
+            return;
         if((*it) == nullptr)
             continue;
         emit sendDoneStateAct((*it)->getRefID());

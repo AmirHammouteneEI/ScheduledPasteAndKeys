@@ -3,14 +3,13 @@
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
 #include "ui/createactiondialog/CreatePasteActionDialog.h"
-#include <QSpinBox>
 #include <QDateTime>
 
 class PasteWidget : public AbstractActionWidget
 {
     Q_OBJECT
     CreatePasteActionDialog *m_createPasteActionDialog;
-    QSpinBox *m_loopSpin;
+    NoWheelFocusSpinBox *m_loopSpin;
     void changedRunningState() override;
 public:
     explicit PasteWidget(QWidget *parent = nullptr);

@@ -8,7 +8,8 @@ StartupTasksDialog::StartupTasksDialog(QWidget *parent)
 {
     ui->setupUi(this);
     ui->tableWidget->horizontalHeader()->resizeSection(1,80);
-    ui->tableWidget->horizontalHeader()->resizeSection(2,50);
+    ui->tableWidget->horizontalHeader()->resizeSection(2,90);
+    ui->tableWidget->horizontalHeader()->resizeSection(3,100);
     connect(ui->addButton, &QPushButton::released, ui->tableWidget, &StartupTasksTableWidget::addStartupTaskReceived);
     connect(ui->removeButton, &QPushButton::released, ui->tableWidget, &StartupTasksTableWidget::removeStartupTaskReceived);
 }

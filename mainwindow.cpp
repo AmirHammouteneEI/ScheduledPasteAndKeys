@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("Scheduled PC Tasks v1.3");
+    setWindowTitle("Scheduled PC Tasks v1.4");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
 
@@ -65,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 1.3 (January 2025)\n\n"
+                    "version 1.4 (July 2025)\n\n"
                     "Free & Open source (see readme.txt for more information)"));
 }
 
@@ -79,14 +79,14 @@ QTabWidget *MainWindow::getTabWidget()
     return ui->tabWidget;
 }
 
-void MainWindow::autoRun(const QString &filename, int delay)
+void MainWindow::autoRun(const QString &filename, int delay, int loopTimes)
 {
     if(m_tasktabsManager == nullptr || delay<0)
         return;
     hide();
     auto taskid = m_tasktabsManager->onOpenNewTabRequest(QApplication::applicationDirPath()+"/"+G_Files::TasksFolder+filename+G_Files::TasksFileExtension);
     if(taskid > -1)
-        m_tasktabsManager->scheduleTaskFromId(taskid, delay);
+        m_tasktabsManager->scheduleTaskFromId(taskid, delay, loopTimes);
 }
 
 void MainWindow::buildSystemTrayMenu()
@@ -234,8 +234,6 @@ void MainWindow::setTheme()
 
 void MainWindow::quitApp()
 {
-    m_tasktabsManager->stopAllRunningTasksReceived();
-
     if(m_tasktabsManager->isAnyTaskModified())
     {
         QMessageBox::StandardButton response = QMessageBox::question(this,tr("Saving changes"),
@@ -250,6 +248,16 @@ void MainWindow::quitApp()
 
     saveSettings();
     m_stMessageShown = true;
+    m_tasktabsManager->forceStopAllRunningTasksReceived();
+    QApplication::quit();
+}
+
+
+void MainWindow::forceQuit()
+{
+    saveSettings();
+    m_stMessageShown = true;
+    m_tasktabsManager->forceStopAllRunningTasksReceived();
     QApplication::quit();
 }
 
