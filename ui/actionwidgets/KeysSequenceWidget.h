@@ -3,14 +3,13 @@
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
 #include "ui/createactiondialog/CreateKeysSequenceActionDialog.h"
-#include <QSpinBox>
 #include <QDateTime>
 
 class KeysSequenceWidget : public AbstractActionWidget
 {
     Q_OBJECT
     CreateKeysSequenceActionDialog *m_createKeysSeqActionDialog;
-    QSpinBox *m_loopSpin;
+    NoWheelFocusSpinBox *m_loopSpin;
     void changedRunningState() override;
 public:
     explicit KeysSequenceWidget(QWidget *parent = nullptr);

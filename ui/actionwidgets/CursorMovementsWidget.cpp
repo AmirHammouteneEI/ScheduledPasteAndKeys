@@ -25,7 +25,7 @@ void CursorMovementsWidget::buildWidget()
 
     auto loopFrame = new QFrame(m_centralWidget);
     auto loopLabel = new QLabel(tr("Loop "),loopFrame);
-    m_loopSpin = new QSpinBox(loopFrame);
+    m_loopSpin = new NoWheelFocusSpinBox(loopFrame);
     auto looptimesLabel = new QLabel(tr(" times"),loopFrame);
     m_loopSpin->setAlignment(Qt::AlignCenter);
     m_loopSpin->setMinimum(1);

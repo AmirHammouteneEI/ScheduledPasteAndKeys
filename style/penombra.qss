@@ -60,7 +60,7 @@ QMenu::item:selected
 
 QMenu::item:disabled
 {
-    color: #aaa;
+    color: #444;
 }
 
 QMenu::separator
@@ -118,7 +118,7 @@ QLabel
 
 QLabel::disabled
 {
-	color: #aaa;
+	color: #444;
 }
 
 QProgressBar
@@ -137,7 +137,7 @@ QProgressBar::chunk
 
 QProgressBar::disabled
 {
-    color: #aaa;
+    color: #444;
 }
 
 QProgressBar::chunk:disabled
@@ -159,16 +159,14 @@ QFrame[frameShape="5"]
 
 QGroupBox 
 {
-    border: 1px solid;
+    border: 1px solid #000;
     border-color: #999999;
 	border-radius: 5px;
     margin-top: 20px;
 }
 
-
 QGroupBox::title  
 {
-    background-color: transparent;
     subcontrol-origin: margin;
 }
 
@@ -345,7 +343,7 @@ QAbstractButton::flat
 QAbstractButton::disabled
 {
 	background-color: #bfbfbf;
-	color: #aaa;
+	color: #444;
 	border-color: #aaa;
 }
 
@@ -383,27 +381,11 @@ QCheckBox,QRadioButton
 	border: none;
 }
 
-QCheckBox::hover,QRadioButton::hover
-{
-	background-color: transparent;
-}
-
-QCheckBox::checked,QRadioButton::checked
-{
-	background-color: transparent;
-	border: none;
-}
-
-QCheckBox::pressed,QRadioButton::pressed
-{
-	background-color: transparent;
-	border: none;
-}
-
 QCheckBox::disabled,QRadioButton::disabled
-{
+{	
 	background-color: transparent;
-	color: #aaa;
+	border: none;
+	color: #444;
 }
 
 QCheckBox::indicator
@@ -456,8 +438,8 @@ QLineEdit,QPlainTextEdit,QTextEdit,QTextBrowser
 QLineEdit::disabled,QPlainTextEdit::disabled,QTextEdit::disabled,QTextBrowser::disabled 
 {
 	border: 1px solid #aaa;
-	color : #aaa;
-	background-color: #777;
+	color : #444;
+	background-color: #aaa;
 }
 
 QComboBox
@@ -471,7 +453,7 @@ QComboBox
 QComboBox::disabled
 {
 	background-color: #bfbfbf;
-	color: #aaa;
+	color: #444;
 	border-color: #aaa;
 }
 
@@ -520,7 +502,7 @@ QTimeEdit::disabled,
 QDateTimeEdit::disabled 
 {
 	background-color: #777;
-	color: #aaa;
+	color: #444;
 	border-color: #aaa;
 }
 
@@ -871,5 +853,5 @@ AbstractActionWidget[runningState="done"] QFrame
 
 QLabel::disabled#actionSubLabel
 {
-	color : #222; 
+	color : #444; 
 }

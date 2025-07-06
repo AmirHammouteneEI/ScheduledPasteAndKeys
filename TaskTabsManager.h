@@ -20,13 +20,14 @@ public:
     explicit TaskTabsManager(MainWindow *parent = nullptr);
     ~TaskTabsManager();
     void forceCloseTask(int id);
-    void scheduleTaskFromId(int id, qint64 delay);
+    void scheduleTaskFromId(int id, qint64 delay, int loopTimes = 1);
 public slots:
     int onOpenNewTabRequest(const QString & path);
     void onTabCloseRequest(int index);
     void onRefreshTabsRequest();
     void onTaskfilePathChanged(QString oldpath, QString newpath);
     void stopAllRunningTasksReceived();
+    void forceStopAllRunningTasksReceived();
     void saveTaskReceived(int taskTabId, bool verbose = false);
     QJsonObject actionToJson(AbstractAction *act);
     AbstractAction* jsonToAction(const QJsonObject &jobj);

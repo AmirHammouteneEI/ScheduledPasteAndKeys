@@ -329,7 +329,7 @@
               </font>
              </property>
              <property name="text">
-              <string>version 1.3 (January 2025)</string>
+              <string>version 1.4 (July 2025)</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>

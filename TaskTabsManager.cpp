@@ -171,7 +171,7 @@ void TaskTabsManager::forceCloseTask(int id)
 
 }
 
-void TaskTabsManager::scheduleTaskFromId(int id, qint64 delay)
+void TaskTabsManager::scheduleTaskFromId(int id, qint64 delay, int loopTimes)
 {
     if(!m_taskTabsMap.contains(id))
         return;
@@ -181,6 +181,7 @@ void TaskTabsManager::scheduleTaskFromId(int id, qint64 delay)
     if(taskTab == nullptr)
         return;
 
+    taskTab->setTimesToRunValue(loopTimes);
     taskTab->scheduleTaskAfterDelay(delay);
 }
 
@@ -240,6 +241,20 @@ void TaskTabsManager::stopAllRunningTasksReceived()
             continue;
 
         it->second->m_stopButton->animateClick();
+    }
+}
+
+void TaskTabsManager::forceStopAllRunningTasksReceived()
+{
+    for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd(); ++it)
+    {
+        if(it->second == nullptr)
+            continue;
+
+        if(it->second->m_scheduleState == ScheduleState::NotScheduled)
+            continue;
+
+        emit it->second->forceStopThread();
     }
 }
 

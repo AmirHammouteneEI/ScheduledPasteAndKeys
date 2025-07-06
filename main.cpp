@@ -36,12 +36,23 @@ int main(int argc, char *argv[])
     // Main ui window
     MainWindow w;
 
-    // In case of program used with correct arguments, automatically run the task (usage : ScheduledPCTasks.exe "TaskFileName" <DelayInSeconds>)
-    if(argc == 3)
+    // In case of program used with correct arguments, automatically run the task (usage : ScheduledPCTasks.exe "TaskFileName" <DelayInSeconds> <NumberOfLoops>)
+    if(argc == 3 || argc == 4)
     {
         int delay = atoi(argv[2]);
         if(delay > 0)
-            w.autoRun(QString(argv[1]), delay);
+        {
+            if(argc == 4)
+            {
+                int timesToRun = atoi(argv[3]);
+                if(timesToRun != 0)
+                    w.autoRun(QString(argv[1]), delay,timesToRun);
+                else
+                    w.showWindow();
+            }
+            else
+                w.autoRun(QString(argv[1]), delay);
+        }
         else
             w.showWindow();
     }

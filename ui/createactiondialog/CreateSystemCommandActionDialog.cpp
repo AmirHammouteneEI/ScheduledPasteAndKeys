@@ -283,7 +283,7 @@ void CreateSystemCommandActionDialog::activateButtons()
         connect(m_option1Button,&QPushButton::released, this, [&]()
                 {
                     bool ok;
-                    int val = QInputDialog::getInt(this,tr("Set the new volume"),tr("Set the new audio volume :"),50,0,100,1,&ok);
+                    int val = QInputDialog::getInt(this,tr("Set the new volume"),tr("Set the new audio volume :"),m_option1Button->text() == "" ? 50 : m_option1Button->text().toInt(),0,100,1,&ok);
                     if(!ok)
                         return;
                     m_option1Button->setText(QString::number(val));

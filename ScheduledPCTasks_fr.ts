@@ -1103,7 +1103,7 @@ version 1.2.2</translation>
     </message>
     <message>
         <source>version 1.3 (January 2025)</source>
-        <translation>version 1.3 (janvier 2025)</translation>
+        <translation type="vanished">version 1.3 (janvier 2025)</translation>
     </message>
     <message>
         <source>Free &amp; Open source (see readme.txt for more information)</source>
@@ -1118,12 +1118,34 @@ initial work on February 2024
 version 1.3 (January 2025)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 1.3 (janvier 2025)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>version 1.4 (July 2025)</source>
+        <translation>version 1.4 (juillet 2025)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.4 (July 2025)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.4 (juillet 2025)
 
 Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>
@@ -1375,6 +1397,22 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
         <source>The delay for the task to run after system startup can&apos;t be set to zero.</source>
         <translation>Le délai pour que la tâche soit exécutée après le démarrage du système ne peut être fixé à zéro.</translation>
     </message>
+    <message>
+        <source>Set how many times this task should be executed :</source>
+        <translation>Déterminez combien de fois cette tâche devra être éxecutée :</translation>
+    </message>
+    <message>
+        <source>times</source>
+        <translation>fois</translation>
+    </message>
+    <message>
+        <source>OR</source>
+        <translation>OU</translation>
+    </message>
+    <message>
+        <source>in infinite loop</source>
+        <translation>en boucle infinie</translation>
+    </message>
 </context>
 <context>
     <name>StartupTasksDialog</name>
@@ -1398,6 +1436,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
         <source>Activated</source>
         <translation>Activé</translation>
     </message>
+    <message>
+        <source>Loops</source>
+        <translation>Boucles</translation>
+    </message>
 </context>
 <context>
     <name>StartupTasksTableWidget</name>
@@ -1412,6 +1454,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>This entry already exists in tasks to be executed at system startup.</source>
         <translation>Cette entrée existe déjà dans les tâches à être exécutées au démarrage du système.</translation>
+    </message>
+    <message>
+        <source>Infinite</source>
+        <translation>Infinie</translation>
     </message>
 </context>
 <context>

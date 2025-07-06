@@ -150,7 +150,7 @@ void TaskTab::buildBasicInterface()
     m_delayChrono->setFont(font);
     topGridLayout->setContentsMargins(1,1,1,1);
     topGridLayout->setSpacing(2);
-    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::Minimum,QSizePolicy::Minimum),0,0);
+    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),0,0);
     topGridLayout->addWidget(m_nameLabel,1,1, Qt::AlignCenter);
     topGridLayout->addWidget(m_saveButton,1,2, Qt::AlignRight);
     topGridLayout->addWidget(m_descriptionEdit,2,1,1,2, Qt::AlignCenter);
@@ -159,7 +159,7 @@ void TaskTab::buildBasicInterface()
     topGridLayout->addWidget(m_delayChrono,5,1,1,2, Qt::AlignCenter);
     topGridLayout->addWidget(m_runOptionsWidget,6,1,1,2, Qt::AlignCenter);
     topGridLayout->addWidget(m_loopedTimesLabel,7,1,1,2, Qt::AlignCenter);
-    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::Minimum,QSizePolicy::Minimum),8,3);
+    topGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding,QSizePolicy::Minimum),8,3);
     topGridLayout->setSizeConstraint(QLayout::SetMinimumSize);
 
     //-- Middle widget with list of actions
@@ -356,6 +356,7 @@ void TaskTab::runTaskThread()
     thread->m_loop = m_loopButton->isChecked();
     thread->m_timesToRun = m_timesToRunSpinBox->value();
 
+    connect(this, &TaskTab::forceStopThread, thread, &TaskThread::stop);
     connect(m_stopButton, &QPushButton::released, thread, &TaskThread::stop);
     connect(thread, &TaskThread::sendRunningStateAct, this, &TaskTab::receivedActionRunningState);
     connect(thread, &TaskThread::sendDoneStateAct, m_actionWidgetsManager, &ActionWidgetsManager::receivedActionDoneState);
@@ -373,6 +374,17 @@ void TaskTab::setTaskModified(bool val)
 {
     m_taskModifiedFromLastSave = val;
     m_saveButton->setEnabled(val);
+}
+
+void TaskTab::setTimesToRunValue(int timesToRun)
+{
+    if(timesToRun > 0 && timesToRun < 10000)
+        m_timesToRunSpinBox->setValue(timesToRun);
+    else
+    {
+        m_loopButton->setChecked(true);
+        loopToggled(true);
+    }
 }
 
 void TaskTab::stopPushed()

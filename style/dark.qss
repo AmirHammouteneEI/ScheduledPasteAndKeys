@@ -60,7 +60,7 @@ QMenu::item:selected
 
 QMenu::item:disabled
 {
-    color: #555;
+    color: #ddd;
 }
 
 QMenu::separator
@@ -118,7 +118,7 @@ QLabel
 
 QLabel::disabled
 {
-	color: #555;
+	color: #ddd;
 }
 
 QProgressBar
@@ -137,7 +137,7 @@ QProgressBar::chunk
 
 QProgressBar::disabled
 {
-    color: #555;
+    color: #ddd;
 }
 
 QProgressBar::chunk:disabled
@@ -165,10 +165,8 @@ QGroupBox
     margin-top: 20px;
 }
 
-
 QGroupBox::title  
 {
-    background-color: transparent;
     subcontrol-origin: margin;
 }
 
@@ -341,7 +339,7 @@ QAbstractButton::flat
 QAbstractButton::disabled
 {
 	background-color: #404040;
-	color: #555;
+	color: #ddd;
 	border-color: #555;
 }
 
@@ -379,27 +377,11 @@ QCheckBox,QRadioButton
 	border: none;
 }
 
-QCheckBox::hover,QRadioButton::hover
-{
-	background-color: transparent;
-}
-
-QCheckBox::checked,QRadioButton::checked
-{
-	background-color: transparent;
-	border: none;
-}
-
-QCheckBox::pressed,QRadioButton::pressed
-{
-	background-color: transparent;
-	border: none;
-}
-
 QCheckBox::disabled,QRadioButton::disabled
 {
 	background-color: transparent;
-	color: #555;
+	border: none;
+	color: #ddd;
 }
 
 QCheckBox::indicator
@@ -451,7 +433,7 @@ QLineEdit,QPlainTextEdit,QTextEdit,QTextBrowser
 QLineEdit::disabled,QPlainTextEdit::disabled,QTextEdit::disabled,QTextBrowser::disabled 
 {
 	border: 1px solid #555;
-	color : #555;
+	color: #ddd;
 	background-color: #404040;
 }
 
@@ -467,7 +449,7 @@ QComboBox
 QComboBox::disabled
 {
 	background-color: #404040;
-	color: #555;
+	color: #ddd;
 	border-color: #555;
 }
 
@@ -515,7 +497,7 @@ QTimeEdit::disabled,
 QDateTimeEdit::disabled 
 {
 	background-color: #404040;
-	color: #555;
+	color: #ddd;
 	border-color: #555;
 }
 

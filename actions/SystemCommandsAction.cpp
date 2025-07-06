@@ -72,9 +72,8 @@ void SystemCommandAction::runAction() const
             }
             if(myMainWindow != nullptr)
             {
-                emit myMainWindow->m_stopAllTasksShortcut->activated();
+                myMainWindow->forceQuit();
             }
-            QApplication::quit();
         }
         break;
         case SystemCommandType::ShutDown:

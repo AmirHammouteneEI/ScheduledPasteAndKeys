@@ -1,6 +1,6 @@
 # Scheduled PC Tasks
 
-version 1.3 (January 2025)
+version 1.4 (July 2025)
 
 Schedule automated simulations of actions you would perform on your PC.
 
@@ -12,7 +12,7 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 1.3:
+Details of version 1.4 :
 
 Stable version, fully functional
 
@@ -41,7 +41,7 @@ Available for install on Microsoft Store :
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
 Available as a portable version :
-https://files.amirhammoutene.dev/ScheduledPCTasks/1.3/Scheduled_PC_Tasks_v1.3.zip
+https://files.amirhammoutene.dev/ScheduledPCTasks/1.4/Scheduled_PC_Tasks_v1.4.zip
 
 Needs 30 Mo disk space, available for Windows systems only
    

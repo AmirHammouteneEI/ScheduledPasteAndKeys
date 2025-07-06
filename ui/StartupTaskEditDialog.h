@@ -16,9 +16,11 @@ public:
     ~StartupTaskEditDialog();
     QString m_filename;
     qint64 m_delay;
+    int m_loopTimes;
     void showDialog();
 private slots:
     void accept() override;
+    void loopToggled(bool state);
 private:
     Ui::StartupTaskEditDialog *ui;
     void fillExistingTasksTable();
