@@ -13,6 +13,7 @@ Schedule automated simulations of actions you would perform on your PC.
    
    <img src="https://files.amirhammoutene.dev/ScheduledPCTasks/screenshots/07-data.png" alt="Keys sequences data" width="400"/>    <img src="https://files.amirhammoutene.dev/ScheduledPCTasks/screenshots/09-darktheme.png" alt="Dark theme" width="300"/>
 </details>
+
 ----------
 
 Under GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
