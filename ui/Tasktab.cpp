@@ -21,7 +21,7 @@
 #include "mainwindow.h"
 
 TaskTab::TaskTab(QWidget *parent, const QString &name)
-    : QScrollArea{parent},m_name(name)
+    : QScrollArea{MainWindow::getInstance()},m_name(name)
 {
     m_ID = -1;
 
@@ -34,17 +34,17 @@ TaskTab::TaskTab(QWidget *parent, const QString &name)
     m_scheduleTimer = new QTimer(this);
     m_scheduleTimer->setSingleShot(true);
     connect(m_scheduleTimer, &QTimer::timeout, this, &TaskTab::runTaskThread);
+}
 
-    connect(this,&TaskTab::refreshTabRunIconRequest, [=](){
-        auto mainWindow = qobject_cast<MainWindow*>(parent);
-        if(mainWindow == nullptr || mainWindow->getTabWidget() == nullptr)
-            return;
+void TaskTab::refreshTabRunIcon()
+{
+    if(MainWindow::getInstance()->getTabWidget() == nullptr)
+        return;
 
-        if(m_scheduleState == ScheduleState::NotScheduled)
-            mainWindow->getTabWidget()->setTabIcon(mainWindow->getTabWidget()->indexOf(this),QIcon());
-        else
-            mainWindow->getTabWidget()->setTabIcon(mainWindow->getTabWidget()->indexOf(this),QIcon(":/img/play.png"));
-    });
+    if(m_scheduleState == ScheduleState::NotScheduled)
+        MainWindow::getInstance()->getTabWidget()->setTabIcon(MainWindow::getInstance()->getTabWidget()->indexOf(this),QIcon());
+    else
+        MainWindow::getInstance()->getTabWidget()->setTabIcon(MainWindow::getInstance()->getTabWidget()->indexOf(this),QIcon(":/img/play.png"));
 }
 
 TaskTab::~TaskTab()
@@ -107,7 +107,7 @@ void TaskTab::buildBasicInterface()
     m_timesToRunWidget = new QWidget(m_runOptionsWidget);
     auto timesToRunLayout = new QHBoxLayout(m_timesToRunWidget);
     QLabel *executeLabel = new QLabel(tr("Execute "),m_timesToRunWidget);
-    m_timesToRunSpinBox = new QSpinBox(m_timesToRunWidget);
+    m_timesToRunSpinBox = new NoWheelFocusSpinBox(m_timesToRunWidget);
     m_timesToRunSpinBox->setAlignment(Qt::AlignCenter);
     m_timesToRunSpinBox->setMinimum(1);
     m_timesToRunSpinBox->setMaximum(9999);
@@ -198,7 +198,7 @@ void TaskTab::buildBasicInterface()
     m_getDelayDialog = new getDelayDialog(this);
 
     connect(m_scheduleButton,&QPushButton::released, m_getDelayDialog, &getDelayDialog::showDialog);
-    connect(m_stopButton,&QPushButton::released, this, &TaskTab::stopPushed);
+    connect(m_stopButton,&QPushButton::released, this, &TaskTab::forcedStop);
     connect(m_getDelayDialog,&getDelayDialog::sendDelay, this, &TaskTab::scheduleTaskAfterDelay);
     connect(m_loopButton,&QToolButton::toggled, this, &TaskTab::loopToggled);
 
@@ -340,7 +340,7 @@ void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
     m_loopedTimes = 0;
     m_loopedTimesLabel->setText(tr("Looped ")+"0"+tr(" times"));
     refreshScheduleText();
-    emit refreshTabRunIconRequest();
+    refreshTabRunIcon();
 
     m_actionWidgetsManager->taskScheduled();
 }
@@ -357,15 +357,14 @@ void TaskTab::runTaskThread()
     thread->m_timesToRun = m_timesToRunSpinBox->value();
 
     connect(this, &TaskTab::forceStopThread, thread, &TaskThread::stop);
-    connect(m_stopButton, &QPushButton::released, thread, &TaskThread::stop);
     connect(thread, &TaskThread::sendRunningStateAct, this, &TaskTab::receivedActionRunningState);
     connect(thread, &TaskThread::sendDoneStateAct, m_actionWidgetsManager, &ActionWidgetsManager::receivedActionDoneState);
     connect(thread, &TaskThread::sendFinishedOneLoop, this, &TaskTab::finishedOneLoop);
-    connect(thread, &TaskThread::finished, this, &TaskTab::stopPushed);
+    connect(thread, &TaskThread::sendFinishedAllLoops, this, &TaskTab::stopTask);
     connect(thread, &TaskThread::finished, thread, &TaskThread::deleteLater);
-    connect(qApp, &QApplication::aboutToQuit, thread, &TaskThread::stop);
 
     thread->start();
+    m_scheduleTimer->stop();
 
     m_scheduleState = ScheduleState::Running;
 }
@@ -387,10 +386,8 @@ void TaskTab::setTimesToRunValue(int timesToRun)
     }
 }
 
-void TaskTab::stopPushed()
+void TaskTab::stopTask()
 {
-    // Stop button is also connect to quitting the thread in TaskTab::runTaskThread()
-    m_scheduleTimer->stop();
     m_scheduleState = ScheduleState::NotScheduled;
     m_descriptionEdit->setEnabled(true);
     m_scheduleButton->setEnabled(true);
@@ -400,8 +397,15 @@ void TaskTab::stopPushed()
     if(m_loopButton->isChecked())
         m_timesToRunWidget->setEnabled(false);
     refreshScheduleText();
-    emit refreshTabRunIconRequest();
+    refreshTabRunIcon();
     m_actionWidgetsManager->taskStopped();
+}
+
+void TaskTab::forcedStop()
+{
+    stopTask();
+    m_scheduleTimer->stop();
+    emit forceStopThread();
 }
 
 void TaskTab::finishedOneLoop()

@@ -116,7 +116,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox">
+          <widget class="NoWheelFocusSpinBox" name="spinBox">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -139,7 +139,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QTimeEdit" name="timeEdit">
+          <widget class="NoWheelFocusTimeEdit" name="timeEdit">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -267,7 +267,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QDateTimeEdit" name="dateTimeEdit">
+             <widget class="NoWheelFocusDateTimeEdit" name="dateTimeEdit">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -390,6 +390,23 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NoWheelFocusSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header location="global">ui/CustomPrimaryWidgets.h</header>
+  </customwidget>
+  <customwidget>
+   <class>NoWheelFocusDateTimeEdit</class>
+   <extends>QDateTimeEdit</extends>
+   <header location="global">ui/CustomPrimaryWidgets.h</header>
+  </customwidget>
+  <customwidget>
+   <class>NoWheelFocusTimeEdit</class>
+   <extends>QTimeEdit</extends>
+   <header location="global">ui/CustomPrimaryWidgets.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

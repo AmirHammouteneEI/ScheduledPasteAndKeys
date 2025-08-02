@@ -31,6 +31,9 @@
    </property>
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="focusPolicy">
+      <enum>Qt::FocusPolicy::StrongFocus</enum>
+     </property>
      <property name="tabPosition">
       <enum>QTabWidget::TabPosition::West</enum>
      </property>
@@ -122,11 +125,14 @@
          </item>
          <item row="3" column="1">
           <widget class="SentencesTableWidget" name="sentencesTableWidget">
+           <property name="focusPolicy">
+            <enum>Qt::FocusPolicy::StrongFocus</enum>
+           </property>
            <property name="editTriggers">
             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
            </property>
            <property name="showDropIndicator" stdset="0">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="dragDropOverwriteMode">
             <bool>false</bool>
@@ -370,11 +376,17 @@
          </item>
          <item row="3" column="1">
           <widget class="KeysSequencesTableWidget" name="keysSequencesTableWidget">
+           <property name="focusPolicy">
+            <enum>Qt::FocusPolicy::StrongFocus</enum>
+           </property>
            <property name="editTriggers">
             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
            </property>
+           <property name="tabKeyNavigation">
+            <bool>true</bool>
+           </property>
            <property name="showDropIndicator" stdset="0">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="dragDropOverwriteMode">
             <bool>false</bool>
@@ -618,11 +630,17 @@
          </item>
          <item row="3" column="1">
           <widget class="CursorMovementsTableWidget" name="cursorMovementsTableWidget">
+           <property name="focusPolicy">
+            <enum>Qt::FocusPolicy::StrongFocus</enum>
+           </property>
            <property name="editTriggers">
             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
            </property>
+           <property name="tabKeyNavigation">
+            <bool>true</bool>
+           </property>
            <property name="showDropIndicator" stdset="0">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="dragDropOverwriteMode">
             <bool>false</bool>
@@ -797,14 +815,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CursorMovementsTableWidget</class>
-   <extends>QTableWidget</extends>
-   <header location="global">ui/CursorMovementsTableWidget.h</header>
-  </customwidget>
-  <customwidget>
    <class>KeysSequencesTableWidget</class>
    <extends>QTableWidget</extends>
    <header location="global">ui/KeysSequencesTableWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CursorMovementsTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header location="global">ui/CursorMovementsTableWidget.h</header>
   </customwidget>
   <customwidget>
    <class>SentencesTableWidget</class>

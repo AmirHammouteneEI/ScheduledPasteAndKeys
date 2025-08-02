@@ -64,7 +64,7 @@ void KeysSequenceWidget::buildWidget()
 
     connect(m_mainButton, &QPushButton::released, m_createKeysSeqActionDialog, &CreateKeysSequenceActionDialog::showDialog);
     connect(m_createKeysSeqActionDialog, &CreateKeysSequenceActionDialog::sendKeysSequence, this, &KeysSequenceWidget::keysSeqIdentityReceived);
-    connect(m_loopSpin, &QSpinBox::valueChanged, this, &KeysSequenceWidget::timesToRunChanged);
+    connect(m_loopSpin, &NoWheelFocusSpinBox::valueChanged, this, &KeysSequenceWidget::timesToRunChanged);
 }
 
 void KeysSequenceWidget::keysSeqIdentityReceived(QString id)

@@ -1,8 +1,7 @@
 #include "CursorMovementsSelectedEditDialog.h"
 #include "ui_CursorMovementsSelectedEditDialog.h"
+#include "ui/CustomPrimaryWidgets.h"
 
-#include <QDoubleSpinBox>
-#include <QSpinBox>
 #include <QPushButton>
 #include <QMessageBox>
 
@@ -61,22 +60,22 @@ void CursorMovementsSelectedEditDialog::setTableCursorMovements(const CursorMove
         if(widgetsList.size() < 4)
             break;
 
-        auto delaySpin = qobject_cast<QDoubleSpinBox*>(widgetsList.at(0));
+        auto delaySpin = qobject_cast<NoWheelFocusDoubleSpinBox*>(widgetsList.at(0));
         if(delaySpin == nullptr)
             break;
         delaySpin->setValue(el[0]/1000.);
 
-        auto movingTimeSpin = qobject_cast<QDoubleSpinBox*>(widgetsList.at(1));
+        auto movingTimeSpin = qobject_cast<NoWheelFocusDoubleSpinBox*>(widgetsList.at(1));
         if(movingTimeSpin == nullptr)
             break;
         movingTimeSpin->setValue(el[1]/1000.);
 
-        auto xCoordSpin = qobject_cast<QSpinBox*>(widgetsList.at(2));
+        auto xCoordSpin = qobject_cast<NoWheelFocusSpinBox*>(widgetsList.at(2));
         if(xCoordSpin == nullptr)
             break;
         xCoordSpin->setValue(el[2]);
 
-        auto yCoordSpin = qobject_cast<QSpinBox*>(widgetsList.at(3));
+        auto yCoordSpin = qobject_cast<NoWheelFocusSpinBox*>(widgetsList.at(3));
         if(yCoordSpin == nullptr)
             break;
         yCoordSpin->setValue(el[3]);
@@ -89,10 +88,10 @@ CursorMovementsList CursorMovementsSelectedEditDialog::tableCursorMovements()
 
     for(int row = 0; row < ui->tableWidget->rowCount(); ++row)
     {
-        auto delaySpin = qobject_cast<QDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 0));
-        auto movingTimeSpin = qobject_cast<QDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 1));
-        auto xCoordSpin = qobject_cast<QSpinBox*>(ui->tableWidget->cellWidget(row, 2));
-        auto yCoordSpin = qobject_cast<QSpinBox*>(ui->tableWidget->cellWidget(row, 3));
+        auto delaySpin = qobject_cast<NoWheelFocusDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 0));
+        auto movingTimeSpin = qobject_cast<NoWheelFocusDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 1));
+        auto xCoordSpin = qobject_cast<NoWheelFocusSpinBox*>(ui->tableWidget->cellWidget(row, 2));
+        auto yCoordSpin = qobject_cast<NoWheelFocusSpinBox*>(ui->tableWidget->cellWidget(row, 3));
         if(delaySpin == nullptr || movingTimeSpin == nullptr || xCoordSpin == nullptr  || yCoordSpin == nullptr)
             break;
         MovementList movlist;
@@ -116,7 +115,7 @@ QStringList CursorMovementsSelectedEditDialog::optionalKeysStroke()
 QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
 {
     int index = ui->tableWidget->rowCount();
-    QDoubleSpinBox *delaySpin = new QDoubleSpinBox(this);
+    NoWheelFocusDoubleSpinBox *delaySpin = new NoWheelFocusDoubleSpinBox(this);
     delaySpin->setDecimals(2);
     delaySpin->setMinimum(0.);
     delaySpin->setMaximum(999999999999.);
@@ -127,7 +126,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
     if(index == 0)
         delaySpin->setEnabled(false);
 
-    QDoubleSpinBox *movingTimeSpin = new QDoubleSpinBox(this);
+    NoWheelFocusDoubleSpinBox *movingTimeSpin = new NoWheelFocusDoubleSpinBox(this);
     movingTimeSpin->setDecimals(2);
     movingTimeSpin->setMinimum(0.1);
     movingTimeSpin->setMaximum(999999999999.);
@@ -136,7 +135,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
     movingTimeSpin->setLocale(QLocale::English);
     movingTimeSpin->setValue(1.);
 
-    QSpinBox *xCoordSpin = new QSpinBox(this);
+    NoWheelFocusSpinBox *xCoordSpin = new NoWheelFocusSpinBox(this);
     xCoordSpin->setMinimum(0);
     xCoordSpin->setMaximum(9999);//TODO check screens max width
     xCoordSpin->setSingleStep(1);
@@ -144,7 +143,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
     xCoordSpin->setLocale(QLocale::English);
     xCoordSpin->setValue(0);
 
-    QSpinBox *yCoordSpin = new QSpinBox(this);
+    NoWheelFocusSpinBox *yCoordSpin = new NoWheelFocusSpinBox(this);
     yCoordSpin->setMinimum(0);
     yCoordSpin->setMaximum(9999);//TODO check screens max height
     yCoordSpin->setSingleStep(1);
@@ -180,8 +179,8 @@ void CursorMovementsSelectedEditDialog::removeLastMovsRow()
 
 void CursorMovementsSelectedEditDialog::coordinatesReceived(int index, int x, int y)
 {
-    auto xCoordSpin = qobject_cast<QSpinBox*>(ui->tableWidget->cellWidget(index, 2));
-    auto yCoordSpin = qobject_cast<QSpinBox*>(ui->tableWidget->cellWidget(index, 3));
+    auto xCoordSpin = qobject_cast<NoWheelFocusSpinBox*>(ui->tableWidget->cellWidget(index, 2));
+    auto yCoordSpin = qobject_cast<NoWheelFocusSpinBox*>(ui->tableWidget->cellWidget(index, 3));
     if(xCoordSpin == nullptr  || yCoordSpin == nullptr)
         return;
     xCoordSpin->setValue(x);

@@ -3,6 +3,7 @@
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
 #include "ui/createactiondialog/CreateKeysSequenceActionDialog.h"
+#include "ui/CustomPrimaryWidgets.h"
 #include <QDateTime>
 
 class KeysSequenceWidget : public AbstractActionWidget

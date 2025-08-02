@@ -3,6 +3,7 @@
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
 #include "ui/createactiondialog/CreateCursorMovementsActionDialog.h"
+#include "ui/CustomPrimaryWidgets.h"
 #include <QDateTime>
 
 class CursorMovementsWidget : public AbstractActionWidget

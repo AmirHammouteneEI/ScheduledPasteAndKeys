@@ -13,7 +13,7 @@ getDelayDialog::getDelayDialog(QWidget *parent)
 
     connect(ui->delayGroup, &QGroupBox::clicked, this, &getDelayDialog::uncheckDateGroup);
     connect(ui->dateTimeGroup, &QGroupBox::clicked, this, &getDelayDialog::uncheckDelayGroup);
-    connect(ui->dateTimeEdit, &QDateTimeEdit::dateTimeChanged, this, &getDelayDialog::refreshDateDelayDetails);
+    connect(ui->dateTimeEdit, &NoWheelFocusDateTimeEdit::dateTimeChanged, this, &getDelayDialog::refreshDateDelayDetails);
 }
 
 getDelayDialog::~getDelayDialog()

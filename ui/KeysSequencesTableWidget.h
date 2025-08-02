@@ -1,11 +1,10 @@
 #ifndef KEYSSEQUENCESTABLEWIDGET_H
 #define KEYSSEQUENCESTABLEWIDGET_H
 
-#include <QTableWidget>
-
+#include "ui/CustomPrimaryWidgets.h"
 #include "ui/KeysSequenceSelectedEditDialog.h"
 
-class KeysSequencesTableWidget : public QTableWidget
+class KeysSequencesTableWidget : public NoFocusCellTableWidget
 {
     Q_OBJECT
     KeysSequenceSelectedEditDialog *m_keysSequenceEditDialog;

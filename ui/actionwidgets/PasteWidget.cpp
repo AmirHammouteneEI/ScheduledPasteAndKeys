@@ -63,7 +63,7 @@ void PasteWidget::buildWidget()
 
     connect(m_mainButton, &QPushButton::released, m_createPasteActionDialog, &CreatePasteActionDialog::showDialog);
     connect(m_createPasteActionDialog, &CreatePasteActionDialog::sendSentence, this, &PasteWidget::sentenceIdentityReceived);
-    connect(m_loopSpin, &QSpinBox::valueChanged, this, &PasteWidget::timesToRunChanged);
+    connect(m_loopSpin, &NoWheelFocusSpinBox::valueChanged, this, &PasteWidget::timesToRunChanged);
 }
 
 void PasteWidget::sentenceIdentityReceived(QString id)

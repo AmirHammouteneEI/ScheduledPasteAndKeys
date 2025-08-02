@@ -12,12 +12,11 @@ class TaskTabsManager : public QObject
 {
     Q_OBJECT
 
-    MainWindow *m_mainwindow = nullptr;
     QMap<unsigned int, TaskTab*> m_taskTabsMap;
     unsigned int m_idCounter = 0;
     QMap<unsigned int, QString> m_taskFilePathsMap; // may contains old closed tab paths of file, but should be updated with opened tasks
 public:
-    explicit TaskTabsManager(MainWindow *parent = nullptr);
+    explicit TaskTabsManager();
     ~TaskTabsManager();
     void forceCloseTask(int id);
     void scheduleTaskFromId(int id, qint64 delay, int loopTimes = 1);
@@ -26,7 +25,6 @@ public slots:
     void onTabCloseRequest(int index);
     void onRefreshTabsRequest();
     void onTaskfilePathChanged(QString oldpath, QString newpath);
-    void stopAllRunningTasksReceived();
     void forceStopAllRunningTasksReceived();
     void saveTaskReceived(int taskTabId, bool verbose = false);
     QJsonObject actionToJson(AbstractAction *act);

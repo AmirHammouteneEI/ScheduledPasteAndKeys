@@ -16,13 +16,17 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
+// SINGLETON
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    static MainWindow* getInstance(QWidget *parent = nullptr);
+    MainWindow(MainWindow &other) = delete;
+    void operator=(const MainWindow &) = delete;
     ~MainWindow();
+    void buildTaskTabsManager();
     QTabWidget * getTabWidget(); // ui container of TaskTabs
     void autoRun(const QString & filename, int delay, int loopTimes = 1); // automatically run a task in silent mode (no window appears)
     QShortcut *m_stopAllTasksShortcut;
@@ -37,6 +41,8 @@ private slots:
     void taskTabPageClicked(int newIndex);
     void taskTabContextMenuRequest(QPoint point);
 protected :
+    MainWindow(QWidget *parent = nullptr);
+    static MainWindow* s_singleton;
     QSystemTrayIcon* m_sticon;
     void setTheme(); // simulate trigger on the appropriate theme button
     void buildToolBar();

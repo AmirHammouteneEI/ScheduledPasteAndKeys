@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>420</width>
-    <height>393</height>
+    <width>527</width>
+    <height>419</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,18 +61,27 @@
        </widget>
       </item>
       <item>
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="NoFocusCellTableWidget" name="tableWidget">
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::StrongFocus</enum>
+        </property>
         <property name="editTriggers">
          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
         </property>
+        <property name="tabKeyNavigation">
+         <bool>true</bool>
+        </property>
         <property name="showDropIndicator" stdset="0">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="dragDropOverwriteMode">
          <bool>false</bool>
         </property>
         <property name="selectionMode">
          <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectionBehavior::SelectItems</enum>
         </property>
         <property name="rowCount">
          <number>0</number>
@@ -84,10 +93,10 @@
          <bool>false</bool>
         </attribute>
         <attribute name="horizontalHeaderMinimumSectionSize">
-         <number>32</number>
+         <number>64</number>
         </attribute>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>193</number>
+         <number>250</number>
         </attribute>
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>
@@ -278,6 +287,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NoFocusCellTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header location="global">ui/CustomPrimaryWidgets.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

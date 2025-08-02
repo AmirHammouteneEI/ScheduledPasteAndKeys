@@ -8,7 +8,7 @@
 #include <QApplication>
 
 StartupTasksTableWidget::StartupTasksTableWidget(QWidget *parent)
-    : QTableWidget{parent}
+    : NoFocusCellTableWidget{parent}
 {
     m_startupTaskEditDialog = new StartupTaskEditDialog(this);
     connect(m_startupTaskEditDialog, &QDialog::accepted, this, &StartupTasksTableWidget::editFromDialogReceived);

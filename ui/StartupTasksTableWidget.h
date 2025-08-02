@@ -1,11 +1,10 @@
 #ifndef STARTUPTASKSTABLEWIDGET_H
 #define STARTUPTASKSTABLEWIDGET_H
 
-#include <QTableWidget>
-
+#include "ui/CustomPrimaryWidgets.h"
 #include "ui/StartupTaskEditDialog.h"
 
-class StartupTasksTableWidget : public QTableWidget
+class StartupTasksTableWidget : public NoFocusCellTableWidget
 {
     Q_OBJECT
     StartupTaskEditDialog *m_startupTaskEditDialog;

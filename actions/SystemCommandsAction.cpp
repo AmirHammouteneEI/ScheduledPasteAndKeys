@@ -56,24 +56,7 @@ void SystemCommandAction::runAction() const
         break;
         case SystemCommandType::QuitSelfProgram:
         {
-            MainWindow* myMainWindow = nullptr;
-            auto wList = qApp->topLevelWidgets();
-            for(auto * w : wList)
-            {
-                if(w->inherits("MainWindow"))
-                {
-                    auto *mainW = qobject_cast<MainWindow*>(w);
-                    if(mainW != nullptr)
-                    {
-                        myMainWindow = mainW;
-                        break;
-                    }
-                }
-            }
-            if(myMainWindow != nullptr)
-            {
-                myMainWindow->forceQuit();
-            }
+            MainWindow::getInstance()->forceQuit();
         }
         break;
         case SystemCommandType::ShutDown:

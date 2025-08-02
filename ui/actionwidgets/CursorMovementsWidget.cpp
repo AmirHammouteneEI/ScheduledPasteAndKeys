@@ -66,7 +66,7 @@ void CursorMovementsWidget::buildWidget()
 
     connect(m_mainButton, &QPushButton::released, m_createCursorMovsActionDialog, &CreateCursorMovementsActionDialog::showDialog);
     connect(m_createCursorMovsActionDialog, &CreateCursorMovementsActionDialog::sendCursorMovements, this, &CursorMovementsWidget::cursorMovsIdentityReceived);
-    connect(m_loopSpin, &QSpinBox::valueChanged, this, &CursorMovementsWidget::timesToRunChanged);
+    connect(m_loopSpin, &NoWheelFocusSpinBox::valueChanged, this, &CursorMovementsWidget::timesToRunChanged);
 
 }
 

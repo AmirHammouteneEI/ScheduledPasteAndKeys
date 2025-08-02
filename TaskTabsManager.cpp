@@ -16,16 +16,9 @@
 #include <QTabBar>
 #include <QFileInfo>
 
-TaskTabsManager::TaskTabsManager(MainWindow *parent)
-    : QObject{parent}, m_mainwindow(parent)
+TaskTabsManager::TaskTabsManager()
+    : QObject{MainWindow::getInstance()}
 {
-    if(m_mainwindow == nullptr)
-    {
-        QMessageBox::critical(nullptr, tr("Internal Error"),
-            tr("An internal error occured : err01\nmainwindow is null when affecting to TaskTabsManager !"));
-        qApp->quit();
-        return;
-    }
 }
 
 TaskTabsManager::~TaskTabsManager()
@@ -37,7 +30,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
     QFile fileToOpen(path);
     if(!fileToOpen.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QMessageBox::warning(m_mainwindow, tr("Cannot open file"), tr("Trying to open file located in :\n")+
+        QMessageBox::warning(MainWindow::getInstance(), tr("Cannot open file"), tr("Trying to open file located in :\n")+
           path+"\n"+G_Sentences::OperationInterference());
         return -1;
     }
@@ -48,7 +41,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
     if(jsonDoc.isNull())
     {
-        QMessageBox::warning(m_mainwindow, tr("File format error"),G_Sentences::FileParsingError());
+        QMessageBox::warning(MainWindow::getInstance(), tr("File format error"),G_Sentences::FileParsingError());
         return -1;
     }
 
@@ -57,7 +50,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
     if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
         != G_Files::DocumentIdentification_Value)
     {
-        QMessageBox::warning(m_mainwindow, tr("File format error"), G_Sentences::FileParsingError());
+        QMessageBox::warning(MainWindow::getInstance(), tr("File format error"), G_Sentences::FileParsingError());
         return -1;
     }
 
@@ -67,7 +60,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
     int tabIfAlreadyOpen = getTabIndexfomId(getIdfromTaskName(taskName));
     if(tabIfAlreadyOpen != -1)
     {
-        m_mainwindow->getTabWidget()->setCurrentIndex(tabIfAlreadyOpen);
+        MainWindow::getInstance()->getTabWidget()->setCurrentIndex(tabIfAlreadyOpen);
         return -1;
     }
 
@@ -82,10 +75,10 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
 
 TaskTab* TaskTabsManager::createEmptyTaskAndOpenTab(const QString &name)
 {
-    TaskTab* newEmptyTask = new TaskTab(m_mainwindow, name);
-    m_mainwindow->getTabWidget()->insertTab(0,newEmptyTask,name);
-    m_mainwindow->getTabWidget()->tabBar()->setTabToolTip(0,name);
-    m_mainwindow->getTabWidget()->setCurrentIndex(0);
+    TaskTab* newEmptyTask = new TaskTab(MainWindow::getInstance(), name);
+    MainWindow::getInstance()->getTabWidget()->insertTab(0,newEmptyTask,name);
+    MainWindow::getInstance()->getTabWidget()->tabBar()->setTabToolTip(0,name);
+    MainWindow::getInstance()->getTabWidget()->setCurrentIndex(0);
 
     connect(newEmptyTask, &TaskTab::saveTaskRequest, this, &TaskTabsManager::saveTaskReceived);
 
@@ -118,29 +111,29 @@ int TaskTabsManager::getTabIndexfomId(int id) const
     if(id < 0 || !m_taskTabsMap.contains(id))
         return -1;
 
-    return m_mainwindow->getTabWidget()->indexOf(m_taskTabsMap.value(id, nullptr));
+    return MainWindow::getInstance()->getTabWidget()->indexOf(m_taskTabsMap.value(id, nullptr));
 }
 
 void TaskTabsManager::onTabCloseRequest(int index)
 {
-    auto task = qobject_cast<TaskTab*>(m_mainwindow->getTabWidget()->widget(index));
+    auto task = qobject_cast<TaskTab*>(MainWindow::getInstance()->getTabWidget()->widget(index));
 
     if(task != nullptr)
     {
         if(task->m_scheduleState != ScheduleState::NotScheduled)
         {
-            if(QMessageBox::question(m_mainwindow,tr("Task is scheduled or is running"),
+            if(QMessageBox::question(MainWindow::getInstance(),tr("Task is scheduled or is running"),
               tr("This task is scheduled for execution or is currently running, by pressing \"Yes\" you are going to stop it.\n"\
-                "(alternative way to stop it is with Ctrl+Alt+S shortcut)\n\nIf you want to close it, you will have to request again."),
+                "\nIf you want to close it, you will have to request again."),
               QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
                 return;
-            task->m_stopButton->animateClick();
+            task->forcedStop();
             return;
         }
 
         if(task->m_taskModifiedFromLastSave)
         {
-            QMessageBox::StandardButton response = QMessageBox::question(m_mainwindow,tr("Saving changes"),
+            QMessageBox::StandardButton response = QMessageBox::question(MainWindow::getInstance(),tr("Saving changes"),
               tr("This Task has been modified since the last save, would you like to save changes ?"),
               QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Yes));
 
@@ -154,8 +147,8 @@ void TaskTabsManager::onTabCloseRequest(int index)
         task->deleteLater();
     }
 
-    m_mainwindow->getTabWidget()->removeTab(index);
-    m_mainwindow->getTabWidget()->setCurrentIndex(0);
+    MainWindow::getInstance()->getTabWidget()->removeTab(index);
+    MainWindow::getInstance()->getTabWidget()->setCurrentIndex(0);
 }
 
 void TaskTabsManager::forceCloseTask(int id)
@@ -163,8 +156,8 @@ void TaskTabsManager::forceCloseTask(int id)
     if(!m_taskTabsMap.contains(id))
         return;
 
-    m_mainwindow->getTabWidget()->removeTab(getTabIndexfomId(id));
-    m_mainwindow->getTabWidget()->setCurrentIndex(0);
+    MainWindow::getInstance()->getTabWidget()->removeTab(getTabIndexfomId(id));
+    MainWindow::getInstance()->getTabWidget()->setCurrentIndex(0);
 
     auto task = m_taskTabsMap.take(id);
     task->deleteLater();
@@ -199,7 +192,7 @@ void TaskTabsManager::onRefreshTabsRequest()
 
         if(!fileToCheck.exists())
         {
-            it->second->m_stopButton->animateClick();
+            it->second->forcedStop();
             forceCloseTask((it++)->first);
             continue;
         }
@@ -209,7 +202,7 @@ void TaskTabsManager::onRefreshTabsRequest()
 
         it->second->setName(taskName);
 
-        m_mainwindow->getTabWidget()->setTabText(getTabIndexfomId(it->first), taskName);
+        MainWindow::getInstance()->getTabWidget()->setTabText(getTabIndexfomId(it->first), taskName);
 
         if(!it->second->m_taskModifiedFromLastSave && it->second->m_scheduleState == ScheduleState::NotScheduled)
             createAndLoadTaskObject(it->first);
@@ -227,23 +220,6 @@ void TaskTabsManager::onTaskfilePathChanged(QString oldpath, QString newpath)
     }
 }
 
-void TaskTabsManager::stopAllRunningTasksReceived()
-{
-    for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd(); ++it)
-    {
-        if(it->second == nullptr)
-            continue;
-
-        if(it->second->m_scheduleState == ScheduleState::NotScheduled)
-            continue;
-
-        if(it->second->m_stopButton == nullptr)
-            continue;
-
-        it->second->m_stopButton->animateClick();
-    }
-}
-
 void TaskTabsManager::forceStopAllRunningTasksReceived()
 {
     for(auto it = m_taskTabsMap.keyValueBegin(); it != m_taskTabsMap.keyValueEnd(); ++it)
@@ -254,7 +230,7 @@ void TaskTabsManager::forceStopAllRunningTasksReceived()
         if(it->second->m_scheduleState == ScheduleState::NotScheduled)
             continue;
 
-        emit it->second->forceStopThread();
+        it->second->forcedStop();
     }
 }
 
@@ -278,7 +254,7 @@ void TaskTabsManager::createAndLoadTaskObject(int id)
     if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
         != G_Files::DocumentIdentification_Value)
     {
-        QMessageBox::warning(m_mainwindow, tr("File format error"),
+        QMessageBox::warning(MainWindow::getInstance(), tr("File format error"),
                              tr("The file is not in the good format, no action can't be loaded."));
     }
     else
@@ -304,7 +280,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(!fileToModify.open(QIODevice::ReadWrite | QIODevice::Text))
     {
         if(verbose)
-            QMessageBox::warning(m_mainwindow,tr("Cannot access file"), G_Sentences::OperationInterference());
+            QMessageBox::warning(MainWindow::getInstance(),tr("Cannot access file"), G_Sentences::OperationInterference());
         return;
     }
 
@@ -314,7 +290,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(jsonDoc.isNull())
     {
         if(verbose)
-            QMessageBox::warning(m_mainwindow,tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
+            QMessageBox::warning(MainWindow::getInstance(),tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
         return;
     }
 
@@ -324,7 +300,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
         != G_Files::DocumentIdentification_Value)
     {
         if(verbose)
-            QMessageBox::warning(m_mainwindow, tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
+            QMessageBox::warning(MainWindow::getInstance(), tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
         return;
     }
     fileToModify.resize(0);
@@ -334,7 +310,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(task == nullptr || task->m_task == nullptr)
     {
         if(verbose)
-            QMessageBox::warning(m_mainwindow, tr("Internal Error"),
+            QMessageBox::warning(MainWindow::getInstance(), tr("Internal Error"),
              tr("An internal error occured : err05\nTaskTab or Task associated is null in TaskTabsManager !"));
         return;
     }

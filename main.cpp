@@ -27,14 +27,15 @@ int main(int argc, char *argv[])
     // Get local system language to apply translations is exists
     QString locale = QLocale::system().name().section('_', 0, 0);
     QTranslator translator;
-    translator.load(QString("ScheduledPCTasks_") + locale);
+    translator.load(QApplication::applicationDirPath()+"/"+QString("ScheduledPCTasks_") + locale);
     QTranslator baseTranslator;
-    baseTranslator.load(QString("qtbase_") + locale);
+    baseTranslator.load(QApplication::applicationDirPath()+"/"+QString("qtbase_") + locale);
     a.installTranslator(&translator);
     a.installTranslator(&baseTranslator);
 
     // Main ui window
-    MainWindow w;
+    MainWindow *w = MainWindow::getInstance();
+    w->buildTaskTabsManager();
 
     // In case of program used with correct arguments, automatically run the task (usage : ScheduledPCTasks.exe "TaskFileName" <DelayInSeconds> <NumberOfLoops>)
     if(argc == 3 || argc == 4)
@@ -46,18 +47,20 @@ int main(int argc, char *argv[])
             {
                 int timesToRun = atoi(argv[3]);
                 if(timesToRun != 0)
-                    w.autoRun(QString(argv[1]), delay,timesToRun);
+                    w->autoRun(QString(argv[1]), delay,timesToRun);
                 else
-                    w.showWindow();
+                    w->showWindow();
             }
             else
-                w.autoRun(QString(argv[1]), delay);
+                w->autoRun(QString(argv[1]), delay);
         }
         else
-            w.showWindow();
+            w->showWindow();
     }
     else
-        w.showWindow();
+        w->showWindow();
 
-    return a.exec();
+    int execCode = a.exec();
+    delete w;
+    return execCode;
 }

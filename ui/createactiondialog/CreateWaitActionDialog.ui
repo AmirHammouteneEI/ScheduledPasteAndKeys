@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>536</width>
-    <height>117</height>
+    <width>561</width>
+    <height>119</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -110,7 +110,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBox">
+          <widget class="NoWheelFocusDoubleSpinBox" name="doubleSpinBox">
            <property name="sizePolicy">
             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -212,7 +212,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox">
+          <widget class="NoWheelFocusSpinBox" name="spinBox">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -235,7 +235,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QTimeEdit" name="timeEdit">
+          <widget class="NoWheelFocusTimeEdit" name="timeEdit">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -291,6 +291,23 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NoWheelFocusSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header location="global">ui/CustomPrimaryWidgets.h</header>
+  </customwidget>
+  <customwidget>
+   <class>NoWheelFocusDoubleSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header location="global">ui/CustomPrimaryWidgets.h</header>
+  </customwidget>
+  <customwidget>
+   <class>NoWheelFocusTimeEdit</class>
+   <extends>QTimeEdit</extends>
+   <header location="global">ui/CustomPrimaryWidgets.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

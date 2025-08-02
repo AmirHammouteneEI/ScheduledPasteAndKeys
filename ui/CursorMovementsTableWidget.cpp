@@ -6,7 +6,7 @@
 #include <QSettings>
 #include <QMessageBox>
 
-CursorMovementsTableWidget::CursorMovementsTableWidget(QWidget *parent)
+CursorMovementsTableWidget::CursorMovementsTableWidget(QWidget *parent):NoFocusCellTableWidget(parent)
 {
     m_cursorMovementsEditDialog = new CursorMovementsSelectedEditDialog(this);
     connect(m_cursorMovementsEditDialog, &QDialog::accepted, this, &CursorMovementsTableWidget::editFromDialogReceived);

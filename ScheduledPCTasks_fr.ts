@@ -1129,7 +1129,7 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     </message>
     <message>
         <source>version 1.4 (July 2025)</source>
-        <translation>version 1.4 (juillet 2025)</translation>
+        <translation type="vanished">version 1.4 (juillet 2025)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1140,12 +1140,34 @@ initial work on February 2024
 version 1.4 (July 2025)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 1.4 (juillet 2025)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>version 1.4.1 (August 2025)</source>
+        <translation>version 1.4.1 (août 2025)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.4.1 (August 2025)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.4.1 (août 2025)
 
 Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>
@@ -1669,7 +1691,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>An internal error occured : err01
 mainwindow is null when affecting to TaskTabsManager !</source>
-        <translation>Une erreur interne s&apos;est produite : err01
+        <translation type="vanished">Une erreur interne s&apos;est produite : err01
 mainwindow is null when affecting to TaskTabsManager !</translation>
     </message>
     <message>
@@ -1731,8 +1753,16 @@ TaskTab or Task associated is null in TaskTabsManager !</translation>
 (alternative way to stop it is with Ctrl+Alt+S shortcut)
 
 If you want to close it, you will have to request again.</source>
-        <translation>Cette tâche est programmée pour exécution ou est en cours d&apos;exécution, en appuyant sur &quot;Oui&quot;, vous allez l&apos;arrêter.
+        <translation type="vanished">Cette tâche est programmée pour exécution ou est en cours d&apos;exécution, en appuyant sur &quot;Oui&quot;, vous allez l&apos;arrêter.
 (une autre façon de l&apos;arrêter est d&apos;utiliser le raccourci Ctrl+Alt+S)
+
+Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</translation>
+    </message>
+    <message>
+        <source>This task is scheduled for execution or is currently running, by pressing &quot;Yes&quot; you are going to stop it.
+
+If you want to close it, you will have to request again.</source>
+        <translation>Cette tâche est programmée pour exécution ou est en cours d&apos;exécution, en appuyant sur &quot;Oui&quot;, vous allez l&apos;arrêter.
 
 Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</translation>
     </message>

@@ -9,6 +9,7 @@
 #include "ui/createactiondialog/CreateKeysSequenceActionDialog.h"
 #include "ui/createactiondialog/CreateSystemCommandActionDialog.h"
 #include "ui/createactiondialog/CreateCursorMovementsActionDialog.h"
+#include "ui/CustomPrimaryWidgets.h"
 
 #include <QFrame>
 #include <QScrollArea>
@@ -17,7 +18,6 @@
 #include <QPushButton>
 #include <QToolButton>
 #include <QTimer>
-#include <QSpinBox>
 #include <QPlainTextEdit>
 
 enum class ScheduleState{
@@ -66,7 +66,8 @@ protected:
     bool m_taskModifiedFromLastSave = false;
     QWidget *m_runOptionsWidget;
     QWidget *m_timesToRunWidget;
-    QSpinBox *m_timesToRunSpinBox;
+    NoWheelFocusSpinBox *m_timesToRunSpinBox;
+    void refreshTabRunIcon();
 public:
     explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
     ~TaskTab();
@@ -76,7 +77,8 @@ public:
     bool taskIsModified() const {return m_taskModifiedFromLastSave;}
     void setTimesToRunValue(int timesToRun);
 private slots:
-    void stopPushed();
+    void stopTask();
+    void forcedStop();
     void loopToggled(bool state);
     void refreshScheduleText();
     void anyActionChangedParam();
@@ -96,7 +98,6 @@ public slots:
     void createCursorMovementsActionRequest(QString cursorMovementsIdentity); // not const & because it's a slot, will make copy evenif
 signals:
     void saveTaskRequest(int taskId, bool verb);
-    void refreshTabRunIconRequest();
     void forceStopThread();
 
     friend class TaskTabsManager;

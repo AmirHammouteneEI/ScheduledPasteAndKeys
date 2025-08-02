@@ -7,7 +7,7 @@
 #include <QApplication>
 
 KeysSequencesTableWidget::KeysSequencesTableWidget(QWidget *parent)
-    : QTableWidget{parent}
+    : NoFocusCellTableWidget{parent}
 {
     m_keysSequenceEditDialog = new KeysSequenceSelectedEditDialog(this);
     connect(m_keysSequenceEditDialog, &QDialog::accepted, this, &KeysSequencesTableWidget::editFromDialogReceived);

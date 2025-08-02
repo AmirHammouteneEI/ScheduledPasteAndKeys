@@ -1,7 +1,7 @@
 #include "KeysSequenceSelectedEditDialog.h"
 #include "ui_KeysSequenceSelectedEditDialog.h"
 #include "KeysSelectorDialog.h"
-#include <QDoubleSpinBox>
+#include "ui/CustomPrimaryWidgets.h"
 #include <QPushButton>
 #include <QMessageBox>
 
@@ -45,12 +45,12 @@ void KeysSequenceSelectedEditDialog::setTableKeysSequence(const PressedReleaseDe
         if(widgetsList.size() != 3)
             break;
 
-        auto pressedDelaySpin = qobject_cast<QDoubleSpinBox*>(widgetsList.at(0));
+        auto pressedDelaySpin = qobject_cast<NoWheelFocusDoubleSpinBox*>(widgetsList.at(0));
         if(pressedDelaySpin == nullptr)
             break;
         pressedDelaySpin->setValue(key/1000.);
 
-        auto releasedDelaySpin = qobject_cast<QDoubleSpinBox*>(widgetsList.at(1));
+        auto releasedDelaySpin = qobject_cast<NoWheelFocusDoubleSpinBox*>(widgetsList.at(1));
         if(releasedDelaySpin == nullptr)
             break;
         releasedDelaySpin->setValue(val.first/1000.);
@@ -69,8 +69,8 @@ PressedReleaseDelaysKeysMap KeysSequenceSelectedEditDialog::tableKeysSequence()
 
     for(int row = 0; row < ui->tableWidget->rowCount(); ++row)
     {
-        auto pressedDelaySpin = qobject_cast<QDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 0));
-        auto releasedDelaySpin = qobject_cast<QDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 1));
+        auto pressedDelaySpin = qobject_cast<NoWheelFocusDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 0));
+        auto releasedDelaySpin = qobject_cast<NoWheelFocusDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 1));
         auto keysListButton = qobject_cast<QPushButton*>(ui->tableWidget->cellWidget(row, 2));
         if(pressedDelaySpin == nullptr || releasedDelaySpin == nullptr || keysListButton == nullptr )
             break;
@@ -83,7 +83,7 @@ PressedReleaseDelaysKeysMap KeysSequenceSelectedEditDialog::tableKeysSequence()
 QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
 {
     int index = ui->tableWidget->rowCount();
-    QDoubleSpinBox *pressedDelaySpin = new QDoubleSpinBox(this);
+    NoWheelFocusDoubleSpinBox *pressedDelaySpin = new NoWheelFocusDoubleSpinBox(ui->tableWidget);
     pressedDelaySpin->setDecimals(2);
     pressedDelaySpin->setMaximum(0.);
     pressedDelaySpin->setMaximum(999999999999.);
@@ -97,12 +97,12 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
     }
     else
     {
-        auto previousSpin = qobject_cast<QDoubleSpinBox*>(ui->tableWidget->cellWidget(index-1,0));
+        auto previousSpin = qobject_cast<NoWheelFocusDoubleSpinBox*>(ui->tableWidget->cellWidget(index-1,0));
         if(previousSpin!= nullptr)
             pressedDelaySpin->setValue(previousSpin->value()+0.1);
     }
 
-    QDoubleSpinBox *releasedDelaySpin = new QDoubleSpinBox(this);
+    NoWheelFocusDoubleSpinBox *releasedDelaySpin = new NoWheelFocusDoubleSpinBox(ui->tableWidget);
     releasedDelaySpin->setDecimals(2);
     releasedDelaySpin->setMinimum(0.1);
     releasedDelaySpin->setMaximum(999999999999.);
@@ -110,7 +110,7 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
     releasedDelaySpin->setAlignment(Qt::AlignCenter);
     releasedDelaySpin->setLocale(QLocale::English);
 
-    QPushButton *keysListButton = new QPushButton(this);
+    QPushButton *keysListButton = new QPushButton(ui->tableWidget);
 
     KeysSelectorDialog *keysSelector = new KeysSelectorDialog(keysListButton);
     connect(keysListButton, &QPushButton::released, keysSelector, &KeysSelectorDialog::showDialog);
@@ -149,7 +149,7 @@ void KeysSequenceSelectedEditDialog::accept()
     QList<int> delaysList;
     for(int row = 0; row < ui->tableWidget->rowCount(); ++row)
     {
-        auto pressedDelaySpin = qobject_cast<QDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 0));
+        auto pressedDelaySpin = qobject_cast<NoWheelFocusDoubleSpinBox*>(ui->tableWidget->cellWidget(row, 0));
         if(pressedDelaySpin == nullptr)
             continue;
         int delay = pressedDelaySpin->value()*1000;
