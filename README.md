@@ -1,6 +1,6 @@
 # Scheduled PC Tasks
 
-version 1.4 (July 2025)
+version 1.4.1 (August 2025)
 
 Schedule automated simulations of actions you would perform on your PC.
 
@@ -22,7 +22,7 @@ Please read license.txt file
 We don't collect any data, please read private_policy.txt
 
 ----------
-Details of version 1.4:
+Details of version 1.4.1:
 
 Stable version, fully functional
 
@@ -37,10 +37,12 @@ Those actions simulations are available :
 
 And other features like data management, scheduled tasks at system startup...
    
-The goal in future versions is to include those actions :
+The goal in future versions is to include those features :
 
-   - Play sounds
+   - Play sound actions
    - Add more Windows system specific command
+   - Create desktop shortcut to launch the tool and auto schedule a task to run
+   - Configure global shortcuts to schedule a task to run while the user is on another application or video game
 
 Working on a Linux system version.
 
@@ -51,7 +53,7 @@ Available for install on Microsoft Store :
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
 Available as a portable version :
-https://files.amirhammoutene.dev/ScheduledPCTasks/1.4/Scheduled_PC_Tasks_v1.4.zip
+https://files.amirhammoutene.dev/ScheduledPCTasks/1.4.1/Scheduled_PC_Tasks_v1.4.1.zip
 
 Needs 30 MB disk space, available for Windows systems only
    
