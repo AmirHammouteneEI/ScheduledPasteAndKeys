@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>361</height>
+    <width>600</width>
+    <height>377</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -154,7 +154,14 @@ If identity is changed (via the Edit Data window), it will make a copy of the en
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="minimumSize">
+         <size>
+          <width>250</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <spacer name="horizontalSpacer">

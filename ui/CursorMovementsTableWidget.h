@@ -1,10 +1,10 @@
 #ifndef CURSORMOVEMENTSTABLEWIDGET_H
 #define CURSORMOVEMENTSTABLEWIDGET_H
 
-#include <QTableWidget>
 #include "ui/CursorMovementsSelectedEditDialog.h"
+#include "ui/CustomPrimaryWidgets.h"
 
-class CursorMovementsTableWidget : public QTableWidget
+class CursorMovementsTableWidget : public NoFocusCellTableWidget
 {
     Q_OBJECT
     CursorMovementsSelectedEditDialog *m_cursorMovementsEditDialog;

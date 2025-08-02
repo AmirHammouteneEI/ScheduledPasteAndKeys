@@ -2,12 +2,10 @@
 #define ABSTRACTACTIONWIDGET_H
 
 #include "actions/AbstractAction.h"
-#include "qevent.h"
 
 #include <QFrame>
 #include <QPushButton>
 #include <QLabel>
-#include <QSpinBox>
 
 enum class RunningState{
     NotExecuted,
@@ -54,25 +52,6 @@ signals:
     void moveUpActionRequest(unsigned int id);
     void moveDownActionRequest(unsigned int id);
     void anyParamChanged();
-};
-
-class NoWheelFocusSpinBox : public QSpinBox
-{
-    Q_OBJECT
-public:
-
-    NoWheelFocusSpinBox(QWidget *parent = 0):QSpinBox(parent)
-    {
-        setFocusPolicy(Qt::StrongFocus);
-    }
-protected:
-    virtual void wheelEvent(QWheelEvent *event) override
-    {
-        if(!hasFocus())
-            event->ignore();
-        else
-            QSpinBox::wheelEvent(event);
-    }
 };
 
 #endif // ABSTRACTACTIONWIDGET_H

@@ -1,11 +1,10 @@
 #ifndef SENTENCESTABLEWIDGET_H
 #define SENTENCESTABLEWIDGET_H
 
-#include <QTableWidget>
-
+#include "ui/CustomPrimaryWidgets.h"
 #include "ui/SentenceSelectedEditDialog.h"
 
-class SentencesTableWidget : public QTableWidget
+class SentencesTableWidget : public NoFocusCellTableWidget
 {
     Q_OBJECT
     SentenceSelectedEditDialog *m_sentenceEditDialog;

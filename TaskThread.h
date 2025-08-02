@@ -26,6 +26,7 @@ signals:
     void sendRunningStateAct(unsigned int actId);
     void sendDoneStateAct(unsigned int actId);
     void sendFinishedOneLoop();
+    void sendFinishedAllLoops();
 
     friend class TaskTab;
 };

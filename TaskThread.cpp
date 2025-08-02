@@ -66,4 +66,5 @@ void TaskThread::run()
     }
 
     emit sendFinishedOneLoop();
+    emit sendFinishedAllLoops();
 }

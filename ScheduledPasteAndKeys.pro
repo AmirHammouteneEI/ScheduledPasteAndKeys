@@ -72,6 +72,7 @@ HEADERS += \
     ui/CreateLoadTaskDialog.h \
     ui/CursorMovementsSelectedEditDialog.h \
     ui/CursorMovementsTableWidget.h \
+    ui/CustomPrimaryWidgets.h \
     ui/DataEditDialog.h \
     ui/KeysSelectorDialog.h \
     ui/KeysSequenceSelectedEditDialog.h \
@@ -132,7 +133,7 @@ RESOURCES += \
 
 RC_ICONS = img/programIcon.ico
 
-VERSION = 1.4.0
+VERSION = 1.4.1
 QMAKE_TARGET_COMPANY = "Amir Hammoutene"
 QMAKE_TARGET_COPYRIGHT = "GNU general public license version 3"
 

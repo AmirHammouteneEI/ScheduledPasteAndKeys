@@ -84,7 +84,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="minimumSize">
+         <size>
+          <width>250</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <spacer name="horizontalSpacer_9">
@@ -138,7 +145,7 @@ If identity is changed (via the Edit Data window), it will make a copy of the en
     </widget>
    </item>
    <item>
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="NoFocusCellTableWidget" name="tableWidget">
      <property name="editTriggers">
       <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
      </property>
@@ -375,6 +382,13 @@ If identity is changed (via the Edit Data window), it will make a copy of the en
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NoFocusCellTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header location="global">ui/CustomPrimaryWidgets.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

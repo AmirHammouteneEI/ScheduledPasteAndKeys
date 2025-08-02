@@ -6,7 +6,7 @@
 #include <QApplication>
 
 SentencesTableWidget::SentencesTableWidget(QWidget *parent)
-    : QTableWidget{parent}
+    : NoFocusCellTableWidget{parent}
 {
     m_sentenceEditDialog = new SentenceSelectedEditDialog(this);
     connect(m_sentenceEditDialog, &QDialog::accepted, this, &SentencesTableWidget::editFromDialogReceived);

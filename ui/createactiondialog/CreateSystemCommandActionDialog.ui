@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>686</width>
-    <height>387</height>
+    <height>395</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -208,7 +208,7 @@
     </spacer>
    </item>
    <item>
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="NoFocusCellTableWidget" name="tableWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -356,6 +356,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NoFocusCellTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header location="global">ui/CustomPrimaryWidgets.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

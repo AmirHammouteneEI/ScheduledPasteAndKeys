@@ -14,14 +14,24 @@
 #include <QMessageBox>
 #include <QDir>
 
+MainWindow* MainWindow::s_singleton= nullptr;
 bool G_Parameters::AutoScrollTask = true;
+
+MainWindow *MainWindow::getInstance(QWidget *parent)
+{
+    if(s_singleton == nullptr)
+    {
+        s_singleton = new MainWindow(parent);
+    }
+    return s_singleton;
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("Scheduled PC Tasks v1.4");
+    setWindowTitle("Scheduled PC Tasks v1.4.1");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
 
@@ -39,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     geometrySet();
 
     m_createLoadTaskDialog = new CreateLoadTaskDialog(this);
+    connect(ui->pushButton, &QPushButton::released, m_createLoadTaskDialog, &CreateLoadTaskDialog::showDialog);
 
     ui->tabWidget->tabBar()->tabButton(0, QTabBar::RightSide)->resize(0,0);
 
@@ -50,28 +61,31 @@ MainWindow::MainWindow(QWidget *parent)
 
     setTheme();
 
-    m_tasktabsManager = new TaskTabsManager(this);
-
-    connect(ui->tabWidget, &QTabWidget::tabCloseRequested, m_tasktabsManager, &TaskTabsManager::onTabCloseRequest);
-    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestOpenNewTab, m_tasktabsManager, &TaskTabsManager::onOpenNewTabRequest);
-    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager, &TaskTabsManager::onRefreshTabsRequest);
-    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager, &TaskTabsManager::onTaskfilePathChanged);
-    connect(ui->pushButton, &QPushButton::released, m_createLoadTaskDialog, &CreateLoadTaskDialog::showDialog);
-
     // Global shortcut to stop all running tasks
     m_stopAllTasksShortcut = new QShortcut(QKeySequence("Ctrl+Alt+S"), this);
-    connect(m_stopAllTasksShortcut, &QShortcut::activated, m_tasktabsManager, &TaskTabsManager::stopAllRunningTasksReceived);
+
 
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 1.4 (July 2025)\n\n"
+                    "version 1.4.1 (August 2025)\n\n"
                     "Free & Open source (see readme.txt for more information)"));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::buildTaskTabsManager()
+{
+    m_tasktabsManager = new TaskTabsManager();
+    connect(ui->tabWidget, &QTabWidget::tabCloseRequested, m_tasktabsManager, &TaskTabsManager::onTabCloseRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestOpenNewTab, m_tasktabsManager, &TaskTabsManager::onOpenNewTabRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager, &TaskTabsManager::onRefreshTabsRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager, &TaskTabsManager::onTaskfilePathChanged);
+
+    connect(m_stopAllTasksShortcut, &QShortcut::activated, m_tasktabsManager, &TaskTabsManager::forceStopAllRunningTasksReceived);
 }
 
 QTabWidget *MainWindow::getTabWidget()
