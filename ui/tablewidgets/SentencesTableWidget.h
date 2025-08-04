@@ -2,7 +2,7 @@
 #define SENTENCESTABLEWIDGET_H
 
 #include "ui/CustomPrimaryWidgets.h"
-#include "ui/SentenceSelectedEditDialog.h"
+#include "ui/editselectedactiondialogs/SentenceSelectedEditDialog.h"
 
 class SentencesTableWidget : public NoFocusCellTableWidget
 {

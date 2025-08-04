@@ -2,7 +2,7 @@
 #define KEYSSEQUENCEWIDGET_H
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
-#include "ui/createactiondialog/CreateKeysSequenceActionDialog.h"
+#include "ui/createactiondialogs/CreateKeysSequenceActionDialog.h"
 #include "ui/CustomPrimaryWidgets.h"
 #include <QDateTime>
 

@@ -3,8 +3,8 @@
 
 #include "actions/ActionParameters.h"
 #include <QDialog>
-#include "ui/getCursorCoordinatesWidget.h"
-#include "KeysSelectorDialog.h"
+#include "ui/getdialogs/getCursorCoordinatesWidget.h"
+#include "ui/various_dialogs/KeysSelectorDialog.h"
 
 namespace Ui {
 class CursorMovementsSelectedEditDialog;

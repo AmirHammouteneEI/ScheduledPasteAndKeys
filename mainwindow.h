@@ -5,10 +5,10 @@
 #include <QSystemTrayIcon>
 #include <QShortcut>
 
-#include "ui/CreateLoadTaskDialog.h"
+#include "ui/various_dialogs/CreateLoadTaskDialog.h"
 #include "TaskTabsManager.h"
-#include "ui/DataEditDialog.h"
-#include "ui/StartupTasksDialog.h"
+#include "ui/various_dialogs/DataEditDialog.h"
+#include "ui/various_dialogs/StartupTasksDialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

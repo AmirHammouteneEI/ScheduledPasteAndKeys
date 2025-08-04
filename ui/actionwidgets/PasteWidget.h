@@ -2,7 +2,7 @@
 #define PASTEWIDGET_H
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
-#include "ui/createactiondialog/CreatePasteActionDialog.h"
+#include "ui/createactiondialogs/CreatePasteActionDialog.h"
 #include "ui/CustomPrimaryWidgets.h"
 #include <QDateTime>
 

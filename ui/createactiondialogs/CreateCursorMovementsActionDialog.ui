@@ -227,7 +227,7 @@
   <customwidget>
    <class>CursorMovementsTableWidget</class>
    <extends>QTableWidget</extends>
-   <header location="global">ui/CursorMovementsTableWidget.h</header>
+   <header location="global">ui/tablewidgets/CursorMovementsTableWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -3,11 +3,11 @@
 
 #include <QDialog>
 #include <QPushButton>
-#include "ui/getProgramPathDialog.h"
-#include "ui/getFilePathDialog.h"
-#include "ui/getFolderPathDialog.h"
-#include "ui/getImagePathDialog.h"
-#include "ui/getAutoRenameOptionDialog.h"
+#include "ui/getdialogs/getProgramPathDialog.h"
+#include "ui/getdialogs/getFilePathDialog.h"
+#include "ui/getdialogs/getFolderPathDialog.h"
+#include "ui/getdialogs/getImagePathDialog.h"
+#include "ui/getdialogs/getAutoRenameOptionDialog.h"
 
 namespace Ui {
 class CreateSystemCommandActionDialog;

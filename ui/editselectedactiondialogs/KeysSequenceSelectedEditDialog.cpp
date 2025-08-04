@@ -1,6 +1,6 @@
 #include "KeysSequenceSelectedEditDialog.h"
 #include "ui_KeysSequenceSelectedEditDialog.h"
-#include "KeysSelectorDialog.h"
+#include "ui/various_dialogs//KeysSelectorDialog.h"
 #include "ui/CustomPrimaryWidgets.h"
 #include <QPushButton>
 #include <QMessageBox>

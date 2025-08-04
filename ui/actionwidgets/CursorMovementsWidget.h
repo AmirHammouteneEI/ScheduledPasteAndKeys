@@ -2,7 +2,7 @@
 #define CURSORMOVEMENTSWIDGET_H
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
-#include "ui/createactiondialog/CreateCursorMovementsActionDialog.h"
+#include "ui/createactiondialogs/CreateCursorMovementsActionDialog.h"
 #include "ui/CustomPrimaryWidgets.h"
 #include <QDateTime>
 

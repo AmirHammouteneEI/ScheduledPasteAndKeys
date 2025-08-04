@@ -2,7 +2,7 @@
 #define STARTUPTASKSTABLEWIDGET_H
 
 #include "ui/CustomPrimaryWidgets.h"
-#include "ui/StartupTaskEditDialog.h"
+#include "ui/various_dialogs/StartupTaskEditDialog.h"
 
 class StartupTasksTableWidget : public NoFocusCellTableWidget
 {

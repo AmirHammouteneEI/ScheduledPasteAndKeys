@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CreatePasteActionDialog</class>
- <widget class="QDialog" name="CreatePasteActionDialog">
+ <class>CreateKeysSequenceActionDialog</class>
+ <widget class="QDialog" name="CreateKeysSequenceActionDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>717</width>
-    <height>426</height>
+    <width>712</width>
+    <height>429</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Create/Edit a Paste Text Action</string>
+   <string>Create/Edit a Keys Sequence Action</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -34,91 +34,6 @@
      <property name="spacing">
       <number>2</number>
      </property>
-     <item row="5" column="2">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Policy::Minimum</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>10</width>
-         <height>10</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="0">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Policy::Minimum</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>10</width>
-         <height>10</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Select the sentence you would like to apply with this action :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Policy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Note : Paste actions are followed by a minimal wait of 0.2 second</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Policy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
      <item row="1" column="0">
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -135,10 +50,33 @@
        </property>
       </spacer>
      </item>
-     <item row="2" column="2">
+     <item row="1" column="1">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Select the sequence of keys you would like to apply with this action :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>10</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="0">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
        <property name="sizeType">
         <enum>QSizePolicy::Policy::Minimum</enum>
@@ -173,7 +111,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="addSentenceButton">
+        <widget class="QPushButton" name="addKeysSequenceButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
@@ -206,7 +144,7 @@
       </layout>
      </item>
      <item row="2" column="1">
-      <widget class="SentencesTableWidget" name="tableWidget">
+      <widget class="KeysSequencesTableWidget" name="tableWidget">
        <property name="focusPolicy">
         <enum>Qt::FocusPolicy::StrongFocus</enum>
        </property>
@@ -250,10 +188,72 @@
        </column>
        <column>
         <property name="text">
-         <string>Sentence</string>
+         <string>Keys sequence</string>
         </property>
        </column>
       </widget>
+     </item>
+     <item row="5" column="1">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>10</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="4" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Policy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Note : Keys sequence actions are followed by a minimal wait of 0.1 second</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Policy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
@@ -271,9 +271,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>SentencesTableWidget</class>
+   <class>KeysSequencesTableWidget</class>
    <extends>QTableWidget</extends>
-   <header location="global">ui/SentencesTableWidget.h</header>
+   <header location="global">ui/tablewidgets/KeysSequencesTableWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -281,7 +281,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>CreatePasteActionDialog</receiver>
+   <receiver>CreateKeysSequenceActionDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -297,7 +297,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>CreatePasteActionDialog</receiver>
+   <receiver>CreateKeysSequenceActionDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

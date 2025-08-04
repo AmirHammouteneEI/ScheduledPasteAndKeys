@@ -2,13 +2,13 @@
 #define TASKTAB_H
 
 #include "Task.h"
-#include "ui/getDelayDialog.h"
+#include "ui/getdialogs/getDelayDialog.h"
 #include "ActionWidgetsManager.h"
-#include "ui/createactiondialog/CreatePasteActionDialog.h"
-#include "ui/createactiondialog/CreateWaitActionDialog.h"
-#include "ui/createactiondialog/CreateKeysSequenceActionDialog.h"
-#include "ui/createactiondialog/CreateSystemCommandActionDialog.h"
-#include "ui/createactiondialog/CreateCursorMovementsActionDialog.h"
+#include "ui/createactiondialogs/CreatePasteActionDialog.h"
+#include "ui/createactiondialogs/CreateWaitActionDialog.h"
+#include "ui/createactiondialogs/CreateKeysSequenceActionDialog.h"
+#include "ui/createactiondialogs/CreateSystemCommandActionDialog.h"
+#include "ui/createactiondialogs/CreateCursorMovementsActionDialog.h"
 #include "ui/CustomPrimaryWidgets.h"
 
 #include <QFrame>

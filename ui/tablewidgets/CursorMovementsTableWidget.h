@@ -1,7 +1,7 @@
 #ifndef CURSORMOVEMENTSTABLEWIDGET_H
 #define CURSORMOVEMENTSTABLEWIDGET_H
 
-#include "ui/CursorMovementsSelectedEditDialog.h"
+#include "ui/editselectedactiondialogs/CursorMovementsSelectedEditDialog.h"
 #include "ui/CustomPrimaryWidgets.h"
 
 class CursorMovementsTableWidget : public NoFocusCellTableWidget

@@ -258,7 +258,7 @@
   <customwidget>
    <class>StartupTasksTableWidget</class>
    <extends>QTableWidget</extends>
-   <header location="global">ui/startuptaskstablewidget.h</header>
+   <header location="global">ui/tablewidgets/StartupTasksTableWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

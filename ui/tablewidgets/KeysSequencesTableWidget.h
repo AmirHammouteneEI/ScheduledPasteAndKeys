@@ -2,7 +2,7 @@
 #define KEYSSEQUENCESTABLEWIDGET_H
 
 #include "ui/CustomPrimaryWidgets.h"
-#include "ui/KeysSequenceSelectedEditDialog.h"
+#include "ui/editselectedactiondialogs/KeysSequenceSelectedEditDialog.h"
 
 class KeysSequencesTableWidget : public NoFocusCellTableWidget
 {

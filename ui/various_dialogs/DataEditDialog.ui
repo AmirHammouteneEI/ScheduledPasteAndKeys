@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>605</width>
+    <width>802</width>
     <height>565</height>
    </rect>
   </property>
@@ -153,10 +153,10 @@
             <number>2</number>
            </property>
            <attribute name="horizontalHeaderMinimumSectionSize">
-            <number>60</number>
+            <number>64</number>
            </attribute>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>150</number>
+            <number>250</number>
            </attribute>
            <attribute name="horizontalHeaderStretchLastSection">
             <bool>true</bool>
@@ -407,10 +407,10 @@
             <number>2</number>
            </property>
            <attribute name="horizontalHeaderMinimumSectionSize">
-            <number>60</number>
+            <number>64</number>
            </attribute>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>150</number>
+            <number>250</number>
            </attribute>
            <attribute name="horizontalHeaderStretchLastSection">
             <bool>true</bool>
@@ -661,10 +661,10 @@
             <number>2</number>
            </property>
            <attribute name="horizontalHeaderMinimumSectionSize">
-            <number>60</number>
+            <number>64</number>
            </attribute>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>150</number>
+            <number>250</number>
            </attribute>
            <attribute name="horizontalHeaderStretchLastSection">
             <bool>true</bool>
@@ -815,19 +815,19 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KeysSequencesTableWidget</class>
-   <extends>QTableWidget</extends>
-   <header location="global">ui/KeysSequencesTableWidget.h</header>
-  </customwidget>
-  <customwidget>
    <class>CursorMovementsTableWidget</class>
    <extends>QTableWidget</extends>
-   <header location="global">ui/CursorMovementsTableWidget.h</header>
+   <header location="global">ui/tablewidgets/CursorMovementsTableWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KeysSequencesTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header location="global">ui/tablewidgets/KeysSequencesTableWidget.h</header>
   </customwidget>
   <customwidget>
    <class>SentencesTableWidget</class>
    <extends>QTableWidget</extends>
-   <header location="global">ui/SentencesTableWidget.h</header>
+   <header location="global">ui/tablewidgets/SentencesTableWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

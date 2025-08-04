@@ -22,18 +22,18 @@ SOURCES += \
     actions/WaitAction.cpp \
     main.cpp \
     mainwindow.cpp \
-    ui/CreateLoadTaskDialog.cpp \
-    ui/CursorMovementsSelectedEditDialog.cpp \
-    ui/CursorMovementsTableWidget.cpp \
-    ui/DataEditDialog.cpp \
-    ui/KeysSelectorDialog.cpp \
-    ui/KeysSequenceSelectedEditDialog.cpp \
-    ui/KeysSequencesTableWidget.cpp \
-    ui/SentenceSelectedEditDialog.cpp \
-    ui/SentencesTableWidget.cpp \
-    ui/StartupTaskEditDialog.cpp \
-    ui/StartupTasksDialog.cpp \
-    ui/StartupTasksTableWidget.cpp \
+    ui/various_dialogs/CreateLoadTaskDialog.cpp \
+    ui/editselectedactiondialogs/CursorMovementsSelectedEditDialog.cpp \
+    ui/tablewidgets/CursorMovementsTableWidget.cpp \
+    ui/various_dialogs/DataEditDialog.cpp \
+    ui/various_dialogs/KeysSelectorDialog.cpp \
+    ui/editselectedactiondialogs/KeysSequenceSelectedEditDialog.cpp \
+    ui/tablewidgets/KeysSequencesTableWidget.cpp \
+    ui/editselectedactiondialogs/SentenceSelectedEditDialog.cpp \
+    ui/tablewidgets/SentencesTableWidget.cpp \
+    ui/various_dialogs/StartupTaskEditDialog.cpp \
+    ui/various_dialogs/StartupTasksDialog.cpp \
+    ui/tablewidgets/StartupTasksTableWidget.cpp \
     ui/TaskTab.cpp \
     ui/actionwidgets/AbstractActionWidget.cpp \
     ui/actionwidgets/CursorMovementsWidget.cpp \
@@ -41,18 +41,18 @@ SOURCES += \
     ui/actionwidgets/PasteWidget.cpp \
     ui/actionwidgets/SystemCommandWidget.cpp \
     ui/actionwidgets/WaitWidget.cpp \
-    ui/createactiondialog/CreateCursorMovementsActionDialog.cpp \
-    ui/createactiondialog/CreateKeysSequenceActionDialog.cpp \
-    ui/createactiondialog/CreatePasteActionDialog.cpp \
-    ui/createactiondialog/CreateSystemCommandActionDialog.cpp \
-    ui/createactiondialog/CreateWaitActionDialog.cpp \
-    ui/getAutoRenameOptionDialog.cpp \
-    ui/getCursorCoordinatesWidget.cpp \
-    ui/getDelayDialog.cpp \
-    ui/getFilePathDialog.cpp \
-    ui/getFolderPathDialog.cpp \
-    ui/getImagePathDialog.cpp \
-    ui/getProgramPathDialog.cpp
+    ui/createactiondialogs/CreateCursorMovementsActionDialog.cpp \
+    ui/createactiondialogs/CreateKeysSequenceActionDialog.cpp \
+    ui/createactiondialogs/CreatePasteActionDialog.cpp \
+    ui/createactiondialogs/CreateSystemCommandActionDialog.cpp \
+    ui/createactiondialogs/CreateWaitActionDialog.cpp \
+    ui/getdialogs/getAutoRenameOptionDialog.cpp \
+    ui/getdialogs/getCursorCoordinatesWidget.cpp \
+    ui/getdialogs/getDelayDialog.cpp \
+    ui/getdialogs/getFilePathDialog.cpp \
+    ui/getdialogs/getFolderPathDialog.cpp \
+    ui/getdialogs/getImagePathDialog.cpp \
+    ui/getdialogs/getProgramPathDialog.cpp
 
 HEADERS += \
     ActionWidgetsManager.h \
@@ -69,19 +69,19 @@ HEADERS += \
     actions/WaitAction.h \
     globals.h \
     mainwindow.h \
-    ui/CreateLoadTaskDialog.h \
-    ui/CursorMovementsSelectedEditDialog.h \
-    ui/CursorMovementsTableWidget.h \
+    ui/various_dialogs/CreateLoadTaskDialog.h \
+    ui/editselectedactiondialogs/CursorMovementsSelectedEditDialog.h \
+    ui/tablewidgets/CursorMovementsTableWidget.h \
     ui/CustomPrimaryWidgets.h \
-    ui/DataEditDialog.h \
-    ui/KeysSelectorDialog.h \
-    ui/KeysSequenceSelectedEditDialog.h \
-    ui/KeysSequencesTableWidget.h \
-    ui/SentenceSelectedEditDialog.h \
-    ui/SentencesTableWidget.h \
-    ui/StartupTaskEditDialog.h \
-    ui/StartupTasksDialog.h \
-    ui/StartupTasksTableWidget.h \
+    ui/various_dialogs/DataEditDialog.h \
+    ui/various_dialogs/KeysSelectorDialog.h \
+    ui/editselectedactiondialogs/KeysSequenceSelectedEditDialog.h \
+    ui/tablewidgets/KeysSequencesTableWidget.h \
+    ui/editselectedactiondialogs/SentenceSelectedEditDialog.h \
+    ui/tablewidgets/SentencesTableWidget.h \
+    ui/various_dialogs/StartupTaskEditDialog.h \
+    ui/various_dialogs/StartupTasksDialog.h \
+    ui/tablewidgets/StartupTasksTableWidget.h \
     ui/TaskTab.h \
     ui/actionwidgets/AbstractActionWidget.h \
     ui/actionwidgets/CursorMovementsWidget.h \
@@ -89,40 +89,40 @@ HEADERS += \
     ui/actionwidgets/PasteWidget.h \
     ui/actionwidgets/SystemCommandWidget.h \
     ui/actionwidgets/WaitWidget.h \
-    ui/createactiondialog/CreateCursorMovementsActionDialog.h \
-    ui/createactiondialog/CreateKeysSequenceActionDialog.h \
-    ui/createactiondialog/CreatePasteActionDialog.h \
-    ui/createactiondialog/CreateSystemCommandActionDialog.h \
-    ui/createactiondialog/CreateWaitActionDialog.h \
-    ui/getAutoRenameOptionDialog.h \
-    ui/getCursorCoordinatesWidget.h \
-    ui/getDelayDialog.h \
-    ui/getFilePathDialog.h \
-    ui/getFolderPathDialog.h \
-    ui/getImagePathDialog.h \
-    ui/getProgramPathDialog.h
+    ui/createactiondialogs/CreateCursorMovementsActionDialog.h \
+    ui/createactiondialogs/CreateKeysSequenceActionDialog.h \
+    ui/createactiondialogs/CreatePasteActionDialog.h \
+    ui/createactiondialogs/CreateSystemCommandActionDialog.h \
+    ui/createactiondialogs/CreateWaitActionDialog.h \
+    ui/getdialogs/getAutoRenameOptionDialog.h \
+    ui/getdialogs/getCursorCoordinatesWidget.h \
+    ui/getdialogs/getDelayDialog.h \
+    ui/getdialogs/getFilePathDialog.h \
+    ui/getdialogs/getFolderPathDialog.h \
+    ui/getdialogs/getImagePathDialog.h \
+    ui/getdialogs/getProgramPathDialog.h
 
 FORMS += \
     mainwindow.ui \
-    ui/CreateLoadTaskDialog.ui \
-    ui/CursorMovementsSelectedEditDialog.ui \
-    ui/DataEditDialog.ui \
-    ui/KeysSelectorDialog.ui \
-    ui/KeysSequenceSelectedEditDialog.ui \
-    ui/SentenceSelectedEditDialog.ui \
-    ui/StartupTaskEditDialog.ui \
-    ui/StartupTasksDialog.ui \
-    ui/createactiondialog/CreateCursorMovementsActionDialog.ui \
-    ui/createactiondialog/CreateKeysSequenceActionDialog.ui \
-    ui/createactiondialog/CreatePasteActionDialog.ui \
-    ui/createactiondialog/CreateSystemCommandActionDialog.ui \
-    ui/createactiondialog/CreateWaitActionDialog.ui \
-    ui/getAutoRenameOptionDialog.ui \
-    ui/getDelayDialog.ui \
-    ui/getFilePathDialog.ui \
-    ui/getFolderPathDialog.ui \
-    ui/getImagePathDialog.ui \
-    ui/getProgramPathDialog.ui
+    ui/various_dialogs/CreateLoadTaskDialog.ui \
+    ui/editselectedactiondialogs/CursorMovementsSelectedEditDialog.ui \
+    ui/various_dialogs/DataEditDialog.ui \
+    ui/various_dialogs/KeysSelectorDialog.ui \
+    ui/editselectedactiondialogs/KeysSequenceSelectedEditDialog.ui \
+    ui/editselectedactiondialogs/SentenceSelectedEditDialog.ui \
+    ui/various_dialogs/StartupTaskEditDialog.ui \
+    ui/various_dialogs/StartupTasksDialog.ui \
+    ui/createactiondialogs/CreateCursorMovementsActionDialog.ui \
+    ui/createactiondialogs/CreateKeysSequenceActionDialog.ui \
+    ui/createactiondialogs/CreatePasteActionDialog.ui \
+    ui/createactiondialogs/CreateSystemCommandActionDialog.ui \
+    ui/createactiondialogs/CreateWaitActionDialog.ui \
+    ui/getdialogs/getAutoRenameOptionDialog.ui \
+    ui/getdialogs/getDelayDialog.ui \
+    ui/getdialogs/getFilePathDialog.ui \
+    ui/getdialogs/getFolderPathDialog.ui \
+    ui/getdialogs/getImagePathDialog.ui \
+    ui/getdialogs/getProgramPathDialog.ui
 
 LIBS += -luser32 -lole32
 

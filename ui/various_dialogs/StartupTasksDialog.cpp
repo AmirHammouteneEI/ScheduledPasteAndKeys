@@ -1,6 +1,6 @@
 #include "StartupTasksDialog.h"
 #include "ui_StartupTasksDialog.h"
-#include "ui/StartupTasksTableWidget.h"
+#include "ui/tablewidgets/StartupTasksTableWidget.h"
 
 StartupTasksDialog::StartupTasksDialog(QWidget *parent)
     : QDialog(parent)

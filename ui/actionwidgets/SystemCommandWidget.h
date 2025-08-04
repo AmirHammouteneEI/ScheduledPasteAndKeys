@@ -3,7 +3,7 @@
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
 #include "actions/SystemCommandsAction.h"
-#include "ui/createactiondialog/CreateSystemCommandActionDialog.h"
+#include "ui/createactiondialogs/CreateSystemCommandActionDialog.h"
 
 class SystemCommandWidget : public AbstractActionWidget
 {

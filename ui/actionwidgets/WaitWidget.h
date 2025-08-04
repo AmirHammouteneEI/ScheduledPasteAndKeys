@@ -2,7 +2,7 @@
 #define WAITWIDGET_H
 
 #include "ui/actionwidgets/AbstractActionWidget.h"
-#include "ui/createactiondialog/CreateWaitActionDialog.h"
+#include "ui/createactiondialogs/CreateWaitActionDialog.h"
 
 #include <QLabel>
 #include <QDateTime>
