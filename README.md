@@ -42,7 +42,7 @@ The goal in future versions is to include those features :
    - Play sound actions
    - Add more Windows system specific command
    - Create desktop shortcut to launch the tool and auto schedule a task to run
-   - Configure global shortcuts to schedule a task to run while the user is on another application or video game
+   - Configure global hot keys to schedule a task to run while the user is on another application or video game
 
 Working on a Linux system version.
 
