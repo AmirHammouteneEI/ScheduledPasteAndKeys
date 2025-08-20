@@ -13,8 +13,8 @@ class CursorMovementsSelectedEditDialog;
 class CursorMovementsSelectedEditDialog : public QDialog
 {
     Q_OBJECT
-    getCursorCoordinatesWidget *m_getCursorCoordinatesWidget;
-    KeysSelectorDialog *m_keySelectorDialog;
+    getCursorCoordinatesWidget *m_getCursorCoordinatesWidget = nullptr;
+    KeysSelectorDialog *m_keySelectorDialog = nullptr;
 public:
     explicit CursorMovementsSelectedEditDialog(QWidget *parent = nullptr);
     ~CursorMovementsSelectedEditDialog();

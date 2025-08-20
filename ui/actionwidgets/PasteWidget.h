@@ -9,8 +9,8 @@
 class PasteWidget : public AbstractActionWidget
 {
     Q_OBJECT
-    CreatePasteActionDialog *m_createPasteActionDialog;
-    NoWheelFocusSpinBox *m_loopSpin;
+    CreatePasteActionDialog *m_createPasteActionDialog = nullptr;
+    NoWheelFocusSpinBox *m_loopSpin = nullptr;
     void changedRunningState() override;
 public:
     explicit PasteWidget(QWidget *parent = nullptr);

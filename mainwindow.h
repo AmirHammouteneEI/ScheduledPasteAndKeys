@@ -22,14 +22,14 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    static MainWindow* getInstance(QWidget *parent = nullptr);
+    static std::shared_ptr<MainWindow> getInstance(QWidget *parent = nullptr);
     MainWindow(MainWindow &other) = delete;
     void operator=(const MainWindow &) = delete;
     ~MainWindow();
     void buildTaskTabsManager();
     QTabWidget * getTabWidget(); // ui container of TaskTabs
     void autoRun(const QString & filename, int delay, int loopTimes = 1); // automatically run a task in silent mode (no window appears)
-    QShortcut *m_stopAllTasksShortcut;
+    QShortcut *m_stopAllTasksShortcut = nullptr;
     void forceQuit();
 public slots:
     void showWindow(QSystemTrayIcon::ActivationReason reason = QSystemTrayIcon::Trigger); // show mainwindow or systemtray icon menu (if right click on icon)
@@ -42,7 +42,8 @@ private slots:
     void taskTabContextMenuRequest(QPoint point);
 protected :
     MainWindow(QWidget *parent = nullptr);
-    static MainWindow* s_singleton;
+    struct SharedPtrMainWindow;
+    static std::shared_ptr<MainWindow> s_singleton;
     QSystemTrayIcon* m_sticon;
     void setTheme(); // simulate trigger on the appropriate theme button
     void buildToolBar();
@@ -53,18 +54,18 @@ protected :
     void geometrySet();
     void loadSettings();
     void saveSettings();
-    QAction *m_stayOnTopAction;
-    QAction * m_lightThemeAction;
-    QAction * m_penombraThemeAction;
-    QAction * m_darkThemeAction;
-    QAction * m_scrollAction;
-    QString m_currentThemeName;
-    CreateLoadTaskDialog *m_createLoadTaskDialog;
-    DataEditDialog *m_dataEditDialog;
-    StartupTasksDialog *m_startupTasksDialog;
-    TaskTabsManager* m_tasktabsManager;
-    QMenu *m_stmenu;
-    QToolBar *m_toolBar;
+    QAction *m_stayOnTopAction = nullptr;
+    QAction * m_lightThemeAction = nullptr;
+    QAction * m_penombraThemeAction = nullptr;
+    QAction * m_darkThemeAction = nullptr;
+    QAction * m_scrollAction = nullptr;
+    QString m_currentThemeName = nullptr;
+    CreateLoadTaskDialog *m_createLoadTaskDialog = nullptr;
+    DataEditDialog *m_dataEditDialog = nullptr;
+    StartupTasksDialog *m_startupTasksDialog = nullptr;
+    std::shared_ptr<TaskTabsManager> m_tasktabsManager = nullptr;
+    QMenu *m_stmenu = nullptr;
+    QToolBar *m_toolBar = nullptr;
     bool m_stMessageShown = false;
 private:
     Ui::MainWindow *ui;

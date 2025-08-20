@@ -9,8 +9,8 @@
 class CursorMovementsWidget : public AbstractActionWidget
 {
     Q_OBJECT
-    CreateCursorMovementsActionDialog *m_createCursorMovsActionDialog;
-    NoWheelFocusSpinBox *m_loopSpin;
+    CreateCursorMovementsActionDialog *m_createCursorMovsActionDialog = nullptr;
+    NoWheelFocusSpinBox *m_loopSpin = nullptr;
     void changedRunningState() override;
 public:
     explicit CursorMovementsWidget(QWidget *parent = nullptr);

@@ -44,7 +44,7 @@ void KeysSequenceWidget::buildWidget()
     centralGridLayout->addWidget(loopFrame,1,0,Qt::AlignCenter);
     centralGridLayout->addWidget(m_infoLabel,2,0,Qt::AlignCenter);
 
-    auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action);
+    auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action.get());
 
     QString seqStr = tr("ERROR on access to action");
     QString id = tr("ERROR");
@@ -69,7 +69,7 @@ void KeysSequenceWidget::buildWidget()
 
 void KeysSequenceWidget::keysSeqIdentityReceived(QString id)
 {
-    auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action);
+    auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action.get());
     if(keysseqaction == nullptr)
     {
         m_mainButton->setToolTip("ERROR on access to action");
@@ -91,7 +91,7 @@ void KeysSequenceWidget::keysSeqIdentityReceived(QString id)
 
 void KeysSequenceWidget::timesToRunChanged(int times)
 {
-    auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action);
+    auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action.get());
     if(keysseqaction == nullptr)
         return;
     keysseqaction->m_timesToRun = times;
@@ -109,7 +109,7 @@ void KeysSequenceWidget::refreshLoopsRemainingText(const QDateTime &departureDat
     if(m_runningState == RunningState::NotExecuted || m_runningState == RunningState::Done)
         return;
 
-    auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action);
+    auto keysseqaction =  dynamic_cast<KeysSequenceAction*>(m_action.get());
     if(keysseqaction == nullptr)
         return;
 

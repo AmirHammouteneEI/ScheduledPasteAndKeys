@@ -44,7 +44,7 @@ void CursorMovementsWidget::buildWidget()
     centralGridLayout->addWidget(loopFrame,1,0,Qt::AlignCenter);
     centralGridLayout->addWidget(m_infoLabel,2,0,Qt::AlignCenter);
 
-    auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action);
+    auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action.get());
 
     QString movsStr = tr("ERROR on access to action");
     QString id = tr("ERROR");
@@ -72,7 +72,7 @@ void CursorMovementsWidget::buildWidget()
 
 void CursorMovementsWidget::cursorMovsIdentityReceived(QString id)
 {
-    auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action);
+    auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action.get());
     if(cursormovsaction == nullptr)
     {
         m_mainButton->setToolTip("ERROR on access to action");
@@ -95,7 +95,7 @@ void CursorMovementsWidget::cursorMovsIdentityReceived(QString id)
 
 void CursorMovementsWidget::timesToRunChanged(int times)
 {
-    auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action);
+    auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action.get());
     if(cursormovsaction == nullptr)
         return;
     cursormovsaction->m_timesToRun = times;
@@ -114,7 +114,7 @@ void CursorMovementsWidget::refreshLoopsRemainingText(const QDateTime &departure
     if(m_runningState == RunningState::NotExecuted || m_runningState == RunningState::Done)
         return;
 
-    auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action);
+    auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action.get());
     if(cursormovsaction == nullptr)
         return;
 

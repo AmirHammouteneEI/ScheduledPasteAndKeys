@@ -18,22 +18,22 @@ class AbstractActionWidget : public QFrame
     Q_OBJECT
 protected:
     QFrame *m_centralWidget = nullptr;
-    AbstractAction *m_action = nullptr;
+    std::shared_ptr<AbstractAction> m_action = nullptr;
     unsigned int m_actionID = 0;
     RunningState m_runningState;
     virtual void changedRunningState() {}
-    QPushButton *m_mainButton;
-    QLabel *m_infoLabel;
-    QPushButton *m_removeButton;
-    QPushButton *m_moveToTopButton;
-    QPushButton *m_moveToBottomButton;
-    QPushButton *m_moveUpButton;
-    QPushButton *m_moveDownButton;
+    QPushButton *m_mainButton = nullptr;
+    QLabel *m_infoLabel = nullptr;
+    QPushButton *m_removeButton = nullptr;
+    QPushButton *m_moveToTopButton = nullptr;
+    QPushButton *m_moveToBottomButton = nullptr;
+    QPushButton *m_moveUpButton = nullptr;
+    QPushButton *m_moveDownButton = nullptr;
 public:
     explicit AbstractActionWidget(QWidget *parent = nullptr);
     virtual ~AbstractActionWidget();
     void setRunningState(RunningState state);
-    void setAction(AbstractAction *action);
+    void setAction(const std::shared_ptr<AbstractAction> &action);
     virtual void buildWidget() = 0;
     unsigned int getActionID() const {return m_actionID;}
 

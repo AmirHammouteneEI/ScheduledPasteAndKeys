@@ -8,12 +8,12 @@
 
 class Task
 {
-    QMap<unsigned int, AbstractAction*> m_actionsMap;
-    QList<AbstractAction*> m_actionsOrderedList;
+    QMap<unsigned int, std::shared_ptr<AbstractAction>> m_actionsMap;
+    QList<std::shared_ptr<AbstractAction>> m_actionsOrderedList;
 public:
     explicit Task();
     ~Task();
-    int appendAction(AbstractAction *act);
+    int appendAction(const std::shared_ptr<AbstractAction> &act);
 
     friend class TaskThread;
     friend class TaskTab;

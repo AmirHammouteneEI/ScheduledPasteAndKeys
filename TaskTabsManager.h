@@ -27,8 +27,8 @@ public slots:
     void onTaskfilePathChanged(QString oldpath, QString newpath);
     void forceStopAllRunningTasksReceived();
     void saveTaskReceived(int taskTabId, bool verbose = false);
-    QJsonObject actionToJson(AbstractAction *act);
-    AbstractAction* jsonToAction(const QJsonObject &jobj);
+    QJsonObject actionToJson(const std::shared_ptr<AbstractAction> &act);
+    std::shared_ptr<AbstractAction> jsonToAction(const QJsonObject &jobj);
     void saveAllTasks();
     bool isAnyTaskModified();
 protected:

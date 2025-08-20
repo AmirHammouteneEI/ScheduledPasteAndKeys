@@ -5,12 +5,12 @@ Task::Task()
 
 Task::~Task()
 {
-    qDeleteAll(m_actionsMap);
+    //qDeleteAll(m_actionsMap);
     m_actionsMap.clear();
     m_actionsOrderedList.clear();
 }
 
-int Task::appendAction(AbstractAction *act)
+int Task::appendAction(const std::shared_ptr<AbstractAction> &act)
 {
     if(act != nullptr)
     {

@@ -7,7 +7,7 @@
 class KeysSequencesTableWidget : public NoFocusCellTableWidget
 {
     Q_OBJECT
-    KeysSequenceSelectedEditDialog *m_keysSequenceEditDialog;
+    KeysSequenceSelectedEditDialog *m_keysSequenceEditDialog = nullptr;
 public:
     explicit KeysSequencesTableWidget(QWidget *parent = nullptr);
     ~KeysSequencesTableWidget() = default;

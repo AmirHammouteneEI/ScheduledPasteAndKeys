@@ -9,8 +9,8 @@
 class KeysSequenceWidget : public AbstractActionWidget
 {
     Q_OBJECT
-    CreateKeysSequenceActionDialog *m_createKeysSeqActionDialog;
-    NoWheelFocusSpinBox *m_loopSpin;
+    CreateKeysSequenceActionDialog *m_createKeysSeqActionDialog = nullptr;
+    NoWheelFocusSpinBox *m_loopSpin = nullptr;
     void changedRunningState() override;
 public:
     explicit KeysSequenceWidget(QWidget *parent = nullptr);

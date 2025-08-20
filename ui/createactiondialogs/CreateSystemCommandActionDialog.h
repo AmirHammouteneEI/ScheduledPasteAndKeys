@@ -18,14 +18,14 @@ class CreateSystemCommandActionDialog : public QDialog
     Q_OBJECT
 
     QString m_type;
-    QPushButton *m_option1Button;
-    QPushButton *m_option2Button;
-    getProgramPathDialog *m_programPathDialog;
-    getFilePathDialog *m_filePathDialog;
-    getFolderPathDialog *m_folderPathDialog;
-    getFilePathDialog *m_savedFilePathDialog;
-    getImagePathDialog *m_imagePathDialog;
-    getAutoRenameOptionDialog *m_autorenameDialog;
+    QPushButton *m_option1Button = nullptr;
+    QPushButton *m_option2Button = nullptr;
+    getProgramPathDialog *m_programPathDialog = nullptr;
+    getFilePathDialog *m_filePathDialog = nullptr;
+    getFolderPathDialog *m_folderPathDialog = nullptr;
+    getFilePathDialog *m_savedFilePathDialog = nullptr;
+    getImagePathDialog *m_imagePathDialog = nullptr;
+    getAutoRenameOptionDialog *m_autorenameDialog = nullptr;
     void activateButtons();
 public:
     explicit CreateSystemCommandActionDialog(QWidget *parent = nullptr);

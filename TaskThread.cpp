@@ -14,7 +14,7 @@ TaskThread::~TaskThread()
     wait();
 }
 
-void TaskThread::copyActionsList(Task *task)
+void TaskThread::copyActionsList(const std::shared_ptr<Task> &task)
 {
     qDeleteAll(m_actionsList);
     m_actionsList.clear();

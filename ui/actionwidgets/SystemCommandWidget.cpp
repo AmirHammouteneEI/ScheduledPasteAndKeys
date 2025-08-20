@@ -11,7 +11,7 @@ void SystemCommandWidget::buildWidget()
     if(m_centralWidget == nullptr)
         return;
 
-    auto sysCmdaction =  dynamic_cast<SystemCommandAction*>(m_action);
+    auto sysCmdaction =  dynamic_cast<SystemCommandAction*>(m_action.get());
 
     QString sysCmdTypeStr = tr("ERROR");
     if(sysCmdaction != nullptr)
@@ -38,7 +38,7 @@ void SystemCommandWidget::buildWidget()
 
 void SystemCommandWidget::systemCommandReceived(QString sysCmdType, QString param1, QString param2)
 {
-    auto sysCmdaction =  dynamic_cast<SystemCommandAction*>(m_action);
+    auto sysCmdaction =  dynamic_cast<SystemCommandAction*>(m_action.get());
     if(sysCmdaction == nullptr)
     {
         m_mainButton->setToolTip("ERROR on access to action");

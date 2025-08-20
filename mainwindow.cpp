@@ -14,14 +14,15 @@
 #include <QMessageBox>
 #include <QDir>
 
-MainWindow* MainWindow::s_singleton= nullptr;
+std::shared_ptr<MainWindow> MainWindow::s_singleton= nullptr;
+struct MainWindow::SharedPtrMainWindow : public MainWindow {SharedPtrMainWindow(QWidget *parent = nullptr):MainWindow(parent){} };
 bool G_Parameters::AutoScrollTask = true;
 
-MainWindow *MainWindow::getInstance(QWidget *parent)
+std::shared_ptr<MainWindow> MainWindow::getInstance(QWidget *parent)
 {
     if(s_singleton == nullptr)
     {
-        s_singleton = new MainWindow(parent);
+        s_singleton = std::make_shared<SharedPtrMainWindow>(parent);
     }
     return s_singleton;
 }
@@ -79,13 +80,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::buildTaskTabsManager()
 {
-    m_tasktabsManager = new TaskTabsManager();
-    connect(ui->tabWidget, &QTabWidget::tabCloseRequested, m_tasktabsManager, &TaskTabsManager::onTabCloseRequest);
-    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestOpenNewTab, m_tasktabsManager, &TaskTabsManager::onOpenNewTabRequest);
-    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager, &TaskTabsManager::onRefreshTabsRequest);
-    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager, &TaskTabsManager::onTaskfilePathChanged);
+    m_tasktabsManager = std::make_shared<TaskTabsManager>();
+    connect(ui->tabWidget, &QTabWidget::tabCloseRequested, m_tasktabsManager.get(), &TaskTabsManager::onTabCloseRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestOpenNewTab, m_tasktabsManager.get(), &TaskTabsManager::onOpenNewTabRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager.get(), &TaskTabsManager::onRefreshTabsRequest);
+    connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager.get(), &TaskTabsManager::onTaskfilePathChanged);
 
-    connect(m_stopAllTasksShortcut, &QShortcut::activated, m_tasktabsManager, &TaskTabsManager::forceStopAllRunningTasksReceived);
+    connect(m_stopAllTasksShortcut, &QShortcut::activated, m_tasktabsManager.get(), &TaskTabsManager::forceStopAllRunningTasksReceived);
 }
 
 QTabWidget *MainWindow::getTabWidget()

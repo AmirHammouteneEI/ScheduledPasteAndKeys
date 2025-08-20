@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     a.installTranslator(&baseTranslator);
 
     // Main ui window
-    MainWindow *w = MainWindow::getInstance();
+    std::shared_ptr<MainWindow> w = MainWindow::getInstance();
     w->buildTaskTabsManager();
 
     // In case of program used with correct arguments, automatically run the task (usage : ScheduledPCTasks.exe "TaskFileName" <DelayInSeconds> <NumberOfLoops>)
@@ -60,7 +60,5 @@ int main(int argc, char *argv[])
     else
         w->showWindow();
 
-    int execCode = a.exec();
-    delete w;
-    return execCode;
+    return a.exec();
 }

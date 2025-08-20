@@ -43,7 +43,7 @@ void PasteWidget::buildWidget()
     centralGridLayout->addWidget(loopFrame,1,0,Qt::AlignCenter);
     centralGridLayout->addWidget(m_infoLabel,2,0,Qt::AlignCenter);
 
-    auto pasteaction =  dynamic_cast<PasteAction*>(m_action);
+    auto pasteaction =  dynamic_cast<PasteAction*>(m_action.get());
 
     QString content = tr("ERROR on access to action");
     QString id = tr("ERROR");
@@ -71,7 +71,7 @@ void PasteWidget::sentenceIdentityReceived(QString id)
     QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     QString content = settings.value(G_Files::SentencesDataCategory+id).toString();
 
-    auto pasteaction =  dynamic_cast<PasteAction*>(m_action);
+    auto pasteaction =  dynamic_cast<PasteAction*>(m_action.get());
     if(pasteaction == nullptr)
     {
         m_mainButton->setToolTip("ERROR on access to action");
@@ -89,7 +89,7 @@ void PasteWidget::sentenceIdentityReceived(QString id)
 
 void PasteWidget::timesToRunChanged(int times)
 {
-    auto pasteaction =  dynamic_cast<PasteAction*>(m_action);
+    auto pasteaction =  dynamic_cast<PasteAction*>(m_action.get());
     if(pasteaction == nullptr)
         return;
     pasteaction->m_timesToRun = times;
@@ -108,7 +108,7 @@ void PasteWidget::refreshLoopsRemainingText(const QDateTime &departureDate)
     if(m_runningState == RunningState::NotExecuted || m_runningState == RunningState::Done)
         return;
 
-    auto pasteaction =  dynamic_cast<PasteAction*>(m_action);
+    auto pasteaction =  dynamic_cast<PasteAction*>(m_action.get());
     if(pasteaction == nullptr)
         return;
 

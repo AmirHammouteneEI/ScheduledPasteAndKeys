@@ -7,7 +7,7 @@
 class StartupTasksTableWidget : public NoFocusCellTableWidget
 {
     Q_OBJECT
-    StartupTaskEditDialog *m_startupTaskEditDialog;
+    StartupTaskEditDialog *m_startupTaskEditDialog = nullptr;
     bool doesEntryExistsInRegistry(const QString & taskParam);
     void addEntryToRegistry(const QString & taskParam);
     void deleteEntryFromRegistry(const QString & taskParam);

@@ -16,7 +16,7 @@ void WaitWidget::buildWidget()
     if(m_centralWidget == nullptr)
         return;
 
-    auto waitaction =  dynamic_cast<WaitAction*>(m_action);
+    auto waitaction =  dynamic_cast<WaitAction*>(m_action.get());
 
     QString durationStr = tr("ERROR");
     if(waitaction != nullptr)
@@ -47,7 +47,7 @@ void WaitWidget::refreshTimeRemainingText(const QDateTime &departureDate)
         return;
     }
 
-    auto waitaction =  dynamic_cast<WaitAction*>(m_action);
+    auto waitaction =  dynamic_cast<WaitAction*>(m_action.get());
     if(waitaction == nullptr)
         return;
 
@@ -75,7 +75,7 @@ void WaitWidget::refreshTimeRemainingText(const QDateTime &departureDate)
 
 void WaitWidget::durationReceived(long double dur)
 {
-    auto waitaction =  dynamic_cast<WaitAction*>(m_action);
+    auto waitaction =  dynamic_cast<WaitAction*>(m_action.get());
     if(waitaction == nullptr)
     {
         m_mainButton->setToolTip("ERROR on access to action");

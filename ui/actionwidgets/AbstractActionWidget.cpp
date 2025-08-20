@@ -108,7 +108,7 @@ void AbstractActionWidget::setRunningState(RunningState state)
     changedRunningState();
 }
 
-void AbstractActionWidget::setAction(AbstractAction *action)
+void AbstractActionWidget::setAction(const std::shared_ptr<AbstractAction> &action)
 {
     m_action = action;
     if(action != nullptr)

@@ -9,7 +9,7 @@ class SystemCommandWidget : public AbstractActionWidget
 {
     Q_OBJECT
     void changedRunningState() override;
-    CreateSystemCommandActionDialog *m_editSysCmdDialog;
+    CreateSystemCommandActionDialog *m_editSysCmdDialog = nullptr;
 public:
     explicit SystemCommandWidget(QWidget *parent = nullptr);
     ~SystemCommandWidget() = default;

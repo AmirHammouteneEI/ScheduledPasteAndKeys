@@ -7,7 +7,7 @@
 class CursorMovementsTableWidget : public NoFocusCellTableWidget
 {
     Q_OBJECT
-    CursorMovementsSelectedEditDialog *m_cursorMovementsEditDialog;
+    CursorMovementsSelectedEditDialog *m_cursorMovementsEditDialog = nullptr;
 public:
     explicit CursorMovementsTableWidget(QWidget *parent = nullptr);
     ~CursorMovementsTableWidget() = default;

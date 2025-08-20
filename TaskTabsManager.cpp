@@ -17,12 +17,14 @@
 #include <QFileInfo>
 
 TaskTabsManager::TaskTabsManager()
-    : QObject{MainWindow::getInstance()}
+    : QObject{MainWindow::getInstance().get()}
 {
 }
 
 TaskTabsManager::~TaskTabsManager()
 {
+    m_taskTabsMap.clear();
+    m_taskFilePathsMap.clear();
 }
 
 int TaskTabsManager::onOpenNewTabRequest(const QString &path)
@@ -30,7 +32,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
     QFile fileToOpen(path);
     if(!fileToOpen.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QMessageBox::warning(MainWindow::getInstance(), tr("Cannot open file"), tr("Trying to open file located in :\n")+
+        QMessageBox::warning(MainWindow::getInstance().get(), tr("Cannot open file"), tr("Trying to open file located in :\n")+
           path+"\n"+G_Sentences::OperationInterference());
         return -1;
     }
@@ -41,7 +43,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
     if(jsonDoc.isNull())
     {
-        QMessageBox::warning(MainWindow::getInstance(), tr("File format error"),G_Sentences::FileParsingError());
+        QMessageBox::warning(MainWindow::getInstance().get(), tr("File format error"),G_Sentences::FileParsingError());
         return -1;
     }
 
@@ -50,7 +52,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
     if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
         != G_Files::DocumentIdentification_Value)
     {
-        QMessageBox::warning(MainWindow::getInstance(), tr("File format error"), G_Sentences::FileParsingError());
+        QMessageBox::warning(MainWindow::getInstance().get(), tr("File format error"), G_Sentences::FileParsingError());
         return -1;
     }
 
@@ -75,7 +77,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
 
 TaskTab* TaskTabsManager::createEmptyTaskAndOpenTab(const QString &name)
 {
-    TaskTab* newEmptyTask = new TaskTab(MainWindow::getInstance(), name);
+    TaskTab* newEmptyTask = new TaskTab(MainWindow::getInstance().get(), name);
     MainWindow::getInstance()->getTabWidget()->insertTab(0,newEmptyTask,name);
     MainWindow::getInstance()->getTabWidget()->tabBar()->setTabToolTip(0,name);
     MainWindow::getInstance()->getTabWidget()->setCurrentIndex(0);
@@ -122,7 +124,7 @@ void TaskTabsManager::onTabCloseRequest(int index)
     {
         if(task->m_scheduleState != ScheduleState::NotScheduled)
         {
-            if(QMessageBox::question(MainWindow::getInstance(),tr("Task is scheduled or is running"),
+            if(QMessageBox::question(MainWindow::getInstance().get(),tr("Task is scheduled or is running"),
               tr("This task is scheduled for execution or is currently running, by pressing \"Yes\" you are going to stop it.\n"\
                 "\nIf you want to close it, you will have to request again."),
               QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
@@ -133,7 +135,7 @@ void TaskTabsManager::onTabCloseRequest(int index)
 
         if(task->m_taskModifiedFromLastSave)
         {
-            QMessageBox::StandardButton response = QMessageBox::question(MainWindow::getInstance(),tr("Saving changes"),
+            QMessageBox::StandardButton response = QMessageBox::question(MainWindow::getInstance().get(),tr("Saving changes"),
               tr("This Task has been modified since the last save, would you like to save changes ?"),
               QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Yes));
 
@@ -247,14 +249,14 @@ void TaskTabsManager::createAndLoadTaskObject(int id)
     if(jsonDoc.isNull())
         return;
 
-    Task *task = new Task();
+    std::shared_ptr<Task> task = std::make_shared<Task>();
 
     QJsonObject jsonContent = jsonDoc.object();
 
     if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
         != G_Files::DocumentIdentification_Value)
     {
-        QMessageBox::warning(MainWindow::getInstance(), tr("File format error"),
+        QMessageBox::warning(MainWindow::getInstance().get(), tr("File format error"),
                              tr("The file is not in the good format, no action can't be loaded."));
     }
     else
@@ -280,7 +282,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(!fileToModify.open(QIODevice::ReadWrite | QIODevice::Text))
     {
         if(verbose)
-            QMessageBox::warning(MainWindow::getInstance(),tr("Cannot access file"), G_Sentences::OperationInterference());
+            QMessageBox::warning(MainWindow::getInstance().get(),tr("Cannot access file"), G_Sentences::OperationInterference());
         return;
     }
 
@@ -290,7 +292,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(jsonDoc.isNull())
     {
         if(verbose)
-            QMessageBox::warning(MainWindow::getInstance(),tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
+            QMessageBox::warning(MainWindow::getInstance().get(),tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
         return;
     }
 
@@ -300,7 +302,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
         != G_Files::DocumentIdentification_Value)
     {
         if(verbose)
-            QMessageBox::warning(MainWindow::getInstance(), tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
+            QMessageBox::warning(MainWindow::getInstance().get(), tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
         return;
     }
     fileToModify.resize(0);
@@ -310,7 +312,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(task == nullptr || task->m_task == nullptr)
     {
         if(verbose)
-            QMessageBox::warning(MainWindow::getInstance(), tr("Internal Error"),
+            QMessageBox::warning(MainWindow::getInstance().get(), tr("Internal Error"),
              tr("An internal error occured : err05\nTaskTab or Task associated is null in TaskTabsManager !"));
         return;
     }
@@ -330,7 +332,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     m_taskTabsMap.value(taskTabId)->setTaskModified(false);
 }
 
-QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
+QJsonObject TaskTabsManager::actionToJson(const std::shared_ptr<AbstractAction> &act)
 {
     QJsonObject jsonToReturn;
 
@@ -339,7 +341,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
         case ActionType::Paste:
         {
             jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionPasteType_Value));
-            auto pasteaction =  dynamic_cast<PasteAction*>(act);
+            auto pasteaction =  dynamic_cast<PasteAction*>(act.get());
             if(pasteaction != nullptr)
             {
                 auto params = pasteaction->generateParameters();
@@ -352,7 +354,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
         case ActionType::Wait:
         {
             jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionWaitType_Value));
-            auto waitaction =  dynamic_cast<WaitAction*>(act);
+            auto waitaction =  dynamic_cast<WaitAction*>(act.get());
             if(waitaction != nullptr)
             {
               auto params = waitaction->generateParameters();
@@ -363,7 +365,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
         case ActionType::KeysSequence:
         {
             jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionKeysSequenceType_Value));
-            auto keySeqaction =  dynamic_cast<KeysSequenceAction*>(act);
+            auto keySeqaction =  dynamic_cast<KeysSequenceAction*>(act.get());
             if(keySeqaction != nullptr)
             {
                 auto params = keySeqaction->generateParameters();
@@ -384,7 +386,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
         case ActionType::SystemCommand:
         {
             jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionSystemCommandeType_Value));
-            auto sysCmdaction =  dynamic_cast<SystemCommandAction*>(act);
+            auto sysCmdaction =  dynamic_cast<SystemCommandAction*>(act.get());
             if(sysCmdaction != nullptr)
             {
                 auto params = sysCmdaction->generateParameters();
@@ -397,7 +399,7 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
         case ActionType::CursorMovements:
         {
             jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionCursorMovementsType_Value));
-            auto cursorMovsaction =  dynamic_cast<CursorMovementsAction*>(act);
+            auto cursorMovsaction =  dynamic_cast<CursorMovementsAction*>(act.get());
             if(cursorMovsaction != nullptr)
             {
                 auto params = cursorMovsaction->generateParameters();
@@ -427,27 +429,27 @@ QJsonObject TaskTabsManager::actionToJson(AbstractAction *act)
     return jsonToReturn;
 }
 
-AbstractAction* TaskTabsManager::jsonToAction(const QJsonObject &jobj)
+std::shared_ptr<AbstractAction> TaskTabsManager::jsonToAction(const QJsonObject &jobj)
 {
-    AbstractAction* actionToReturn = nullptr;
+    std::shared_ptr<AbstractAction> actionToReturn = nullptr;
     ActionParameters params;
 
     QString type = jobj.value(G_Files::ActionType_KeyWord).toString();
     if(type == G_Files::ActionPasteType_Value)
     {
-        actionToReturn = new PasteAction();
+        actionToReturn = std::make_shared<PasteAction>();
         params.m_pasteContent = jobj.value(G_Files::ActionContent_KeyWord).toString();
         params.m_dataId = jobj.value(G_Files::ActionContentId_KeyWord).toString();
         params.m_timesToRun = jobj.value(G_Files::ActionPasteTextLoop_KeyWord).toInt(1);
     }
     else if(type == G_Files::ActionWaitType_Value)
     {
-        actionToReturn = new WaitAction();
+        actionToReturn = std::make_shared<WaitAction>();
         params.m_waitDuration = jobj.value(G_Files::ActionDuration_KeyWord).toDouble();
     }
     else if(type == G_Files::ActionKeysSequenceType_Value)
     {
-        actionToReturn = new KeysSequenceAction();
+        actionToReturn = std::make_shared<KeysSequenceAction>();
         auto readMap = jobj.value(G_Files::ActionKeysSeqMap_KeyWord).toVariant().toMap();
         PressedReleaseDelaysKeysMap actMap;
         for(auto [key,val] : readMap.asKeyValueRange())
@@ -466,14 +468,14 @@ AbstractAction* TaskTabsManager::jsonToAction(const QJsonObject &jobj)
     }
     else if(type == G_Files::ActionSystemCommandeType_Value)
     {
-        actionToReturn = new SystemCommandAction();
+        actionToReturn = std::make_shared<SystemCommandAction>();
         params.m_sysCmdTypeStr = jobj.value(G_Files::ActionSysCommandType_KeyWord).toString();
         params.m_sysCmdParam1 = jobj.value(G_Files::ActionSysCommandParam1_KeyWord).toString();
         params.m_sysCmdParam2 = jobj.value(G_Files::ActionSysCommandParam2_KeyWord).toString();
     }
     else if(type == G_Files::ActionCursorMovementsType_Value)
     {
-        actionToReturn = new CursorMovementsAction();
+        actionToReturn = std::make_shared<CursorMovementsAction>();
         auto readList = jobj.value(G_Files::ActionCursorMovsMap_KeyWord).toVariant().toList();
         CursorMovementsList actList;
         for(auto &el : readList)

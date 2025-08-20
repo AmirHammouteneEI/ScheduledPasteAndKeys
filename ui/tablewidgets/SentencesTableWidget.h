@@ -7,7 +7,7 @@
 class SentencesTableWidget : public NoFocusCellTableWidget
 {
     Q_OBJECT
-    SentenceSelectedEditDialog *m_sentenceEditDialog;
+    SentenceSelectedEditDialog *m_sentenceEditDialog = nullptr;
 public:
     explicit SentencesTableWidget(QWidget *parent = nullptr);
     ~SentencesTableWidget() = default;

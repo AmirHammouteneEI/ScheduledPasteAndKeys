@@ -21,7 +21,7 @@
 #include "mainwindow.h"
 
 TaskTab::TaskTab(QWidget *parent, const QString &name)
-    : QScrollArea{MainWindow::getInstance()},m_name(name)
+    : QScrollArea{MainWindow::getInstance().get()},m_name(name)
 {
     m_ID = -1;
 
@@ -50,11 +50,6 @@ void TaskTab::refreshTabRunIcon()
 TaskTab::~TaskTab()
 {
     m_actionWidgetsManager->deleteLater();
-    if(m_task != nullptr)
-    {
-        delete m_task;
-        m_task = nullptr;
-    }
 }
 
 void TaskTab::buildBasicInterface()
@@ -236,13 +231,9 @@ void TaskTab::buildAddButtonMenu()
     m_addActionButton->setPopupMode(QToolButton::InstantPopup);
 }
 
-void TaskTab::setTask(Task *task)
+void TaskTab::setTask(const std::shared_ptr<Task> &task)
 {
-    if(m_task != nullptr)
-    {
-        delete m_task;
-        m_task = nullptr;
-    }
+    m_task = nullptr;
 
     m_actionWidgetsManager->clear();
     m_task = task;
@@ -257,7 +248,7 @@ void TaskTab::setTask(Task *task)
     setTaskModified(false);
 }
 
-void TaskTab::appendAction(AbstractAction *act)
+void TaskTab::appendAction(const std::shared_ptr<AbstractAction> &act)
 {
     if(act == nullptr || m_task == nullptr)
         return;
@@ -270,7 +261,7 @@ void TaskTab::appendAction(AbstractAction *act)
     setTaskModified(true);
 }
 
-AbstractActionWidget *TaskTab::createActionWidget(AbstractAction *act)
+AbstractActionWidget *TaskTab::createActionWidget(const std::shared_ptr<AbstractAction> &act)
 {
     if(act == nullptr)
         return nullptr;
@@ -481,10 +472,7 @@ void TaskTab::removeActionReceived(unsigned int actId)
     auto act = m_task->m_actionsMap.take(actId);
     m_task->m_actionsOrderedList.removeOne(act);
     if(act != nullptr)
-    {
-        delete act;
         act = nullptr;
-    }
 
     auto actWidg = m_actionWidgetsManager->m_actionWidgetsMap.take(actId);
     m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList.removeOne(actWidg);
@@ -633,7 +621,7 @@ void TaskTab::createPasteActionRequest(QString sentenceIdentity)
     paramPaste.m_pasteContent = content;
     paramPaste.m_dataId = sentenceIdentity;
 
-    PasteAction *pasteAct = new PasteAction();
+    std::shared_ptr<PasteAction> pasteAct = std::make_shared<PasteAction>();
     pasteAct->setParameters(paramPaste);
 
     appendAction(pasteAct);
@@ -644,7 +632,7 @@ void TaskTab::createWaitActionRequest(long double duration)
     ActionParameters paramWait;
     paramWait.m_waitDuration = duration;
 
-    WaitAction *waitAct = new WaitAction();
+    std::shared_ptr<WaitAction> waitAct = std::make_shared<WaitAction>();
     waitAct->setParameters(paramWait);
 
     appendAction(waitAct);
@@ -658,7 +646,7 @@ void TaskTab::createKeysSequenceActionRequest(QString keysSequenceIdentity)
     paramKeysSeq.m_keysSeqMap = ActionsTools::fromStandardQMapToKeysSeqMap(keysSequenceFromSettings);
     paramKeysSeq.m_dataId = keysSequenceIdentity;
 
-    KeysSequenceAction *keysSeqAct = new KeysSequenceAction();
+    std::shared_ptr<KeysSequenceAction> keysSeqAct = std::make_shared<KeysSequenceAction>();
     keysSeqAct->setParameters(paramKeysSeq);
     keysSeqAct->generateTimeline();
 
@@ -672,7 +660,7 @@ void TaskTab::createSystemCommandActionRequest(QString sysCmdType, QString param
     paramSysCmd.m_sysCmdParam1 = param1;
     paramSysCmd.m_sysCmdParam2 = param2;
 
-    SystemCommandAction *sysCmdAct = new SystemCommandAction();
+    std::shared_ptr<SystemCommandAction> sysCmdAct = std::make_shared<SystemCommandAction>();
     sysCmdAct->setParameters(paramSysCmd);
 
     appendAction(sysCmdAct);
@@ -687,7 +675,7 @@ void TaskTab::createCursorMovementsActionRequest(QString cursorMovementsIdentity
     paramCurMovs.m_dataId = cursorMovementsIdentity;
     paramCurMovs.m_cursorMovementsOptionalKeysStroke = cursorMovementsFromSettings.last().toStringList();
 
-    CursorMovementsAction *cursorMovsAct = new CursorMovementsAction();
+    std::shared_ptr<CursorMovementsAction> cursorMovsAct = std::make_shared<CursorMovementsAction>();
     cursorMovsAct->setParameters(paramCurMovs);
 
     appendAction(cursorMovsAct);
