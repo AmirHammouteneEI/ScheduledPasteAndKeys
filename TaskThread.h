@@ -8,7 +8,7 @@
 class TaskThread : public QThread
 {
     Q_OBJECT
-    QList<AbstractAction*> m_actionsList;
+    QList<std::shared_ptr<AbstractAction>> m_actionsList;
 public:
     explicit TaskThread(QObject *parent = nullptr);
     ~TaskThread();

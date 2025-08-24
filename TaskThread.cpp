@@ -8,7 +8,6 @@ TaskThread::TaskThread(QObject *parent)
 
 TaskThread::~TaskThread()
 {
-    qDeleteAll(m_actionsList);
     quit();
     requestInterruption();
     wait();
@@ -16,7 +15,6 @@ TaskThread::~TaskThread()
 
 void TaskThread::copyActionsList(const std::shared_ptr<Task> &task)
 {
-    qDeleteAll(m_actionsList);
     m_actionsList.clear();
 
     if(task == nullptr)

@@ -2,6 +2,7 @@
 #define ABSTRACTACTION_H
 
 #include "actions/ActionParameters.h"
+#include <QObject>
 
 enum class ActionType {
     Undefined,
@@ -9,11 +10,13 @@ enum class ActionType {
     Wait,
     KeysSequence,
     SystemCommand,
-    CursorMovements
+    CursorMovements,
+    RunningOtherTask
 };
 
-class AbstractAction
+class AbstractAction : public QObject
 {
+    Q_OBJECT
     static unsigned int s_idCounter;
 protected:
     unsigned int m_ID = 0;
@@ -24,9 +27,9 @@ public:
     AbstractAction(const AbstractAction & other) = delete;
     AbstractAction& operator=(const AbstractAction & other) = delete;
 
-    virtual void runAction() const = 0;
+    virtual void runAction() = 0;
     virtual void setParameters(const ActionParameters& param) = 0;
-    virtual AbstractAction* deepCopy() const = 0;
+    virtual std::shared_ptr<AbstractAction> deepCopy() const = 0;
     virtual ActionParameters generateParameters() const = 0;
     virtual void optionalProcesses() = 0;
 

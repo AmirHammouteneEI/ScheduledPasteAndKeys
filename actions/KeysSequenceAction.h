@@ -5,6 +5,7 @@
 
 class KeysSequenceAction : public AbstractAction
 {
+    Q_OBJECT
 private:
     PressedReleaseDelaysKeysMap m_keysSeqMap;
     QString m_sequenceId;
@@ -16,9 +17,9 @@ public:
     KeysSequenceAction(const KeysSequenceAction & other) = delete;
     KeysSequenceAction& operator=(const KeysSequenceAction & other) = delete;
 
-    void runAction() const override;
+    void runAction() override;
     void setParameters(const ActionParameters& param) override;
-    KeysSequenceAction *deepCopy() const override;
+    std::shared_ptr<AbstractAction> deepCopy() const override;
     ActionParameters generateParameters() const override;
 
     void generateTimeline();

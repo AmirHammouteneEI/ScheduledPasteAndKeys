@@ -19,6 +19,7 @@ namespace G_Files {
     inline QString ActionSystemCommandeType_Value = "systemcommand";
     inline QString ActionKeysSequenceType_Value = "keyssequence";
     inline QString ActionCursorMovementsType_Value = "cursormovements";
+    inline QString ActionRunningOtherTaskType_Value = "runningothertask";
     inline QString ActionContent_KeyWord = "content";
     inline QString ActionContentId_KeyWord = "contentId";
     inline QString ActionPasteTextLoop_KeyWord = "loop";
@@ -33,6 +34,9 @@ namespace G_Files {
     inline QString ActionCursorMovsId_KeyWord = "cursorMovsId";
     inline QString ActionCursorMovsLoop_KeyWord = "loop";
     inline QString ActionCursorMovsOptKeysStroke_KeyWord = "optionalkeysstroke";
+    inline QString RunningOtherTaskFilename_KeyWord = "otherTaskName";
+    inline QString RunningOtherTaskDelay_KeyWord = "otherTaskDelay";
+    inline QString RunningOtherTaskLoops_KeyWord = "otherTaskLoops";
     inline QString TasksFolder = "saved_tasks/";
     inline QString TasksFileExtension = ".scht";
     inline QString StartupTasksParams_KeyWord = "startupTasksParams";

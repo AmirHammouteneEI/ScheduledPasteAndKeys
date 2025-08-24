@@ -5,12 +5,14 @@
 #include "ui/actionwidgets/KeysSequenceWidget.h"
 #include "ui/actionwidgets/SystemCommandWidget.h"
 #include "ui/actionwidgets/CursorMovementsWidget.h"
+#include "ui/actionwidgets/RunningOtherTaskWidget.h"
 #include "globals.h"
 #include "actions/PasteAction.h"
 #include "actions/WaitAction.h"
 #include "actions/KeysSequenceAction.h"
 #include "actions/SystemCommandsAction.h"
 #include "actions/CursorMovementsAction.h"
+#include "actions/RunningOtherTaskAction.h"
 #include "actions/ActionsTools.h"
 
 #include <QGridLayout>
@@ -58,6 +60,7 @@ void TaskTab::buildBasicInterface()
     m_createWaitActionDialog = new CreateWaitActionDialog(this);
     m_createKeysSequenceActionDialog = new CreateKeysSequenceActionDialog(this);
     m_createSystemCommandActionDialog = new CreateSystemCommandActionDialog(this);
+    m_createRunningOtherTaskActionDialog = new CreateRunningOtherTaskActionDialog(this);
     m_createCursorMovementsActionDialog = new CreateCursorMovementsActionDialog(this);
 
     setWidgetResizable(true);
@@ -202,6 +205,7 @@ void TaskTab::buildBasicInterface()
     connect(m_createKeysSequenceActionDialog, &CreateKeysSequenceActionDialog::sendKeysSequence, this, &TaskTab::createKeysSequenceActionRequest);
     connect(m_createSystemCommandActionDialog, &CreateSystemCommandActionDialog::sendSystemCommand, this, &TaskTab::createSystemCommandActionRequest);
     connect(m_createCursorMovementsActionDialog, &CreateCursorMovementsActionDialog::sendCursorMovements, this, &TaskTab::createCursorMovementsActionRequest);
+    connect(m_createRunningOtherTaskActionDialog, &CreateRunningOtherTaskActionDialog::sendRunningOtherTask, this, &TaskTab::createRunningOtherTaskActionRequest);
 
     connect(m_saveButton, &QPushButton::released, this, [&](){ emit saveTaskRequest(m_ID, true); });
 
@@ -215,16 +219,19 @@ void TaskTab::buildAddButtonMenu()
     auto creaKeysSeqAct = new QAction(QIcon(":/img/key.png"),tr("Add a Keys Sequence action..."), menu);
     auto creaCursorMovsAct = new QAction(QIcon(":/img/cursor.png"),tr("Add a Cursor Movements action..."), menu);
     auto creaSysCmdAct = new QAction(QIcon(":/img/systemCommand.png"),tr("Add a System Command action..."),menu);
+    auto creaRunOtherTaskAct = new QAction(QIcon(":/img/anotherTask.png"),tr("Add a Running Another Task action..."),menu);
     auto creaWaitAct = new QAction(QIcon(":/img/wait.png"),tr("Add a Wait action..."), menu);
     menu->addAction(creaPasteAct);
     menu->addAction(creaKeysSeqAct);
     menu->addAction(creaCursorMovsAct);
     menu->addAction(creaSysCmdAct);
+    menu->addAction(creaRunOtherTaskAct);
     menu->addAction(creaWaitAct);
     connect(creaPasteAct, &QAction::triggered, m_createPasteActionDialog, &CreatePasteActionDialog::showDialog);
     connect(creaWaitAct, &QAction::triggered, m_createWaitActionDialog, &CreateWaitActionDialog::showDialog);
     connect(creaKeysSeqAct, &QAction::triggered, m_createKeysSequenceActionDialog, &CreateKeysSequenceActionDialog::showDialog);
     connect(creaSysCmdAct, &QAction::triggered, m_createSystemCommandActionDialog, &CreateSystemCommandActionDialog::showDialog);
+    connect(creaRunOtherTaskAct, &QAction::triggered, m_createRunningOtherTaskActionDialog, &CreateRunningOtherTaskActionDialog::showDialog);
     connect(creaCursorMovsAct, &QAction::triggered, m_createCursorMovementsActionDialog, &CreateCursorMovementsActionDialog::showDialog);
 
     m_addActionButton->setMenu(menu);
@@ -281,6 +288,9 @@ AbstractActionWidget *TaskTab::createActionWidget(const std::shared_ptr<Abstract
         case ActionType::SystemCommand:
             actWidgToCreate = new SystemCommandWidget(m_actionsFrame);
         break;
+        case ActionType::RunningOtherTask:
+            actWidgToCreate = new RunningOtherTaskWidget(m_actionsFrame);
+            break;
         case ActionType::CursorMovements:
             actWidgToCreate = new CursorMovementsWidget(m_actionsFrame);
         break;
@@ -679,4 +689,17 @@ void TaskTab::createCursorMovementsActionRequest(QString cursorMovementsIdentity
     cursorMovsAct->setParameters(paramCurMovs);
 
     appendAction(cursorMovsAct);
+}
+
+void TaskTab::createRunningOtherTaskActionRequest(QString filename, int delay, int loops)
+{
+    ActionParameters paramRunOtherTask;
+    paramRunOtherTask.m_taskName = filename;
+    paramRunOtherTask.m_delay = delay;
+    paramRunOtherTask.m_timesToRun = loops;
+
+    std::shared_ptr<RunningOtherTaskAction> runOtherTaskAct = std::make_shared<RunningOtherTaskAction>();
+    runOtherTaskAct->setParameters(paramRunOtherTask);
+
+    appendAction(runOtherTaskAct);
 }

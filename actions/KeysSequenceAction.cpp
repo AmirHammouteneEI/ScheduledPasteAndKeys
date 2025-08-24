@@ -6,7 +6,7 @@ KeysSequenceAction::KeysSequenceAction() : AbstractAction()
     e_type = ActionType::KeysSequence;
 }
 
-void KeysSequenceAction::runAction() const
+void KeysSequenceAction::runAction()
 {
     int timesToRun = m_timesToRun;
 
@@ -44,9 +44,9 @@ void KeysSequenceAction::setParameters(const ActionParameters &param)
     m_timesToRun = param.m_timesToRun;
 }
 
-KeysSequenceAction *KeysSequenceAction::deepCopy() const
+std::shared_ptr<AbstractAction> KeysSequenceAction::deepCopy() const
 {
-    KeysSequenceAction *actToReturn = new KeysSequenceAction();
+    auto actToReturn = std::make_shared<KeysSequenceAction>();
     actToReturn->m_keysSeqMap = m_keysSeqMap;
     actToReturn->m_sequenceId = m_sequenceId;
     actToReturn->m_keysStrokeTimeline = m_keysStrokeTimeline;

@@ -27,26 +27,29 @@ enum class SystemCommandType {
 
 class SystemCommandAction : public AbstractAction
 {
+    Q_OBJECT
+private:
+    SystemCommandType e_sysCommandType;
+    QString m_param1;
+    QString m_param2;
 public:
     SystemCommandAction();
     ~SystemCommandAction() = default;
     SystemCommandAction(const SystemCommandAction & other) = delete;
     SystemCommandAction& operator=(const SystemCommandAction & other) = delete;
 
-    void runAction() const override;
+    void runAction() override;
     void setParameters(const ActionParameters& param) override;
-    SystemCommandAction *deepCopy() const override;
+    std::shared_ptr<AbstractAction> deepCopy() const override;
     ActionParameters generateParameters() const override;
     void optionalProcesses() override {}
 
-    void executeCommand(const QString & cmd,const QString & option) const;
-
-    SystemCommandType e_sysCommandType;
-    QString m_param1;
-    QString m_param2;
-
     QString incrementFilenameIfExists(const QString & path) const;
     QString incrementFilenameIfExists(const QString & path, unsigned char ndigits) const;
+
+    friend class SystemCommandWidget;
+signals:
+    void forceQuitProgramRequest();
 };
 
 #endif // SYSTEMCOMMANDSACTION_H

@@ -5,6 +5,7 @@
 
 class PasteAction : public AbstractAction
 {
+    Q_OBJECT
 private:
     QString m_content;
     QString m_contentId;
@@ -15,9 +16,9 @@ public:
     PasteAction(const PasteAction & other) = delete;
     PasteAction& operator=(const PasteAction & other) = delete;
 
-    void runAction() const override;
+    void runAction() override;
     void setParameters(const ActionParameters& param) override;
-    PasteAction* deepCopy() const override;
+    std::shared_ptr<AbstractAction> deepCopy() const override;
     ActionParameters generateParameters() const override;
     void optionalProcesses() override {}
     int computeOneExecutionDuration(); // in miliseconds

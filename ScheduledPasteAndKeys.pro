@@ -18,10 +18,13 @@ SOURCES += \
     actions/CursorMovementsAction.cpp \
     actions/KeysSequenceAction.cpp \
     actions/PasteAction.cpp \
+    actions/RunningOtherTaskAction.cpp \
     actions/SystemCommandsAction.cpp \
     actions/WaitAction.cpp \
     main.cpp \
     mainwindow.cpp \
+    ui/actionwidgets/RunningOtherTaskWidget.cpp \
+    ui/createactiondialogs/CreateRunningOtherTaskActionDialog.cpp \
     ui/various_dialogs/CreateLoadTaskDialog.cpp \
     ui/editselectedactiondialogs/CursorMovementsSelectedEditDialog.cpp \
     ui/tablewidgets/CursorMovementsTableWidget.cpp \
@@ -65,10 +68,13 @@ HEADERS += \
     actions/CursorMovementsAction.h \
     actions/KeysSequenceAction.h \
     actions/PasteAction.h \
+    actions/RunningOtherTaskAction.h \
     actions/SystemCommandsAction.h \
     actions/WaitAction.h \
     globals.h \
     mainwindow.h \
+    ui/actionwidgets/RunningOtherTaskWidget.h \
+    ui/createactiondialogs/CreateRunningOtherTaskActionDialog.h \
     ui/various_dialogs/CreateLoadTaskDialog.h \
     ui/editselectedactiondialogs/CursorMovementsSelectedEditDialog.h \
     ui/tablewidgets/CursorMovementsTableWidget.h \
@@ -104,6 +110,7 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui \
+    ui/createactiondialogs/CreateRunningOtherTaskActionDialog.ui \
     ui/various_dialogs/CreateLoadTaskDialog.ui \
     ui/editselectedactiondialogs/CursorMovementsSelectedEditDialog.ui \
     ui/various_dialogs/DataEditDialog.ui \

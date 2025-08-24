@@ -47,12 +47,18 @@ int main(int argc, char *argv[])
             {
                 int timesToRun = atoi(argv[3]);
                 if(timesToRun != 0)
+                {
+                    w->hide();
                     w->autoRun(QString(argv[1]), delay,timesToRun);
+                }
                 else
                     w->showWindow();
             }
             else
+            {
+                w->hide();
                 w->autoRun(QString(argv[1]), delay);
+            }
         }
         else
             w->showWindow();

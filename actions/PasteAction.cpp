@@ -8,7 +8,7 @@ PasteAction::PasteAction() : AbstractAction()
     e_type = ActionType::Paste;
 }
 
-void PasteAction::runAction() const
+void PasteAction::runAction()
 {
     int timesToRun = m_timesToRun;
 
@@ -29,9 +29,9 @@ void PasteAction::setParameters(const ActionParameters &param)
     m_timesToRun = param.m_timesToRun;
 }
 
-PasteAction *PasteAction::deepCopy() const
+std::shared_ptr<AbstractAction> PasteAction::deepCopy() const
 {
-    PasteAction *actToReturn = new PasteAction();
+    auto actToReturn = std::make_shared<PasteAction>();
     actToReturn->m_content = m_content;
     actToReturn->m_contentId = m_contentId;
     actToReturn->m_timesToRun = m_timesToRun;

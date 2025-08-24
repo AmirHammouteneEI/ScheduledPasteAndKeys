@@ -35,6 +35,8 @@ public:
     QString m_sysCmdParam2;
     CursorMovementsList m_cursorMovementsList;
     QStringList m_cursorMovementsOptionalKeysStroke;
+    QString m_taskName;
+    int m_delay; // in seconds
 };
 
 Q_DECLARE_METATYPE(ActionParameters);

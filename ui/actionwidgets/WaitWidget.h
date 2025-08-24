@@ -16,9 +16,10 @@ public:
     explicit WaitWidget(QWidget *parent = nullptr);
     ~WaitWidget() = default;
     void buildWidget() override;
+public slots:
+    void durationReceived(long double dur);
 private slots:
     void refreshTimeRemainingText(const QDateTime& departureDate);
-    void durationReceived(long double dur);
 signals:
 };
 

@@ -9,6 +9,7 @@
 #include "ui/createactiondialogs/CreateKeysSequenceActionDialog.h"
 #include "ui/createactiondialogs/CreateSystemCommandActionDialog.h"
 #include "ui/createactiondialogs/CreateCursorMovementsActionDialog.h"
+#include "ui/createactiondialogs/CreateRunningOtherTaskActionDialog.h"
 #include "ui/CustomPrimaryWidgets.h"
 
 #include <QFrame>
@@ -58,6 +59,7 @@ protected:
     CreateSystemCommandActionDialog *m_createSystemCommandActionDialog = nullptr;
     CreateKeysSequenceActionDialog *m_createKeysSequenceActionDialog = nullptr;
     CreateCursorMovementsActionDialog *m_createCursorMovementsActionDialog = nullptr;
+    CreateRunningOtherTaskActionDialog *m_createRunningOtherTaskActionDialog = nullptr;
     void buildAddButtonMenu();
     void appendAction(const std::shared_ptr<AbstractAction> &act);
     unsigned int m_loopedTimes = 0;
@@ -92,10 +94,11 @@ public slots:
     void moveUpActionReceived(unsigned int actId);
     void moveDownActionReceived(unsigned int actId);
     void createPasteActionRequest(QString sentenceIdentity); // not const & because it's a slot, will make copy evenif
-    void createWaitActionRequest(long double duration);
+    void createWaitActionRequest(long double duration); // not const & because it's a slot, will make copy evenif
     void createKeysSequenceActionRequest(QString keysSequenceIdentity); // not const & because it's a slot, will make copy evenif
     void createSystemCommandActionRequest(QString sysCmdType, QString param1, QString param2); // not const & because it's a slot, will make copy evenif
     void createCursorMovementsActionRequest(QString cursorMovementsIdentity); // not const & because it's a slot, will make copy evenif
+    void createRunningOtherTaskActionRequest(QString filename, int delay, int loops); // not const & because it's a slot, will make copy evenif
 signals:
     void saveTaskRequest(int taskId, bool verb);
     void forceStopThread();

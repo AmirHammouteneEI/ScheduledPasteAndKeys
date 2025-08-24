@@ -16,8 +16,9 @@ public:
     explicit PasteWidget(QWidget *parent = nullptr);
     ~PasteWidget() = default;
     void buildWidget() override;
+public slots:
+    void sentenceIdentityReceived(QString id); // not const & because it's a slot, will make copy evenif    
 private slots:
-    void sentenceIdentityReceived(QString id); // not const & because it's a slot, will make copy evenif
     void timesToRunChanged(int times);
 private:
     void refreshLoopsRemainingText(const QDateTime& departureDate);

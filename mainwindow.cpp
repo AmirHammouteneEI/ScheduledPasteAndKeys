@@ -98,10 +98,19 @@ void MainWindow::autoRun(const QString &filename, int delay, int loopTimes)
 {
     if(m_tasktabsManager == nullptr || delay<0)
         return;
-    hide();
-    auto taskid = m_tasktabsManager->onOpenNewTabRequest(QApplication::applicationDirPath()+"/"+G_Files::TasksFolder+filename+G_Files::TasksFileExtension);
-    if(taskid > -1)
-        m_tasktabsManager->scheduleTaskFromId(taskid, delay, loopTimes);
+    auto taskCreatedId = m_tasktabsManager->onOpenNewTabRequest(QApplication::applicationDirPath()+"/"+G_Files::TasksFolder+filename+G_Files::TasksFileExtension);
+    if(taskCreatedId > -1)
+        m_tasktabsManager->scheduleTaskFromId(taskCreatedId, delay, loopTimes);
+    else // if task already open and not scheduled
+    {
+        auto taskExistingId = m_tasktabsManager->getIdfromTaskName(filename);
+        if(taskExistingId > -1)
+        {
+            auto task = m_tasktabsManager->m_taskTabsMap[taskExistingId];
+            if(task && task->m_scheduleState == ScheduleState::NotScheduled)
+                m_tasktabsManager->scheduleTaskFromId(taskExistingId, delay, loopTimes);
+        }
+    }
 }
 
 void MainWindow::buildSystemTrayMenu()
@@ -178,7 +187,7 @@ void MainWindow::buildToolBar()
     startupTasksAction->setToolTip(tr("Edit tasks scheduled at system startup..."));
     connect(startupTasksAction, &QAction::triggered, m_startupTasksDialog, &StartupTasksDialog::showDialog);
 
-    QWidget* spacer0 = new QWidget(m_toolBar);
+    QWidget* spacer0 = new QWidget(this);
     spacer0->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     QAction *dataEditAction = new QAction("▤",this);
@@ -189,14 +198,14 @@ void MainWindow::buildToolBar()
     dataEditAction->setToolTip(tr("Edit data..."));
     connect(dataEditAction, &QAction::triggered, m_dataEditDialog, &DataEditDialog::showDialog);
 
-    QWidget* spacer1 = new QWidget(m_toolBar);
+    QWidget* spacer1 = new QWidget(this);
     spacer1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     m_scrollAction = new QAction("",this);
     m_scrollAction->setCheckable(true);
     connect(m_scrollAction, &QAction::triggered, this, &MainWindow::swapAutoscrollMode);
 
-    QWidget* spacer2 = new QWidget(m_toolBar);
+    QWidget* spacer2 = new QWidget(this);
     spacer2->setFixedWidth(20);
     spacer2->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 

@@ -324,6 +324,49 @@ item selected in CreatePasteActionDialog is null !</translation>
     </message>
 </context>
 <context>
+    <name>CreateRunningOtherTaskActionDialog</name>
+    <message>
+        <source>Create/Edit a Running Another Task Action</source>
+        <translation>Créer/Éditer une action Exécution d&apos;une autre Tâche</translation>
+    </message>
+    <message>
+        <source>Select the task to be run to apply to this action :</source>
+        <translation>Sélectionnez la tâche à être exécutée que vous souhaitez affecter à cette action :</translation>
+    </message>
+    <message>
+        <source>Set the delay for the task to be executed :</source>
+        <translation>Déterminez le délai pour que la tâche soit exécutée :</translation>
+    </message>
+    <message>
+        <source> days and </source>
+        <translation> jours et </translation>
+    </message>
+    <message>
+        <source> hours,minutes,seconds</source>
+        <translation> heures,minutes,secondes</translation>
+    </message>
+    <message>
+        <source>Set how many times this task should be executed :</source>
+        <translation>Déterminez combien de fois cette tâche devrait être éxecutée :</translation>
+    </message>
+    <message>
+        <source>times</source>
+        <translation>fois</translation>
+    </message>
+    <message>
+        <source>OR</source>
+        <translation>OU</translation>
+    </message>
+    <message>
+        <source>in infinite loop</source>
+        <translation>en boucle infinie</translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation>Aucun fichier séléctionné</translation>
+    </message>
+</context>
+<context>
     <name>CreateSystemCommandActionDialog</name>
     <message>
         <source>Create/Edit a System Command Action</source>
@@ -417,11 +460,11 @@ Veuillez fournir toutes les informations nécessaires.</translation>
     </message>
     <message>
         <source>Set the filename</source>
-        <translation>Définir le nom de fichier</translation>
+        <translation type="vanished">Définir le nom de fichier</translation>
     </message>
     <message>
         <source>Set the filename (existing or not) for the operation you would like to proceed :</source>
-        <translation>Définissez le nom du fichier (existant ou non) pour l&apos;opération que vous souhaitez effectuer :</translation>
+        <translation type="vanished">Définissez le nom du fichier (existant ou non) pour l&apos;opération que vous souhaitez effectuer :</translation>
     </message>
     <message>
         <source>Set the process name</source>
@@ -601,7 +644,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Set how many times this cursor movements should be executed</source>
-        <translation>Déterminez combien de fois ces mouvements de curseur devraient être exécutés</translation>
+        <translation>Déterminez combien de fois ces mouvements de curseur devraient être éxecutée :</translation>
     </message>
     <message>
         <source>ERROR on access to action</source>
@@ -1291,6 +1334,33 @@ Assurez-vous que ce programme est exécuté en tant qu&apos;administrateur (clic
     </message>
 </context>
 <context>
+    <name>RunningOtherTaskWidget</name>
+    <message>
+        <source>ERROR</source>
+        <translation>ERREUR</translation>
+    </message>
+    <message>
+        <source>Run another task</source>
+        <translation>Exécuter une autre tâche</translation>
+    </message>
+    <message>
+        <source>Task name : </source>
+        <translation>Nom de la tâche : </translation>
+    </message>
+    <message>
+        <source>
+Delay : </source>
+        <translation>
+Délai : </translation>
+    </message>
+    <message>
+        <source>
+Loops : </source>
+        <translation>
+Boucles : </translation>
+    </message>
+</context>
+<context>
     <name>SelectSentenceDialog</name>
     <message>
         <source>Select a sentence for this action</source>
@@ -1397,7 +1467,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Set the delay for the task to be executed after system startup :</source>
-        <translation>Déterminez le délai pour la tâche à être exécutée après le démarrage du système :</translation>
+        <translation>Déterminez le délai pour que la tâche soit exécutée après le démarrage du système :</translation>
     </message>
     <message>
         <source> days and </source>
@@ -1680,6 +1750,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>description...</source>
         <translation>description...</translation>
+    </message>
+    <message>
+        <source>Add a Running Another Task action...</source>
+        <translation>Ajouter une action d&apos;Exécution d&apos;une autre Tâche...</translation>
     </message>
 </context>
 <context>

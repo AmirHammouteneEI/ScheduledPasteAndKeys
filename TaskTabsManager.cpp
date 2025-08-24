@@ -6,6 +6,7 @@
 #include "actions/KeysSequenceAction.h"
 #include "actions/SystemCommandsAction.h"
 #include "actions/CursorMovementsAction.h"
+#include "actions/RunningOtherTaskAction.h"
 #include <qt_windows.h>
 
 #include <QApplication>
@@ -422,6 +423,19 @@ QJsonObject TaskTabsManager::actionToJson(const std::shared_ptr<AbstractAction> 
             }
         }
         break;
+        case ActionType::RunningOtherTask:
+        {
+            jsonToReturn.insert(G_Files::ActionType_KeyWord, QJsonValue::fromVariant(G_Files::ActionRunningOtherTaskType_Value));
+            auto runOtherTaskaction =  dynamic_cast<RunningOtherTaskAction*>(act.get());
+            if(runOtherTaskaction != nullptr)
+            {
+                auto params = runOtherTaskaction->generateParameters();
+                jsonToReturn.insert(G_Files::RunningOtherTaskFilename_KeyWord, QJsonValue::fromVariant(params.m_taskName));
+                jsonToReturn.insert(G_Files::RunningOtherTaskDelay_KeyWord, QJsonValue::fromVariant(params.m_delay));
+                jsonToReturn.insert(G_Files::RunningOtherTaskLoops_KeyWord, QJsonValue::fromVariant(params.m_timesToRun));
+            }
+        }
+        break;
         default:
           break;
     }
@@ -491,6 +505,13 @@ std::shared_ptr<AbstractAction> TaskTabsManager::jsonToAction(const QJsonObject 
         params.m_dataId = jobj.value(G_Files::ActionCursorMovsId_KeyWord).toString();
         params.m_timesToRun = jobj.value(G_Files::ActionCursorMovsLoop_KeyWord).toInt();
         params.m_cursorMovementsOptionalKeysStroke = jobj.value(G_Files::ActionCursorMovsOptKeysStroke_KeyWord).toVariant().toStringList();
+    }
+    else if(type == G_Files::ActionRunningOtherTaskType_Value)
+    {
+        actionToReturn = std::make_shared<RunningOtherTaskAction>();
+        params.m_taskName = jobj.value(G_Files::RunningOtherTaskFilename_KeyWord).toString();
+        params.m_delay = jobj.value(G_Files::RunningOtherTaskDelay_KeyWord).toInt();
+        params.m_timesToRun = jobj.value(G_Files::RunningOtherTaskLoops_KeyWord).toInt();
     }
     else
         return nullptr;

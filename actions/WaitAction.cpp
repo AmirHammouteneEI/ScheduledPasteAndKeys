@@ -8,7 +8,7 @@ WaitAction::WaitAction() : AbstractAction()
     e_type = ActionType::Wait;
 }
 
-void WaitAction::runAction() const
+void WaitAction::runAction()
 {
     Sleep(m_duration*1000);
     //QThread::msleep((int)(m_duration*1000));
@@ -19,9 +19,9 @@ void WaitAction::setParameters(const ActionParameters &param)
     m_duration = param.m_waitDuration;
 }
 
-WaitAction *WaitAction::deepCopy() const
+std::shared_ptr<AbstractAction> WaitAction::deepCopy() const
 {
-    WaitAction *actToReturn = new WaitAction();
+    auto actToReturn = std::make_shared<WaitAction>();
     actToReturn->m_duration = m_duration;
     actToReturn->m_refID = m_ID;
     return actToReturn;

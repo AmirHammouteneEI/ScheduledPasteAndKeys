@@ -16,9 +16,11 @@ SystemCommandAction::SystemCommandAction() : AbstractAction()
 {
     e_type = ActionType::SystemCommand;
     e_sysCommandType = SystemCommandType::Undefined;
+
+    connect(this, &SystemCommandAction::forceQuitProgramRequest, MainWindow::getInstance().get(), &MainWindow::forceQuit);
 }
 
-void SystemCommandAction::runAction() const
+void SystemCommandAction::runAction()
 {
     switch(e_sysCommandType)
     {
@@ -36,9 +38,11 @@ void SystemCommandAction::runAction() const
         break;
         case SystemCommandType::CreateOneFile:
         {
+            QFileInfo finfo(m_param1);
             QDir d;
-            d.mkpath(m_param1);
-            QFile f(m_param1+"/"+m_param2);
+            d.mkpath(finfo.absolutePath());
+            auto pathToSave = m_param2 == "Auto-rename if exists" ? incrementFilenameIfExists(m_param1) : m_param1;
+            QFile f(pathToSave);
             f.open(QIODevice::WriteOnly);
             f.close();
         }
@@ -56,7 +60,7 @@ void SystemCommandAction::runAction() const
         break;
         case SystemCommandType::QuitSelfProgram:
         {
-            MainWindow::getInstance()->forceQuit();
+            emit forceQuitProgramRequest();
         }
         break;
         case SystemCommandType::ShutDown:
@@ -206,9 +210,9 @@ void SystemCommandAction::setParameters(const ActionParameters &param)
     m_param2 = param.m_sysCmdParam2;
 }
 
-SystemCommandAction *SystemCommandAction::deepCopy() const
+std::shared_ptr<AbstractAction> SystemCommandAction::deepCopy() const
 {
-    SystemCommandAction *actToReturn = new SystemCommandAction();
+    auto actToReturn = std::make_shared<SystemCommandAction>();
     actToReturn->e_sysCommandType = e_sysCommandType;
     actToReturn->m_param1 = m_param1;
     actToReturn->m_param2 = m_param2;

@@ -16,8 +16,9 @@ public:
     explicit KeysSequenceWidget(QWidget *parent = nullptr);
     ~KeysSequenceWidget() = default;
     void buildWidget() override;
-private slots:
+public slots:
     void keysSeqIdentityReceived(QString id); // not const & because it's a slot, will make copy evenif
+private slots:
     void timesToRunChanged(int times);
 private:
     void refreshLoopsRemainingText(const QDateTime& departureDate);

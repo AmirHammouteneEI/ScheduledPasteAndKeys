@@ -104,9 +104,3 @@ QString SystemCommandWidget::fromSysCmdTypeToDiplayedStr(SystemCommandType t)
 
     return sysCmdTypeStr;
 }
-
-
-void SystemCommandWidget::changedRunningState()
-{
-
-}

@@ -5,6 +5,7 @@
 
 class CursorMovementsAction : public AbstractAction
 {
+    Q_OBJECT
 private:
     CursorMovementsList m_cursorMovementsList;
     QString m_movementsId;
@@ -16,9 +17,9 @@ public:
     CursorMovementsAction(const CursorMovementsAction & other) = delete;
     CursorMovementsAction& operator=(const CursorMovementsAction & other) = delete;
 
-    void runAction() const override;
+    void runAction() override;
     void setParameters(const ActionParameters& param) override;
-    CursorMovementsAction *deepCopy() const override;
+    std::shared_ptr<AbstractAction> deepCopy() const override;
     ActionParameters generateParameters() const override;
 
     void optionalProcesses() override {}

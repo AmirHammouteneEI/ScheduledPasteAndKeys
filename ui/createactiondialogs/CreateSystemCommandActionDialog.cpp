@@ -148,21 +148,28 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
         m_option2Button->setEnabled(true);
-        connect(m_option1Button,&QPushButton::released, m_folderPathDialog, &getFolderPathDialog::showDialog);
-        connect(m_folderPathDialog, &getFolderPathDialog::sendDirectory,this,[&](const QString &dir)
+        connect(m_option1Button,&QPushButton::released, m_savedFilePathDialog, &getFilePathDialog::showDialog);
+        connect(m_savedFilePathDialog, &getFilePathDialog::sendFile,this,[&](const QString &dir)
                 {
                     m_option1Button->setText(dir);
                     m_option1Button->setToolTip(dir);
                 });
 
-        connect(m_option2Button,&QPushButton::released, this, [&]()
+        if(m_option2Button->text().isEmpty())
+            m_option2Button->setText("Auto-rename if exists");
+        connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
+        connect(m_autorenameDialog, &getAutoRenameOptionDialog::sendAutorename,this,[&](bool autorename)
                 {
-                    bool ok;
-                    QString val = QInputDialog::getText(this,tr("Set the filename"),tr("Set the filename (existing or not) for the operation you would like to proceed :"),QLineEdit::Normal,m_option2Button->text(),&ok);
-                    if(!ok)
-                        return;
-                    m_option2Button->setText(val);
-                    m_option2Button->setToolTip(val);
+                    if(autorename)
+                    {
+                        m_option2Button->setText("Auto-rename if exists");
+                        m_option2Button->setToolTip(tr("If the file already exists, a new file will be created with another filename."));
+                    }
+                    else
+                    {
+                        m_option2Button->setText("Erase if exists");
+                        m_option2Button->setToolTip(tr("If the file already exists, it will be erased to save the new file."));
+                    }
                 });
     }
     else if(m_type == G_SystemCommands::CreateFolderType || m_type == G_SystemCommands::DeleteFolderType || m_type == G_SystemCommands::OpenFolderType)
@@ -262,6 +269,8 @@ void CreateSystemCommandActionDialog::activateButtons()
                     m_option1Button->setToolTip(dir);
                 });
 
+        if(m_option2Button->text().isEmpty())
+            m_option2Button->setText("Auto-rename if exists");
         connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
         connect(m_autorenameDialog, &getAutoRenameOptionDialog::sendAutorename,this,[&](bool autorename)
                 {

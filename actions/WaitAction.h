@@ -5,6 +5,7 @@
 
 class WaitAction : public AbstractAction
 {
+    Q_OBJECT
 private:
     long double m_duration; // in seconds
 public:
@@ -13,9 +14,9 @@ public:
     WaitAction(const WaitAction & other) = delete;
     WaitAction& operator=(const WaitAction & other) = delete;
 
-    void runAction() const override;
+    void runAction() override;
     void setParameters(const ActionParameters& param) override;
-    WaitAction* deepCopy() const override;
+    std::shared_ptr<AbstractAction> deepCopy() const override;
     ActionParameters generateParameters() const override;
     void optionalProcesses() override {}
 

@@ -28,12 +28,12 @@ public:
     ~MainWindow();
     void buildTaskTabsManager();
     QTabWidget * getTabWidget(); // ui container of TaskTabs
-    void autoRun(const QString & filename, int delay, int loopTimes = 1); // automatically run a task in silent mode (no window appears)
     QShortcut *m_stopAllTasksShortcut = nullptr;
-    void forceQuit();
 public slots:
     void showWindow(QSystemTrayIcon::ActivationReason reason = QSystemTrayIcon::Trigger); // show mainwindow or systemtray icon menu (if right click on icon)
     void quitApp(); // stops all running tasks (forced), asks to saved modified tasks and quit the program
+    void forceQuit();
+    void autoRun(const QString & filename, int delay, int loopTimes = 1); // automatically run a task in silent mode (no window appears)
 private slots:
     void swapStayOnTop(bool state);
     void swapAutoscrollMode(bool state); // autoscroll force the action widget visible when running the action
