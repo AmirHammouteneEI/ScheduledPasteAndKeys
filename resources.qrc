@@ -50,5 +50,6 @@
         <file>img/crosshair.png</file>
         <file>img/startup.png</file>
         <file>img/anotherTask.png</file>
+        <file>img/shortcut.png</file>
     </qresource>
 </RCC>

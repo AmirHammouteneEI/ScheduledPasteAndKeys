@@ -46,6 +46,77 @@ layout is null when affecting to ActionWidgetsManager !</translation>
     </message>
 </context>
 <context>
+    <name>CreateAutorunDesktopShortcutDialog</name>
+    <message>
+        <source>Create a desktop shortcut of a task which autoruns</source>
+        <translation>Créer un raccourci bureau d&apos;une tâche qui s&apos;exécute automatiquement</translation>
+    </message>
+    <message>
+        <source>Select the task to be run when desktop shortcut would be used :</source>
+        <translation>Sélectionnez la tâche à être exécutée lorsque le raccourci bureau sera utilisé :</translation>
+    </message>
+    <message>
+        <source>Set the delay for the task to be executed :</source>
+        <translation>Déterminez le délai pour que la tâche soit exécutée :</translation>
+    </message>
+    <message>
+        <source> days and </source>
+        <translation> jours et </translation>
+    </message>
+    <message>
+        <source> hours,minutes,seconds</source>
+        <translation> heures,minutes,secondes</translation>
+    </message>
+    <message>
+        <source>Set how many times this task should be executed :</source>
+        <translation>Déterminez combien de fois cette tâche devrait être éxecutée :</translation>
+    </message>
+    <message>
+        <source>times</source>
+        <translation>fois</translation>
+    </message>
+    <message>
+        <source>OR</source>
+        <translation>OU</translation>
+    </message>
+    <message>
+        <source>in infinite loop</source>
+        <translation>en boucle infinie</translation>
+    </message>
+    <message>
+        <source>Set the desktop shortcut name :</source>
+        <translation>Définissez le nom du raccourci bureau :</translation>
+    </message>
+    <message>
+        <source>Shortcut name...</source>
+        <translation>Nom du raccourci...</translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation>Aucun fichier séléctionné</translation>
+    </message>
+    <message>
+        <source>Delay can&apos;t be set to 0</source>
+        <translation>Le délai ne peut être fixé à 0</translation>
+    </message>
+    <message>
+        <source>The delay for the task to run after system startup can&apos;t be set to zero.</source>
+        <translation>Le délai pour que la tâche soit exécutée après le démarrage du système ne peut être fixé à zéro.</translation>
+    </message>
+    <message>
+        <source>Empty name</source>
+        <translation>Nom vide</translation>
+    </message>
+    <message>
+        <source>Shortcut must have a name.</source>
+        <translation>Un raccourci doit avoir un nom.</translation>
+    </message>
+    <message>
+        <source>Forbidden character</source>
+        <translation>Caractère interdit</translation>
+    </message>
+</context>
+<context>
     <name>CreateCursorMovementsActionDialog</name>
     <message>
         <source>Create/Edit a Cursor Movements Action</source>
@@ -1213,6 +1284,10 @@ premiers travaux en février 2024
 version 1.4.1 (août 2025)
 
 Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>Create a desktop shortcut of a task which autoruns...</source>
+        <translation>Créer un raccourci bureau d&apos;une tâche qui s&apos;exécute automatiquement...</translation>
     </message>
 </context>
 <context>

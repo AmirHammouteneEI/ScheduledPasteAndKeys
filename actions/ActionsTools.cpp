@@ -221,3 +221,33 @@ QPair<int, int> ActionsTools::getCursorPos()
     }
     return returnedVal;
 }
+
+void ActionsTools::createDesktopShortcut(const QString &savePath, const QString &linkPath, const QString & args, const QString & linkname)
+{
+    LPCWSTR locSavePath = (const wchar_t*) savePath.utf16();
+    LPCWSTR lkPath =  (const wchar_t*) linkPath.utf16();
+    LPCWSTR lkArgs =  (const wchar_t*) args.utf16();
+    LPCWSTR name =  (const wchar_t*) linkname.utf16();
+
+    CoInitializeEx(NULL, 0);
+    IShellLink* psl = NULL;
+    CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_ALL, IID_IShellLink, (LPVOID*)&psl);
+    psl->SetPath(lkPath);
+    psl->SetDescription(name);
+    psl->SetArguments(lkArgs);
+    psl->SetIconLocation(lkPath, 0);
+
+    IPersistFile* ppf = NULL;
+    psl->QueryInterface(IID_IPersistFile, (LPVOID*)&ppf);
+
+    WCHAR wsz[MAX_PATH];
+    _wmakepath_s( wsz, _MAX_PATH, NULL, locSavePath,name, L"lnk" );
+
+    ppf->Save(wsz, TRUE);
+
+    ppf->Release();
+    ppf = NULL;
+    psl->Release();
+    psl = NULL;
+    CoUninitialize();
+}

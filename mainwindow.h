@@ -9,6 +9,7 @@
 #include "TaskTabsManager.h"
 #include "ui/various_dialogs/DataEditDialog.h"
 #include "ui/various_dialogs/StartupTasksDialog.h"
+#include "ui/various_dialogs/CreateAutorunDesktopShortcutDialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -40,6 +41,7 @@ private slots:
     void switchTheme(); // set stylesheet
     void taskTabPageClicked(int newIndex);
     void taskTabContextMenuRequest(QPoint point);
+    void createAutorunShortcutFromDialogReceived();
 protected :
     MainWindow(QWidget *parent = nullptr);
     struct SharedPtrMainWindow;
@@ -63,6 +65,7 @@ protected :
     CreateLoadTaskDialog *m_createLoadTaskDialog = nullptr;
     DataEditDialog *m_dataEditDialog = nullptr;
     StartupTasksDialog *m_startupTasksDialog = nullptr;
+    CreateAutorunDesktopShortcutDialog *m_createDesktopShortcutDialog = nullptr;
     std::shared_ptr<TaskTabsManager> m_tasktabsManager = nullptr;
     QMenu *m_stmenu = nullptr;
     QToolBar *m_toolBar = nullptr;

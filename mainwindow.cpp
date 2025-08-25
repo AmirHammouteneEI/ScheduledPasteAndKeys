@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "globals.h"
+#include "actions/ActionsTools.h"
 
 #include <QMenu>
 #include <QAction>
@@ -13,6 +14,7 @@
 #include <QShortcut>
 #include <QMessageBox>
 #include <QDir>
+#include <QStandardPaths>
 
 std::shared_ptr<MainWindow> MainWindow::s_singleton= nullptr;
 struct MainWindow::SharedPtrMainWindow : public MainWindow {SharedPtrMainWindow(QWidget *parent = nullptr):MainWindow(parent){} };
@@ -44,6 +46,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_startupTasksDialog = new StartupTasksDialog(this);
     m_dataEditDialog = new DataEditDialog(this);
+    m_createDesktopShortcutDialog = new CreateAutorunDesktopShortcutDialog(this);
+    connect(m_createDesktopShortcutDialog, &QDialog::accepted, this, &MainWindow::createAutorunShortcutFromDialogReceived);
     buildToolBar();
 
     loadSettings();
@@ -187,6 +191,10 @@ void MainWindow::buildToolBar()
     startupTasksAction->setToolTip(tr("Edit tasks scheduled at system startup..."));
     connect(startupTasksAction, &QAction::triggered, m_startupTasksDialog, &StartupTasksDialog::showDialog);
 
+    QAction *desktopShortcutAction = new QAction(QIcon(":/img/shortcut.png"),"",this);
+    desktopShortcutAction->setToolTip(tr("Create a desktop shortcut of a task which autoruns..."));
+    connect(desktopShortcutAction, &QAction::triggered, m_createDesktopShortcutDialog, &CreateAutorunDesktopShortcutDialog::showDialog);
+
     QWidget* spacer0 = new QWidget(this);
     spacer0->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -233,6 +241,7 @@ void MainWindow::buildToolBar()
     connect(m_stayOnTopAction, &QAction::triggered, this, &MainWindow::swapStayOnTop);
 
     m_toolBar->addAction(startupTasksAction);
+    m_toolBar->addAction(desktopShortcutAction);
     m_toolBar->addWidget(spacer0);
     m_toolBar->addAction(dataEditAction);
     m_toolBar->addWidget(spacer1);
@@ -328,6 +337,10 @@ void MainWindow::switchTheme()
     m_penombraThemeAction->setChecked(false);
     m_darkThemeAction->setChecked(false);
 
+    m_lightThemeAction->setEnabled(true);
+    m_penombraThemeAction->setEnabled(true);
+    m_darkThemeAction->setEnabled(true);
+
     QString objName = sender->objectName();
     QString qssFileName;
     if(objName=="lightAction")
@@ -335,18 +348,21 @@ void MainWindow::switchTheme()
         qssFileName = ":/style/light.qss";
         m_lightThemeAction->setChecked(true);
         m_currentThemeName = "light";
+        m_lightThemeAction->setEnabled(false);
     }
     else if(objName=="darkAction")
     {
         qssFileName = ":/style/dark.qss";
         m_darkThemeAction->setChecked(true);
         m_currentThemeName = "dark";
+        m_darkThemeAction->setEnabled(false);
     }
     else
     {
         qssFileName = ":/style/penombra.qss";
         m_penombraThemeAction->setChecked(true);
         m_currentThemeName = "penombra";
+        m_penombraThemeAction->setEnabled(false);
     }
 
     QFile qss(qssFileName);
@@ -382,6 +398,16 @@ void MainWindow::taskTabContextMenuRequest(QPoint point)
     connect(closeAct, &QAction::triggered, this, [=](){ m_tasktabsManager->onTabCloseRequest(index); });
 
     menu->popup(ui->tabWidget->tabBar()->mapToGlobal(point));
+}
+
+void MainWindow::createAutorunShortcutFromDialogReceived()
+{
+    if(m_createDesktopShortcutDialog->m_filename.isEmpty() || m_createDesktopShortcutDialog->m_delay < 0
+        || m_createDesktopShortcutDialog->m_loopTimes == 0 || m_createDesktopShortcutDialog->m_shortcutname.isEmpty())
+        return;
+    QString args = "\""+m_createDesktopShortcutDialog->m_filename+"\" "+QString::number(m_createDesktopShortcutDialog->m_delay)
+                   + " " + QString::number(m_createDesktopShortcutDialog->m_loopTimes);
+    ActionsTools::createDesktopShortcut(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), QCoreApplication::applicationFilePath(), args, m_createDesktopShortcutDialog->m_shortcutname);
 }
 
 void MainWindow::showWindow(QSystemTrayIcon::ActivationReason reason)
