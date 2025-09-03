@@ -28,19 +28,13 @@ void StartupTasksTableWidget::refresh()
         for(auto& taskParam : tasksParamsList)
         {
             auto paramL = taskParam.split("/");
-            if((paramL.size() != 3 && paramL.size() != 2) || paramsInTable.contains(taskParam))
+            if(paramL.size() != 3 || paramsInTable.contains(taskParam))
                 continue;
             insertRow(rowCount());
             setItem(rowCount()-1,0,new QTableWidgetItem(paramL.at(0)));
             setItem(rowCount()-1,1,new QTableWidgetItem(paramL.at(1)));
             QString loopTimesStr = "";
-            if(paramL.size()==2)
-            {
-                loopTimesStr = "1";
-                taskParam +="/1";
-            }
-            else
-                loopTimesStr = paramL.at(2);
+            loopTimesStr = paramL.at(2);
             if(loopTimesStr == "-1")
                 setItem(rowCount()-1,2,new QTableWidgetItem(tr("Infinite")));
             else
@@ -77,17 +71,6 @@ void StartupTasksTableWidget::refresh()
                 loopTimes = match.captured(3);
 
                 entryMatches = true;
-            }
-            else
-            {
-                QRegularExpression regexp2args(G_Files::ProgramNameInRegistry_KeyWord+" (.*) (\\d+)");
-                QRegularExpressionMatch match2args = regexp2args.match(entry);
-                if (match2args.hasMatch()) {
-                    taskName = match2args.captured(1);
-                    delay = match2args.captured(2);
-                    loopTimes = "1";
-                    entryMatches = true;
-                }
             }
 
             QString taskParam = taskName+"/"+delay+"/"+loopTimes;
@@ -193,8 +176,6 @@ bool StartupTasksTableWidget::doesEntryExistsInRegistry(const QString &taskParam
     {
         if(settings.childKeys().contains(G_Files::ProgramNameInRegistry_KeyWord+" "+paramL.at(0)+" "+paramL.at(1)+" "+paramL.at(2)))
             return true;
-        if(paramL.at(2) == "1" && settings.childKeys().contains(G_Files::ProgramNameInRegistry_KeyWord+" "+paramL.at(0)+" "+paramL.at(1)))
-            return true;
     }
     return false;
 }
@@ -221,8 +202,6 @@ void StartupTasksTableWidget::deleteEntryFromRegistry(const QString &taskParam)
 
     QSettings settings(G_Files::SystemStartupRegistry_Path, QSettings::NativeFormat);
     settings.remove(G_Files::ProgramNameInRegistry_KeyWord+" "+paramL.at(0)+" "+paramL.at(1)+" "+paramL.at(2));
-    if(paramL.at(2) == "1")
-        settings.remove(G_Files::ProgramNameInRegistry_KeyWord+" "+paramL.at(0)+" "+paramL.at(1));
     settings.sync();
 }
 

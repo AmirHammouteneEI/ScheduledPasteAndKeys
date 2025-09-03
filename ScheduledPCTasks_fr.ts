@@ -469,7 +469,7 @@ item selected in CreatePasteActionDialog is null !</translation>
     </message>
     <message>
         <source>Quit Scheduled PC Tasks</source>
-        <translation>Quitter Scheduled PC Tasks</translation>
+        <translation type="vanished">Quitter Scheduled PC Tasks</translation>
     </message>
     <message>
         <source>Log off user session</source>
@@ -588,6 +588,10 @@ Veuillez fournir toutes les informations nécessaires.</translation>
     <message>
         <source>Set the new audio volume :</source>
         <translation>Définissez le nouveau volume :</translation>
+    </message>
+    <message>
+        <source>Quit Tasket++</source>
+        <translation>Quitter Tasket++</translation>
     </message>
 </context>
 <context>
@@ -1097,7 +1101,7 @@ version 0.2</translation>
     </message>
     <message>
         <source>Scheduled PC Tasks is still running...</source>
-        <translation>Scheduled PC Tasks est toujours en cours d&apos;exécution...</translation>
+        <translation type="vanished">Scheduled PC Tasks est toujours en cours d&apos;exécution...</translation>
     </message>
     <message>
         <source>You can open the window by a simple click on the system tray icon.
@@ -1265,7 +1269,7 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     </message>
     <message>
         <source>version 1.4.1 (August 2025)</source>
-        <translation>version 1.4.1 (août 2025)</translation>
+        <translation type="vanished">version 1.4.1 (août 2025)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1276,7 +1280,7 @@ initial work on February 2024
 version 1.4.1 (August 2025)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
@@ -1288,6 +1292,32 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     <message>
         <source>Create a desktop shortcut of a task which autoruns...</source>
         <translation>Créer un raccourci bureau d&apos;une tâche qui s&apos;exécute automatiquement...</translation>
+    </message>
+    <message>
+        <source>version 1.5 (August 2025)</source>
+        <translation>version 1.5 (août 2025)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.5 (August 2025)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.5 (août 2025)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>Tasket++ is still running...</source>
+        <translation>Tasket++ est toujours en cours d&apos;exécution...</translation>
     </message>
 </context>
 <context>
@@ -1659,7 +1689,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Quit Scheduled PC Tasks</source>
-        <translation>Quitter Scheduled PC Tasks</translation>
+        <translation type="vanished">Quitter Scheduled PC Tasks</translation>
     </message>
     <message>
         <source>Create a folder</source>
@@ -1712,6 +1742,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>Change PC audio volume</source>
         <translation>Changer le volume audio du PC</translation>
+    </message>
+    <message>
+        <source>Quit Tasket++</source>
+        <translation>Quitter Tasket++</translation>
     </message>
 </context>
 <context>

@@ -78,7 +78,7 @@ QString SystemCommandWidget::fromSysCmdTypeToDiplayedStr(SystemCommandType t)
     else if(t == SystemCommandType::KillProcess)
         sysCmdTypeStr = tr("Kill a process");
     else if(t == SystemCommandType::QuitSelfProgram)
-        sysCmdTypeStr = tr("Quit Scheduled PC Tasks");
+        sysCmdTypeStr = tr("Quit Tasket++");
     else if(t == SystemCommandType::CreateFolder)
         sysCmdTypeStr = tr("Create a folder");
     else if(t == SystemCommandType::DeleteFolder)

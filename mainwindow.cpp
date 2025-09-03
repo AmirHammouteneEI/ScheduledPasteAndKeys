@@ -34,14 +34,14 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("Scheduled PC Tasks v1.4.1");
+    setWindowTitle("Tasket++ v1.5");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
 
     // Will also be a system tray app
     m_sticon = new QSystemTrayIcon(QIcon(":/img/programIcon.png"),this);
     buildSystemTrayMenu();
-    m_sticon->setToolTip("Scheduled PC Tasks");
+    m_sticon->setToolTip("Tasket++");
     m_sticon->show();
 
     m_startupTasksDialog = new StartupTasksDialog(this);
@@ -73,7 +73,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 1.4.1 (August 2025)\n\n"
+                    "version 1.5 (August 2025)\n\n"
                     "Free & Open source (see readme.txt for more information)"));
 }
 
@@ -121,7 +121,7 @@ void MainWindow::buildSystemTrayMenu()
 {
     m_stmenu = new QMenu(this);
 
-    QAction* titleAction = new QAction(QIcon(":/img/programIcon.png"),"Scheduled PC Tasks",m_stmenu);
+    QAction* titleAction = new QAction(QIcon(":/img/programIcon.png"),"Tasket++",m_stmenu);
     QFont titleFont = titleAction->font();
     titleFont.setBold(true);
     titleAction->setFont(titleFont);
@@ -144,7 +144,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     // Shows a system tray message saying that app is still running only the first time we close window
     if(!m_stMessageShown)
     {
-        m_sticon->showMessage(tr("Scheduled PC Tasks is still running..."),
+        m_sticon->showMessage(tr("Tasket++ is still running..."),
                                  tr("You can open the window by a simple click on the system tray icon.\n"\
                                  "Right click on it to quit the application."),QIcon(":/img/programIcon.png"));
         m_stMessageShown = true;

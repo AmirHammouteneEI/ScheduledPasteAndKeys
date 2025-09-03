@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
 
-TARGET = ScheduledPCTasks
+TARGET = Tasket++
 
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function -Wno-unused-parameter -Wno-unused-result
 
@@ -143,7 +143,7 @@ RESOURCES += \
 
 RC_ICONS = img/programIcon.ico
 
-VERSION = 1.4.1
+VERSION = 1.5
 QMAKE_TARGET_COMPANY = "Amir Hammoutene"
 QMAKE_TARGET_COPYRIGHT = "GNU general public license version 3"
 

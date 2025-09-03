@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     // Get local system language to apply translations is exists
     QString locale = QLocale::system().name().section('_', 0, 0);
     QTranslator translator;
-    translator.load(QApplication::applicationDirPath()+"/"+QString("ScheduledPCTasks_") + locale);
+    translator.load(QApplication::applicationDirPath()+"/"+QString("Tasket++_") + locale);
     QTranslator baseTranslator;
     baseTranslator.load(QApplication::applicationDirPath()+"/"+QString("qtbase_") + locale);
     a.installTranslator(&translator);
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     std::shared_ptr<MainWindow> w = MainWindow::getInstance();
     w->buildTaskTabsManager();
 
-    // In case of program used with correct arguments, automatically run the task (usage : ScheduledPCTasks.exe "TaskFileName" <DelayInSeconds> <NumberOfLoops>)
+    // In case of program used with correct arguments, automatically run the task (usage : Tasket++.exe "TaskFileName" <DelayInSeconds> <NumberOfLoops>)
     if(argc == 3 || argc == 4)
     {
         int delay = atoi(argv[2]);

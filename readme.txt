@@ -1,6 +1,6 @@
-# Scheduled PC Tasks
+# Tasket++
 
-version 1.4.1 (August 2025)
+version 1.5 (August 2025)
 
 Schedule automated simulations of actions you would perform on your PC.
 
@@ -12,7 +12,7 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 1.4.1 :
+Details of version 1.5 :
 
 Stable version, fully functional
 
@@ -25,13 +25,12 @@ Those actions simulations are available :
    - Run Windows system specific command (shut down, reboot, kill processes, create files...)
    - Wait
 
-And other features like data management, scheduled tasks at system startup...
+And other features like data management, scheduled tasks at system startup, create desktop shortcut to autorun a task...
    
 The goal in future versions is to include those features :
 
-   - Play sound actions
+   - Play sound and show alert dialog actions
    - Add more Windows system specific command
-   - Create desktop shortcut to launch the tool and auto schedule a task to run
    - Configure global hot keys to schedule a task to run while the user is on another application or video game
 
 Working on a Linux system version.
@@ -43,13 +42,9 @@ Available for install on Microsoft Store :
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
 Available as a portable version :
-https://files.amirhammoutene.dev/ScheduledPCTasks/1.4.1/Scheduled_PC_Tasks_v1.4.1.zip
+https://files.amirhammoutene.dev/Tasket++/1.5/Tasket++_v1.5.zip
 
 Needs 30 Mo disk space, available for Windows systems only
-   
-----------
-Presentation video is available on Youtube :
-https://www.youtube.com/watch?v=ue6FPNrjD4c
 
 ----------
 Has been developed in C++ language, using Qt (6.7.1) framework 

@@ -41,7 +41,7 @@ namespace G_Files {
     inline QString TasksFileExtension = ".scht";
     inline QString StartupTasksParams_KeyWord = "startupTasksParams";
     inline QString SystemStartupRegistry_Path = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
-    inline QString ProgramNameInRegistry_KeyWord = "ScheduledPCTask";
+    inline QString ProgramNameInRegistry_KeyWord = "Tasket++";
 }
 
 namespace G_Sentences {

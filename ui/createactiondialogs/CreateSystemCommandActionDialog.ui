@@ -128,7 +128,7 @@
       <item row="3" column="3" colspan="2">
        <widget class="QPushButton" name="quitselfprogramButton">
         <property name="text">
-         <string>Quit Scheduled PC Tasks</string>
+         <string>Quit Tasket++</string>
         </property>
        </widget>
       </item>
