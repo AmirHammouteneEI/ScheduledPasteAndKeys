@@ -1,17 +1,17 @@
 # Tasket++
 
-version 1.5 (August 2025)
+version 1.6 (December 2025)
 
 Schedule automated simulations of actions you would perform on your PC.
 
-<img src="https://files.amirhammoutene.dev/ScheduledPCTasks/screenshots/00-task-launchapp.png" alt="Example of Task" width="300"/> 
+<img src="https://files.amirhammoutene.dev/Tasket++/screenshots/1-main.png" alt="Example of Task" width="300"/> 
 <details>  
    <summary>More image previews</summary>
-   <img src="https://files.amirhammoutene.dev/ScheduledPCTasks/screenshots/04-cursormove.png" alt="Edit cursor movements" width="600"/>
+   <img src="https://files.amirhammoutene.dev/Tasket++/screenshots/2-actiontypes.png" alt="Action types" width="600"/>
    
-   <img src="https://files.amirhammoutene.dev/ScheduledPCTasks/screenshots/02-systemcommands.png" alt="System commands" width="500"/>    <img src="https://files.amirhammoutene.dev/ScheduledPCTasks/screenshots/06-selectkeys.png" alt="Select keys" width="300"/> 
+   <img src="https://files.amirhammoutene.dev/Tasket++/screenshots/3-systemcommands.png" alt="System commands" width="500"/>    <img src="https://files.amirhammoutene.dev/Tasket++/screenshots/4-cursormovements.png" alt="Cursor Movements" width="300"/> 
    
-   <img src="https://files.amirhammoutene.dev/ScheduledPCTasks/screenshots/07-data.png" alt="Keys sequences data" width="400"/>    <img src="https://files.amirhammoutene.dev/ScheduledPCTasks/screenshots/09-darktheme.png" alt="Dark theme" width="300"/>
+   <img src="https://files.amirhammoutene.dev/Tasket++/screenshots/5-runatstartup.png" alt="Run task at startup" width="400"/>    <img src="https://files.amirhammoutene.dev/Tasket++/screenshots/6-keysequences.png" alt="Key sequences" width="300"/>
 </details>
 
 ----------
@@ -22,7 +22,7 @@ Please read license.txt file
 We don't collect any data, please read private_policy.txt
 
 ----------
-Details of version 1.5:
+Details of version 1.6 :
 
 Stable version, fully functional
 
@@ -31,9 +31,9 @@ Those actions simulations are available :
    - Keys sequence
    - Move Cursor
    - Paste text
-   - Open files, folders, executables, url
-   - Run Windows system specific command (shut down, reboot, kill processes, create files...)
+   - Run Windows system specific command (open files, folders, executables, url, shut down pc, reboot, kill processes, create files...)
    - Wait
+   - Run another task
 
 And other features like data management, scheduled tasks at system startup, create desktop shortcut to autorun a task...
    
@@ -43,8 +43,6 @@ The goal in future versions is to include those features :
    - Add more Windows system specific command
    - Configure global hot keys to schedule a task to run while the user is on another application or video game
 
-Working on a Linux system version.
-
 Feedbacks and ideas for further actions are very welcome !
 
 ----------
@@ -52,12 +50,12 @@ Available for install on Microsoft Store :
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
 Available as a portable version :
-https://files.amirhammoutene.dev/Tasket++/1.5/Tasket++_v1.5.zip
+https://files.amirhammoutene.dev/Tasket++/1.6/Tasket++_v1.6.zip
 
 Needs 30 MB disk space, available for Windows systems only
 
 ----------
-Has been developed in C++ language, using Qt (6.7.1) framework 
+Has been developed in C++ language, using Qt (6.9.3) framework 
 
 Open Source
 
