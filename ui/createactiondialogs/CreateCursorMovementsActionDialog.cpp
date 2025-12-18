@@ -9,6 +9,7 @@ CreateCursorMovementsActionDialog::CreateCursorMovementsActionDialog(QWidget *pa
     , ui(new Ui::CreateCursorMovementsActionDialog)
 {
     ui->setupUi(this);
+    ui->addCursorMovementsButton->setObjectName("plusminusButton");
     connect(ui->addCursorMovementsButton, &QPushButton::released, ui->tableWidget, &CursorMovementsTableWidget::createCursorMovementsReceived);
 }
 

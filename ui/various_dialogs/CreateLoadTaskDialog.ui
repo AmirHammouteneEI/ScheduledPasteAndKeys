@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>527</width>
-    <height>419</height>
+    <width>524</width>
+    <height>387</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -93,10 +93,10 @@
          <bool>false</bool>
         </attribute>
         <attribute name="horizontalHeaderMinimumSectionSize">
-         <number>64</number>
+         <number>68</number>
         </attribute>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>250</number>
+         <number>255</number>
         </attribute>
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>
@@ -261,7 +261,7 @@
       <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Create a new task:</string>
+         <string>Create a new task  </string>
         </property>
        </widget>
       </item>
@@ -274,6 +274,22 @@
       </item>
      </layout>
     </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Policy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">

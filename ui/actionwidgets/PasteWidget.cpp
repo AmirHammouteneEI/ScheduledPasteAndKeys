@@ -22,10 +22,14 @@ void PasteWidget::buildWidget()
     if(centralGridLayout == nullptr)
         return;
 
-    auto loopFrame = new QFrame(m_centralWidget);
-    auto loopLabel = new QLabel(tr("Loop "),loopFrame);
-    m_loopSpin = new NoWheelFocusSpinBox(loopFrame);
-    auto looptimesLabel = new QLabel(tr(" times"),loopFrame);
+    auto loopFrame = new QFrame(this);
+    loopFrame->setObjectName("actionSubFrame");
+    auto loopLabel = new QLabel(tr("Loop "),this);
+    loopLabel->setObjectName("actionSubLabel");
+    m_loopSpin = new NoWheelFocusSpinBox(this);
+    m_loopSpin->setObjectName("actionSpin");
+    auto looptimesLabel = new QLabel(tr(" times"),this);
+    looptimesLabel->setObjectName("actionSubLabel");
     m_loopSpin->setAlignment(Qt::AlignCenter);
     m_loopSpin->setMinimum(1);
     m_loopSpin->setMaximum(9999);
@@ -54,7 +58,7 @@ void PasteWidget::buildWidget()
         m_loopSpin->setValue(pasteaction->m_timesToRun);
     }
 
-    m_mainButton->setIcon(QIcon(":/img/text.png"));
+    m_mainButton->setObjectName("pastetextActionButton");
     m_mainButton->setText(tr("Paste text #")+id);
     m_mainButton->setToolTip(content);
     m_mainButton->setProperty("contentId", id);

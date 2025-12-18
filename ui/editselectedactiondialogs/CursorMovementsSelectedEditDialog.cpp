@@ -10,6 +10,8 @@ CursorMovementsSelectedEditDialog::CursorMovementsSelectedEditDialog(QWidget *pa
     , ui(new Ui::CursorMovementsSelectedEditDialog)
 {
     ui->setupUi(this);
+    ui->addMovsButton->setObjectName("plusminusButton");
+    ui->removeMovsButton->setObjectName("plusminusButton");
     ui->tableWidget->horizontalHeader()->resizeSection(0,220);
     ui->tableWidget->horizontalHeader()->resizeSection(4,40);
     ui->lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("\\w+"), this));
@@ -116,6 +118,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
 {
     int index = ui->tableWidget->rowCount();
     NoWheelFocusDoubleSpinBox *delaySpin = new NoWheelFocusDoubleSpinBox(this);
+    delaySpin->setObjectName("dspinInTable");
     delaySpin->setDecimals(2);
     delaySpin->setMinimum(0.);
     delaySpin->setMaximum(999999999999.);
@@ -127,6 +130,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
         delaySpin->setEnabled(false);
 
     NoWheelFocusDoubleSpinBox *movingTimeSpin = new NoWheelFocusDoubleSpinBox(this);
+    movingTimeSpin->setObjectName("dspinInTable");
     movingTimeSpin->setDecimals(2);
     movingTimeSpin->setMinimum(0.1);
     movingTimeSpin->setMaximum(999999999999.);
@@ -136,6 +140,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
     movingTimeSpin->setValue(1.);
 
     NoWheelFocusSpinBox *xCoordSpin = new NoWheelFocusSpinBox(this);
+    xCoordSpin->setObjectName("spinInTable");
     xCoordSpin->setMinimum(0);
     xCoordSpin->setMaximum(9999);//TODO check screens max width
     xCoordSpin->setSingleStep(1);
@@ -144,6 +149,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
     xCoordSpin->setValue(0);
 
     NoWheelFocusSpinBox *yCoordSpin = new NoWheelFocusSpinBox(this);
+    yCoordSpin->setObjectName("spinInTable");
     yCoordSpin->setMinimum(0);
     yCoordSpin->setMaximum(9999);//TODO check screens max height
     yCoordSpin->setSingleStep(1);
@@ -153,6 +159,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
 
     QPushButton *captureCoordsButton = new QPushButton(this);
     captureCoordsButton->setFlat(true);
+    captureCoordsButton->setObjectName("buttonInTable");
     captureCoordsButton->setIcon(QIcon(":/img/cursor-cross.png"));
     captureCoordsButton->setProperty("index",index);
     connect(captureCoordsButton,&QPushButton::released, m_getCursorCoordinatesWidget,&getCursorCoordinatesWidget::showWidget);

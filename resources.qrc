@@ -5,30 +5,17 @@
         <file>img/unpinned.png</file>
         <file>img/darkTheme.png</file>
         <file>img/lightTheme.png</file>
-        <file>img/penombraTheme.png</file>
         <file>style/dark.qss</file>
         <file>style/light.qss</file>
-        <file>style/penombra.qss</file>
         <file>img/check.png</file>
         <file>img/check_light.png</file>
-        <file>img/check_penombra.png</file>
-        <file>img/close.png</file>
-        <file>img/close_light.png</file>
-        <file>img/close_penombra.png</file>
         <file>img/down_arrow_light.png</file>
-        <file>img/down_arrow_penombra.png</file>
         <file>img/left_arrow.png</file>
         <file>img/left_arrow_light.png</file>
-        <file>img/left_arrow_penombra.png</file>
         <file>img/right_arrow.png</file>
         <file>img/right_arrow_light.png</file>
-        <file>img/right_arrow_penombra.png</file>
-        <file>img/undock.png</file>
-        <file>img/undock_light.png</file>
-        <file>img/undock_penombra.png</file>
         <file>img/up_arrow.png</file>
         <file>img/up_arrow_light.png</file>
-        <file>img/up_arrow_penombra.png</file>
         <file>img/plus.png</file>
         <file>img/close_red.png</file>
         <file>img/bottom_arrow_rounded.png</file>
@@ -51,5 +38,22 @@
         <file>img/startup.png</file>
         <file>img/anotherTask.png</file>
         <file>img/shortcut.png</file>
+        <file>img/data.png</file>
+        <file>img/anotherTask_light.png</file>
+        <file>img/bottom_arrow_rounded_light.png</file>
+        <file>img/browseFolder_light.png</file>
+        <file>img/close_red_light.png</file>
+        <file>img/cursor_light.png</file>
+        <file>img/data_light.png</file>
+        <file>img/down_arrow_rounded_light.png</file>
+        <file>img/key_light.png</file>
+        <file>img/save_light.png</file>
+        <file>img/shortcut_light.png</file>
+        <file>img/startup_light.png</file>
+        <file>img/systemCommand_light.png</file>
+        <file>img/text_light.png</file>
+        <file>img/top_arrow_rounded_light.png</file>
+        <file>img/up_arrow_rounded_light.png</file>
+        <file>img/wait_light.png</file>
     </qresource>
 </RCC>

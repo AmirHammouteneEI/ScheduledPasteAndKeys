@@ -8,6 +8,7 @@ getFolderPathDialog::getFolderPathDialog(QWidget *parent)
     , ui(new Ui::getFolderPathDialog)
 {
     ui->setupUi(this);
+    ui->pushButton->setObjectName("browseButton");
     connect(ui->pushButton, &QPushButton::released, this, &getFolderPathDialog::showBrowseFoldersDialog);
 }
 

@@ -10,6 +10,8 @@ KeysSequenceSelectedEditDialog::KeysSequenceSelectedEditDialog(QWidget *parent)
     , ui(new Ui::KeysSequenceSelectedEditDialog)
 {
     ui->setupUi(this);
+    ui->addKeysButton->setObjectName("plusminusButton");
+    ui->removeKeysButton->setObjectName("plusminusButton");
     ui->lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("\\w+"), this));
     connect(ui->addKeysButton, &QPushButton::released, this,&KeysSequenceSelectedEditDialog::addKeysRow);
     connect(ui->removeKeysButton, &QPushButton::released, this,&KeysSequenceSelectedEditDialog::removeLastKeysRow);
@@ -84,6 +86,7 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
 {
     int index = ui->tableWidget->rowCount();
     NoWheelFocusDoubleSpinBox *pressedDelaySpin = new NoWheelFocusDoubleSpinBox(ui->tableWidget);
+    pressedDelaySpin->setObjectName("dspinInTable");
     pressedDelaySpin->setDecimals(2);
     pressedDelaySpin->setMaximum(0.);
     pressedDelaySpin->setMaximum(999999999999.);
@@ -103,6 +106,7 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
     }
 
     NoWheelFocusDoubleSpinBox *releasedDelaySpin = new NoWheelFocusDoubleSpinBox(ui->tableWidget);
+    releasedDelaySpin->setObjectName("dspinInTable");
     releasedDelaySpin->setDecimals(2);
     releasedDelaySpin->setMinimum(0.1);
     releasedDelaySpin->setMaximum(999999999999.);
@@ -111,6 +115,8 @@ QList<QWidget*> KeysSequenceSelectedEditDialog::addKeysRow()
     releasedDelaySpin->setLocale(QLocale::English);
 
     QPushButton *keysListButton = new QPushButton(ui->tableWidget);
+    keysListButton->setFlat(true);
+    keysListButton->setObjectName("buttonInTable");
 
     KeysSelectorDialog *keysSelector = new KeysSelectorDialog(keysListButton);
     connect(keysListButton, &QPushButton::released, keysSelector, &KeysSelectorDialog::showDialog);

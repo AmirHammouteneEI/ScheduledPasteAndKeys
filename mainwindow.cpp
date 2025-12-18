@@ -34,7 +34,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("Tasket++ v1.5");
+
+    setWindowTitle("Tasket++ v1.6");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
 
@@ -73,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 1.5 (August 2025)\n\n"
+                    "version 1.6 (December 2025)\n\n"
                     "Free & Open source (see readme.txt for more information)"));
 }
 
@@ -161,13 +162,13 @@ void MainWindow::geometrySet()
 void MainWindow::loadSettings()
 {
     QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::SettingsFilePath, QSettings::IniFormat);
-    m_windowWidth = settings.value("windowWidth", 510).toInt();
+    m_windowWidth = settings.value("windowWidth", 540).toInt();
     m_windowHeight = settings.value("windowHeight", 800).toInt();
 
-    m_windowWidth = m_windowWidth < 50 ? 510 : m_windowWidth;
+    m_windowWidth = m_windowWidth < 50 ? 540 : m_windowWidth;
     m_windowHeight = m_windowHeight < 50 ? 800 : m_windowHeight;
 
-    m_currentThemeName = settings.value("style", "penombra").toString();
+    m_currentThemeName = settings.value("style", "dark").toString();
     swapAutoscrollMode(settings.value("autoscroll", true).toBool());
 }
 
@@ -185,24 +186,19 @@ void MainWindow::buildToolBar()
     m_toolBar = new QToolBar("toolbar",this);
     m_toolBar->setMovable(false);
     m_toolBar->setFloatable(false);
-    m_toolBar->setFixedHeight(30);
 
-    QAction *startupTasksAction = new QAction(QIcon(":/img/startup.png"),"",this);
+    QAction *startupTasksAction = new QAction("",this);
     startupTasksAction->setToolTip(tr("Edit tasks scheduled at system startup..."));
     connect(startupTasksAction, &QAction::triggered, m_startupTasksDialog, &StartupTasksDialog::showDialog);
 
-    QAction *desktopShortcutAction = new QAction(QIcon(":/img/shortcut.png"),"",this);
+    QAction *desktopShortcutAction = new QAction("",this);
     desktopShortcutAction->setToolTip(tr("Create a desktop shortcut of a task which autoruns..."));
     connect(desktopShortcutAction, &QAction::triggered, m_createDesktopShortcutDialog, &CreateAutorunDesktopShortcutDialog::showDialog);
 
     QWidget* spacer0 = new QWidget(this);
     spacer0->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    QAction *dataEditAction = new QAction("▤",this);
-    QFont font = dataEditAction->font();
-    font.setBold(true);
-    font.setPointSize(21);
-    dataEditAction->setFont(font);
+    QAction *dataEditAction = new QAction("",this);
     dataEditAction->setToolTip(tr("Edit data..."));
     connect(dataEditAction, &QAction::triggered, m_dataEditDialog, &DataEditDialog::showDialog);
 
@@ -223,12 +219,6 @@ void MainWindow::buildToolBar()
     m_lightThemeAction->setToolTip(tr("Click to switch to Light style"));
     connect(m_lightThemeAction, &QAction::triggered, this, &MainWindow::switchTheme);
 
-    m_penombraThemeAction = new QAction(QIcon(":/img/penombraTheme.png"),"",this);
-    m_penombraThemeAction->setObjectName("penombraAction");
-    m_penombraThemeAction->setCheckable(true);
-    m_penombraThemeAction->setToolTip(tr("Click to switch to Penombra style"));
-    connect(m_penombraThemeAction, &QAction::triggered, this, &MainWindow::switchTheme);
-
     m_darkThemeAction = new QAction(QIcon(":/img/darkTheme.png"),"",this);
     m_darkThemeAction->setObjectName("darkAction");
     m_darkThemeAction->setCheckable(true);
@@ -248,9 +238,21 @@ void MainWindow::buildToolBar()
     m_toolBar->addAction(m_scrollAction);
     m_toolBar->addWidget(spacer2);
     m_toolBar->addAction(m_lightThemeAction);
-    m_toolBar->addAction(m_penombraThemeAction);
     m_toolBar->addAction(m_darkThemeAction);
     m_toolBar->addAction(m_stayOnTopAction);
+
+    // icons managed by .qss and depend on style
+    auto desktopShortcutButton = m_toolBar->widgetForAction(desktopShortcutAction);
+    if(desktopShortcutButton)
+        desktopShortcutButton->setObjectName("desktopShortcutButton");
+
+    auto dataEditButton = m_toolBar->widgetForAction(dataEditAction);
+    if(dataEditButton)
+        dataEditButton->setObjectName("dataEditButton");
+
+    auto startupTasksButton = m_toolBar->widgetForAction(startupTasksAction);
+    if(startupTasksButton)
+        startupTasksButton->setObjectName("startupTasksButton");
 
     addToolBar(m_toolBar);
 }
@@ -259,10 +261,8 @@ void MainWindow::setTheme()
 {
     if(m_currentThemeName == "light")
         m_lightThemeAction->trigger();
-    else if(m_currentThemeName == "dark")
-        m_darkThemeAction->trigger();
     else
-        m_penombraThemeAction->trigger();
+        m_darkThemeAction->trigger();
 }
 
 void MainWindow::quitApp()
@@ -334,11 +334,9 @@ void MainWindow::switchTheme()
         return;
 
     m_lightThemeAction->setChecked(false);
-    m_penombraThemeAction->setChecked(false);
     m_darkThemeAction->setChecked(false);
 
     m_lightThemeAction->setEnabled(true);
-    m_penombraThemeAction->setEnabled(true);
     m_darkThemeAction->setEnabled(true);
 
     QString objName = sender->objectName();
@@ -350,19 +348,12 @@ void MainWindow::switchTheme()
         m_currentThemeName = "light";
         m_lightThemeAction->setEnabled(false);
     }
-    else if(objName=="darkAction")
+    else
     {
         qssFileName = ":/style/dark.qss";
         m_darkThemeAction->setChecked(true);
         m_currentThemeName = "dark";
         m_darkThemeAction->setEnabled(false);
-    }
-    else
-    {
-        qssFileName = ":/style/penombra.qss";
-        m_penombraThemeAction->setChecked(true);
-        m_currentThemeName = "penombra";
-        m_penombraThemeAction->setEnabled(false);
     }
 
     QFile qss(qssFileName);

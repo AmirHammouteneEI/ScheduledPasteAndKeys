@@ -7,6 +7,7 @@ getFilePathDialog::getFilePathDialog(QWidget *parent, bool getSaved)
     , ui(new Ui::getFilePathDialog)
 {
     ui->setupUi(this);
+    ui->pushButton->setObjectName("browseButton");
     connect(ui->pushButton, &QPushButton::released, this, &getFilePathDialog::showBrowseFilesDialog);
 }
 

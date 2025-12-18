@@ -101,7 +101,7 @@ layout is null when affecting to ActionWidgetsManager !</translation>
     </message>
     <message>
         <source>The delay for the task to run after system startup can&apos;t be set to zero.</source>
-        <translation>Le délai pour que la tâche soit exécutée après le démarrage du système ne peut être fixé à zéro.</translation>
+        <translation type="vanished">Le délai pour que la tâche soit exécutée après le démarrage du système ne peut être fixé à zéro.</translation>
     </message>
     <message>
         <source>Empty name</source>
@@ -114,6 +114,10 @@ layout is null when affecting to ActionWidgetsManager !</translation>
     <message>
         <source>Forbidden character</source>
         <translation>Caractère interdit</translation>
+    </message>
+    <message>
+        <source>The delay for the task to run after using a desktop shortcut can&apos;t be set to zero.</source>
+        <translation>Le délai pour que la tâche soit exécutée après l&apos;utilisation d&apos;un raccourci bureau ne peut être fixé à zéro.</translation>
     </message>
 </context>
 <context>
@@ -222,7 +226,7 @@ item selected in SelectSentenceDialog is null !</translation>
     </message>
     <message>
         <source>Create a new task:</source>
-        <translation>Créer une nouvelle tâche :</translation>
+        <translation type="vanished">Créer une nouvelle tâche :</translation>
     </message>
     <message>
         <source>Task name...</source>
@@ -327,6 +331,10 @@ item selected in SelectSentenceDialog is null !</translation>
     <message>
         <source>Forbidden character</source>
         <translation>Caractère interdit</translation>
+    </message>
+    <message>
+        <source>Create a new task  </source>
+        <translation>Créer une nouvelle tâche  </translation>
     </message>
 </context>
 <context>
@@ -643,7 +651,7 @@ Veuillez fournir toutes les informations nécessaires.</translation>
         <source>Identity must be alphanumerical.
 If already exists in data, it will replace the entry.
 If identity is changed (via the Edit Data window), it will make a copy of the entry.</source>
-        <translation>L&apos;identité doit être alphanumérique.
+        <translation type="vanished">L&apos;identité doit être alphanumérique.
 Si elle existe déjà dans les données, cela remplacera l&apos;entrée.
 Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela fera une copie de l&apos;entrée.</translation>
     </message>
@@ -682,6 +690,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>The cursor movement set you tried to add has no identity, please define one.</source>
         <translation>L&apos;ensemble de mouvements du curseur que vous avez essayé d&apos;ajouter n&apos;a pas d&apos;identité, veuillez en définir une.</translation>
+    </message>
+    <message>
+        <source>Identity must be alphanumerical</source>
+        <translation>L&apos;identité doit être alphanumérique</translation>
     </message>
 </context>
 <context>
@@ -886,7 +898,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
         <source>Identity must be alphanumerical.
 If already exists in data, it will replace the entry.
 If identity is changed (via the Edit Data window), it will make a copy of the entry.</source>
-        <translation>L&apos;identité doit être alphanumérique.
+        <translation type="vanished">L&apos;identité doit être alphanumérique.
 Si elle existe déjà dans les données, cela remplacera l&apos;entrée.
 Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela fera une copie de l&apos;entrée.</translation>
     </message>
@@ -921,6 +933,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>Delays before press must be unique, but some of them have the same value, please modify the entries.</source>
         <translation>Les délais avant appui doivent être unique, mais certains ont la même valeur, veuillez modifier les entrées.</translation>
+    </message>
+    <message>
+        <source>Identity must be alphanumerical</source>
+        <translation>L&apos;identité doit être alphanumérique</translation>
     </message>
 </context>
 <context>
@@ -1013,7 +1029,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Click to switch to Penombra style</source>
-        <translation>Cliquer pour passer au thème Pénombre</translation>
+        <translation type="vanished">Cliquer pour passer au thème Pénombre</translation>
     </message>
     <message>
         <source>Click to switch to Dark style</source>
@@ -1295,7 +1311,7 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     </message>
     <message>
         <source>version 1.5 (August 2025)</source>
-        <translation>version 1.5 (août 2025)</translation>
+        <translation type="vanished">version 1.5 (août 2025)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1306,7 +1322,7 @@ initial work on February 2024
 version 1.5 (August 2025)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
@@ -1318,6 +1334,28 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     <message>
         <source>Tasket++ is still running...</source>
         <translation>Tasket++ est toujours en cours d&apos;exécution...</translation>
+    </message>
+    <message>
+        <source>version 1.6 (December 2025)</source>
+        <translation>version 1.6 (décembre 2025)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.6 (December 2025)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.6 (décembre 2025)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>
 </context>
 <context>
@@ -1520,7 +1558,7 @@ item selected in SelectSentenceDialog is null !</translation>
         <source>Identity must be alphanumerical.
 If already exists in data, it will replace the entry.
 If identity is changed (via the Edit Data window), it will make a copy of the entry.</source>
-        <translation>L&apos;identité doit être alphanumérique.
+        <translation type="vanished">L&apos;identité doit être alphanumérique.
 Si elle existe déjà dans les données, cela remplacera l&apos;entrée.
 Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela fera une copie de l&apos;entrée.</translation>
     </message>
@@ -1535,6 +1573,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>The sentence you tried to add has no identity, please define one.</source>
         <translation>La phrase que vous avez essayée d&apos;ajouter n&apos;a pas d&apos;identité, veuillez en définir une.</translation>
+    </message>
+    <message>
+        <source>Identity must be alphanumerical</source>
+        <translation>L&apos;identité doit être alphanumérique</translation>
     </message>
 </context>
 <context>

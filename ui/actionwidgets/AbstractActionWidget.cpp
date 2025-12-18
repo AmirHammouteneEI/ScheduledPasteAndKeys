@@ -13,14 +13,16 @@ AbstractActionWidget::AbstractActionWidget(QWidget *parent)
     auto gridLayout = new QGridLayout(this);
     m_centralWidget = new QFrame(this);
 
-    //m_centralWidget->setMinimumHeight(90);
+    m_centralWidget->setMinimumHeight(90);
+    m_centralWidget->setObjectName("actionSubFrame");
 
     auto centralGridLayout = new QGridLayout(m_centralWidget);
-    m_mainButton = new QPushButton(m_centralWidget);
+    m_mainButton = new QPushButton(this);
+    m_mainButton->setObjectName("actionButton");
     m_mainButton->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     m_mainButton->setMinimumWidth(200);
 
-    m_infoLabel = new QLabel("",m_centralWidget);
+    m_infoLabel = new QLabel("",this);
     m_infoLabel->setObjectName("actionSubLabel");
     m_infoLabel->setWordWrap(true);
     m_infoLabel->setAlignment(Qt::AlignCenter);
@@ -35,24 +37,24 @@ AbstractActionWidget::AbstractActionWidget(QWidget *parent)
     centralGridLayout->setSizeConstraint(QLayout::SetMinimumSize);
     m_centralWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
 
-    m_removeButton = new QPushButton(QIcon(":/img/close_red.png"),"",this);
-    m_removeButton->setMaximumSize(QSize(20,20));
+    m_removeButton = new QPushButton("",this);
+    m_removeButton->setObjectName("deleteButton");
     m_removeButton->setFlat(true);
     m_removeButton->setToolTip(tr("Remove this action from the task..."));
-    m_moveToTopButton = new QPushButton(QIcon(":/img/top_arrow_rounded.png"),"",this);
-    m_moveToTopButton->setMaximumSize(QSize(20,20));
+    m_moveToTopButton = new QPushButton("",this);
+    m_moveToTopButton->setObjectName("movetopButton");
     m_moveToTopButton->setFlat(true);
     m_moveToTopButton->setToolTip(tr("Move this action to the top"));
-    m_moveToBottomButton = new QPushButton(QIcon(":/img/bottom_arrow_rounded.png"),"",this);
-    m_moveToBottomButton->setMaximumSize(QSize(20,20));
+    m_moveToBottomButton = new QPushButton("",this);
+    m_moveToBottomButton->setObjectName("movebottomButton");
     m_moveToBottomButton->setFlat(true);
     m_moveToBottomButton->setToolTip(tr("Move this action to the bottom"));
-    m_moveUpButton = new QPushButton(QIcon(":/img/up_arrow_rounded.png"),"",this);
-    m_moveUpButton->setMaximumSize(QSize(20,20));
+    m_moveUpButton = new QPushButton("",this);
+    m_moveUpButton->setObjectName("moveupButton");
     m_moveUpButton->setFlat(true);
     m_moveUpButton->setToolTip(tr("Move this action up"));
-    m_moveDownButton = new QPushButton(QIcon(":/img/down_arrow_rounded.png"),"",this);
-    m_moveDownButton->setMaximumSize(QSize(20,20));
+    m_moveDownButton = new QPushButton("",this);
+    m_moveDownButton->setObjectName("movedownButton");
     m_moveDownButton->setFlat(true);
     m_moveDownButton->setToolTip(tr("Move this action down"));
 

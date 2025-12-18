@@ -7,6 +7,8 @@ StartupTasksDialog::StartupTasksDialog(QWidget *parent)
     , ui(new Ui::StartupTasksDialog)
 {
     ui->setupUi(this);
+    ui->addButton->setObjectName("plusminusButton");
+    ui->removeButton->setObjectName("plusminusButton");
     ui->tableWidget->horizontalHeader()->resizeSection(1,80);
     ui->tableWidget->horizontalHeader()->resizeSection(2,90);
     ui->tableWidget->horizontalHeader()->resizeSection(3,100);

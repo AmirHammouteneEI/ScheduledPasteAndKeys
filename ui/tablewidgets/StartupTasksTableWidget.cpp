@@ -41,6 +41,7 @@ void StartupTasksTableWidget::refresh()
                 setItem(rowCount()-1,2,new QTableWidgetItem(loopTimesStr));
 
             auto checkB = new QCheckBox(this);
+            checkB->setObjectName("checkboxInTable");
             checkB->setProperty("params", taskParam);
             checkB->setChecked(doesEntryExistsInRegistry(taskParam));
             connect(checkB, &QCheckBox::clicked, this, &StartupTasksTableWidget::checkBoxToggled);

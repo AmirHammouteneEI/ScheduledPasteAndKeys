@@ -77,15 +77,14 @@ void TaskTab::buildBasicInterface()
     m_nameLabel->setAlignment(Qt::AlignCenter);
     m_nameLabel->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
     m_nameLabel->setMinimumWidth(400);
-    m_saveButton = new QPushButton(QIcon(":/img/save.png"),"", topWidget);
-    m_saveButton->setFlat(true);
+    m_saveButton = new QPushButton("", topWidget);
+    m_saveButton->setObjectName("saveButton");
     m_saveButton->setToolTip(tr("Save changes"));
-    m_saveButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     m_descriptionEdit = new QPlainTextEdit(topWidget);
     m_descriptionEdit->setPlaceholderText(tr("description..."));
     m_descriptionEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::MinimumExpanding);
-    m_descriptionEdit->setMinimumWidth(300);
-    m_descriptionEdit->setMaximumHeight(60);
+    m_descriptionEdit->setMinimumWidth(350);
+    m_descriptionEdit->setMaximumHeight(80);
     auto scheduleAndStopWidget = new QWidget(topWidget);
     auto scheduleAndStopLayout = new QHBoxLayout(scheduleAndStopWidget);
     m_scheduleButton = new QPushButton(tr("Schedule the Task"), topWidget);
@@ -132,17 +131,17 @@ void TaskTab::buildBasicInterface()
     m_loopedTimesLabel->setContentsMargins(1,1,1,1);
     auto font = m_nameLabel->font();
     font.setBold(true);
-    font.setPointSize(13);
+    font.setPointSize(14);
     m_nameLabel->setFont(font);
     font.setPointSize(16);
     m_scheduleButton->setFont(font);
     m_stopButton->setFont(font);
-    font.setPointSize(12);
+    font.setPointSize(9);
     m_timesToRunSpinBox->setFont(font);
     orLabel->setFont(font);
     m_loopButton->setFont(font);
     font.setBold(false);
-    font.setPointSize(11);
+    font.setPointSize(10);
     executeLabel->setFont(font);
     timesLabel->setFont(font);
     m_delayChrono->setFont(font);
@@ -172,7 +171,7 @@ void TaskTab::buildBasicInterface()
     m_addActionButton = new QToolButton(bottomWidget);
     m_addActionButton->setObjectName("addActionButton");
     m_addActionButton->setText("+");
-    m_addActionButton->setStyleSheet("QToolButton{font-size:42px;font-weight:bold;text-align:center;padding:-10px -5px 5px -5px;}");
+    m_addActionButton->setStyleSheet("QToolButton{font-family: \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif;font-size:42px;font-weight:bold;text-align:center;padding:-10px -5px 5px -5px;}");
 
     buildAddButtonMenu();
 
@@ -444,12 +443,12 @@ void TaskTab::refreshScheduleText()
     if(m_scheduleState == ScheduleState::NotScheduled)
     {
         m_delayChrono->setText(tr("not scheduled"));
-        m_delayChrono->setStyleSheet("");
+        m_delayChrono->setStyleSheet("color: #9ea7b3");
     }
     else if(m_scheduleState == ScheduleState::Running)
     {
         m_delayChrono->setText(tr("Running"));
-        m_delayChrono->setStyleSheet("color: green;");
+        m_delayChrono->setStyleSheet("color: #2a8f6f;");
     }
     else
     {

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>561</width>
-    <height>119</height>
+    <width>595</width>
+    <height>128</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -298,13 +298,13 @@
    <header location="global">ui/CustomPrimaryWidgets.h</header>
   </customwidget>
   <customwidget>
-   <class>NoWheelFocusDoubleSpinBox</class>
-   <extends>QDoubleSpinBox</extends>
+   <class>NoWheelFocusTimeEdit</class>
+   <extends>QTimeEdit</extends>
    <header location="global">ui/CustomPrimaryWidgets.h</header>
   </customwidget>
   <customwidget>
-   <class>NoWheelFocusTimeEdit</class>
-   <extends>QTimeEdit</extends>
+   <class>NoWheelFocusDoubleSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
    <header location="global">ui/CustomPrimaryWidgets.h</header>
   </customwidget>
  </customwidgets>

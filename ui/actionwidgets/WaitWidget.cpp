@@ -22,7 +22,7 @@ void WaitWidget::buildWidget()
     if(waitaction != nullptr)
         durationStr = QString::number((double)waitaction->m_duration);
 
-    m_mainButton->setIcon(QIcon(":/img/wait.png"));
+    m_mainButton->setObjectName("waitActionButton");
     m_mainButton->setText(tr("Wait for ") + durationStr + tr(" secs"));
     m_mainButton->setToolTip(durationStr+tr(" seconds"));
     m_mainButton->setProperty("duration", durationStr);

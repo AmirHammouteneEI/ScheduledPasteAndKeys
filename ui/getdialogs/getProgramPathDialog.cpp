@@ -8,6 +8,7 @@ getProgramPathDialog::getProgramPathDialog(QWidget *parent)
     , ui(new Ui::getProgramPathDialog)
 {
     ui->setupUi(this);
+    ui->pushButton->setObjectName("browseButton");
     connect(ui->pushButton, &QPushButton::released, this, &getProgramPathDialog::showBrowseFilesDialog);
 }
 

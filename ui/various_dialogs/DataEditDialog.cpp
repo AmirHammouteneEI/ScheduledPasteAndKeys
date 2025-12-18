@@ -7,12 +7,17 @@ DataEditDialog::DataEditDialog(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QFont font = ui->tabWidget->tabBar()->font();
-    font.setPointSize(14);
-    ui->tabWidget->tabBar()->setFont(font);
+    ui->tabWidget->tabBar()->setObjectName("dataTabBar");
     ui->sentencesTableWidget->m_belongsToDataEditDialog = true;
     ui->keysSequencesTableWidget->m_belongsToDataEditDialog = true;
     ui->cursorMovementsTableWidget->m_belongsToDataEditDialog = true;
+
+    ui->addSentenceButton->setObjectName("plusminusButton");
+    ui->removeSentenceButton->setObjectName("plusminusButton");
+    ui->addKeysSequenceButton->setObjectName("plusminusButton");
+    ui->removeKeysSequenceButton->setObjectName("plusminusButton");
+    ui->addCursorMovementsButton->setObjectName("plusminusButton");
+    ui->removeCursorMovementsButton->setObjectName("plusminusButton");
 
     connect(ui->addSentenceButton, &QPushButton::released, ui->sentencesTableWidget, &SentencesTableWidget::createSentenceReceived);
     connect(ui->removeSentenceButton, &QPushButton::released, ui->sentencesTableWidget, &SentencesTableWidget::removeSentenceReceived);

@@ -31,7 +31,6 @@ void TaskThread::copyActionsList(const std::shared_ptr<Task> &task)
 void TaskThread::stop()
 {
     m_haveToStop = true;
-    //quit();
     terminate();
 }
 

@@ -25,7 +25,7 @@ void RunningOtherTaskWidget::buildWidget()
         m_mainButton->setProperty("loops", params.m_timesToRun);
     }
 
-    m_mainButton->setIcon(QIcon(":/img/anotherTask.png"));
+    m_mainButton->setObjectName("runAnotherTaskActionButton");
     m_mainButton->setText(runOtherTaskStr);
 
     m_editRunOtherTaskDialog = new CreateRunningOtherTaskActionDialog(this);

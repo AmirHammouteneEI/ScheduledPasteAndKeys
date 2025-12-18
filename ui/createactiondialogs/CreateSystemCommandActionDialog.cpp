@@ -27,7 +27,11 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     ui->changevolume->setProperty("type", "changevolume");
 
     m_option1Button = new QPushButton(this);
+    m_option1Button->setFlat(true);
+    m_option1Button->setObjectName("buttonInTable");
     m_option2Button = new QPushButton(this);
+    m_option2Button->setFlat(true);
+    m_option2Button->setObjectName("buttonInTable");
 
     ui->tableWidget->setRowCount(1);
     ui->tableWidget->setItem(0,0,new QTableWidgetItem());

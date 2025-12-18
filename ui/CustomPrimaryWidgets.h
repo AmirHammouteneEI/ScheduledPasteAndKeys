@@ -6,6 +6,7 @@
 #include <QTimeEdit>
 #include <QDateTimeEdit>
 #include <QTableWidget>
+#include <QStyledItemDelegate>
 #include "qevent.h"
 
 class NoWheelFocusSpinBox : public QSpinBox
@@ -89,6 +90,7 @@ public:
     {
         setFocusPolicy(Qt::NoFocus);
         setMouseTracking(false);
+        setItemDelegate(new QStyledItemDelegate(this));
     }
 protected:
     virtual void mouseMoveEvent(QMouseEvent *event) override

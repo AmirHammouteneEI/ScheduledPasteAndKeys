@@ -190,27 +190,6 @@
      </item>
      <item>
       <widget class="QPushButton" name="addButton">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>45</width>
-         <height>45</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>28</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton{padding-top:-10px;}</string>
-       </property>
        <property name="text">
         <string notr="true">+</string>
        </property>
@@ -221,27 +200,6 @@
      </item>
      <item>
       <widget class="QPushButton" name="removeButton">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>45</width>
-         <height>45</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>28</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton{padding-top:-10px;}</string>
-       </property>
        <property name="text">
         <string notr="true">-</string>
        </property>

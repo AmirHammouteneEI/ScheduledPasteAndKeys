@@ -143,7 +143,7 @@ RESOURCES += \
 
 RC_ICONS = img/programIcon.ico
 
-VERSION = 1.5
+VERSION = 1.6
 QMAKE_TARGET_COMPANY = "Amir Hammoutene"
 QMAKE_TARGET_COPYRIGHT = "GNU general public license version 3"
 

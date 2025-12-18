@@ -41,7 +41,7 @@ void CreateAutorunDesktopShortcutDialog::accept()
     };
     if(ui->timeEdit->time() == QTime(0,0,0))
     {
-        QMessageBox::warning(this, tr("Delay can't be set to 0"), tr("The delay for the task to run after system startup can't be set to zero."));
+        QMessageBox::warning(this, tr("Delay can't be set to 0"), tr("The delay for the task to run after using a desktop shortcut can't be set to zero."));
         return;
     }
     if(m_shortcutname.isEmpty())

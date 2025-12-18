@@ -9,6 +9,7 @@ CreateKeysSequenceActionDialog::CreateKeysSequenceActionDialog(QWidget *parent)
     , ui(new Ui::CreateKeysSequenceActionDialog)
 {
     ui->setupUi(this);
+    ui->addKeysSequenceButton->setObjectName("plusminusButton");
     connect(ui->addKeysSequenceButton, &QPushButton::released, ui->tableWidget, &KeysSequencesTableWidget::createKeysSequenceReceived);
 }
 

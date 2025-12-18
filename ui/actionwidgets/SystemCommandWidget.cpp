@@ -27,7 +27,7 @@ void SystemCommandWidget::buildWidget()
         m_mainButton->setProperty("displayedStr", sysCmdTypeStr);
     }
 
-    m_mainButton->setIcon(QIcon(":/img/systemCommand.png"));
+    m_mainButton->setObjectName("syscommandActionButton");
     m_mainButton->setText(sysCmdTypeStr);
 
     m_editSysCmdDialog = new CreateSystemCommandActionDialog(this);

@@ -9,6 +9,7 @@ CreatePasteActionDialog::CreatePasteActionDialog(QWidget *parent)
     , ui(new Ui::CreatePasteActionDialog)
 {
     ui->setupUi(this);
+    ui->addSentenceButton->setObjectName("plusminusButton");
     connect(ui->addSentenceButton, &QPushButton::released, ui->tableWidget, &SentencesTableWidget::createSentenceReceived);
 }
 

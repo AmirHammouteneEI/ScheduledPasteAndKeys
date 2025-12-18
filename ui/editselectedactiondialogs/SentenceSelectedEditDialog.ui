@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>377</height>
+    <width>650</width>
+    <height>395</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -96,9 +96,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Identity must be alphanumerical.
-If already exists in data, it will replace the entry.
-If identity is changed (via the Edit Data window), it will make a copy of the entry.</string>
+      <string>Identity must be alphanumerical</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>

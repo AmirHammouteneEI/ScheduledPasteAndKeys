@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>841</width>
-    <height>128</height>
+    <width>908</width>
+    <height>143</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -397,13 +397,13 @@
    <header location="global">ui/CustomPrimaryWidgets.h</header>
   </customwidget>
   <customwidget>
-   <class>NoWheelFocusDateTimeEdit</class>
-   <extends>QDateTimeEdit</extends>
+   <class>NoWheelFocusTimeEdit</class>
+   <extends>QTimeEdit</extends>
    <header location="global">ui/CustomPrimaryWidgets.h</header>
   </customwidget>
   <customwidget>
-   <class>NoWheelFocusTimeEdit</class>
-   <extends>QTimeEdit</extends>
+   <class>NoWheelFocusDateTimeEdit</class>
+   <extends>QDateTimeEdit</extends>
    <header location="global">ui/CustomPrimaryWidgets.h</header>
   </customwidget>
  </customwidgets>

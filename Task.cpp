@@ -5,7 +5,6 @@ Task::Task()
 
 Task::~Task()
 {
-    //qDeleteAll(m_actionsMap);
     m_actionsMap.clear();
     m_actionsOrderedList.clear();
 }

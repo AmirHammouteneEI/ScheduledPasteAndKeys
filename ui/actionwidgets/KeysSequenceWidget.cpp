@@ -23,10 +23,14 @@ void KeysSequenceWidget::buildWidget()
     if(centralGridLayout == nullptr)
         return;
 
-    auto loopFrame = new QFrame(m_centralWidget);
-    auto loopLabel = new QLabel(tr("Loop "),loopFrame);
-    m_loopSpin = new NoWheelFocusSpinBox(loopFrame);
-    auto looptimesLabel = new QLabel(tr(" times"),loopFrame);
+    auto loopFrame = new QFrame(this);
+    loopFrame->setObjectName("actionSubFrame");
+    auto loopLabel = new QLabel(tr("Loop "),this);
+    loopLabel->setObjectName("actionSubLabel");
+    m_loopSpin = new NoWheelFocusSpinBox(this);
+    m_loopSpin->setObjectName("actionSpin");
+    auto looptimesLabel = new QLabel(tr(" times"),this);
+    looptimesLabel->setObjectName("actionSubLabel");
     m_loopSpin->setAlignment(Qt::AlignCenter);
     m_loopSpin->setMinimum(1);
     m_loopSpin->setMaximum(9999);
@@ -55,7 +59,7 @@ void KeysSequenceWidget::buildWidget()
         m_loopSpin->setValue(keysseqaction->m_timesToRun);
     }
 
-    m_mainButton->setIcon(QIcon(":/img/key.png"));
+    m_mainButton->setObjectName("keyActionButton");
     m_mainButton->setText(tr("Keys sequence >")+id);
     m_mainButton->setToolTip(seqStr);
     m_mainButton->setProperty("keysSeqId", id);

@@ -51,14 +51,13 @@ protected :
     void buildToolBar();
     void buildSystemTrayMenu();
     void closeEvent(QCloseEvent *event) override;
-    int m_windowWidth = 510;
+    int m_windowWidth = 540;
     int m_windowHeight = 800;
     void geometrySet();
     void loadSettings();
     void saveSettings();
     QAction *m_stayOnTopAction = nullptr;
     QAction * m_lightThemeAction = nullptr;
-    QAction * m_penombraThemeAction = nullptr;
     QAction * m_darkThemeAction = nullptr;
     QAction * m_scrollAction = nullptr;
     QString m_currentThemeName = nullptr;

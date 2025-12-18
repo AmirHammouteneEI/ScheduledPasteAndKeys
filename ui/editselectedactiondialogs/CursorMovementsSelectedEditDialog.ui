@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>805</width>
-    <height>499</height>
+    <width>818</width>
+    <height>534</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -112,9 +112,7 @@
    <item>
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Identity must be alphanumerical.
-If already exists in data, it will replace the entry.
-If identity is changed (via the Edit Data window), it will make a copy of the entry.</string>
+      <string>Identity must be alphanumerical</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -245,12 +243,6 @@ If identity is changed (via the Edit Data window), it will make a copy of the en
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="maximumSize">
-        <size>
-         <width>45</width>
-         <height>45</height>
-        </size>
-       </property>
        <property name="font">
         <font>
          <pointsize>28</pointsize>
@@ -275,12 +267,6 @@ If identity is changed (via the Edit Data window), it will make a copy of the en
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>45</width>
-         <height>45</height>
-        </size>
        </property>
        <property name="font">
         <font>

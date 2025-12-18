@@ -11,7 +11,6 @@ WaitAction::WaitAction() : AbstractAction()
 void WaitAction::runAction()
 {
     Sleep(m_duration*1000);
-    //QThread::msleep((int)(m_duration*1000));
 }
 
 void WaitAction::setParameters(const ActionParameters &param)
