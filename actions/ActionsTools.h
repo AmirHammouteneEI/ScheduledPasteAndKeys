@@ -29,7 +29,7 @@ public:
     static CursorMovementsList fromStandardQMapToCursorMovsMap(const QList<QVariant> &standardList);
     static void moveCursorSimulate(int xPos, int yPos, int time);
     static QPair<int,int> getCursorPos();
-    static void createDesktopShortcut(const QString & savePath, const QString & linkPath, const QString &args, const QString &linkname);
+    static void createShortcut(const QString & savePath, const QString & linkPath, const QString &args, const QString &linkname);
 };
 
 #endif // ACTIONSTOOLS_H

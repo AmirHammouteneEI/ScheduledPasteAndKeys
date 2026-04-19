@@ -222,7 +222,7 @@ QPair<int, int> ActionsTools::getCursorPos()
     return returnedVal;
 }
 
-void ActionsTools::createDesktopShortcut(const QString &savePath, const QString &linkPath, const QString & args, const QString & linkname)
+void ActionsTools::createShortcut(const QString &savePath, const QString &linkPath, const QString & args, const QString & linkname)
 {
     LPCWSTR locSavePath = (const wchar_t*) savePath.utf16();
     LPCWSTR lkPath =  (const wchar_t*) linkPath.utf16();

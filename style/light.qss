@@ -1,18 +1,8 @@
-/***
- * Amir Hammmoutene (contact@amirhammoutene.dev)
- * December 2025 - Modernized light theme for Tasket++
- * Open-source, under GNU GPL v3
- *
- * Palette notes
- * -- bg: #f5f6f8 (main background)
- * -- surface: #ffffff (panels, inputs)
- * -- surface-2: #f0f1f3 (alternate surfaces)
- * -- border: #c7ccd1 (subtle borders)
- * -- accent: #0078d4 (primary interactive accent)
- * -- accent-2: #2a8f6f (success-ish)
- * -- warn: #d13438 (stop / danger)
- * -- muted: #6e6e6e (disabled / secondary text)
- ***/
+/**
+* Amir Hammmoutene (contact@amirhammoutene.dev)
+* December 2025 - Modernized light theme for Tasket++
+* Open-source, under GNU GPL v3
+**/
 
 /*-----BASE-----*/
 QWidget

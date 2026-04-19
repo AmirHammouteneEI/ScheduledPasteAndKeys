@@ -41,7 +41,7 @@ void SystemCommandAction::runAction()
             QFileInfo finfo(m_param1);
             QDir d;
             d.mkpath(finfo.absolutePath());
-            auto pathToSave = m_param2 == "Auto-rename if exists" ? incrementFilenameIfExists(m_param1) : m_param1;
+            auto pathToSave = m_param2 == G_Sentences::AutoRenameFileOption ? incrementFilenameIfExists(m_param1) : m_param1;
             QFile f(pathToSave);
             f.open(QIODevice::WriteOnly);
             f.close();
@@ -128,7 +128,7 @@ void SystemCommandAction::runAction()
                 painter.drawPixmap(QPoint(drawOrigin, 0), pix);
                 drawOrigin += pix.width();
             }
-            auto pathToSave = m_param2 == "Auto-rename if exists" ? incrementFilenameIfExists(m_param1) : m_param1;
+            auto pathToSave = m_param2 == G_Sentences::AutoRenameFileOption ? incrementFilenameIfExists(m_param1) : m_param1;
             globalPix.save(pathToSave,"PNG");
         }
         break;
@@ -271,58 +271,37 @@ ActionParameters SystemCommandAction::generateParameters() const
 
 QString SystemCommandAction::incrementFilenameIfExists(const QString &path) const
 {
-    QFileInfo finfo(path);
-    if(!finfo.exists())
-        return path;
+    static QMap<QString, QString> potentialFilenamesForPathsCache;
 
+    auto nextPotentialFreeFilename = [](const QString &name) {
+        QString lastDigits = name.last(4);
+        if (lastDigits.size() == 4 && lastDigits[0].isDigit() && lastDigits[1].isDigit() && lastDigits[2].isDigit() && lastDigits[3].isDigit() && lastDigits != "9999")
+            return name.chopped(4)+(QString::number(lastDigits.toInt()+1).rightJustified(4, '0'));
+        else
+            return name+"-0000";
+    };
+
+    QFileInfo finfo(path);
     auto filename = finfo.fileName();
     auto ext = finfo.suffix();
     auto name = filename.chopped(ext.size()+1);
 
-    auto lastDigits = name.last(4);
-
-    if(lastDigits.size() == 4 && lastDigits[0].isDigit() && lastDigits[1].isDigit() && lastDigits[2].isDigit() && lastDigits[3].isDigit() && lastDigits != "9999")
-        name = name.chopped(4)+(QString::number(lastDigits.toInt()+1).rightJustified(4,'0'));
-    else
-        name.append("-0000");
-
-    auto newPath = (path.chopped(filename.size()))+name+"."+ext;
-    return incrementFilenameIfExists(newPath);
-}
-
-QString SystemCommandAction::incrementFilenameIfExists(const QString &path, unsigned char ndigits) const
-{
-    QFileInfo finfo(path);
-    if(!finfo.exists() || ndigits == 0)
-        return path;
-
-    auto filename = finfo.fileName();
-    auto ext = finfo.suffix();
-    auto name = filename.chopped(ext.size()+1);
-
-    auto lastDigits = name.last(ndigits);
-
-    bool aredigits = true;
-    for(QChar &c : lastDigits)
+    if(!potentialFilenamesForPathsCache.contains(path))
     {
-        if(!c.isDigit())
-        {
-            aredigits = false;
-            break;
-        }
+        potentialFilenamesForPathsCache.insert(path,nextPotentialFreeFilename(name));
+        if(!finfo.exists())
+            return path;
+        else
+            return incrementFilenameIfExists(path);
     }
-
-    QString zeros = "0";
-    zeros = ("-")+(zeros.rightJustified(ndigits,'0'));
-    QString nines = "9";
-    nines = nines.rightJustified(ndigits,'9');
-
-    if(lastDigits.size() == ndigits && aredigits && lastDigits != nines)
-        name = name.chopped(ndigits)+(QString::number(lastDigits.toInt()+1).rightJustified(ndigits,'0'));
-
     else
-        name.append(zeros);
-
-    auto newPath = (path.chopped(filename.size()))+name+"."+ext;
-    return incrementFilenameIfExists(newPath,ndigits);
+    {
+        auto newPath = (path.chopped(filename.size()))+potentialFilenamesForPathsCache[path]+"."+ext;
+        QFileInfo fnewinfo(newPath);
+        potentialFilenamesForPathsCache.insert(path,nextPotentialFreeFilename(potentialFilenamesForPathsCache[path]));
+        if(!fnewinfo.exists())
+            return newPath;
+        else
+            return incrementFilenameIfExists(path);
+    }
 }

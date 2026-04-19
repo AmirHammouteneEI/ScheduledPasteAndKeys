@@ -54,6 +54,8 @@ namespace G_Sentences {
     static QString NoKeysSequenceSelected() {return QObject::tr("No keys sequence has been selected. Please select one.");}
     static QString NoCursorMovementsSelected() {return QObject::tr("No cursor movements set has been selected. Please select one.");}
     static QString NoStartupTaskSelected() {return QObject::tr("No startup task has been selected. Please select one.");}
+    inline QString AutoRenameFileOption = "Auto-rename if exists";
+    inline QString EraseFileOption = "Erase if exists";
 }
 
 namespace G_SystemCommands {

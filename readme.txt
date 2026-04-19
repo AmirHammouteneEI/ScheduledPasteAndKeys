@@ -1,6 +1,6 @@
 # Tasket++
 
-version 1.6 (December 2025)
+version 1.7 (April 2026)
 
 Schedule automated simulations of actions you would perform on your PC.
 
@@ -12,7 +12,7 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 1.6 :
+Details of version 1.7 :
 
 Stable version, fully functional
 
@@ -40,7 +40,7 @@ Available for install on Microsoft Store :
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
 Available as a portable version :
-https://files.amirhammoutene.dev/Tasket++/1.6/Tasket++_v1.6.zip
+https://files.amirhammoutene.dev/Tasket++/1.7/Tasket++_v1.7.zip
 
 Needs 30 Mo disk space, available for Windows systems only
 

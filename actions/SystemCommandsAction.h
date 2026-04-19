@@ -45,7 +45,6 @@ public:
     void optionalProcesses() override {}
 
     QString incrementFilenameIfExists(const QString & path) const;
-    QString incrementFilenameIfExists(const QString & path, unsigned char ndigits) const;
 
     friend class SystemCommandWidget;
 signals:

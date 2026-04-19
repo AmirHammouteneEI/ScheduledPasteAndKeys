@@ -160,18 +160,18 @@ void CreateSystemCommandActionDialog::activateButtons()
                 });
 
         if(m_option2Button->text().isEmpty())
-            m_option2Button->setText("Auto-rename if exists");
+            m_option2Button->setText(G_Sentences::AutoRenameFileOption);
         connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
         connect(m_autorenameDialog, &getAutoRenameOptionDialog::sendAutorename,this,[&](bool autorename)
                 {
                     if(autorename)
                     {
-                        m_option2Button->setText("Auto-rename if exists");
+                        m_option2Button->setText(G_Sentences::AutoRenameFileOption);
                         m_option2Button->setToolTip(tr("If the file already exists, a new file will be created with another filename."));
                     }
                     else
                     {
-                        m_option2Button->setText("Erase if exists");
+                        m_option2Button->setText(G_Sentences::EraseFileOption);
                         m_option2Button->setToolTip(tr("If the file already exists, it will be erased to save the new file."));
                     }
                 });
@@ -274,18 +274,18 @@ void CreateSystemCommandActionDialog::activateButtons()
                 });
 
         if(m_option2Button->text().isEmpty())
-            m_option2Button->setText("Auto-rename if exists");
+            m_option2Button->setText(G_Sentences::AutoRenameFileOption);
         connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
         connect(m_autorenameDialog, &getAutoRenameOptionDialog::sendAutorename,this,[&](bool autorename)
                 {
                     if(autorename)
                         {
-                            m_option2Button->setText("Auto-rename if exists");
+                            m_option2Button->setText(G_Sentences::AutoRenameFileOption);
                             m_option2Button->setToolTip(tr("If the file already exists, a new file will be created with another filename."));
                         }
                     else
                         {
-                            m_option2Button->setText("Erase if exists");
+                            m_option2Button->setText(G_Sentences::EraseFileOption);
                             m_option2Button->setToolTip(tr("If the file already exists, it will be erased to save the new file."));
                         }
                 });

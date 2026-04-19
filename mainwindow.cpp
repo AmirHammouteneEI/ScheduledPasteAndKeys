@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowTitle("Tasket++ v1.6");
+    setWindowTitle("Tasket++ v1.7");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
 
@@ -74,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 1.6 (December 2025)\n\n"
+                    "version 1.7 (April 2026)\n\n"
                     "Free & Open source (see readme.txt for more information)"));
 }
 
@@ -398,7 +398,7 @@ void MainWindow::createAutorunShortcutFromDialogReceived()
         return;
     QString args = "\""+m_createDesktopShortcutDialog->m_filename+"\" "+QString::number(m_createDesktopShortcutDialog->m_delay)
                    + " " + QString::number(m_createDesktopShortcutDialog->m_loopTimes);
-    ActionsTools::createDesktopShortcut(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), QCoreApplication::applicationFilePath(), args, m_createDesktopShortcutDialog->m_shortcutname);
+    ActionsTools::createShortcut(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), QCoreApplication::applicationFilePath(), args, m_createDesktopShortcutDialog->m_shortcutname);
 }
 
 void MainWindow::showWindow(QSystemTrayIcon::ActivationReason reason)
