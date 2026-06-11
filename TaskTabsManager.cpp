@@ -177,6 +177,8 @@ void TaskTabsManager::scheduleTaskFromId(int id, qint64 delay, int loopTimes)
     if(taskTab == nullptr)
         return;
 
+    if(delay < 0 || loopTimes == 0)
+        return;
     taskTab->setTimesToRunValue(loopTimes);
     taskTab->scheduleTaskAfterDelay(delay);
 }

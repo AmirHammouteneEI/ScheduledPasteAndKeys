@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowTitle("Tasket++ v1.7");
+    setWindowTitle("Tasket++ v1.8");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
 
@@ -74,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 1.7 (April 2026)\n\n"
+                    "version 1.8 (June 2026)\n\n"
                     "Free & Open source (see readme.txt for more information)"));
 }
 
@@ -101,7 +101,7 @@ QTabWidget *MainWindow::getTabWidget()
 
 void MainWindow::autoRun(const QString &filename, int delay, int loopTimes)
 {
-    if(m_tasktabsManager == nullptr || delay<0)
+    if(m_tasktabsManager == nullptr || delay<0 || loopTimes == 0)
         return;
     auto taskCreatedId = m_tasktabsManager->onOpenNewTabRequest(QApplication::applicationDirPath()+"/"+G_Files::TasksFolder+filename+G_Files::TasksFileExtension);
     if(taskCreatedId > -1)

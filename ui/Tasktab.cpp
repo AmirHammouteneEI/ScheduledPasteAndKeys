@@ -126,7 +126,7 @@ void TaskTab::buildBasicInterface()
     runOptionsLayout->addWidget(orLabel);
     runOptionsLayout->addWidget(m_loopButton,0,Qt::AlignLeft);
     runOptionsLayout->setSizeConstraint(QLayout::SetMinimumSize);
-    m_loopedTimesLabel = new QLabel(tr("Has been executed ")+"0"+tr(" times"),topWidget);
+    m_loopedTimesLabel = new QLabel(tr("Looped ")+"0"+tr(" times"),topWidget);
     m_loopedTimesLabel->setAlignment(Qt::AlignCenter);
     m_loopedTimesLabel->setContentsMargins(1,1,1,1);
     auto font = m_nameLabel->font();

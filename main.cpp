@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
     a.setWindowIcon(QIcon(":/img/programIcon.png"));
 
-    // Get local system language to apply translations is exists
+    // Get local system language to apply translations if exists
     QString locale = QLocale::system().name().section('_', 0, 0);
     QTranslator translator;
     translator.load(QApplication::applicationDirPath()+"/"+QString("Tasket++_") + locale);

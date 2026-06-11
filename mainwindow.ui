@@ -335,7 +335,7 @@
               </font>
              </property>
              <property name="text">
-              <string>version 1.7 (April 2026)</string>
+              <string>version 1.8 (June 2026)</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>

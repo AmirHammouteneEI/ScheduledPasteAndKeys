@@ -731,7 +731,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Set how many times this cursor movements should be executed</source>
-        <translation>Déterminez combien de fois ces mouvements de curseur devraient être éxecutée :</translation>
+        <translation>Déterminez combien de fois cette séquence de touches devrait être exécutée</translation>
     </message>
     <message>
         <source>ERROR on access to action</source>
@@ -1359,7 +1359,7 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     </message>
     <message>
         <source>version 1.7 (April 2026)</source>
-        <translation>version 1.7 (avril 2026)</translation>
+        <translation type="vanished">version 1.7 (avril 2026)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1370,12 +1370,34 @@ initial work on February 2024
 version 1.7 (April 2026)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 1.7 (avril 2026)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>version 1.8 (June 2026)</source>
+        <translation>version 1.8 (juin 2026)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.8 (June 2026)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.8 (juin 2026)
 
 Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>
@@ -1890,7 +1912,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Has been executed </source>
-        <translation>A été exécuté </translation>
+        <translation type="vanished">A été exécuté </translation>
     </message>
     <message>
         <source>Stop the task. shortcut to stop all tasks : Ctrl+Alt+S</source>

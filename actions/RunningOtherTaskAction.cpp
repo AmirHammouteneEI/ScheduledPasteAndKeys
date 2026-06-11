@@ -11,7 +11,7 @@ RunningOtherTaskAction::RunningOtherTaskAction() : AbstractAction()
 
 void RunningOtherTaskAction::runAction()
 {
-    if(!m_taskName.isEmpty() && m_delay >= 0 && m_timesToRun > 0)
+    if(!m_taskName.isEmpty() && m_delay >= 0 && m_timesToRun != 0)
         emit autoRunTaskRequest(m_taskName, m_delay, m_timesToRun);
 }
 

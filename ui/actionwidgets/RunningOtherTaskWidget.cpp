@@ -18,7 +18,8 @@ void RunningOtherTaskWidget::buildWidget()
     {
         runOtherTaskStr = tr("Run another task");
 
-        m_mainButton->setToolTip(tr("Task name : ")+runOtherTaskaction->m_taskName+ tr("\nDelay : ")+QString::number(runOtherTaskaction->m_delay)+ tr("\nLoops : ")+QString::number(runOtherTaskaction->m_timesToRun));
+        QString loopStrVal = runOtherTaskaction->m_timesToRun > 0 ? QString::number(runOtherTaskaction->m_timesToRun) : "Infinite";
+        m_mainButton->setToolTip(tr("Task name : ")+runOtherTaskaction->m_taskName+ tr("\nDelay : ")+QString::number(runOtherTaskaction->m_delay)+ tr("\nLoops : ")+loopStrVal);
         ActionParameters params = runOtherTaskaction->generateParameters();
         m_mainButton->setProperty("filename", params.m_taskName);
         m_mainButton->setProperty("delay", params.m_delay);
@@ -51,7 +52,8 @@ void RunningOtherTaskWidget::runningOtherTaskReceived(QString filename, int dela
 
     runOtherTaskaction->setParameters(params);
 
-    m_mainButton->setToolTip(tr("Task name : ")+filename+ tr("\nDelay : ")+QString::number(delay)+ tr("\nLoops : ")+QString::number(timesOfLoop));
+    QString loopStrVal = timesOfLoop > 0 ? QString::number(timesOfLoop) : "Infinite";
+    m_mainButton->setToolTip(tr("Task name : ")+filename+ tr("\nDelay : ")+QString::number(delay)+ tr("\nLoops : ")+loopStrVal);
     m_mainButton->setProperty("filename", params.m_taskName);
     m_mainButton->setProperty("delay", params.m_delay);
     m_mainButton->setProperty("loops", params.m_timesToRun);

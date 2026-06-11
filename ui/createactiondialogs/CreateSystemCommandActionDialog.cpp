@@ -160,7 +160,10 @@ void CreateSystemCommandActionDialog::activateButtons()
                 });
 
         if(m_option2Button->text().isEmpty())
+        {
             m_option2Button->setText(G_Sentences::AutoRenameFileOption);
+            m_option2Button->setToolTip(tr("If the file already exists, a new file will be created with another filename."));
+        }
         connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
         connect(m_autorenameDialog, &getAutoRenameOptionDialog::sendAutorename,this,[&](bool autorename)
                 {
@@ -274,7 +277,10 @@ void CreateSystemCommandActionDialog::activateButtons()
                 });
 
         if(m_option2Button->text().isEmpty())
+        {
             m_option2Button->setText(G_Sentences::AutoRenameFileOption);
+            m_option2Button->setToolTip(tr("If the file already exists, a new file will be created with another filename."));
+        }
         connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
         connect(m_autorenameDialog, &getAutoRenameOptionDialog::sendAutorename,this,[&](bool autorename)
                 {
