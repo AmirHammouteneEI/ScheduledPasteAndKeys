@@ -22,7 +22,7 @@ std::shared_ptr<AbstractAction> WaitAction::deepCopy() const
 {
     auto actToReturn = std::make_shared<WaitAction>();
     actToReturn->m_duration = m_duration;
-    actToReturn->m_refID = m_ID;
+    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

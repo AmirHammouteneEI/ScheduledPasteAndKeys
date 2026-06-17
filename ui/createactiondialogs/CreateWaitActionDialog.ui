@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>595</width>
+    <width>642</width>
     <height>128</height>
    </rect>
   </property>
@@ -123,6 +123,9 @@
              <height>0</height>
             </size>
            </property>
+           <property name="frame">
+            <bool>false</bool>
+           </property>
            <property name="alignment">
             <set>Qt::AlignmentFlag::AlignCenter</set>
            </property>
@@ -159,7 +162,7 @@
       <item>
        <widget class="QGroupBox" name="byDayGroup">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -213,9 +216,15 @@
          </item>
          <item>
           <widget class="NoWheelFocusSpinBox" name="spinBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
-             <width>60</width>
+             <width>100</width>
              <height>0</height>
             </size>
            </property>
@@ -223,7 +232,7 @@
             <set>Qt::AlignmentFlag::AlignCenter</set>
            </property>
            <property name="maximum">
-            <number>10000</number>
+            <number>999999999</number>
            </property>
           </widget>
          </item>

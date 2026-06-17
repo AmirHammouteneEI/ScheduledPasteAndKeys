@@ -12,7 +12,7 @@
 
 class ActionsTools
 {
-    static const int s_cursorFrequency = 20;
+    static const int s_cursorFrequency = 10;
 public:
     ActionsTools();
     ~ActionsTools() = default;

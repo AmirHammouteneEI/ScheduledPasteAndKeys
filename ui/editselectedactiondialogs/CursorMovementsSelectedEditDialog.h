@@ -23,11 +23,11 @@ public:
     QString identity();
     void setTableCursorMovements(const CursorMovementsList &tableContent);
     CursorMovementsList tableCursorMovements();
-    void setOptionalKeysStroke(const QStringList &keysStroke);
     QStringList optionalKeysStroke();
 public slots:
     QList<QWidget*> addMovsRow();
     void removeLastMovsRow();
+    void setOptionalKeysStroke(const QStringList &keysStroke);
     void coordinatesReceived(int index, int x, int y);
 private slots:
     void accept() override;

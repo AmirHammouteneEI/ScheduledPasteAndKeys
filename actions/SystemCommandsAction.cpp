@@ -216,7 +216,7 @@ std::shared_ptr<AbstractAction> SystemCommandAction::deepCopy() const
     actToReturn->e_sysCommandType = e_sysCommandType;
     actToReturn->m_param1 = m_param1;
     actToReturn->m_param2 = m_param2;
-    actToReturn->m_refID = m_ID;
+    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

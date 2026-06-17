@@ -24,6 +24,7 @@ TaskTabsManager::TaskTabsManager()
 
 TaskTabsManager::~TaskTabsManager()
 {
+    qDeleteAll(m_taskTabsMap);
     m_taskTabsMap.clear();
     m_taskFilePathsMap.clear();
 }

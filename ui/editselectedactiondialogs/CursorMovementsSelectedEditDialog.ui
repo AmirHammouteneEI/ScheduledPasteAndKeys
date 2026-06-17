@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>818</width>
+    <width>862</width>
     <height>534</height>
    </rect>
   </property>
@@ -316,7 +316,7 @@
       <widget class="QPushButton" name="keysStrokeButton">
        <property name="minimumSize">
         <size>
-         <width>100</width>
+         <width>150</width>
          <height>0</height>
         </size>
        </property>

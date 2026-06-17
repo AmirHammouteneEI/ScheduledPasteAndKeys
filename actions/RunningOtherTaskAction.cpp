@@ -28,7 +28,7 @@ std::shared_ptr<AbstractAction> RunningOtherTaskAction::deepCopy() const
     actToReturn->m_taskName = m_taskName;
     actToReturn->m_delay = m_delay;
     actToReturn->m_timesToRun = m_timesToRun;
-    actToReturn->m_refID = m_ID;
+    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

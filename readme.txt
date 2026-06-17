@@ -1,6 +1,6 @@
 # Tasket++
 
-version 1.8 (June 2026)
+version 1.9 (June 2026)
 
 Schedule automated simulations of actions you would perform on your PC.
 
@@ -12,7 +12,7 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 1.8 :
+Details of version 1.9 :
 
 Stable version, fully functional
 
@@ -40,9 +40,9 @@ Available for install on Microsoft Store :
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
 Available as a portable version :
-https://files.amirhammoutene.dev/Tasket++/1.8/Tasket++_v1.8.zip
+https://files.amirhammoutene.dev/Tasket++/1.9/Tasket++_v1.9.zip
 
-Needs 30 Mo disk space, available for Windows systems only
+Needs 35 MB disk space, available for Windows systems only
 
 ----------
 Has been developed in C++ language, using Qt (6.9.3) framework 

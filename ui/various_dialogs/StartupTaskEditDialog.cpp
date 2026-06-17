@@ -4,12 +4,14 @@
 
 #include <QDir>
 #include <QMessageBox>
+#include <QPushButton>
 
 StartupTaskEditDialog::StartupTaskEditDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::StartupTaskEditDialog)
 {
     ui->setupUi(this);
+    ui->buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Add"));
     connect(ui->checkBox,&QCheckBox::toggled, this, &StartupTaskEditDialog::loopToggled);
 }
 
@@ -38,7 +40,7 @@ void StartupTaskEditDialog::accept()
     };
     if(ui->timeEdit->time() == QTime(0,0,0))
     {
-        QMessageBox::warning(this, tr("Delay can't be set to 0"), tr("The delay for the task to run after system startup can't be set to zero."));
+        QMessageBox::warning(this, tr("Delay can't be set to 0"), tr("The delay for the task to run after system startup can't be set to zero second."));
         return;
     }
 
@@ -64,6 +66,7 @@ void StartupTaskEditDialog::fillExistingTasksTable()
 
     int nextLineNum, nextColumnNum;
 
+    ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
 
     for(int k = 0; k < tasksNamesList.size(); k++)
@@ -74,7 +77,10 @@ void StartupTaskEditDialog::fillExistingTasksTable()
         if(nextColumnNum == 0)
             ui->tableWidget->insertRow(ui->tableWidget->rowCount());
 
-        ui->tableWidget->setItem(nextLineNum, nextColumnNum, new QTableWidgetItem(tasksNamesList.at(k)));
+        auto * item = new QTableWidgetItem(tasksNamesList.at(k));
+        item->setToolTip(tasksNamesList.at(k));
+
+        ui->tableWidget->setItem(nextLineNum, nextColumnNum, item);
     }
 }
 

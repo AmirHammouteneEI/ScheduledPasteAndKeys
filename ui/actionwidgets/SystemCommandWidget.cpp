@@ -58,6 +58,7 @@ void SystemCommandWidget::systemCommandReceived(QString sysCmdType, QString para
     m_mainButton->setProperty("type", params.m_sysCmdTypeStr);
     m_mainButton->setProperty("param1", params.m_sysCmdParam1);
     m_mainButton->setProperty("param2", params.m_sysCmdParam2);
+    m_mainButton->setProperty("displayedStr", displayedStr);
 
     emit anyParamChanged();
 }

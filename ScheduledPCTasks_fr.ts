@@ -117,7 +117,15 @@ layout is null when affecting to ActionWidgetsManager !</translation>
     </message>
     <message>
         <source>The delay for the task to run after using a desktop shortcut can&apos;t be set to zero.</source>
-        <translation>Le délai pour que la tâche soit exécutée après l&apos;utilisation d&apos;un raccourci bureau ne peut être fixé à zéro.</translation>
+        <translation type="vanished">Le délai pour que la tâche soit exécutée après l&apos;utilisation d&apos;un raccourci bureau ne peut être fixé à zéro.</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>Créer</translation>
+    </message>
+    <message>
+        <source>The delay for the task to run after using a desktop shortcut can&apos;t be set to zero second.</source>
+        <translation>Le délai pour que la tâche soit exécutée après l&apos;utilisation d&apos;un raccourci bureau ne peut être fixé à zéro seconde.</translation>
     </message>
 </context>
 <context>
@@ -399,7 +407,11 @@ item selected in CreatePasteActionDialog is null !</translation>
     </message>
     <message>
         <source>Note : Paste actions are followed by a minimal wait of 0.2 second</source>
-        <translation>Remarque : Les actions de Coller du texte sont suivies d&apos;une pause minimal de 0,2 seconde</translation>
+        <translation type="vanished">Remarque : Les actions de Coller du texte sont suivies d&apos;une pause minimal de 0,2 seconde</translation>
+    </message>
+    <message>
+        <source>Note : Paste actions are followed by a minimal wait of 0.3 second</source>
+        <translation>Remarque : Les actions de Coller du texte sont suivies d&apos;une pause minimal de 0,3 seconde</translation>
     </message>
 </context>
 <context>
@@ -567,7 +579,7 @@ Veuillez fournir toutes les informations nécessaires.</translation>
     </message>
     <message>
         <source>Set the URL you would like to open :</source>
-        <translation>Définissez l&apos;URL que vous souhaitez ouvrir :</translation>
+        <translation type="vanished">Définissez l&apos;URL que vous souhaitez ouvrir :</translation>
     </message>
     <message>
         <source>Copy a file</source>
@@ -600,6 +612,10 @@ Veuillez fournir toutes les informations nécessaires.</translation>
     <message>
         <source>Quit Tasket++</source>
         <translation>Quitter Tasket++</translation>
+    </message>
+    <message>
+        <source>                            Set the URL you would like to open :                            </source>
+        <translation>                            Définissez l&apos;URL que vous souhaitez ouvrir :                            </translation>
     </message>
 </context>
 <context>
@@ -731,7 +747,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Set how many times this cursor movements should be executed</source>
-        <translation>Déterminez combien de fois cette séquence de touches devrait être exécutée</translation>
+        <translation>Déterminez combien de fois ces mouvements de curseur devraient être éxecutés</translation>
     </message>
     <message>
         <source>ERROR on access to action</source>
@@ -795,6 +811,10 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>Cursor movements</source>
         <translation>Mouvements de curseur</translation>
+    </message>
+    <message>
+        <source>Note : Rename an entry to make a copy </source>
+        <translation>Remarque : Renommez une entrée pour en faire une copie </translation>
     </message>
 </context>
 <context>
@@ -1381,7 +1401,7 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     </message>
     <message>
         <source>version 1.8 (June 2026)</source>
-        <translation>version 1.8 (juin 2026)</translation>
+        <translation type="vanished">version 1.8 (juin 2026)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1392,12 +1412,34 @@ initial work on February 2024
 version 1.8 (June 2026)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 1.8 (juin 2026)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>version 1.9 (June 2026)</source>
+        <translation>version 1.9 (juin 2026)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 1.9 (June 2026)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 1.9 (juin 2026)
 
 Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>
@@ -1678,7 +1720,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>The delay for the task to run after system startup can&apos;t be set to zero.</source>
-        <translation>Le délai pour que la tâche soit exécutée après le démarrage du système ne peut être fixé à zéro.</translation>
+        <translation type="vanished">Le délai pour que la tâche soit exécutée après le démarrage du système ne peut être fixé à zéro.</translation>
     </message>
     <message>
         <source>Set how many times this task should be executed :</source>
@@ -1695,6 +1737,14 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>in infinite loop</source>
         <translation>en boucle infinie</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Ajouter</translation>
+    </message>
+    <message>
+        <source>The delay for the task to run after system startup can&apos;t be set to zero second.</source>
+        <translation>Le délai pour que la tâche soit exécutée après le démarrage du système ne peut être fixé à zéro seconde.</translation>
     </message>
 </context>
 <context>

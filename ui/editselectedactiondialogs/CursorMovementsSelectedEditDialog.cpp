@@ -12,8 +12,9 @@ CursorMovementsSelectedEditDialog::CursorMovementsSelectedEditDialog(QWidget *pa
     ui->setupUi(this);
     ui->addMovsButton->setObjectName("plusminusButton");
     ui->removeMovsButton->setObjectName("plusminusButton");
-    ui->tableWidget->horizontalHeader()->resizeSection(0,220);
-    ui->tableWidget->horizontalHeader()->resizeSection(4,40);
+    ui->tableWidget->horizontalHeader()->resizeSection(0,180);
+    ui->tableWidget->horizontalHeader()->resizeSection(2,180);
+    ui->tableWidget->horizontalHeader()->resizeSection(3,180);
     ui->lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("\\w+"), this));
     m_getCursorCoordinatesWidget = new getCursorCoordinatesWidget(this);
     m_keySelectorDialog = new KeysSelectorDialog(ui->keysStrokeButton);
@@ -21,11 +22,7 @@ CursorMovementsSelectedEditDialog::CursorMovementsSelectedEditDialog(QWidget *pa
     connect(ui->addMovsButton, &QPushButton::released, this,&CursorMovementsSelectedEditDialog::addMovsRow);
     connect(ui->removeMovsButton, &QPushButton::released, this,&CursorMovementsSelectedEditDialog::removeLastMovsRow);
     connect(ui->keysStrokeButton, &QPushButton::released, m_keySelectorDialog, &KeysSelectorDialog::showDialog);
-    connect(m_keySelectorDialog, &KeysSelectorDialog::sendKeysList, this,[=](QStringList keysList)
-            {
-                ui->keysStrokeButton->setProperty("keys", keysList);
-                ui->keysStrokeButton->setText(keysList.join("+"));
-            });
+    connect(m_keySelectorDialog, &KeysSelectorDialog::sendKeysList, this,&CursorMovementsSelectedEditDialog::setOptionalKeysStroke);
 }
 
 CursorMovementsSelectedEditDialog::~CursorMovementsSelectedEditDialog()
@@ -107,6 +104,7 @@ void CursorMovementsSelectedEditDialog::setOptionalKeysStroke(const QStringList 
 {
     ui->keysStrokeButton->setProperty("keys", keysStroke);
     ui->keysStrokeButton->setText(keysStroke.join("+"));
+    ui->keysStrokeButton->setToolTip(keysStroke.join("+"));
 }
 
 QStringList CursorMovementsSelectedEditDialog::optionalKeysStroke()

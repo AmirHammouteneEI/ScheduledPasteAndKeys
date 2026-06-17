@@ -240,7 +240,7 @@ void CreateSystemCommandActionDialog::activateButtons()
         connect(m_option1Button,&QPushButton::released, this, [&]()
                 {
                     bool ok;
-                    QString val = QInputDialog::getText(this,tr("Set the URL"),tr("Set the URL you would like to open :"),QLineEdit::Normal,m_option1Button->text(),&ok);
+                    QString val = QInputDialog::getText(this,tr("Set the URL"),tr("                            Set the URL you would like to open :                            "),QLineEdit::Normal,m_option1Button->text(),&ok);
                     if(!ok)
                         return;
                     m_option1Button->setText(val);

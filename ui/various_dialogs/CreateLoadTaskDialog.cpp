@@ -219,7 +219,7 @@ void CreateLoadTaskDialog::onDeleteFilename()
     if(fileChosen.exists() && fileChosen.isFile())
     {
         if(QMessageBox::question(this, tr("Confirm deleting file"),
-            tr("Do you confirm that you would like to delete this file :\n")+fileName.chopped(5),
+            tr("Do you confirm that you would like to delete this file :\n")+fileName,
             QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
             return;
         else
@@ -245,6 +245,7 @@ void CreateLoadTaskDialog::fillExistingTasksTable()
 
     int nextLineNum, nextColumnNum;
 
+    ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
 
     for(int k = 0; k < tasksNamesList.size(); k++)

@@ -8,6 +8,7 @@ TaskThread::TaskThread(QObject *parent)
 
 TaskThread::~TaskThread()
 {
+    m_actionsList.clear();
     quit();
     requestInterruption();
     wait();

@@ -4,12 +4,14 @@
 
 #include <QDir>
 #include <QMessageBox>
+#include <QPushButton>
 
 CreateAutorunDesktopShortcutDialog::CreateAutorunDesktopShortcutDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::CreateAutorunDesktopShortcutDialog)
 {
     ui->setupUi(this);
+    ui->buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Create"));
     connect(ui->checkBox,&QCheckBox::toggled, this, &CreateAutorunDesktopShortcutDialog::loopToggled);
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &CreateAutorunDesktopShortcutDialog::onFileSelected);
 }
@@ -41,7 +43,7 @@ void CreateAutorunDesktopShortcutDialog::accept()
     };
     if(ui->timeEdit->time() == QTime(0,0,0))
     {
-        QMessageBox::warning(this, tr("Delay can't be set to 0"), tr("The delay for the task to run after using a desktop shortcut can't be set to zero."));
+        QMessageBox::warning(this, tr("Delay can't be set to 0"), tr("The delay for the task to run after using a desktop shortcut can't be set to zero second."));
         return;
     }
     if(m_shortcutname.isEmpty())
@@ -77,6 +79,7 @@ void CreateAutorunDesktopShortcutDialog::fillExistingTasksTable()
 
     int nextLineNum, nextColumnNum;
 
+    ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
 
     for(int k = 0; k < tasksNamesList.size(); k++)
@@ -87,7 +90,10 @@ void CreateAutorunDesktopShortcutDialog::fillExistingTasksTable()
         if(nextColumnNum == 0)
             ui->tableWidget->insertRow(ui->tableWidget->rowCount());
 
-        ui->tableWidget->setItem(nextLineNum, nextColumnNum, new QTableWidgetItem(tasksNamesList.at(k)));
+        auto * item = new QTableWidgetItem(tasksNamesList.at(k));
+        item->setToolTip(tasksNamesList.at(k));
+
+        ui->tableWidget->setItem(nextLineNum, nextColumnNum, item);
     }
 }
 

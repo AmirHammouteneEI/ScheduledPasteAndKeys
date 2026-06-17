@@ -52,7 +52,7 @@ std::shared_ptr<AbstractAction> CursorMovementsAction::deepCopy() const
     actToReturn->m_movementsId = m_movementsId;
     actToReturn->m_timesToRun = m_timesToRun;
     actToReturn->m_cursorMovementsOptionalKeysStroke = m_cursorMovementsOptionalKeysStroke;
-    actToReturn->m_refID = m_ID;
+    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

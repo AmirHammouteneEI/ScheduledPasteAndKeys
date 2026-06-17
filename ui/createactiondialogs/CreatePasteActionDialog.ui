@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>636</width>
+    <width>865</width>
     <height>410</height>
    </rect>
   </property>
@@ -97,7 +97,7 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Note : Paste actions are followed by a minimal wait of 0.2 second</string>
+          <string>Note : Paste actions are followed by a minimal wait of 0.3 second</string>
          </property>
         </widget>
        </item>

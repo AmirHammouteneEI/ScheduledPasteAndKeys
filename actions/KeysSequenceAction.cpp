@@ -51,7 +51,7 @@ std::shared_ptr<AbstractAction> KeysSequenceAction::deepCopy() const
     actToReturn->m_sequenceId = m_sequenceId;
     actToReturn->m_keysStrokeTimeline = m_keysStrokeTimeline;
     actToReturn->m_timesToRun = m_timesToRun;
-    actToReturn->m_refID = m_ID;
+    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

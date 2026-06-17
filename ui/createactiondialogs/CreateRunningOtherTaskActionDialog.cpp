@@ -11,6 +11,8 @@ CreateRunningOtherTaskActionDialog::CreateRunningOtherTaskActionDialog(QWidget *
     , ui(new Ui::CreateRunningOtherTaskActionDialog)
 {
     ui->setupUi(this);
+    ui->delayGroup->setStyleSheet("QGroupBox { border: none; }");
+    ui->delayGroup_2->setStyleSheet("QGroupBox { border: none; }");
     connect(ui->checkBox_2,&QCheckBox::toggled, this, &CreateRunningOtherTaskActionDialog::loopToggled);
 }
 
@@ -121,6 +123,7 @@ void CreateRunningOtherTaskActionDialog::fillExistingTasksTable()
 
     int nextLineNum, nextColumnNum;
 
+    ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
 
     for(int k = 0; k < tasksNamesList.size(); k++)
@@ -131,7 +134,10 @@ void CreateRunningOtherTaskActionDialog::fillExistingTasksTable()
         if(nextColumnNum == 0)
             ui->tableWidget->insertRow(ui->tableWidget->rowCount());
 
-        ui->tableWidget->setItem(nextLineNum, nextColumnNum, new QTableWidgetItem(tasksNamesList.at(k)));
+        auto * item = new QTableWidgetItem(tasksNamesList.at(k));
+        item->setToolTip(tasksNamesList.at(k));
+
+        ui->tableWidget->setItem(nextLineNum, nextColumnNum, item);
     }
 }
 

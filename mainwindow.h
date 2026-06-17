@@ -69,6 +69,7 @@ protected :
     QMenu *m_stmenu = nullptr;
     QToolBar *m_toolBar = nullptr;
     bool m_stMessageShown = false;
+    bool m_dialogSaveChangesShown = false;
 private:
     Ui::MainWindow *ui;
 };

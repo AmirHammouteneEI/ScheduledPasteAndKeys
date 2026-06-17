@@ -15,6 +15,7 @@ void PasteAction::runAction()
     begin:
 
     ActionsTools::setClipboard(m_content);
+    Sleep(100);
     ActionsTools::pasteKeystrokeSimulate();
 
     --timesToRun;
@@ -35,7 +36,7 @@ std::shared_ptr<AbstractAction> PasteAction::deepCopy() const
     actToReturn->m_content = m_content;
     actToReturn->m_contentId = m_contentId;
     actToReturn->m_timesToRun = m_timesToRun;
-    actToReturn->m_refID = m_ID;
+    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

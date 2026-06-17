@@ -107,7 +107,9 @@ void CursorMovementsTableWidget::refresh()
                 if(movelist.size() >= 4)
                     contentList.append("["+QString::number(movelist[2])+","+QString::number(movelist[3])+"]");
             }
-            QString fullContent = contentList.join(" ; ") + " (Keys stroke : "+readList.last().toStringList().join("+")+")";
+            auto keysStrokeStrList = readList.last().toStringList();
+            QString keysstrokeSentence = keysStrokeStrList.size() == 0 ? QString() : " (Keys stroke : "+readList.last().toStringList().join("+")+")";
+            QString fullContent = contentList.join(" ; ") + keysstrokeSentence;
             contentItem->setText(fullContent);
             contentItem->setToolTip(ActionsTools::fromCursorMovsMapToPrintedString(ActionsTools::fromStandardQMapToCursorMovsMap(readList))+
                                     "\nKeys stroke : "+readList.last().toStringList().join("+"));
