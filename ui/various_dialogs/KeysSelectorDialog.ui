@@ -158,6 +158,16 @@
           <string notr="true">XBUTTON_2</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string notr="true">MOUSE_WHEEL_UP</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">MOUSE_WHEEL_DOWN</string>
+         </property>
+        </item>
        </item>
        <item>
         <property name="text">

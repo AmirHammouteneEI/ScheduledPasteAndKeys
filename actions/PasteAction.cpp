@@ -51,5 +51,5 @@ ActionParameters PasteAction::generateParameters() const
 
 int PasteAction::computeOneExecutionDuration()
 {
-    return 200;// 0.2 second as the minimal time wait for each execution
+    return 300;// 0.3 second as the minimal time wait for each execution
 }
