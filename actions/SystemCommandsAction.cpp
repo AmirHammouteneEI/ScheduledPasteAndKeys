@@ -85,7 +85,8 @@ void SystemCommandAction::runAction()
         break;
         case SystemCommandType::ExecuteProgram:
         {
-            QProcess::startDetached(m_param1+" "+m_param2);
+            QString commandLine = "\""+m_param1+"\""+" "+m_param2;
+            QProcess::startDetached(commandLine);
         }
         break;
         case SystemCommandType::OpenUrl:
