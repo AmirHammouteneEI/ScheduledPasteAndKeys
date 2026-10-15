@@ -38,9 +38,9 @@ public:
     SystemCommandAction(const SystemCommandAction & other) = delete;
     SystemCommandAction& operator=(const SystemCommandAction & other) = delete;
 
-    void runAction() override;
+    void runAction() const override;
     void setParameters(const ActionParameters& param) override;
-    std::shared_ptr<AbstractAction> deepCopy() const override;
+    std::shared_ptr<AbstractAction> deepCopy(bool makeIdReference = true) const override;
     ActionParameters generateParameters() const override;
     void optionalProcesses() override {}
 
@@ -48,7 +48,7 @@ public:
 
     friend class SystemCommandWidget;
 signals:
-    void forceQuitProgramRequest();
+    void forceQuitProgramRequest() const;
 };
 
 #endif // SYSTEMCOMMANDSACTION_H

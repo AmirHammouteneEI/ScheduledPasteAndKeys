@@ -11,6 +11,7 @@
 #include "ui/createactiondialogs/CreateCursorMovementsActionDialog.h"
 #include "ui/createactiondialogs/CreateRunningOtherTaskActionDialog.h"
 #include "ui/CustomPrimaryWidgets.h"
+#include "ui/getdialogs/getResolutionsForRescaleCursorCoordinatesDialog.h"
 
 #include <QFrame>
 #include <QScrollArea>
@@ -46,6 +47,7 @@ protected:
     QPushButton *m_scheduleButton = nullptr;
     QPushButton *m_stopButton = nullptr;
     QToolButton *m_addActionButton = nullptr;
+    QToolButton *m_taskToolsButton = nullptr;
     QToolButton *m_loopButton = nullptr;
     QLabel *m_delayChrono = nullptr;
     void setName(const QString & newname);
@@ -61,6 +63,7 @@ protected:
     CreateCursorMovementsActionDialog *m_createCursorMovementsActionDialog = nullptr;
     CreateRunningOtherTaskActionDialog *m_createRunningOtherTaskActionDialog = nullptr;
     void buildAddButtonMenu();
+    void buildToolsButtonMenu();
     void appendAction(const std::shared_ptr<AbstractAction> &act);
     unsigned int m_loopedTimes = 0;
     QLabel *m_loopedTimesLabel = nullptr;
@@ -70,6 +73,8 @@ protected:
     QWidget *m_timesToRunWidget = nullptr;
     NoWheelFocusSpinBox *m_timesToRunSpinBox = nullptr;
     void refreshTabRunIcon();
+    void appendActionsList(const QList<std::shared_ptr<AbstractAction>> &actionsList);
+    getResolutionsForRescaleCursorCoordinatesDialog *m_rescaleCurPosDialog = nullptr;
 public:
     explicit TaskTab(QWidget *parent = nullptr, const QString & name = "NONAME");
     ~TaskTab();
@@ -84,6 +89,7 @@ private slots:
     void loopToggled(bool state);
     void refreshScheduleText();
     void anyActionChangedParam();
+    void getActionsDuplicateRepetition();
 public slots:
     void scheduleTaskAfterDelay(qint64 delayInSeconds);
     void finishedOneLoop();
@@ -93,12 +99,13 @@ public slots:
     void moveToBottomActionReceived(unsigned int actId);
     void moveUpActionReceived(unsigned int actId);
     void moveDownActionReceived(unsigned int actId);
-    void createPasteActionRequest(QString sentenceIdentity); // not const & because it's a slot, will make copy evenif
-    void createWaitActionRequest(long double duration); // not const & because it's a slot, will make copy evenif
-    void createKeysSequenceActionRequest(QString keysSequenceIdentity); // not const & because it's a slot, will make copy evenif
-    void createSystemCommandActionRequest(QString sysCmdType, QString param1, QString param2); // not const & because it's a slot, will make copy evenif
-    void createCursorMovementsActionRequest(QString cursorMovementsIdentity); // not const & because it's a slot, will make copy evenif
-    void createRunningOtherTaskActionRequest(QString filename, int delay, int loops); // not const & because it's a slot, will make copy evenif
+    void createPasteActionRequest(QString sentenceIdentity); // not const & because it's a slot, will make copy anyway
+    void createWaitActionRequest(long double duration); // not const & because it's a slot, will make copy anyway
+    void createKeysSequenceActionRequest(QString keysSequenceIdentity); // not const & because it's a slot, will make copy anyway
+    void createSystemCommandActionRequest(QString sysCmdType, QString param1, QString param2); // not const & because it's a slot, will make copy anyway
+    void createCursorMovementsActionRequest(QString cursorMovementsIdentity); // not const & because it's a slot, will make copy anyway
+    void createRunningOtherTaskActionRequest(QString filename, int delay, int loops); // not const & because it's a slot, will make copy anyway
+    void rescaleCurPosFromDialogReceived();
 signals:
     void saveTaskRequest(int taskId, bool verb);
     void forceStopThread();

@@ -16,8 +16,10 @@ public:
     explicit CursorMovementsWidget(QWidget *parent = nullptr);
     ~CursorMovementsWidget() = default;
     void buildWidget() override;
+    QString getCursorMovementIdentity();
+
 public slots:
-    void cursorMovsIdentityReceived(QString id); // not const & because it's a slot, will make copy evenif
+    void cursorMovsIdentityReceived(QString id); // not const & because it's a slot, will make copy anyway
 private slots:
     void timesToRunChanged(int times);
 private:

@@ -10,6 +10,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QFileDialog>
 
 CreateLoadTaskDialog::CreateLoadTaskDialog(QWidget *parent)
     : QDialog(parent)
@@ -18,12 +19,14 @@ CreateLoadTaskDialog::CreateLoadTaskDialog(QWidget *parent)
     ui->setupUi(this);
     ui->buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Create"));
 
-    connect(ui->openButton, &QPushButton::released, this, &CreateLoadTaskDialog::onOpenFilename);
-    connect(ui->tableWidget, &QTableWidget::cellDoubleClicked, this, &CreateLoadTaskDialog::onOpenFilename);
+    connect(ui->openButton, &QPushButton::released, this, &CreateLoadTaskDialog::onOpenFile);
+    connect(ui->tableWidget, &QTableWidget::cellDoubleClicked, this, &CreateLoadTaskDialog::onOpenFile);
 
     connect(ui->renameButton, &QPushButton::released, this, &CreateLoadTaskDialog::onRenameFilename);
-    connect(ui->deleteButton, &QPushButton::released, this, &CreateLoadTaskDialog::onDeleteFilename);
+    connect(ui->deleteButton, &QPushButton::released, this, &CreateLoadTaskDialog::onDeleteFile);
     connect(ui->duplicateButton, &QPushButton::released, this, &CreateLoadTaskDialog::onDuplicateFilename);
+    connect(ui->exportButton, &QPushButton::released, this, &CreateLoadTaskDialog::onExportFile);
+    connect(ui->importButton, &QPushButton::released, this, &CreateLoadTaskDialog::onImportFile);
 }
 
 CreateLoadTaskDialog::~CreateLoadTaskDialog()
@@ -84,7 +87,7 @@ void CreateLoadTaskDialog::accept()
     QDialog::accept();
 }
 
-void CreateLoadTaskDialog::onOpenFilename()
+void CreateLoadTaskDialog::onOpenFile()
 {
     if(ui->tableWidget->selectedItems().count() == 0)
     {
@@ -126,6 +129,78 @@ void CreateLoadTaskDialog::onDuplicateFilename()
     QString oldFilePath = QApplication::applicationDirPath()+"/"+G_Files::TasksFolder+oldFileName;
 
     renameFilename(oldFileName, oldFilePath, true);
+}
+
+void CreateLoadTaskDialog::onExportFile()
+{
+    if(ui->tableWidget->selectedItems().count() == 0)
+    {
+        QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected());
+        return;
+    }
+
+    QString fileName = ui->tableWidget->selectedItems().at(0)->text();
+    QString path = QFileDialog::getSaveFileName(this, tr("Define where to save the task file"),fileName,tr("ScheduledTask file (*.scht)"));
+
+    if(!path.isEmpty())
+    {
+        QFile f(path);
+        f.remove();
+        if(!QFile::copy(QApplication::applicationDirPath()+"/"+G_Files::TasksFolder+fileName,path))
+        {
+            QMessageBox::warning(this, tr("Cannot save this file"), G_Sentences::OperationInterference());
+            return;
+        }
+    }
+}
+
+void CreateLoadTaskDialog::onImportFile()
+{
+    QString path = QFileDialog::getOpenFileName(this, tr("Select a task file"),"",tr("ScheduledTask file (*.scht)"));
+
+    if(path.isEmpty())
+        return;
+
+    QFileInfo fileChosen(path);
+    QString taskName = fileChosen.fileName().chopped(5);
+
+    if(doesFilenameContainForbiddenChar(taskName))
+    {
+        QMessageBox::warning(this, tr("Forbidden character"), G_Sentences::ForbiddenCharacter());
+        return;
+    }
+
+    if(!fileChosen.exists() || !fileChosen.isFile())
+    {
+        QMessageBox::warning(this, tr("Cannot find the file"), G_Sentences::OperationInterference());
+        return;
+    }
+
+    QString taskNameToSave = taskName;
+    QString pathToSave = QApplication::applicationDirPath()+"/"+G_Files::TasksFolder+taskNameToSave+G_Files::TasksFileExtension;
+    QFileInfo fileToSave(pathToSave);
+    bool okButPushed = true;
+    while(fileToSave.exists() && fileToSave.isFile() && okButPushed)
+    {
+        taskNameToSave = QInputDialog::getText(this, tr("New name for this file"),tr("A task with the same name already exists.\nPlease choose a new name for this file to import : \n"),
+                                                    QLineEdit::Normal, taskNameToSave,&okButPushed);
+
+        pathToSave = QApplication::applicationDirPath()+"/"+G_Files::TasksFolder+taskNameToSave+G_Files::TasksFileExtension;
+        fileToSave.setFile(pathToSave);
+    }
+
+    if(!okButPushed)
+        return;
+
+    QFile f(pathToSave);
+    f.remove();
+    if(!QFile::copy(path, pathToSave))
+    {
+        QMessageBox::warning(this, tr("Cannot save this file"), G_Sentences::OperationInterference());
+        return;
+    }
+
+    fillExistingTasksTable();
 }
 
 void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QString &oldFilePath, bool duplicate)
@@ -181,6 +256,8 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
 
     if(!duplicate)
     {
+        QFile f(filePathChosen);
+        f.remove();
         if(!QFile::rename(oldFilePath, filePathChosen))
         {
             QMessageBox::warning(this, tr("Cannot rename this file"), G_Sentences::OperationInterference());
@@ -203,7 +280,7 @@ void CreateLoadTaskDialog::renameFilename(const QString &oldFileName, const QStr
     emit requestRefreshTabs();
 }
 
-void CreateLoadTaskDialog::onDeleteFilename()
+void CreateLoadTaskDialog::onDeleteFile()
 {
     if(ui->tableWidget->selectedItems().count() == 0)
     {

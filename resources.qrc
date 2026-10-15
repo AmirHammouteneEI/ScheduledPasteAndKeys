@@ -55,5 +55,7 @@
         <file>img/top_arrow_rounded_light.png</file>
         <file>img/up_arrow_rounded_light.png</file>
         <file>img/wait_light.png</file>
+        <file>img/tool.png</file>
+        <file>img/tool_light.png</file>
     </qresource>
 </RCC>

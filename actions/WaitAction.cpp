@@ -8,7 +8,7 @@ WaitAction::WaitAction() : AbstractAction()
     e_type = ActionType::Wait;
 }
 
-void WaitAction::runAction()
+void WaitAction::runAction() const
 {
     Sleep(m_duration*1000);
 }
@@ -18,11 +18,12 @@ void WaitAction::setParameters(const ActionParameters &param)
     m_duration = param.m_waitDuration;
 }
 
-std::shared_ptr<AbstractAction> WaitAction::deepCopy() const
+std::shared_ptr<AbstractAction> WaitAction::deepCopy(bool makeIdReference) const
 {
     auto actToReturn = std::make_shared<WaitAction>();
     actToReturn->m_duration = m_duration;
-    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
+    if(makeIdReference)
+        actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

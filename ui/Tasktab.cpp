@@ -20,6 +20,7 @@
 #include <QApplication>
 #include <QMenu>
 #include <QSettings>
+#include <QInputDialog>
 #include "mainwindow.h"
 
 TaskTab::TaskTab(QWidget *parent, const QString &name)
@@ -166,19 +167,28 @@ void TaskTab::buildBasicInterface()
     m_actionsLayout->setSizeConstraint(QLayout::SetMinimumSize);
 
     //-- Botton widget with + button and loop button
+    m_rescaleCurPosDialog = new getResolutionsForRescaleCursorCoordinatesDialog(this);
+    connect(m_rescaleCurPosDialog,&QDialog::accepted, this, &TaskTab::rescaleCurPosFromDialogReceived);
+
     auto bottomWidget = new QFrame(m_mainWidget);
     auto bottomGridLayout = new QGridLayout(bottomWidget);
     m_addActionButton = new QToolButton(bottomWidget);
     m_addActionButton->setObjectName("addActionButton");
     m_addActionButton->setText("+");
-    m_addActionButton->setStyleSheet("QToolButton{font-family: \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif;font-size:42px;font-weight:bold;text-align:center;padding:-10px -5px 5px -5px;}");
 
     buildAddButtonMenu();
 
-    font.setPointSize(14);
-    font.setBold(true);
-    m_addActionButton->setFont(font);
     bottomGridLayout->addWidget(m_addActionButton,0,0,Qt::AlignCenter);
+
+    bottomGridLayout->addItem(new QSpacerItem(10,10,QSizePolicy::Minimum,QSizePolicy::Fixed),1,0);
+
+    m_taskToolsButton = new QToolButton(bottomWidget);
+    m_taskToolsButton->setObjectName("taskToolButton");
+    m_taskToolsButton->setText("");
+
+    buildToolsButtonMenu();
+
+    bottomGridLayout->addWidget(m_taskToolsButton,2,0,Qt::AlignCenter);
 
     m_mainWidget->layout()->addWidget(topWidget);
     m_mainWidget->layout()->addWidget(m_actionsFrame);
@@ -235,6 +245,22 @@ void TaskTab::buildAddButtonMenu()
 
     m_addActionButton->setMenu(menu);
     m_addActionButton->setPopupMode(QToolButton::InstantPopup);
+}
+
+void TaskTab::buildToolsButtonMenu()
+{
+    auto menu = new QMenu(m_taskToolsButton);
+    auto duplicateActions = new QAction(tr("Duplicate actions list..."),menu);
+    auto rescaleCurPosActions = new QAction(tr("Rescale cursor positions for new screen resolution..."),menu);
+
+    menu->addAction(duplicateActions);
+    menu->addAction(rescaleCurPosActions);
+
+    connect(duplicateActions, &QAction::triggered, this, &TaskTab::getActionsDuplicateRepetition);
+    connect(rescaleCurPosActions, &QAction::triggered, m_rescaleCurPosDialog, &getResolutionsForRescaleCursorCoordinatesDialog::showDialog);
+
+    m_taskToolsButton->setMenu(menu);
+    m_taskToolsButton->setPopupMode(QToolButton::InstantPopup);
 }
 
 void TaskTab::setTask(const std::shared_ptr<Task> &task)
@@ -336,6 +362,7 @@ void TaskTab::scheduleTaskAfterDelay(qint64 delayInSeconds)
     m_scheduleButton->setEnabled(false);
     m_stopButton->setEnabled(true);
     m_addActionButton->setEnabled(false);
+    m_taskToolsButton->setEnabled(false);
     m_runOptionsWidget->setEnabled(false);
     m_loopedTimes = 0;
     m_loopedTimesLabel->setText(tr("Looped ")+"0"+tr(" times"));
@@ -393,6 +420,7 @@ void TaskTab::stopTask()
     m_scheduleButton->setEnabled(true);
     m_stopButton->setEnabled(false);
     m_addActionButton->setEnabled(true);
+    m_taskToolsButton->setEnabled(true);
     m_runOptionsWidget->setEnabled(true);
     if(m_loopButton->isChecked())
         m_timesToRunWidget->setEnabled(false);
@@ -403,9 +431,9 @@ void TaskTab::stopTask()
 
 void TaskTab::forcedStop()
 {
+    emit forceStopThread();
     stopTask();
     m_scheduleTimer->stop();
-    emit forceStopThread();
 }
 
 void TaskTab::finishedOneLoop()
@@ -471,6 +499,25 @@ void TaskTab::anyActionChangedParam()
 {
     m_description = m_descriptionEdit->toPlainText();
     setTaskModified(true);
+}
+
+void TaskTab::getActionsDuplicateRepetition()
+{
+    bool ok;
+    int val = QInputDialog::getInt(this,tr("Number of duplication"),tr("How many times would you like to duplicate the current actions list?"),1,1,100,1,&ok);
+    if(!ok)
+        return;
+
+    QList<std::shared_ptr<AbstractAction>> actionsListToAppend;
+
+    while(val > 0)
+    {
+        for(auto& act : m_task->m_actionsOrderedList)
+            actionsListToAppend.append(act->deepCopy(false));
+        --val;
+    }
+
+    appendActionsList(actionsListToAppend);
 }
 
 void TaskTab::removeActionReceived(unsigned int actId)
@@ -701,4 +748,57 @@ void TaskTab::createRunningOtherTaskActionRequest(QString filename, int delay, i
     runOtherTaskAct->setParameters(paramRunOtherTask);
 
     appendAction(runOtherTaskAct);
+}
+
+void TaskTab::rescaleCurPosFromDialogReceived()
+{
+    auto wRatio = m_rescaleCurPosDialog->getWidthRatio();
+    auto hRatio = m_rescaleCurPosDialog->getHeightRatio();
+
+    for(auto& widget : m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList)
+    {
+        auto& action = widget->getAction();
+        if(action->e_type != ActionType::CursorMovements)
+            continue;
+
+        auto cursorWidget = qobject_cast<CursorMovementsWidget*>(widget);
+        if(!cursorWidget)
+            continue;
+
+        auto originalDataId = cursorWidget->getCursorMovementIdentity();
+        QString rescaledDataId = originalDataId+"_scaled";
+
+        QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
+
+        auto cursorMovementsFromSettings = settings.value(G_Files::CursorMovementsDataCategory+originalDataId).toList();
+        CursorMovementsList movsList = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
+        ActionsTools::rescaleCursorMovementsList(movsList, wRatio, hRatio);
+
+        QList<QVariant> writtenList;
+        for(auto &el : movsList)
+        {
+            QVariant variant = QVariant::fromValue(el);
+            writtenList.append(variant);
+        }
+        writtenList.append(cursorMovementsFromSettings.last().toStringList());
+        settings.setValue(G_Files::CursorMovementsDataCategory+rescaledDataId,writtenList);
+
+        cursorWidget->cursorMovsIdentityReceived(rescaledDataId);
+    }
+}
+
+void TaskTab::appendActionsList(const QList<std::shared_ptr<AbstractAction>> &actionsList)
+{
+    if(actionsList.empty() || m_task == nullptr)
+        return;
+
+    for(auto& act : actionsList)
+    {
+        m_task->appendAction(act);
+        m_actionWidgetsManager->appendWidget(createActionWidget(act));
+    }
+
+    m_actionWidgetsManager->fullRefreshActionWidgets();
+
+    setTaskModified(true);
 }

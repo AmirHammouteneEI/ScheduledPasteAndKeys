@@ -14,6 +14,9 @@ class DataEditDialog : public QDialog
 public:
     explicit DataEditDialog(QWidget *parent = nullptr);
     ~DataEditDialog();
+private slots:
+    void onExportData();
+    void onImportData();
 public slots:
     void showDialog();
 

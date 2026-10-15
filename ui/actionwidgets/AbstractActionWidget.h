@@ -36,6 +36,7 @@ public:
     void setAction(const std::shared_ptr<AbstractAction> &action);
     virtual void buildWidget() = 0;
     unsigned int getActionID() const {return m_actionID;}
+    const std::shared_ptr<AbstractAction>& getAction() const { return m_action;}
 
     inline bool operator==(const AbstractActionWidget& otherActWidg) { return m_actionID == otherActWidg.m_actionID; }
 

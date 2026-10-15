@@ -20,10 +20,12 @@ public:
     void renameFilename(const QString &oldFileName, const QString &oldFilePath, bool duplicate = false);
 private slots:
     void accept() override;
-    void onOpenFilename();
-    void onDeleteFilename();
+    void onOpenFile();
+    void onDeleteFile();
     void onRenameFilename();
     void onDuplicateFilename();
+    void onExportFile();
+    void onImportFile();
 signals:
     void requestOpenNewTab(QString);
     void requestRefreshTabs();

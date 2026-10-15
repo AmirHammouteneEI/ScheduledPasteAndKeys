@@ -116,16 +116,12 @@ DWORD ActionsTools::mouseFlagPressReleaseConversion(WORD keyInputWord, DWORD typ
     {
     case MOUSEEVENTF_RIGHTDOWN:
         return MOUSEEVENTF_RIGHTUP;
-        break;
     case MOUSEEVENTF_MIDDLEDOWN:
         return MOUSEEVENTF_MIDDLEUP;
-        break;
     case MOUSEEVENTF_XDOWN:
         return MOUSEEVENTF_XUP;
-        break;
     default:
         return MOUSEEVENTF_LEFTUP;
-        break;
     }
 }
 
@@ -264,4 +260,15 @@ void ActionsTools::createShortcut(const QString &savePath, const QString &linkPa
     psl->Release();
     psl = NULL;
     CoUninitialize();
+}
+
+void ActionsTools::rescaleCursorMovementsList(CursorMovementsList &movsList, float wRatio, float hRatio)
+{
+    for(auto& mov : movsList)
+    {
+        if(mov.size() < 4)
+            continue;
+        mov[2] *= wRatio;
+        mov[3] *= hRatio;
+    }
 }

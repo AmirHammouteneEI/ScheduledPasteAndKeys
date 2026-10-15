@@ -18,13 +18,14 @@ getFilePathDialog::~getFilePathDialog()
 
 void getFilePathDialog::showBrowseFilesDialog()
 {
-    QString dir;
+    QString path;
     if(m_getSavedFileName)
-        dir = QFileDialog::getSaveFileName(this, tr("Select a file"),ui->lineEdit->text());
+        path = QFileDialog::getSaveFileName(this, tr("Select a file"),ui->lineEdit->text());
     else
-        dir = QFileDialog::getOpenFileName(this, tr("Select a file"),ui->lineEdit->text());
+        path = QFileDialog::getOpenFileName(this, tr("Select a file"),ui->lineEdit->text());
 
-    ui->lineEdit->setText(dir);
+    if(!path.isEmpty())
+        ui->lineEdit->setText(path);
 }
 
 void getFilePathDialog::accept()

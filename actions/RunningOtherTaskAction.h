@@ -16,15 +16,15 @@ public:
     RunningOtherTaskAction(const RunningOtherTaskAction & other) = delete;
     RunningOtherTaskAction& operator=(const RunningOtherTaskAction & other) = delete;
 
-    void runAction() override;
+    void runAction() const override;
     void setParameters(const ActionParameters& param) override;
-    std::shared_ptr<AbstractAction> deepCopy() const override;
+    std::shared_ptr<AbstractAction> deepCopy(bool makeIdReference = true) const override;
     ActionParameters generateParameters() const override;
     void optionalProcesses() override {}
 
     friend class RunningOtherTaskWidget;
 signals:
-    void autoRunTaskRequest(QString filename, int delay, int loopTimes);
+    void autoRunTaskRequest(QString filename, int delay, int loopTimes) const;
 };
 
 #endif // RUNNINGOTHERTASKACTION_H

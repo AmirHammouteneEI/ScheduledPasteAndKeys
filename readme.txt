@@ -1,6 +1,6 @@
 # Tasket++
 
-version 2.1 (October 2026)
+version 2.2 (October 2026)
 
 Schedule automated simulations of actions you would perform on your PC.
 
@@ -12,7 +12,7 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 2.1 :
+Details of version 2.2 :
 
 Stable version, fully functional
 
@@ -25,7 +25,8 @@ Those actions simulations are available :
    - Wait
    - Run another task
 
-And other features like data management, scheduled tasks at system startup, create desktop shortcut to autorun a task...
+Task tools like duplicating actions list, rescaling cursor position for new screen resolution.
+And other features like data management, scheduled tasks at system startup, create desktop shortcut to autorun a task, import/export task files or program data...
    
 The goal in future versions is to include those features :
 
@@ -40,7 +41,7 @@ Available for install on Microsoft Store :
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
 Available as a portable version :
-https://files.amirhammoutene.dev/Tasket++/2.1/Tasket++_v2.1.zip
+https://files.amirhammoutene.dev/Tasket++/2.2/Tasket++_v2.2.zip
 
 Needs 35 MB disk space, available for Windows systems only
 

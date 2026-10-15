@@ -318,7 +318,7 @@ item selected in SelectSentenceDialog is null !</translation>
     </message>
     <message>
         <source>rename</source>
-        <translation>renomer</translation>
+        <translation>renommer</translation>
     </message>
     <message>
         <source>duplicate</source>
@@ -343,6 +343,42 @@ item selected in SelectSentenceDialog is null !</translation>
     <message>
         <source>Create a new task  </source>
         <translation>Créer une nouvelle tâche  </translation>
+    </message>
+    <message>
+        <source>export...</source>
+        <translation>exporter...</translation>
+    </message>
+    <message>
+        <source>import...</source>
+        <translation>importer...</translation>
+    </message>
+    <message>
+        <source>Define where to save the task file</source>
+        <translation>Définir où enregistrer le fichier tâche</translation>
+    </message>
+    <message>
+        <source>ScheduledTask file (*.scht)</source>
+        <translation>ScheduledTask file (*.scht)</translation>
+    </message>
+    <message>
+        <source>Cannot save this file</source>
+        <translation>Impossible d&apos;enregistrer ce fichier</translation>
+    </message>
+    <message>
+        <source>Select a task file</source>
+        <translation>Sélectionner un fichier tâche</translation>
+    </message>
+    <message>
+        <source>Cannot find the file</source>
+        <translation>Fichier introuvable</translation>
+    </message>
+    <message>
+        <source>A task with the same name already exists.
+Please choose a new name for this file to import : 
+</source>
+        <translation>Une tâche portant le même nom existe déjà.
+Veuillez choisir un nouveau nom pour ce fichier à importer : 
+</translation>
     </message>
 </context>
 <context>
@@ -815,6 +851,40 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>Note : Rename an entry to make a copy </source>
         <translation>Remarque : Renommez une entrée pour en faire une copie </translation>
+    </message>
+    <message>
+        <source>export data...</source>
+        <translation>exporter les données...</translation>
+    </message>
+    <message>
+        <source>import data...</source>
+        <translation>importer les données...</translation>
+    </message>
+    <message>
+        <source>Define where to save the data file</source>
+        <translation>Définir où enregistrer le fichier de données</translation>
+    </message>
+    <message>
+        <source>INI file (*.ini)</source>
+        <translation>INI file (*.ini)</translation>
+    </message>
+    <message>
+        <source>Cannot save this file</source>
+        <translation>Impossible d&apos;enregistrer ce fichier</translation>
+    </message>
+    <message>
+        <source>Confirm data copy</source>
+        <translation>Confirmation de la copie des données</translation>
+    </message>
+    <message>
+        <source>Data will be added from the programData.ini file you will select.
+If some data already exist, the &apos;_other&apos; suffix will be added to identities.</source>
+        <translation>Les données seront ajoutées à partir du fichier programData.ini que vous sélectionnerez.
+Si des données existent déjà, le suffixe &apos;_other&apos; sera ajouté aux identités.</translation>
+    </message>
+    <message>
+        <source>Select a data file</source>
+        <translation>Sélectionner un fichier de données</translation>
     </message>
 </context>
 <context>
@@ -1467,7 +1537,7 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     </message>
     <message>
         <source>version 2.1 (October 2026)</source>
-        <translation>version 2.1 (octobre 2026)</translation>
+        <translation type="vanished">version 2.1 (octobre 2026)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1478,12 +1548,34 @@ initial work on February 2024
 version 2.1 (October 2026)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 2.1 (octobre 2026)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>version 2.2 (October 2026)</source>
+        <translation>version 2.2 (octobre 2026)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 2.2 (October 2026)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 2.2 (octobre 2026)
 
 Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>
@@ -2044,6 +2136,22 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
         <source>Add a Running Another Task action...</source>
         <translation>Ajouter une action d&apos;Exécution d&apos;une autre Tâche...</translation>
     </message>
+    <message>
+        <source>Duplicate actions list...</source>
+        <translation>Dupliquer la liste des actions...</translation>
+    </message>
+    <message>
+        <source>Rescale cursor positions for new screen resolution...</source>
+        <translation>Recalculer les positions du curseur pour une nouvelle résolution d&apos;écran...</translation>
+    </message>
+    <message>
+        <source>Number of duplication</source>
+        <translation>Nombre de duplications</translation>
+    </message>
+    <message>
+        <source>How many times would you like to duplicate the current actions list?</source>
+        <translation>Combien de fois souhaitez-vous dupliquer la liste d&apos;actions actuelle ?</translation>
+    </message>
 </context>
 <context>
     <name>TaskTabsManager</name>
@@ -2343,6 +2451,49 @@ Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</transla
     <message>
         <source>Set the program option</source>
         <translation>Définir l&apos;option de programme</translation>
+    </message>
+</context>
+<context>
+    <name>getResolutionsForRescaleCursorCoordinatesDialog</name>
+    <message>
+        <source>Rescale cursor positions for new screen resolution</source>
+        <translation>Recalculer les positions du curseur pour une nouvelle résolution d&apos;écran</translation>
+    </message>
+    <message>
+        <source>Enter the original and target screen resolutions to rescale all simulated cursor positions.
+A new data entry with the &apos;_scaled&apos; suffix will be created.
+
+Note : In most cases, rescaling isn’t needed, as original element positions are usually preserved.
+This tool supports single‑monitor setups, multi‑screen task files may produce inaccurate results.</source>
+        <translation type="vanished">Saisissez les résolutions d&apos;écran d&apos;origine et cible pour recalculer toutes les positions simulées du curseur.
+Une nouvelle entrée de données avec le suffixe &apos;_scaled&apos; sera créée.
+
+Remarque : Dans la plupart des cas, le recalcul n&apos;est pas nécessaire, car les positions d&apos;origine des éléments sont généralement conservées.
+Cet outil prend en charge les configurations à écran unique, les fichiers de tâches multi-écrans peuvent générer des résultats inexacts.</translation>
+    </message>
+    <message>
+        <source>Original resolution</source>
+        <translation>Résolution d&apos;origine</translation>
+    </message>
+    <message>
+        <source>x</source>
+        <translation>x</translation>
+    </message>
+    <message>
+        <source>Target resolution</source>
+        <translation>Résolution cible</translation>
+    </message>
+    <message>
+        <source>Enter the original and target screen resolutions to rescale all simulated cursor positions.
+New data entries with the &apos;_scaled&apos; suffix will be created.
+
+Note : In most cases, rescaling isn’t needed, as original element positions are usually preserved.
+This tool supports single‑monitor setups, multi‑screen task files may produce inaccurate results.</source>
+        <translation>Saisissez les résolutions d&apos;écran d&apos;origine et cible pour recalculer toutes les positions simulées du curseur.
+De nouvelles entrées de données avec le suffixe &apos;_scaled&apos; seront créées.
+
+Remarque : Dans la plupart des cas, le recalcul n&apos;est pas nécessaire, car les positions d&apos;origine des éléments sont généralement conservées.
+Cet outil prend en charge les configurations à écran unique, les fichiers de tâches multi-écrans peuvent générer des résultats inexacts.</translation>
     </message>
 </context>
 </TS>

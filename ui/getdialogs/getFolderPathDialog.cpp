@@ -21,7 +21,8 @@ void getFolderPathDialog::showBrowseFoldersDialog()
 {
     QString dir = QFileDialog::getExistingDirectory(this, tr("Select a directory"),ui->lineEdit->text(),QFileDialog::ShowDirsOnly);
 
-    ui->lineEdit->setText(dir);
+    if(!dir.isEmpty())
+        ui->lineEdit->setText(dir);
 }
 
 void getFolderPathDialog::accept()

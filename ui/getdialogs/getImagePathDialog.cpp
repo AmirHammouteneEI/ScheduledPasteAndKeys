@@ -20,9 +20,10 @@ getImagePathDialog::~getImagePathDialog()
 
 void getImagePathDialog::showBrowseFilesDialog()
 {
-    QString dir = QFileDialog::getSaveFileName(this, tr("Define the image file path"),ui->lineEdit->text(),tr("PNG (*.png)"));
+    QString path = QFileDialog::getSaveFileName(this, tr("Define the image file path"),ui->lineEdit->text(),tr("PNG (*.png)"));
 
-    ui->lineEdit->setText(dir);
+    if(!path.isEmpty())
+        ui->lineEdit->setText(path);
 }
 
 void getImagePathDialog::accept()

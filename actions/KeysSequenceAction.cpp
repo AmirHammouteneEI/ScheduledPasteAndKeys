@@ -6,7 +6,7 @@ KeysSequenceAction::KeysSequenceAction() : AbstractAction()
     e_type = ActionType::KeysSequence;
 }
 
-void KeysSequenceAction::runAction()
+void KeysSequenceAction::runAction() const
 {
     int timesToRun = m_timesToRun;
 
@@ -44,14 +44,15 @@ void KeysSequenceAction::setParameters(const ActionParameters &param)
     m_timesToRun = param.m_timesToRun;
 }
 
-std::shared_ptr<AbstractAction> KeysSequenceAction::deepCopy() const
+std::shared_ptr<AbstractAction> KeysSequenceAction::deepCopy(bool makeIdReference) const
 {
     auto actToReturn = std::make_shared<KeysSequenceAction>();
     actToReturn->m_keysSeqMap = m_keysSeqMap;
     actToReturn->m_sequenceId = m_sequenceId;
     actToReturn->m_keysStrokeTimeline = m_keysStrokeTimeline;
     actToReturn->m_timesToRun = m_timesToRun;
-    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
+    if(makeIdReference)
+        actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

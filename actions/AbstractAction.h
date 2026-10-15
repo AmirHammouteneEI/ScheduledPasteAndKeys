@@ -27,9 +27,9 @@ public:
     AbstractAction(const AbstractAction & other) = delete;
     AbstractAction& operator=(const AbstractAction & other) = delete;
 
-    virtual void runAction() = 0;
+    virtual void runAction() const = 0;
     virtual void setParameters(const ActionParameters& param) = 0;
-    virtual std::shared_ptr<AbstractAction> deepCopy() const = 0;
+    virtual std::shared_ptr<AbstractAction> deepCopy(bool makeIdReference = true) const = 0;
     virtual ActionParameters generateParameters() const = 0;
     virtual void optionalProcesses() = 0;
 

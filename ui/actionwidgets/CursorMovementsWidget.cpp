@@ -74,6 +74,11 @@ void CursorMovementsWidget::buildWidget()
 
 }
 
+QString CursorMovementsWidget::getCursorMovementIdentity()
+{
+    return m_mainButton->property("cursorMovsId").toString();
+}
+
 void CursorMovementsWidget::cursorMovsIdentityReceived(QString id)
 {
     auto cursormovsaction =  dynamic_cast<CursorMovementsAction*>(m_action.get());

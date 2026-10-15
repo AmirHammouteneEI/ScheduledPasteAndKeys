@@ -19,10 +19,10 @@ getProgramPathDialog::~getProgramPathDialog()
 
 void getProgramPathDialog::showBrowseFilesDialog()
 {
-    QString dir;
-    dir = QFileDialog::getOpenFileName(this, tr("Select a program"),ui->lineEdit->text());
+    QString path = QFileDialog::getOpenFileName(this, tr("Select a program"),ui->lineEdit->text());
 
-    ui->lineEdit->setText(dir);
+    if(!path.isEmpty())
+        ui->lineEdit->setText(path);
 }
 
 void getProgramPathDialog::accept()

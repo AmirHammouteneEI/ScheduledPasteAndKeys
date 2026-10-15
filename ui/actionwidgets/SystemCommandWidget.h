@@ -15,7 +15,7 @@ public:
     ~SystemCommandWidget() = default;
     void buildWidget() override;
 public slots:
-    void systemCommandReceived(QString sysCmdType, QString param1, QString param2); // not const & because it's a slot, will make copy evenif
+    void systemCommandReceived(QString sysCmdType, QString param1, QString param2); // not const & because it's a slot, will make copy anyway
 private:
     QString fromSysCmdTypeToDiplayedStr(SystemCommandType t);
 };

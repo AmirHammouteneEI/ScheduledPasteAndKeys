@@ -17,7 +17,7 @@ public:
     ~KeysSequenceWidget() = default;
     void buildWidget() override;
 public slots:
-    void keysSeqIdentityReceived(QString id); // not const & because it's a slot, will make copy evenif
+    void keysSeqIdentityReceived(QString id); // not const & because it's a slot, will make copy anyway
 private slots:
     void timesToRunChanged(int times);
 private:

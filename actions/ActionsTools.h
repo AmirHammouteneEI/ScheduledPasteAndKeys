@@ -30,6 +30,7 @@ public:
     static void moveCursorSimulate(int xPos, int yPos, int time);
     static QPair<int,int> getCursorPos();
     static void createShortcut(const QString & savePath, const QString & linkPath, const QString &args, const QString &linkname);
+    static void rescaleCursorMovementsList(CursorMovementsList &movsList, float wRatio, float hRatio);
 };
 
 #endif // ACTIONSTOOLS_H

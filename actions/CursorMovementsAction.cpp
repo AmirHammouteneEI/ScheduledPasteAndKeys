@@ -6,7 +6,7 @@ CursorMovementsAction::CursorMovementsAction() : AbstractAction()
     e_type = ActionType::CursorMovements;
 }
 
-void CursorMovementsAction::runAction()
+void CursorMovementsAction::runAction() const
 {
     int timesToRun = m_timesToRun;
 
@@ -45,14 +45,15 @@ void CursorMovementsAction::setParameters(const ActionParameters &param)
     m_cursorMovementsOptionalKeysStroke = param.m_cursorMovementsOptionalKeysStroke;
 }
 
-std::shared_ptr<AbstractAction> CursorMovementsAction::deepCopy() const
+std::shared_ptr<AbstractAction> CursorMovementsAction::deepCopy(bool makeIdReference) const
 {
     auto actToReturn = std::make_shared<CursorMovementsAction>();
     actToReturn->m_cursorMovementsList = m_cursorMovementsList;
     actToReturn->m_movementsId = m_movementsId;
     actToReturn->m_timesToRun = m_timesToRun;
     actToReturn->m_cursorMovementsOptionalKeysStroke = m_cursorMovementsOptionalKeysStroke;
-    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
+    if(makeIdReference)
+        actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

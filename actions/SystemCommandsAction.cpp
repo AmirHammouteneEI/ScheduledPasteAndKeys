@@ -20,7 +20,7 @@ SystemCommandAction::SystemCommandAction() : AbstractAction()
     connect(this, &SystemCommandAction::forceQuitProgramRequest, MainWindow::getInstance().get(), &MainWindow::forceQuit);
 }
 
-void SystemCommandAction::runAction()
+void SystemCommandAction::runAction() const
 {
     switch(e_sysCommandType)
     {
@@ -43,6 +43,7 @@ void SystemCommandAction::runAction()
             d.mkpath(finfo.absolutePath());
             auto pathToSave = m_param2 == G_Sentences::AutoRenameFileOption ? incrementFilenameIfExists(m_param1) : m_param1;
             QFile f(pathToSave);
+            f.remove();
             f.open(QIODevice::WriteOnly);
             f.close();
         }
@@ -101,6 +102,8 @@ void SystemCommandAction::runAction()
         break;
         case SystemCommandType::CopyOneFile:
         {
+            QFile f(m_param2);
+            f.remove();
             QFile::copy(m_param1,m_param2);
         }
         break;
@@ -130,6 +133,8 @@ void SystemCommandAction::runAction()
                 drawOrigin += pix.width();
             }
             auto pathToSave = m_param2 == G_Sentences::AutoRenameFileOption ? incrementFilenameIfExists(m_param1) : m_param1;
+            QFile f(pathToSave);
+            f.remove();
             globalPix.save(pathToSave,"PNG");
         }
         break;
@@ -211,13 +216,14 @@ void SystemCommandAction::setParameters(const ActionParameters &param)
     m_param2 = param.m_sysCmdParam2;
 }
 
-std::shared_ptr<AbstractAction> SystemCommandAction::deepCopy() const
+std::shared_ptr<AbstractAction> SystemCommandAction::deepCopy(bool makeIdReference) const
 {
     auto actToReturn = std::make_shared<SystemCommandAction>();
     actToReturn->e_sysCommandType = e_sysCommandType;
     actToReturn->m_param1 = m_param1;
     actToReturn->m_param2 = m_param2;
-    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
+    if(makeIdReference)
+        actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

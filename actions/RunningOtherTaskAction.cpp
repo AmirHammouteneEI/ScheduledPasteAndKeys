@@ -9,7 +9,7 @@ RunningOtherTaskAction::RunningOtherTaskAction() : AbstractAction()
     connect(this, &RunningOtherTaskAction::autoRunTaskRequest, MainWindow::getInstance().get(), &MainWindow::autoRun);
 }
 
-void RunningOtherTaskAction::runAction()
+void RunningOtherTaskAction::runAction() const
 {
     if(!m_taskName.isEmpty() && m_delay >= 0 && m_timesToRun != 0)
         emit autoRunTaskRequest(m_taskName, m_delay, m_timesToRun);
@@ -22,13 +22,14 @@ void RunningOtherTaskAction::setParameters(const ActionParameters &param)
     m_timesToRun = param.m_timesToRun;
 }
 
-std::shared_ptr<AbstractAction> RunningOtherTaskAction::deepCopy() const
+std::shared_ptr<AbstractAction> RunningOtherTaskAction::deepCopy(bool makeIdReference) const
 {
     auto actToReturn = std::make_shared<RunningOtherTaskAction>();
     actToReturn->m_taskName = m_taskName;
     actToReturn->m_delay = m_delay;
     actToReturn->m_timesToRun = m_timesToRun;
-    actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
+    if(makeIdReference)
+        actToReturn->m_refID = m_refID == 0 ? m_ID : m_refID;
     return actToReturn;
 }
 

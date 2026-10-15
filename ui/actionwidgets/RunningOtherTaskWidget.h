@@ -15,7 +15,7 @@ public:
     ~RunningOtherTaskWidget() = default;
     void buildWidget() override;
 public slots:
-    void runningOtherTaskReceived(QString filename, int delay, int timesOfLoop); // not const & because it's a slot, will make copy evenif
+    void runningOtherTaskReceived(QString filename, int delay, int timesOfLoop); // not const & because it's a slot, will make copy anyway
 };
 
 #endif // RUNNINGOTHERTASKWIDGET_H
