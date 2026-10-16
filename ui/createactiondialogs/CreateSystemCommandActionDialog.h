@@ -8,6 +8,7 @@
 #include "ui/getdialogs/getFolderPathDialog.h"
 #include "ui/getdialogs/getImagePathDialog.h"
 #include "ui/getdialogs/getAutoRenameOptionDialog.h"
+#include "ui/getdialogs/getForceOptionDialog.h"
 
 namespace Ui {
 class CreateSystemCommandActionDialog;
@@ -26,6 +27,7 @@ class CreateSystemCommandActionDialog : public QDialog
     getFilePathDialog *m_savedFilePathDialog = nullptr;
     getImagePathDialog *m_imagePathDialog = nullptr;
     getAutoRenameOptionDialog *m_autorenameDialog = nullptr;
+    getForceOptionDialog *m_forceDialog = nullptr;
     void activateButtons();
 public:
     explicit CreateSystemCommandActionDialog(QWidget *parent = nullptr);

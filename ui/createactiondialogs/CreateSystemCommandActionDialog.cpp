@@ -45,6 +45,7 @@ CreateSystemCommandActionDialog::CreateSystemCommandActionDialog(QWidget *parent
     m_savedFilePathDialog = new getFilePathDialog(this,true);
     m_imagePathDialog = new getImagePathDialog(this);
     m_autorenameDialog = new getAutoRenameOptionDialog(this);
+    m_forceDialog = new getForceOptionDialog(this);
 
     connect(ui->shutdownButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
     connect(ui->restartButton,&QPushButton::released, this, &CreateSystemCommandActionDialog::commandButtonPushed);
@@ -308,5 +309,28 @@ void CreateSystemCommandActionDialog::activateButtons()
                     m_option1Button->setText(QString::number(val));
                 });
     }
-    // if QuitSelfProgramType,ShutDownType,RestartType,LogOffType no need of any option
+    else if(m_type == G_SystemCommands::ShutDownType || m_type == G_SystemCommands::RestartType || m_type == G_SystemCommands::LogOffType)
+    {
+        m_option1Button->setEnabled(true);
+        if(m_option1Button->text().isEmpty())
+        {
+            m_option1Button->setText(G_Sentences::ForceOption);
+            m_option1Button->setToolTip(tr("Will force the execution of the action."));
+        }
+        connect(m_option1Button,&QPushButton::released, m_forceDialog, &getForceOptionDialog::showDialog);
+        connect(m_forceDialog, &getForceOptionDialog::sendForce,this,[&](bool force)
+                {
+                    if(force)
+                    {
+                        m_option1Button->setText(G_Sentences::ForceOption);
+                        m_option1Button->setToolTip(tr("Will force the execution of the action."));
+                    }
+                    else
+                    {
+                        m_option1Button->setText(G_Sentences::DontForceOption);
+                        m_option1Button->setToolTip(tr("Won't force the execution of the action."));
+                    }
+                });
+    }
+    // if QuitSelfProgramType no need of any option
 }

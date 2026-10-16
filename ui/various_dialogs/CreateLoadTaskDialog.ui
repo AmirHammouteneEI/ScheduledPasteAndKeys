@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>524</width>
+    <width>611</width>
     <height>387</height>
    </rect>
   </property>
@@ -96,7 +96,7 @@
          <number>68</number>
         </attribute>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>255</number>
+         <number>290</number>
         </attribute>
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>

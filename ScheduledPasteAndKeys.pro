@@ -25,6 +25,7 @@ SOURCES += \
     mainwindow.cpp \
     ui/actionwidgets/RunningOtherTaskWidget.cpp \
     ui/createactiondialogs/CreateRunningOtherTaskActionDialog.cpp \
+    ui/getdialogs/getForceOptionDialog.cpp \
     ui/getdialogs/getResolutionsForRescaleCursorCoordinatesDialog.cpp \
     ui/various_dialogs/CreateAutorunDesktopShortcutDialog.cpp \
     ui/various_dialogs/CreateLoadTaskDialog.cpp \
@@ -77,6 +78,7 @@ HEADERS += \
     mainwindow.h \
     ui/actionwidgets/RunningOtherTaskWidget.h \
     ui/createactiondialogs/CreateRunningOtherTaskActionDialog.h \
+    ui/getdialogs/getForceOptionDialog.h \
     ui/getdialogs/getResolutionsForRescaleCursorCoordinatesDialog.h \
     ui/various_dialogs/CreateAutorunDesktopShortcutDialog.h \
     ui/various_dialogs/CreateLoadTaskDialog.h \
@@ -115,6 +117,7 @@ HEADERS += \
 FORMS += \
     mainwindow.ui \
     ui/createactiondialogs/CreateRunningOtherTaskActionDialog.ui \
+    ui/getdialogs/getForceOptionDialog.ui \
     ui/getdialogs/getResolutionsForRescaleCursorCoordinatesDialog.ui \
     ui/various_dialogs/CreateAutorunDesktopShortcutDialog.ui \
     ui/various_dialogs/CreateLoadTaskDialog.ui \
@@ -146,7 +149,7 @@ RESOURCES += \
 
 RC_ICONS = img/programIcon.ico
 
-VERSION = 2.2
+VERSION = 2.3
 QMAKE_TARGET_COMPANY = "Amir Hammoutene"
 QMAKE_TARGET_COPYRIGHT = "GNU general public license version 3"
 

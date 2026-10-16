@@ -185,6 +185,7 @@ void TaskTab::buildBasicInterface()
     m_taskToolsButton = new QToolButton(bottomWidget);
     m_taskToolsButton->setObjectName("taskToolButton");
     m_taskToolsButton->setText("");
+    m_taskToolsButton->setIconSize(QSize(20,20));
 
     buildToolsButtonMenu();
 

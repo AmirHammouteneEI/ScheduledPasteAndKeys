@@ -66,17 +66,20 @@ void SystemCommandAction::runAction() const
         break;
         case SystemCommandType::ShutDown:
         {
-            std::system("shutdown -s -f -t 00");
+            QString forceStr = m_param1 != G_Sentences::DontForceOption ? " -f" : "";
+            std::system(("shutdown -s"+forceStr+" -t 00").toLatin1());
         }
         break;
         case SystemCommandType::Restart:
         {
-            std::system("shutdown -r -f -t 00");
+            QString forceStr = m_param1 != G_Sentences::DontForceOption ? " -f" : "";
+            std::system(("shutdown -r"+forceStr+" -t 00").toLatin1());
         }
         break;
         case SystemCommandType::LogOff:
         {
-            std::system("shutdown -l -f");
+            QString forceStr = m_param1 != G_Sentences::DontForceOption ? " -f" : "";
+            std::system(("shutdown -l"+forceStr).toLatin1());
         }
         break;
         case SystemCommandType::OpenFile:

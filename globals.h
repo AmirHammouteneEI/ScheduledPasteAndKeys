@@ -56,6 +56,8 @@ namespace G_Sentences {
     static QString NoStartupTaskSelected() {return QObject::tr("No startup task has been selected. Please select one.");}
     inline const QString AutoRenameFileOption = "Auto-rename if exists";
     inline const QString EraseFileOption = "Erase if exists";
+    inline const QString ForceOption = "Force";
+    inline const QString DontForceOption = "Don't force";
 }
 
 namespace G_SystemCommands {
