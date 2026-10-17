@@ -15,6 +15,7 @@
 #include <QMessageBox>
 #include <QDir>
 #include <QStandardPaths>
+#include <QDesktopServices>
 
 std::shared_ptr<MainWindow> MainWindow::s_singleton= nullptr;
 struct MainWindow::SharedPtrMainWindow : public MainWindow {SharedPtrMainWindow(QWidget *parent = nullptr):MainWindow(parent){} };
@@ -35,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowTitle("Tasket++ v2.3");
+    setWindowTitle("Tasket++ v2.4");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
 
@@ -74,8 +75,10 @@ MainWindow::MainWindow(QWidget *parent)
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 2.3 (October 2026)\n\n"
+                    "version 2.4 (October 2026)\n\n"
                     "Free & Open source (see readme.txt for more information)"));
+
+    connect(ui->label_readme, &QLabel::linkActivated, this, &MainWindow::openReadmeFile);
 }
 
 MainWindow::~MainWindow()
@@ -403,6 +406,11 @@ void MainWindow::createAutorunShortcutFromDialogReceived()
     QString args = "\""+m_createDesktopShortcutDialog->m_filename+"\" "+QString::number(m_createDesktopShortcutDialog->m_delay)
                    + " " + QString::number(m_createDesktopShortcutDialog->m_loopTimes);
     ActionsTools::createShortcut(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), QCoreApplication::applicationFilePath(), args, m_createDesktopShortcutDialog->m_shortcutname);
+}
+
+void MainWindow::openReadmeFile(QString link)
+{
+    QDesktopServices::openUrl(QUrl("file:///"+QApplication::applicationDirPath()+"/"+G_Files::ReadmeFilePath, QUrl::TolerantMode));
 }
 
 void MainWindow::showWindow(QSystemTrayIcon::ActivationReason reason)

@@ -100,8 +100,10 @@ void CreateSystemCommandActionDialog::commandButtonPushed()
     m_option2Button->setText("");
     m_option1Button->setToolTip("");
     m_option2Button->setToolTip("");
-    m_option1Button->disconnect();
-    m_option2Button->disconnect();
+    if(m_option1ButConnection)
+        m_option1Button->disconnect(m_option1ButConnection);
+    if(m_option2ButConnection)
+        m_option2Button->disconnect(m_option2ButConnection);
 
     activateButtons();
 }
@@ -112,10 +114,12 @@ void CreateSystemCommandActionDialog::showDialog()
     ui->tableWidget->item(0,0)->setText("");
     m_option1Button->setText("");
     m_option1Button->setEnabled(false);
-    m_option1Button->disconnect();
+    if(m_option1ButConnection)
+        m_option1Button->disconnect(m_option1ButConnection);
     m_option2Button->setText("");
     m_option2Button->setEnabled(false);
-    m_option2Button->disconnect();
+    if(m_option2ButConnection)
+        m_option2Button->disconnect(m_option2ButConnection);
 
     // if shows from an existing System Command Widget
     auto mainButtonSender = qobject_cast<QPushButton*>(sender());
@@ -153,7 +157,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
         m_option2Button->setEnabled(true);
-        connect(m_option1Button,&QPushButton::released, m_savedFilePathDialog, &getFilePathDialog::showDialog);
+        m_option1ButConnection = connect(m_option1Button,&QPushButton::released, m_savedFilePathDialog, &getFilePathDialog::showDialog);
         connect(m_savedFilePathDialog, &getFilePathDialog::sendFile,this,[&](const QString &dir)
                 {
                     m_option1Button->setText(dir);
@@ -165,7 +169,7 @@ void CreateSystemCommandActionDialog::activateButtons()
             m_option2Button->setText(G_Sentences::AutoRenameFileOption);
             m_option2Button->setToolTip(tr("If the file already exists, a new file will be created with another filename."));
         }
-        connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
+        m_option2ButConnection = connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
         connect(m_autorenameDialog, &getAutoRenameOptionDialog::sendAutorename,this,[&](bool autorename)
                 {
                     if(autorename)
@@ -183,7 +187,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     else if(m_type == G_SystemCommands::CreateFolderType || m_type == G_SystemCommands::DeleteFolderType || m_type == G_SystemCommands::OpenFolderType)
     {
         m_option1Button->setEnabled(true);
-        connect(m_option1Button,&QPushButton::released, m_folderPathDialog, &getFolderPathDialog::showDialog);
+        m_option1ButConnection = connect(m_option1Button,&QPushButton::released, m_folderPathDialog, &getFolderPathDialog::showDialog);
         connect(m_folderPathDialog, &getFolderPathDialog::sendDirectory,this,[&](const QString & dir)
                 {
                     m_option1Button->setText(dir);
@@ -194,7 +198,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
 
-        connect(m_option1Button,&QPushButton::released, this, [&]()
+        m_option1ButConnection = connect(m_option1Button,&QPushButton::released, this, [&]()
                 {
                     bool ok;
                     QString val = QInputDialog::getText(this,tr("Set the process name"),tr("Set the process name (including .exe) you would like to schedule to kill :"),QLineEdit::Normal,m_option1Button->text(),&ok);
@@ -206,7 +210,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     else if(m_type == G_SystemCommands::OpenFileType || m_type == G_SystemCommands::DeleteFileType)
     {
         m_option1Button->setEnabled(true);
-        connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);
+        m_option1ButConnection = connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);
         connect(m_filePathDialog, &getFilePathDialog::sendFile,this,[&](const QString & dir)
                 {
                     m_option1Button->setText(dir);
@@ -217,14 +221,14 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
         m_option2Button->setEnabled(true);
-        connect(m_option1Button,&QPushButton::released, m_programPathDialog, &getProgramPathDialog::showDialog);
+        m_option1ButConnection = connect(m_option1Button,&QPushButton::released, m_programPathDialog, &getProgramPathDialog::showDialog);
         connect(m_programPathDialog, &getProgramPathDialog::sendProgram,this,[&](const QString & dir)
                 {
                     m_option1Button->setText(dir);
                     m_option1Button->setToolTip(dir);
                 });
 
-        connect(m_option2Button,&QPushButton::released, this, [&]()
+        m_option2ButConnection = connect(m_option2Button,&QPushButton::released, this, [&]()
                 {
                     bool ok;
                     QString val = QInputDialog::getText(this,tr("Set optional arguments"),tr("If needed, set arguments for the execution of the program you would like to run :"),QLineEdit::Normal,m_option2Button->text(),&ok);
@@ -238,7 +242,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
 
-        connect(m_option1Button,&QPushButton::released, this, [&]()
+        m_option1ButConnection = connect(m_option1Button,&QPushButton::released, this, [&]()
                 {
                     bool ok;
                     QString val = QInputDialog::getText(this,tr("Set the URL"),tr("                            Set the URL you would like to open :                            "),QLineEdit::Normal,m_option1Button->text(),&ok);
@@ -252,14 +256,14 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
         m_option2Button->setEnabled(true);
-        connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);
+        m_option1ButConnection = connect(m_option1Button,&QPushButton::released, m_filePathDialog, &getFilePathDialog::showDialog);
         connect(m_filePathDialog, &getFilePathDialog::sendFile,this,[&](const QString &dir)
                 {
                     m_option1Button->setText(dir);
                     m_option1Button->setToolTip(dir);
                 });
 
-        connect(m_option2Button,&QPushButton::released, m_savedFilePathDialog, &getFilePathDialog::showDialog);
+        m_option2ButConnection = connect(m_option2Button,&QPushButton::released, m_savedFilePathDialog, &getFilePathDialog::showDialog);
         connect(m_savedFilePathDialog, &getFilePathDialog::sendFile,this,[&](const QString &dir)
                 {
                     m_option2Button->setText(dir);
@@ -270,7 +274,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     {
         m_option1Button->setEnabled(true);
         m_option2Button->setEnabled(true);
-        connect(m_option1Button,&QPushButton::released, m_imagePathDialog, &getImagePathDialog::showDialog);
+        m_option1ButConnection = connect(m_option1Button,&QPushButton::released, m_imagePathDialog, &getImagePathDialog::showDialog);
         connect(m_imagePathDialog, &getImagePathDialog::sendImage,this,[&](const QString & dir)
                 {
                     m_option1Button->setText(dir);
@@ -282,7 +286,7 @@ void CreateSystemCommandActionDialog::activateButtons()
             m_option2Button->setText(G_Sentences::AutoRenameFileOption);
             m_option2Button->setToolTip(tr("If the file already exists, a new file will be created with another filename."));
         }
-        connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
+        m_option2ButConnection = connect(m_option2Button,&QPushButton::released, m_autorenameDialog, &getAutoRenameOptionDialog::showDialog);
         connect(m_autorenameDialog, &getAutoRenameOptionDialog::sendAutorename,this,[&](bool autorename)
                 {
                     if(autorename)
@@ -300,7 +304,7 @@ void CreateSystemCommandActionDialog::activateButtons()
     else if(m_type == G_SystemCommands::ChangeAudioVolumeType)
     {
         m_option1Button->setEnabled(true);
-        connect(m_option1Button,&QPushButton::released, this, [&]()
+        m_option1ButConnection = connect(m_option1Button,&QPushButton::released, this, [&]()
                 {
                     bool ok;
                     int val = QInputDialog::getInt(this,tr("Set the new volume"),tr("Set the new audio volume :"),m_option1Button->text() == "" ? 50 : m_option1Button->text().toInt(),0,100,1,&ok);
@@ -317,7 +321,7 @@ void CreateSystemCommandActionDialog::activateButtons()
             m_option1Button->setText(G_Sentences::ForceOption);
             m_option1Button->setToolTip(tr("Will force the execution of the action."));
         }
-        connect(m_option1Button,&QPushButton::released, m_forceDialog, &getForceOptionDialog::showDialog);
+        m_option1ButConnection = connect(m_option1Button,&QPushButton::released, m_forceDialog, &getForceOptionDialog::showDialog);
         connect(m_forceDialog, &getForceOptionDialog::sendForce,this,[&](bool force)
                 {
                     if(force)

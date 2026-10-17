@@ -40,8 +40,9 @@ private slots:
     void swapAutoscrollMode(bool state); // autoscroll force the action widget visible when running the action
     void switchTheme(); // set stylesheet
     void taskTabPageClicked(int newIndex);
-    void taskTabContextMenuRequest(QPoint point);
+    void taskTabContextMenuRequest(QPoint point);// not const & because it's a slot, will make copy anyway
     void createAutorunShortcutFromDialogReceived();
+    void openReadmeFile(QString link);// not const & because it's a slot, will make copy anyway
 protected :
     MainWindow(QWidget *parent = nullptr);
     struct SharedPtrMainWindow;

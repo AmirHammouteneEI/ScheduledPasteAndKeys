@@ -42,6 +42,7 @@ namespace G_Files {
     inline const QString StartupTasksParams_KeyWord = "startupTasksParams";
     inline const QString SystemStartupRegistry_Path = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
     inline const QString ProgramNameInRegistry_KeyWord = "Tasket++";
+    inline const QString ReadmeFilePath = "readme.txt";
 }
 
 namespace G_Sentences {

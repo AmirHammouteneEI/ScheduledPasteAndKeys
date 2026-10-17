@@ -1339,7 +1339,7 @@ version 1.2.2</translation>
     </message>
     <message>
         <source>Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+        <translation type="vanished">Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1589,7 +1589,7 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     </message>
     <message>
         <source>version 2.3 (October 2026)</source>
-        <translation>version 2.3 (octobre 2026)</translation>
+        <translation type="vanished">version 2.3 (octobre 2026)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1600,12 +1600,38 @@ initial work on February 2024
 version 2.3 (October 2026)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 2.3 (octobre 2026)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>version 2.4 (October 2026)</source>
+        <translation>version 2.4 (octobre 2026)</translation>
+    </message>
+    <message>
+        <source>Free &amp; Open source (see &lt;a href=&quot;#readmeFile&quot;&gt;readme.txt&lt;/a&gt; for more information)</source>
+        <translation>Gratuit &amp; Open source (lire &lt;a href=&quot;#readmeFile&quot;&gt;readme.txt&lt;/a&gt; pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 2.4 (October 2026)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 2.4 (octobre 2026)
 
 Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>

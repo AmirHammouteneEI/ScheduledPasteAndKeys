@@ -29,6 +29,8 @@ class CreateSystemCommandActionDialog : public QDialog
     getAutoRenameOptionDialog *m_autorenameDialog = nullptr;
     getForceOptionDialog *m_forceDialog = nullptr;
     void activateButtons();
+    QMetaObject::Connection m_option1ButConnection;
+    QMetaObject::Connection m_option2ButConnection;
 public:
     explicit CreateSystemCommandActionDialog(QWidget *parent = nullptr);
     ~CreateSystemCommandActionDialog();

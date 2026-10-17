@@ -335,7 +335,7 @@
               </font>
              </property>
              <property name="text">
-              <string>version 2.3 (October 2026)</string>
+              <string>version 2.4 (October 2026)</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -359,14 +359,14 @@
             </spacer>
            </item>
            <item row="3" column="1">
-            <widget class="QLabel" name="label_11">
+            <widget class="QLabel" name="label_readme">
              <property name="font">
               <font>
                <pointsize>10</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Free &amp; Open source (see readme.txt for more information)</string>
+              <string>Free &amp; Open source (see &lt;a href=&quot;#readmeFile&quot;&gt;readme.txt&lt;/a&gt; for more information)</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
