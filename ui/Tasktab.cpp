@@ -766,13 +766,12 @@ void TaskTab::rescaleCurPosFromDialogReceived()
         if(!cursorWidget)
             continue;
 
-        auto originalDataId = cursorWidget->getCursorMovementIdentity();
-        QString rescaledDataId = originalDataId+"_scaled";
-
         QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
 
-        auto cursorMovementsFromSettings = settings.value(G_Files::CursorMovementsDataCategory+originalDataId).toList();
-        CursorMovementsList movsList = ActionsTools::fromStandardQMapToCursorMovsMap(cursorMovementsFromSettings);
+        auto actParameters = action->generateParameters();
+
+        QString rescaledDataId = actParameters.m_dataId+"_scaled";
+        CursorMovementsList movsList = actParameters.m_cursorMovementsList;
         ActionsTools::rescaleCursorMovementsList(movsList, wRatio, hRatio);
 
         QList<QVariant> writtenList;
@@ -781,7 +780,7 @@ void TaskTab::rescaleCurPosFromDialogReceived()
             QVariant variant = QVariant::fromValue(el);
             writtenList.append(variant);
         }
-        writtenList.append(cursorMovementsFromSettings.last().toStringList());
+        writtenList.append(actParameters.m_cursorMovementsOptionalKeysStroke);
         settings.setValue(G_Files::CursorMovementsDataCategory+rescaledDataId,writtenList);
 
         cursorWidget->cursorMovsIdentityReceived(rescaledDataId);

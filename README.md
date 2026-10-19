@@ -1,6 +1,6 @@
 # Tasket++
 
-version 2.4 (October 2026)
+version 2.5 (October 2026)
 
 Schedule automated simulations of actions you would perform on your PC.
 
@@ -23,7 +23,7 @@ Please read license.txt file
 We don't collect any data, please read private_policy.txt
 
 ----------
-Details of version 2.4 :
+Details of version 2.5 :
 
 Stable version, fully functional
 
@@ -53,7 +53,7 @@ Available for install on Microsoft Store :
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
 Available as a portable version :
-https://files.amirhammoutene.dev/Tasket++/2.4/Tasket++_v2.4.zip
+https://files.amirhammoutene.dev/Tasket++/2.5/Tasket++_v2.5.zip
 
 Needs 35 MB disk space, available for Windows systems only
 

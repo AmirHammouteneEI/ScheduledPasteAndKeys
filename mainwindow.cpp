@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowTitle("Tasket++ v2.4");
+    setWindowTitle("Tasket++ v2.5");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
 
@@ -75,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 2.4 (October 2026)\n\n"
+                    "version 2.5 (October 2026)\n\n"
                     "Free & Open source (see readme.txt for more information)"));
 
     connect(ui->label_readme, &QLabel::linkActivated, this, &MainWindow::openReadmeFile);
