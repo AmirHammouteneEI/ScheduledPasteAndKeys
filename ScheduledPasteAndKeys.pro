@@ -10,7 +10,9 @@ QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function -Wno-unused-parameter -Wno-unused
 
 SOURCES += \
     ActionWidgetsManager.cpp \
+    GlobalHotkeyRegisterManager.cpp \
     Task.cpp \
+    TaskHotKey.cpp \
     TaskTabsManager.cpp \
     TaskThread.cpp \
     actions/AbstractAction.cpp \
@@ -26,12 +28,16 @@ SOURCES += \
     ui/actionwidgets/RunningOtherTaskWidget.cpp \
     ui/createactiondialogs/CreateRunningOtherTaskActionDialog.cpp \
     ui/getdialogs/getForceOptionDialog.cpp \
+    ui/getdialogs/getQKeySequenceDialog.cpp \
     ui/getdialogs/getResolutionsForRescaleCursorCoordinatesDialog.cpp \
+    ui/tablewidgets/GlobalHotKeysTableWidget.cpp \
     ui/various_dialogs/CreateAutorunDesktopShortcutDialog.cpp \
     ui/various_dialogs/CreateLoadTaskDialog.cpp \
     ui/editselectedactiondialogs/CursorMovementsSelectedEditDialog.cpp \
     ui/tablewidgets/CursorMovementsTableWidget.cpp \
     ui/various_dialogs/DataEditDialog.cpp \
+    ui/various_dialogs/GlobalHotKeyEditDialog.cpp \
+    ui/various_dialogs/GlobalHotKeysDialog.cpp \
     ui/various_dialogs/KeysSelectorDialog.cpp \
     ui/editselectedactiondialogs/KeysSequenceSelectedEditDialog.cpp \
     ui/tablewidgets/KeysSequencesTableWidget.cpp \
@@ -62,7 +68,9 @@ SOURCES += \
 
 HEADERS += \
     ActionWidgetsManager.h \
+    GlobalHotkeyRegisterManager.h \
     Task.h \
+    TaskHotKey.h \
     TaskTabsManager.h \
     TaskThread.h \
     actions/AbstractAction.h \
@@ -79,13 +87,17 @@ HEADERS += \
     ui/actionwidgets/RunningOtherTaskWidget.h \
     ui/createactiondialogs/CreateRunningOtherTaskActionDialog.h \
     ui/getdialogs/getForceOptionDialog.h \
+    ui/getdialogs/getQKeySequenceDialog.h \
     ui/getdialogs/getResolutionsForRescaleCursorCoordinatesDialog.h \
+    ui/tablewidgets/GlobalHotKeysTableWidget.h \
     ui/various_dialogs/CreateAutorunDesktopShortcutDialog.h \
     ui/various_dialogs/CreateLoadTaskDialog.h \
     ui/editselectedactiondialogs/CursorMovementsSelectedEditDialog.h \
     ui/tablewidgets/CursorMovementsTableWidget.h \
     ui/CustomPrimaryWidgets.h \
     ui/various_dialogs/DataEditDialog.h \
+    ui/various_dialogs/GlobalHotKeyEditDialog.h \
+    ui/various_dialogs/GlobalHotKeysDialog.h \
     ui/various_dialogs/KeysSelectorDialog.h \
     ui/editselectedactiondialogs/KeysSequenceSelectedEditDialog.h \
     ui/tablewidgets/KeysSequencesTableWidget.h \
@@ -118,11 +130,14 @@ FORMS += \
     mainwindow.ui \
     ui/createactiondialogs/CreateRunningOtherTaskActionDialog.ui \
     ui/getdialogs/getForceOptionDialog.ui \
+    ui/getdialogs/getQKeySequenceDialog.ui \
     ui/getdialogs/getResolutionsForRescaleCursorCoordinatesDialog.ui \
     ui/various_dialogs/CreateAutorunDesktopShortcutDialog.ui \
     ui/various_dialogs/CreateLoadTaskDialog.ui \
     ui/editselectedactiondialogs/CursorMovementsSelectedEditDialog.ui \
     ui/various_dialogs/DataEditDialog.ui \
+    ui/various_dialogs/GlobalHotKeyEditDialog.ui \
+    ui/various_dialogs/GlobalHotKeysDialog.ui \
     ui/various_dialogs/KeysSelectorDialog.ui \
     ui/editselectedactiondialogs/KeysSequenceSelectedEditDialog.ui \
     ui/editselectedactiondialogs/SentenceSelectedEditDialog.ui \
@@ -149,7 +164,7 @@ RESOURCES += \
 
 RC_ICONS = img/programIcon.ico
 
-VERSION = 2.5
+VERSION = 3.0
 QMAKE_TARGET_COMPANY = "Amir Hammoutene"
 QMAKE_TARGET_COPYRIGHT = "GNU general public license version 3"
 

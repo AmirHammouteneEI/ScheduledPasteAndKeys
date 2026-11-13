@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "globals.h"
 #include "actions/ActionsTools.h"
+#include "GlobalHotkeyRegisterManager.h"
 
 #include <QMenu>
 #include <QAction>
@@ -17,17 +18,26 @@
 #include <QStandardPaths>
 #include <QDesktopServices>
 
-std::shared_ptr<MainWindow> MainWindow::s_singleton= nullptr;
-struct MainWindow::SharedPtrMainWindow : public MainWindow {SharedPtrMainWindow(QWidget *parent = nullptr):MainWindow(parent){} };
+MainWindow* MainWindow::s_singleton= nullptr;
 bool G_Parameters::AutoScrollTask = true;
+bool G_Parameters::ListenHotkeys = true;
 
-std::shared_ptr<MainWindow> MainWindow::getInstance(QWidget *parent)
+MainWindow* MainWindow::getInstance(QWidget *parent)
 {
     if(s_singleton == nullptr)
     {
-        s_singleton = std::make_shared<SharedPtrMainWindow>(parent);
+        s_singleton = new MainWindow(parent);
     }
     return s_singleton;
+}
+
+void MainWindow::destroyInstance()
+{
+    if(s_singleton != nullptr)
+    {
+        delete s_singleton;
+        s_singleton = nullptr;
+    }
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -36,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowTitle("Tasket++ v2.5");
+    setWindowTitle("Tasket++ v3.0");
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint
                    | Qt::WindowCloseButtonHint);
 
@@ -50,6 +60,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_dataEditDialog = new DataEditDialog(this);
     m_createDesktopShortcutDialog = new CreateAutorunDesktopShortcutDialog(this);
     connect(m_createDesktopShortcutDialog, &QDialog::accepted, this, &MainWindow::createAutorunShortcutFromDialogReceived);
+    m_globalHorkeysDialog = new GlobalHotKeysDialog(this);
+    m_globalHorkeysDialog->refreshTable();
+
     buildToolBar();
 
     loadSettings();
@@ -68,14 +81,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     setTheme();
 
-    // Global shortcut to stop all running tasks
-    m_stopAllTasksShortcut = new QShortcut(QKeySequence("Ctrl+Alt+S"), this);
-
-
     setWhatsThis(tr("This software allows you to automatically schedule the actions you would perform on your PC.\n\n"\
                     "Developed by Amir Hammoutene (contact@amirhammoutene.dev)\n"
                     "initial work on February 2024\n\n"
-                    "version 2.5 (October 2026)\n\n"
+                    "version 3.0 (November 2026)\n\n"
                     "Free & Open source (see readme.txt for more information)"));
 
     connect(ui->label_readme, &QLabel::linkActivated, this, &MainWindow::openReadmeFile);
@@ -83,6 +92,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    if (m_sticon)
+        m_sticon->hide();
     delete ui;
 }
 
@@ -93,8 +104,6 @@ void MainWindow::buildTaskTabsManager()
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestOpenNewTab, m_tasktabsManager.get(), &TaskTabsManager::onOpenNewTabRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::requestRefreshTabs, m_tasktabsManager.get(), &TaskTabsManager::onRefreshTabsRequest);
     connect(m_createLoadTaskDialog, &CreateLoadTaskDialog::taskfilePathChanged, m_tasktabsManager.get(), &TaskTabsManager::onTaskfilePathChanged);
-
-    connect(m_stopAllTasksShortcut, &QShortcut::activated, m_tasktabsManager.get(), &TaskTabsManager::forceStopAllRunningTasksReceived);
 }
 
 QTabWidget *MainWindow::getTabWidget()
@@ -119,6 +128,11 @@ void MainWindow::autoRun(const QString &filename, int delay, int loopTimes)
                 m_tasktabsManager->scheduleTaskFromId(taskExistingId, delay, loopTimes);
         }
     }
+}
+
+void MainWindow::stopAllTasks()
+{
+    m_tasktabsManager->forceStopAllRunningTasksReceived();
 }
 
 void MainWindow::buildSystemTrayMenu()
@@ -173,6 +187,7 @@ void MainWindow::loadSettings()
 
     m_currentThemeName = settings.value("style", "dark").toString();
     swapAutoscrollMode(settings.value("autoscroll", true).toBool());
+    swapListenHotkeysMode(settings.value("hotkeys", true).toBool());
 }
 
 void MainWindow::saveSettings()
@@ -182,6 +197,7 @@ void MainWindow::saveSettings()
     settings.setValue("windowHeight", height());
     settings.setValue("style", m_currentThemeName);
     settings.setValue("autoscroll", G_Parameters::AutoScrollTask);
+    settings.setValue("hotkeys", G_Parameters::ListenHotkeys);
 }
 
 void MainWindow::buildToolBar()
@@ -198,6 +214,10 @@ void MainWindow::buildToolBar()
     desktopShortcutAction->setToolTip(tr("Create a desktop shortcut of a task which autoruns..."));
     connect(desktopShortcutAction, &QAction::triggered, m_createDesktopShortcutDialog, &CreateAutorunDesktopShortcutDialog::showDialog);
 
+    QAction *manageHotkeysAction = new QAction(QIcon(":/img/keyboard.png"),"",this);
+    manageHotkeysAction->setToolTip(tr("Edit global hotkeys to run and stop tasks..."));
+    connect(manageHotkeysAction, &QAction::triggered, m_globalHorkeysDialog, &GlobalHotKeysDialog::showDialog);
+
     QWidget* spacer0 = new QWidget(this);
     spacer0->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -207,6 +227,14 @@ void MainWindow::buildToolBar()
 
     QWidget* spacer1 = new QWidget(this);
     spacer1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    m_listenHotkeysAction = new QAction("",this);
+    m_listenHotkeysAction->setCheckable(true);
+    connect(m_listenHotkeysAction, &QAction::triggered, this, &MainWindow::swapListenHotkeysMode);
+
+    QWidget* spacer3 = new QWidget(this);
+    spacer3->setFixedWidth(5);
+    spacer3->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     m_scrollAction = new QAction("",this);
     m_scrollAction->setCheckable(true);
@@ -235,9 +263,12 @@ void MainWindow::buildToolBar()
 
     m_toolBar->addAction(startupTasksAction);
     m_toolBar->addAction(desktopShortcutAction);
+    m_toolBar->addAction(manageHotkeysAction);
     m_toolBar->addWidget(spacer0);
     m_toolBar->addAction(dataEditAction);
     m_toolBar->addWidget(spacer1);
+    m_toolBar->addAction(m_listenHotkeysAction);
+    m_toolBar->addWidget(spacer3);
     m_toolBar->addAction(m_scrollAction);
     m_toolBar->addWidget(spacer2);
     m_toolBar->addAction(m_lightThemeAction);
@@ -289,6 +320,7 @@ void MainWindow::quitApp()
     saveSettings();
     m_stMessageShown = true;
     m_tasktabsManager->forceStopAllRunningTasksReceived();
+    GlobalHotkeyRegisterManager::destroyInstance();
     QApplication::quit();
 }
 
@@ -298,6 +330,7 @@ void MainWindow::forceQuit()
     saveSettings();
     m_stMessageShown = true;
     m_tasktabsManager->forceStopAllRunningTasksReceived();
+    GlobalHotkeyRegisterManager::destroyInstance();
     QApplication::quit();
 }
 
@@ -332,6 +365,33 @@ void MainWindow::swapAutoscrollMode(bool state)
     m_scrollAction->setChecked(false);
     m_scrollAction->setIcon(QIcon(":/img/noscroll.png"));
     m_scrollAction->setToolTip(tr("Check to enable autoscrolling during task execution"));
+}
+
+void MainWindow::swapListenHotkeysMode(bool state)
+{
+    if(state)
+    {
+        G_Parameters::ListenHotkeys = true;
+        m_listenHotkeysAction->setChecked(true);
+
+        if(m_currentThemeName == "light")
+            m_listenHotkeysAction->setIcon(QIcon(":/img/ear_light.png"));
+        else
+            m_listenHotkeysAction->setIcon(QIcon(":/img/ear.png"));
+
+        m_listenHotkeysAction->setToolTip(tr("Uncheck to suspend global hotkey listening"));
+        return;
+    }
+
+    G_Parameters::ListenHotkeys = false;
+    m_listenHotkeysAction->setChecked(false);
+
+    if(m_currentThemeName == "light")
+        m_listenHotkeysAction->setIcon(QIcon(":/img/noear_light.png"));
+    else
+        m_listenHotkeysAction->setIcon(QIcon(":/img/noear.png"));
+
+    m_listenHotkeysAction->setToolTip(tr("Check to resume global hotkey listening"));
 }
 
 void MainWindow::switchTheme()
@@ -369,6 +429,8 @@ void MainWindow::switchTheme()
         qApp->setStyleSheet(qss.readAll());
         qss.close();
     }
+
+    swapListenHotkeysMode(G_Parameters::ListenHotkeys);
 }
 
 void MainWindow::taskTabPageClicked(int index)

@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>getForceOptionDialog</class>
  <widget class="QDialog" name="getForceOptionDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>327</width>
+    <width>325</width>
     <height>71</height>
    </rect>
   </property>
@@ -14,6 +17,21 @@
    <string>Set if the execution of the action should be forced</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>1</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>1</number>
+   </property>
+   <property name="bottomMargin">
+    <number>1</number>
+   </property>
    <item>
     <widget class="QCheckBox" name="checkBox">
      <property name="text">

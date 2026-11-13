@@ -18,7 +18,7 @@
 #include <QFileInfo>
 
 TaskTabsManager::TaskTabsManager()
-    : QObject{MainWindow::getInstance().get()}
+    : QObject{MainWindow::getInstance()}
 {
 }
 
@@ -34,7 +34,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
     QFile fileToOpen(path);
     if(!fileToOpen.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QMessageBox::warning(MainWindow::getInstance().get(), tr("Cannot open file"), tr("Trying to open file located in :\n")+
+        QMessageBox::warning(MainWindow::getInstance(), tr("Cannot open file"), tr("Trying to open file located in :\n")+
           path+"\n"+G_Sentences::OperationInterference());
         return -1;
     }
@@ -45,7 +45,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent.toUtf8());
     if(jsonDoc.isNull())
     {
-        QMessageBox::warning(MainWindow::getInstance().get(), tr("File format error"),G_Sentences::FileParsingError());
+        QMessageBox::warning(MainWindow::getInstance(), tr("File format error"),G_Sentences::FileParsingError());
         return -1;
     }
 
@@ -54,7 +54,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
     if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
         != G_Files::DocumentIdentification_Value)
     {
-        QMessageBox::warning(MainWindow::getInstance().get(), tr("File format error"), G_Sentences::FileParsingError());
+        QMessageBox::warning(MainWindow::getInstance(), tr("File format error"), G_Sentences::FileParsingError());
         return -1;
     }
 
@@ -79,7 +79,7 @@ int TaskTabsManager::onOpenNewTabRequest(const QString &path)
 
 TaskTab* TaskTabsManager::createEmptyTaskAndOpenTab(const QString &name)
 {
-    TaskTab* newEmptyTask = new TaskTab(MainWindow::getInstance().get(), name);
+    TaskTab* newEmptyTask = new TaskTab(MainWindow::getInstance(), name);
     MainWindow::getInstance()->getTabWidget()->insertTab(0,newEmptyTask,name);
     MainWindow::getInstance()->getTabWidget()->tabBar()->setTabToolTip(0,name);
     MainWindow::getInstance()->getTabWidget()->setCurrentIndex(0);
@@ -126,7 +126,7 @@ void TaskTabsManager::onTabCloseRequest(int index)
     {
         if(task->m_scheduleState != ScheduleState::NotScheduled)
         {
-            if(QMessageBox::question(MainWindow::getInstance().get(),tr("Task is scheduled or is running"),
+            if(QMessageBox::question(MainWindow::getInstance(),tr("Task is scheduled or is running"),
               tr("This task is scheduled for execution or is currently running, by pressing \"Yes\" you are going to stop it.\n"\
                 "\nIf you want to close it, you will have to request again."),
               QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Cancel)) == QMessageBox::Cancel)
@@ -137,7 +137,7 @@ void TaskTabsManager::onTabCloseRequest(int index)
 
         if(task->m_taskModifiedFromLastSave)
         {
-            QMessageBox::StandardButton response = QMessageBox::question(MainWindow::getInstance().get(),tr("Saving changes"),
+            QMessageBox::StandardButton response = QMessageBox::question(MainWindow::getInstance(),tr("Saving changes"),
               tr("This Task has been modified since the last save, would you like to save changes ?"),
               QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel), QMessageBox::StandardButton(QMessageBox::Yes));
 
@@ -260,7 +260,7 @@ void TaskTabsManager::createAndLoadTaskObject(int id)
     if(jsonContent.value(G_Files::DocumentIdentification_KeyWord).toString()
         != G_Files::DocumentIdentification_Value)
     {
-        QMessageBox::warning(MainWindow::getInstance().get(), tr("File format error"),
+        QMessageBox::warning(MainWindow::getInstance(), tr("File format error"),
                              tr("The file is not in the good format, no action can't be loaded."));
     }
     else
@@ -286,7 +286,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(!fileToModify.open(QIODevice::ReadWrite | QIODevice::Text))
     {
         if(verbose)
-            QMessageBox::warning(MainWindow::getInstance().get(),tr("Cannot access file"), G_Sentences::OperationInterference());
+            QMessageBox::warning(MainWindow::getInstance(),tr("Cannot access file"), G_Sentences::OperationInterference());
         return;
     }
 
@@ -296,7 +296,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(jsonDoc.isNull())
     {
         if(verbose)
-            QMessageBox::warning(MainWindow::getInstance().get(),tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
+            QMessageBox::warning(MainWindow::getInstance(),tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
         return;
     }
 
@@ -306,7 +306,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
         != G_Files::DocumentIdentification_Value)
     {
         if(verbose)
-            QMessageBox::warning(MainWindow::getInstance().get(), tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
+            QMessageBox::warning(MainWindow::getInstance(), tr("File isn't in the good format anymore"), G_Sentences::FileParsingError());
         return;
     }
     fileToModify.resize(0);
@@ -316,7 +316,7 @@ void TaskTabsManager::saveTaskReceived(int taskTabId, bool verbose)
     if(task == nullptr || task->m_task == nullptr)
     {
         if(verbose)
-            QMessageBox::warning(MainWindow::getInstance().get(), tr("Internal Error"),
+            QMessageBox::warning(MainWindow::getInstance(), tr("Internal Error"),
              tr("An internal error occured : err05\nTaskTab or Task associated is null in TaskTabsManager !"));
         return;
     }
@@ -340,7 +340,7 @@ QJsonObject TaskTabsManager::actionToJson(const std::shared_ptr<AbstractAction> 
 {
     QJsonObject jsonToReturn;
 
-    switch(act->e_type)
+    switch(act->getType())
     {
         case ActionType::Paste:
         {

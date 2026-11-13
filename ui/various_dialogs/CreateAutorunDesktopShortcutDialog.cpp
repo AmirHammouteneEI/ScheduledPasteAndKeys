@@ -30,7 +30,7 @@ void CreateAutorunDesktopShortcutDialog::showDialog()
     ui->spinBox_2->setValue(1);
     ui->spinBox_2->setEnabled(true);
     ui->lineEdit->setText("");
-    exec();
+    show();
 }
 
 void CreateAutorunDesktopShortcutDialog::accept()
@@ -40,7 +40,7 @@ void CreateAutorunDesktopShortcutDialog::accept()
     {
         QMessageBox::warning(this, tr("No file selected"), G_Sentences::NoFileSelected());
         return;
-    };
+    }
     if(ui->timeEdit->time() == QTime(0,0,0))
     {
         QMessageBox::warning(this, tr("Delay can't be set to 0"), tr("The delay for the task to run after using a desktop shortcut can't be set to zero second."));

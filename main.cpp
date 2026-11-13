@@ -34,8 +34,7 @@ int main(int argc, char *argv[])
     a.installTranslator(&baseTranslator);
 
     // Main ui window
-    std::shared_ptr<MainWindow> w = MainWindow::getInstance();
-    w->buildTaskTabsManager();
+    MainWindow::getInstance()->buildTaskTabsManager();
 
     // In case of program used with correct arguments, automatically run the task (usage : Tasket++.exe "TaskFileName" <DelayInSeconds> <NumberOfLoops>)
     if(argc == 3 || argc == 4)
@@ -48,23 +47,25 @@ int main(int argc, char *argv[])
                 int timesToRun = atoi(argv[3]);
                 if(timesToRun != 0)
                 {
-                    w->hide();
-                    w->autoRun(QString(argv[1]), delay,timesToRun);
+                    MainWindow::getInstance()->hide();
+                    MainWindow::getInstance()->autoRun(QString(argv[1]), delay,timesToRun);
                 }
                 else
-                    w->showWindow();
+                    MainWindow::getInstance()->showWindow();
             }
             else
             {
-                w->hide();
-                w->autoRun(QString(argv[1]), delay);
+                MainWindow::getInstance()->hide();
+                MainWindow::getInstance()->autoRun(QString(argv[1]), delay);
             }
         }
         else
-            w->showWindow();
+            MainWindow::getInstance()->showWindow();
     }
     else
-        w->showWindow();
+        MainWindow::getInstance()->showWindow();
+
+    QObject::connect(&a, &QApplication::aboutToQuit, &MainWindow::destroyInstance);
 
     return a.exec();
 }

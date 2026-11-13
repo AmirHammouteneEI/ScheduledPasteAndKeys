@@ -3,7 +3,7 @@
  <class>SentenceSelectedEditDialog</class>
  <widget class="QDialog" name="SentenceSelectedEditDialog">
   <property name="windowModality">
-   <enum>Qt::WindowModality::WindowModal</enum>
+   <enum>Qt::WindowModality::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>

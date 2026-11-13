@@ -3,13 +3,13 @@
  <class>KeysSelectorDialog</class>
  <widget class="QDialog" name="KeysSelectorDialog">
   <property name="windowModality">
-   <enum>Qt::WindowModality::WindowModal</enum>
+   <enum>Qt::WindowModality::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>520</width>
+    <width>632</width>
     <height>599</height>
    </rect>
   </property>
@@ -435,11 +435,6 @@
         </item>
         <item>
          <property name="text">
-          <string notr="true">,</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string notr="true">NUMPAD_ENTER</string>
          </property>
         </item>
@@ -711,6 +706,21 @@
         <item>
          <property name="text">
           <string>!§</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>=+</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>,</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>.&gt;</string>
          </property>
         </item>
        </item>

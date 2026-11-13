@@ -666,7 +666,7 @@ Veuillez fournir toutes les informations nécessaires.</translation>
     <name>CreateWaitActionDialog</name>
     <message>
         <source>Create a Wait Action</source>
-        <translation>Créer une action d&apos;Attente</translation>
+        <translation type="vanished">Créer une action d&apos;Attente</translation>
     </message>
     <message>
         <source>Set the duration you would like to apply to this action :</source>
@@ -695,6 +695,10 @@ Veuillez fournir toutes les informations nécessaires.</translation>
     <message>
         <source>ERROR</source>
         <translation>ERREUR</translation>
+    </message>
+    <message>
+        <source>Create/Edit a Wait Action</source>
+        <translation>Créer/Éditer une action d&apos;Attente</translation>
     </message>
 </context>
 <context>
@@ -894,6 +898,139 @@ Si des données existent déjà, le suffixe &apos;_other&apos; sera ajouté aux 
         <source>Select a data file</source>
         <translation>Sélectionner un fichier de données</translation>
     </message>
+    <message>
+        <source>Keys sequence</source>
+        <translation>Séquence de touches</translation>
+    </message>
+</context>
+<context>
+    <name>GlobalHotKeyEditDialog</name>
+    <message>
+        <source>Add a task scheduled when using hotkey</source>
+        <translation>Ajouter une tâche planifiée à l&apos;utilisation d&apos;un raccourci clavier</translation>
+    </message>
+    <message>
+        <source>Select the task to be run :</source>
+        <translation>Sélectionnez la tâche à être exécutée :</translation>
+    </message>
+    <message>
+        <source>Set the delay for the task to be executed after system startup :</source>
+        <translation type="obsolete">Déterminez le délai pour que la tâche soit exécutée après le démarrage du système :</translation>
+    </message>
+    <message>
+        <source> days and </source>
+        <translation> jours et </translation>
+    </message>
+    <message>
+        <source> hours,minutes,seconds</source>
+        <translation> heures,minutes,secondes</translation>
+    </message>
+    <message>
+        <source>Set how many times this task should be executed :</source>
+        <translation>Déterminez combien de fois cette tâche devrait être éxecutée :</translation>
+    </message>
+    <message>
+        <source>times</source>
+        <translation>fois</translation>
+    </message>
+    <message>
+        <source>OR</source>
+        <translation>OU</translation>
+    </message>
+    <message>
+        <source>in infinite loop</source>
+        <translation>en boucle infinie</translation>
+    </message>
+    <message>
+        <source>Set the hotkey to be used to run the task :</source>
+        <translation>Définissez le raccourci clavier à utiliser pour exécuter la tâche :</translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation>Aucun fichier séléctionné</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Ajouter</translation>
+    </message>
+    <message>
+        <source>Set the delay for the task to be executed when using the hotkey :</source>
+        <translation>Déterminez le délai pour que la tâche soit exécutée après l&apos;utilisation du raccourci clavier :</translation>
+    </message>
+    <message>
+        <source>No hotkey defined</source>
+        <translation>Aucun raccourci clavier défini</translation>
+    </message>
+</context>
+<context>
+    <name>GlobalHotKeysDialog</name>
+    <message>
+        <source>Tasks scheduled when using global hotkeys</source>
+        <translation>Tâches planifiées lors de l&apos;utilisation de raccourcis clavier globaux</translation>
+    </message>
+    <message>
+        <source>These are the tasks you saved to be run when you use their associated global hotkey, wherever you are :</source>
+        <translation>Voici les tâches que vous avez enregistrées pour qu&apos;elles s&apos;exécutent lorsque vous utilisez leur raccourci clavier global associé, où que vous soyez :</translation>
+    </message>
+    <message>
+        <source>Global Hotkey</source>
+        <translation>Raccourci clavier Global</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation>Tâche</translation>
+    </message>
+    <message>
+        <source>Delay</source>
+        <translation type="obsolete">Délai</translation>
+    </message>
+    <message>
+        <source>Loops</source>
+        <translation>Boucles</translation>
+    </message>
+    <message>
+        <source>Activated</source>
+        <translation>Activé</translation>
+    </message>
+    <message>
+        <source>Delay (s)</source>
+        <translation>Délai (s)</translation>
+    </message>
+</context>
+<context>
+    <name>GlobalHotKeysTableWidget</name>
+    <message>
+        <source>No startup task selected</source>
+        <translation type="obsolete">Aucune tâche de démarrage séléctionée</translation>
+    </message>
+    <message>
+        <source>Infinite</source>
+        <translation>Infinie</translation>
+    </message>
+    <message>
+        <source>Global hotkey already in use</source>
+        <translation>Raccourci clavier global déjà utilisé</translation>
+    </message>
+    <message>
+        <source>Registration failed</source>
+        <translation>L&apos;enregistrement a échoué</translation>
+    </message>
+    <message>
+        <source>Windows could not register this global hotkey. It may already be in use by another application.</source>
+        <translation>Windows n&apos;a pas pu enregistrer ce raccourci clavier global. Il est peut-être déjà utilisé par une autre application.</translation>
+    </message>
+    <message>
+        <source>Unregistration failed</source>
+        <translation>La désactivation a échoué</translation>
+    </message>
+    <message>
+        <source>Windows could not unregister this global hotkey.</source>
+        <translation>Windows n&apos;a pas pu désactiver ce raccourci clavier global.</translation>
+    </message>
+    <message>
+        <source>No global hotkey selected</source>
+        <translation>Aucun raccourci clavier global sélectionné</translation>
+    </message>
 </context>
 <context>
     <name>KeysSelectorDialog</name>
@@ -980,6 +1117,18 @@ Si des données existent déjà, le suffixe &apos;_other&apos; sera ajouté aux 
     <message>
         <source>!§</source>
         <translation>!§</translation>
+    </message>
+    <message>
+        <source>=+</source>
+        <translation>=+</translation>
+    </message>
+    <message>
+        <source>,</source>
+        <translation>,?</translation>
+    </message>
+    <message>
+        <source>.&gt;</source>
+        <translation>;.</translation>
     </message>
 </context>
 <context>
@@ -1637,7 +1786,7 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     </message>
     <message>
         <source>version 2.5 (October 2026)</source>
-        <translation>version 2.5 (octobre 2026)</translation>
+        <translation type="vanished">version 2.5 (octobre 2026)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1648,7 +1797,7 @@ initial work on February 2024
 version 2.5 (October 2026)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
@@ -1656,6 +1805,40 @@ premiers travaux en février 2024
 version 2.5 (octobre 2026)
 
 Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>Edit global hotkeys to run and stop tasks...</source>
+        <translation>Éditer les raccourcis clavier globaux pour exécuter et arrêter les tâches...</translation>
+    </message>
+    <message>
+        <source>version 3.0 (November 2026)</source>
+        <translation>version 3.0 (novembre 2026)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 3.0 (November 2026)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 3.0 (novembre 2026)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>Uncheck to suspend global hotkey listening</source>
+        <translation>Décochez pour suspendre l&apos;écoute des raccourcis clavier globaux</translation>
+    </message>
+    <message>
+        <source>Check to resume global hotkey listening</source>
+        <translation>Cochez pour reprendre l&apos;écoute des raccourcis clavier globaux</translation>
     </message>
 </context>
 <context>
@@ -1774,6 +1957,18 @@ Assurez-vous que ce programme est exécuté en tant qu&apos;administrateur (clic
     <message>
         <source>No startup task has been selected. Please select one.</source>
         <translation>Aucune tâche de démarrage n&apos;a été sélectionnée. Veuillez en sélectionner une.</translation>
+    </message>
+    <message>
+        <source>This key combination is already assigned to another task.</source>
+        <translation>Cette combinaison de touches est déjà attribuée à une autre tâche.</translation>
+    </message>
+    <message>
+        <source>No global hotkey has been selected. Please select one.</source>
+        <translation>Aucun raccourci clavier global n&apos;a été sélectionné. Veuillez en sélectionner un.</translation>
+    </message>
+    <message>
+        <source>No hotkey has been defined to run the task. Please define one.</source>
+        <translation>Aucun raccourci clavier n&apos;a été défini pour exécuter la tâche. Veuillez en définir un.</translation>
     </message>
 </context>
 <context>
@@ -1969,15 +2164,15 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Those are the tasks you saved to be run at each system startup :</source>
-        <translation>Voici les tâches que vous avez sauvegardées à être exécutées à chaque démarrage du système :</translation>
+        <translation type="vanished">Voici les tâches que vous avez sauvegardées à être exécutées à chaque démarrage du système :</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation>Nom de fichier</translation>
+        <translation type="vanished">Nom de fichier</translation>
     </message>
     <message>
         <source>Delay</source>
-        <translation>Délai</translation>
+        <translation type="vanished">Délai</translation>
     </message>
     <message>
         <source>Activated</source>
@@ -1986,6 +2181,18 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>Loops</source>
         <translation>Boucles</translation>
+    </message>
+    <message>
+        <source>These are the tasks you saved to be run at each system startup :</source>
+        <translation>Voici les tâches que vous avez sauvegardées à être exécutées à chaque démarrage du système :</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation>Tâche</translation>
+    </message>
+    <message>
+        <source>Delay (s)</source>
+        <translation>Délai (s)</translation>
     </message>
 </context>
 <context>
@@ -2180,7 +2387,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Stop the task. shortcut to stop all tasks : Ctrl+Alt+S</source>
-        <translation>Arrêter la tâche. raccourci pour arrêter toutes les tâches : Ctrl+Alt+S</translation>
+        <translation type="vanished">Arrêter la tâche. raccourci pour arrêter toutes les tâches : Ctrl+Alt+S</translation>
     </message>
     <message>
         <source>Infinite loop OFF</source>
@@ -2188,7 +2395,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>Check to execute the task forever. It can be stopped with the red stop button or its shortcut: Ctrl+Alt+S</source>
-        <translation>Cocher pour exécuter la tâche pour toujours. Elle peut être arrêtée avec le bouton stop rouge ou son raccourci : Ctrl+Alt+S</translation>
+        <translation type="vanished">Cocher pour exécuter la tâche pour toujours. Elle peut être arrêtée avec le bouton stop rouge ou son raccourci : Ctrl+Alt+S</translation>
     </message>
     <message>
         <source>Add a Keys Sequence action...</source>
@@ -2229,6 +2436,14 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <message>
         <source>How many times would you like to duplicate the current actions list?</source>
         <translation>Combien de fois souhaitez-vous dupliquer la liste d&apos;actions actuelle ?</translation>
+    </message>
+    <message>
+        <source>Stop the task. Use the global hotkey defined to stop all tasks.</source>
+        <translation>Arrêtez la tâche. Utilisez le raccourci clavier global défini pour arrêter toutes les tâches.</translation>
+    </message>
+    <message>
+        <source>Check to execute the task forever. It can be stopped with the red stop button or its global hotkey defined.</source>
+        <translation>Cocher pour exécuter la tâche pour toujours. Vous pouvez l&apos;arrêter avec le bouton d&apos;arrêt rouge ou avec le raccourci clavier global.défini.</translation>
     </message>
 </context>
 <context>
@@ -2540,6 +2755,17 @@ Si vous souhaitez la fermer, vous devrez en faire une nouvelle demande.</transla
     <message>
         <source>Set the program option</source>
         <translation>Définir l&apos;option de programme</translation>
+    </message>
+</context>
+<context>
+    <name>getQKeySequenceDialog</name>
+    <message>
+        <source>Set the associated hotkey</source>
+        <translation>Définir le raccourci clavier associé</translation>
+    </message>
+    <message>
+        <source>Set the hotkey you would like to associate to the execution of the task :</source>
+        <translation>Définissez le raccourci clavier que vous souhaitez associer à l&apos;exécution de la tâche :</translation>
     </message>
 </context>
 <context>

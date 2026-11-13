@@ -43,6 +43,8 @@ namespace G_Files {
     inline const QString SystemStartupRegistry_Path = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
     inline const QString ProgramNameInRegistry_KeyWord = "Tasket++";
     inline const QString ReadmeFilePath = "readme.txt";
+    inline const QString HotkeysParams_KeyWord = "hotkeysParams";
+    inline const int HotKeyRangeStart = 3000;
 }
 
 namespace G_Sentences {
@@ -55,6 +57,8 @@ namespace G_Sentences {
     static QString NoKeysSequenceSelected() {return QObject::tr("No keys sequence has been selected. Please select one.");}
     static QString NoCursorMovementsSelected() {return QObject::tr("No cursor movements set has been selected. Please select one.");}
     static QString NoStartupTaskSelected() {return QObject::tr("No startup task has been selected. Please select one.");}
+    static QString NoHotKeySelected() {return QObject::tr("No global hotkey has been selected. Please select one.");}
+    static QString HotKeyAlreadyUsed() {return QObject::tr("This key combination is already assigned to another task.");}
     inline const QString AutoRenameFileOption = "Auto-rename if exists";
     inline const QString EraseFileOption = "Erase if exists";
     inline const QString ForceOption = "Force";
@@ -85,6 +89,7 @@ namespace G_SystemCommands {
 
 struct G_Parameters {
     static bool AutoScrollTask;
+    static bool ListenHotkeys;
 };
 
 #endif // GLOBALS_H

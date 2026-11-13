@@ -9,9 +9,7 @@ StartupTasksDialog::StartupTasksDialog(QWidget *parent)
     ui->setupUi(this);
     ui->addButton->setObjectName("plusminusButton");
     ui->removeButton->setObjectName("plusminusButton");
-    ui->tableWidget->horizontalHeader()->resizeSection(1,80);
-    ui->tableWidget->horizontalHeader()->resizeSection(2,90);
-    ui->tableWidget->horizontalHeader()->resizeSection(3,100);
+    ui->tableWidget->horizontalHeader()->resizeSection(0,300);
     connect(ui->addButton, &QPushButton::released, ui->tableWidget, &StartupTasksTableWidget::addStartupTaskReceived);
     connect(ui->removeButton, &QPushButton::released, ui->tableWidget, &StartupTasksTableWidget::removeStartupTaskReceived);
 }

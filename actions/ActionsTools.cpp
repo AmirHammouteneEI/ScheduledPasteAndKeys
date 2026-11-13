@@ -2,7 +2,7 @@
 #include <QStringList>
 #include <QVariant>
 
-QMap<QString, WORD> ActionsTools::m_keysStrToInputWordMap = { {"CONTROL_LEFT", VK_LCONTROL},{"CONTROL_RIGHT", VK_RCONTROL},{"SHIFT_LEFT", VK_LSHIFT},{"SHIFT_RIGHT", VK_RSHIFT},
+const QMap<QString, WORD> ActionsTools::m_keysStrToInputWordMap = { {"CONTROL_LEFT", VK_LCONTROL},{"CONTROL_RIGHT", VK_RCONTROL},{"SHIFT_LEFT", VK_LSHIFT},{"SHIFT_RIGHT", VK_RSHIFT},
     {"ALT_LEFT", VK_LMENU},{"ALT_GR", VK_RMENU},{"WINDOWS", VK_LWIN},{"FN", 0xFF},{"LEFT_MOUSE", MOUSEEVENTF_LEFTDOWN},{"RIGHT_MOUSE", MOUSEEVENTF_RIGHTDOWN},{"MIDDLE_MOUSE", MOUSEEVENTF_MIDDLEDOWN},
     {"XBUTTON_1", MOUSEEVENTF_XDOWN},{"XBUTTON_2", MOUSEEVENTF_XDOWN}, {"MOUSE_WHEEL_UP", MOUSEEVENTF_WHEEL}, {"MOUSE_WHEEL_DOWN", MOUSEEVENTF_WHEEL},
     {"A", 0x41},{"B", 0x42},{"C", 0x43},{"D", 0x44},{"E", 0x45},{"F", 0x46},{"G", 0x47},{"H", 0x48},{"I", 0x49},{"J", 0x4A},{"K", 0x4B},{"L", 0x4C},
@@ -17,8 +17,8 @@ QMap<QString, WORD> ActionsTools::m_keysStrToInputWordMap = { {"CONTROL_LEFT", V
     {"VOLUME_MUTE", VK_VOLUME_MUTE},{"NEXT_TRACK", VK_MEDIA_NEXT_TRACK},{"PREVIOUS_TRACK", VK_MEDIA_PREV_TRACK},{"CAPS_LOCK", VK_CAPITAL},{"SCROLL_LOCK", VK_SCROLL},
     {"UP_ARROW", VK_UP},{"DOWN_ARROW", VK_DOWN},{"LEFT_ARROW", VK_LEFT},{"RIGHT_ARROW", VK_RIGHT},{"HOME", VK_HOME},{"END", VK_END},
     {"PAGE_UP", VK_PRIOR},{"PAGE_DOWN", VK_NEXT},{"TAB", VK_TAB},
-    {";:", VK_OEM_1},{"/?", VK_OEM_2},{"`~", VK_OEM_3},{"[{", VK_OEM_4},{"\\|", VK_OEM_5},{"]}", VK_OEM_6},{"'\"", VK_OEM_7},{"!§", VK_OEM_8},{"<>", VK_OEM_102},
-    {"$£", VK_OEM_1},{":/", VK_OEM_2},{"ù%", VK_OEM_3},{")°", VK_OEM_4},{"*µ", VK_OEM_5},{"^¨", VK_OEM_6},{"²", VK_OEM_7},
+    {";:", VK_OEM_1},{"/?", VK_OEM_2},{"`~", VK_OEM_3},{"[{", VK_OEM_4},{"\\|", VK_OEM_5},{"]}", VK_OEM_6},{"'\"", VK_OEM_7},{"!§", VK_OEM_8},{"<>", VK_OEM_102},{"=+", VK_OEM_PLUS},{",", VK_OEM_COMMA},{".>", VK_OEM_PERIOD},
+    {"$£", VK_OEM_1},{":/", VK_OEM_2},{"ù%", VK_OEM_3},{")°", VK_OEM_4},{"*µ", VK_OEM_5},{"^¨", VK_OEM_6},{"²", VK_OEM_7},{",?", VK_OEM_COMMA},{";.", VK_OEM_PERIOD}
 };
 
 ActionsTools::ActionsTools()

@@ -3,7 +3,7 @@
  <class>CreateLoadTaskDialog</class>
  <widget class="QDialog" name="CreateLoadTaskDialog">
   <property name="windowModality">
-   <enum>Qt::WindowModality::WindowModal</enum>
+   <enum>Qt::WindowModality::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -24,16 +24,16 @@
     <enum>QLayout::SizeConstraint::SetMinimumSize</enum>
    </property>
    <property name="leftMargin">
-    <number>2</number>
+    <number>1</number>
    </property>
    <property name="topMargin">
-    <number>2</number>
+    <number>1</number>
    </property>
    <property name="rightMargin">
-    <number>2</number>
+    <number>1</number>
    </property>
    <property name="bottomMargin">
-    <number>2</number>
+    <number>1</number>
    </property>
    <item>
     <widget class="QFrame" name="frame">

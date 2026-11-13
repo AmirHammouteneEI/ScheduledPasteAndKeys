@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>DataEditDialog</class>
  <widget class="QDialog" name="DataEditDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -406,7 +409,7 @@
            </column>
            <column>
             <property name="text">
-             <string>Sentence</string>
+             <string>Keys sequence</string>
             </property>
            </column>
           </widget>
@@ -818,14 +821,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CursorMovementsTableWidget</class>
-   <extends>QTableWidget</extends>
-   <header location="global">ui/tablewidgets/CursorMovementsTableWidget.h</header>
-  </customwidget>
-  <customwidget>
    <class>KeysSequencesTableWidget</class>
    <extends>QTableWidget</extends>
    <header location="global">ui/tablewidgets/KeysSequencesTableWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CursorMovementsTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header location="global">ui/tablewidgets/CursorMovementsTableWidget.h</header>
   </customwidget>
   <customwidget>
    <class>SentencesTableWidget</class>

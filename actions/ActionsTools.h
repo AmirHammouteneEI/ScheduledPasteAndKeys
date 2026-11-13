@@ -13,6 +13,8 @@
 class ActionsTools
 {
     static const int s_cursorFrequency = 10;
+    static const QMap<QString, WORD> m_keysStrToInputWordMap;
+    static DWORD mouseFlagPressReleaseConversion(WORD keyInputWord, DWORD typeOfPress);
 public:
     ActionsTools();
     ~ActionsTools() = default;
@@ -20,11 +22,9 @@ public:
     static void pasteKeystrokeSimulate();
     static void keyStokeSimulate(const QString & keyAsStr, DWORD typeOfPress);
     static void mouseStokeSimulate(const QString & keyAsStr, DWORD typeOfPress);
-    static DWORD mouseFlagPressReleaseConversion(WORD keyInputWord, DWORD typeOfPress);
     static void setClipboard(const QString & str);
     static PressedReleaseDelaysKeysMap fromStandardQMapToKeysSeqMap(const QMap<QString,QVariant> &standardMap);
     static QString fromKeysSeqMapToPrintedString(const PressedReleaseDelaysKeysMap &map);
-    static QMap<QString, WORD> m_keysStrToInputWordMap;
     static QString fromCursorMovsMapToPrintedString(const CursorMovementsList &map);
     static CursorMovementsList fromStandardQMapToCursorMovsMap(const QList<QVariant> &standardList);
     static void moveCursorSimulate(int xPos, int yPos, int time);

@@ -20,7 +20,7 @@ void getResolutionsForRescaleCursorCoordinatesDialog::showDialog()
 {
     ui->widthTargetspinBox->setValue(QApplication::primaryScreen()->geometry().width());
     ui->heightTargetspinBox->setValue(QApplication::primaryScreen()->geometry().height());
-    exec();
+    show();
 }
 
 float getResolutionsForRescaleCursorCoordinatesDialog::getWidthRatio() const

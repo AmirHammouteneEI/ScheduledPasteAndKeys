@@ -559,11 +559,20 @@ QLabel#actionSubLabel
 QAbstractButton#buttonInTable, QAbstractButton::flat#buttonInTable, QAbstractButton::flat:hover#buttonInTable
 {
     background-color: transparent;
-    border: none;
+    border: 1px solid #2b2d31;
+    border-radius: 8px;
     padding: 0px;
 }
 
-QAbstractButton:checked#buttonInTable,QAbstractButton:checked#checkboxInTable 
+QAbstractButton:checked#buttonInTable
+{
+    background-color: transparent;
+    border: 1px solid #2b2d31;
+    border-radius: 8px;
+    padding: 0px;
+}
+
+QAbstractButton:disabled#buttonInTable
 {
     background-color: transparent;
     border: none;

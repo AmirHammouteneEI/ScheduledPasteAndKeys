@@ -19,7 +19,7 @@ void CursorMovementsTableWidget::createCursorMovementsReceived()
     m_cursorMovementsEditDialog->setIdentity("");
     m_cursorMovementsEditDialog->setTableCursorMovements(CursorMovementsList());
     m_cursorMovementsEditDialog->setOptionalKeysStroke(QStringList());
-    m_cursorMovementsEditDialog->exec();
+    m_cursorMovementsEditDialog->show();
 }
 
 void CursorMovementsTableWidget::editFromDialogReceived()

@@ -57,5 +57,10 @@
         <file>img/wait_light.png</file>
         <file>img/tool.png</file>
         <file>img/tool_light.png</file>
+        <file>img/ear.png</file>
+        <file>img/ear_light.png</file>
+        <file>img/keyboard.png</file>
+        <file>img/noear.png</file>
+        <file>img/noear_light.png</file>
     </qresource>
 </RCC>

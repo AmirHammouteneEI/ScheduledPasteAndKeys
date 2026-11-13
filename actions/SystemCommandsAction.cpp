@@ -17,7 +17,7 @@ SystemCommandAction::SystemCommandAction() : AbstractAction()
     e_type = ActionType::SystemCommand;
     e_sysCommandType = SystemCommandType::Undefined;
 
-    connect(this, &SystemCommandAction::forceQuitProgramRequest, MainWindow::getInstance().get(), &MainWindow::forceQuit);
+    connect(this, &SystemCommandAction::forceQuitProgramRequest, MainWindow::getInstance(), &MainWindow::forceQuit);
 }
 
 void SystemCommandAction::runAction() const

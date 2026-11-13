@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>getAutoRenameOptionDialog</class>
  <widget class="QDialog" name="getAutoRenameOptionDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>

@@ -19,7 +19,7 @@ void KeysSequencesTableWidget::createKeysSequenceReceived()
     m_keysSequenceEditDialog->setEditable(true);
     m_keysSequenceEditDialog->setIdentity("");
     m_keysSequenceEditDialog->setTableKeysSequence(PressedReleaseDelaysKeysMap());
-    m_keysSequenceEditDialog->exec();
+    m_keysSequenceEditDialog->show();
 }
 
 void KeysSequencesTableWidget::editKeysSequenceSelected(int row, int)

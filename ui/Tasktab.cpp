@@ -24,7 +24,7 @@
 #include "mainwindow.h"
 
 TaskTab::TaskTab(QWidget *parent, const QString &name)
-    : QScrollArea{MainWindow::getInstance().get()},m_name(name)
+    : QScrollArea{MainWindow::getInstance()},m_name(name)
 {
     m_ID = -1;
 
@@ -92,7 +92,7 @@ void TaskTab::buildBasicInterface()
     m_scheduleButton->setObjectName("scheduleButton");
     m_stopButton = new QPushButton("■", topWidget);
     m_stopButton->setObjectName("stopButton");
-    m_stopButton->setToolTip(tr("Stop the task. shortcut to stop all tasks : Ctrl+Alt+S"));
+    m_stopButton->setToolTip(tr("Stop the task. Use the global hotkey defined to stop all tasks."));
     scheduleAndStopLayout->addWidget(m_scheduleButton);
     scheduleAndStopLayout->addWidget(m_stopButton);
     scheduleAndStopLayout->setContentsMargins(1,1,1,1);
@@ -108,7 +108,7 @@ void TaskTab::buildBasicInterface()
     m_timesToRunSpinBox = new NoWheelFocusSpinBox(m_timesToRunWidget);
     m_timesToRunSpinBox->setAlignment(Qt::AlignCenter);
     m_timesToRunSpinBox->setMinimum(1);
-    m_timesToRunSpinBox->setMaximum(9999);
+    m_timesToRunSpinBox->setMaximum(999999);
     m_timesToRunSpinBox->setMinimumWidth(80);
     QLabel *timesLabel = new QLabel(tr(" times"),m_timesToRunWidget);
     timesToRunLayout->addWidget(executeLabel);
@@ -119,7 +119,7 @@ void TaskTab::buildBasicInterface()
     m_loopButton = new QToolButton(topWidget);
     m_loopButton->setObjectName("loopButton");
     m_loopButton->setText(tr("Infinite loop OFF"));
-    m_loopButton->setToolTip(tr("Check to execute the task forever. It can be stopped with the red stop button or its shortcut: Ctrl+Alt+S"));
+    m_loopButton->setToolTip(tr("Check to execute the task forever. It can be stopped with the red stop button or its global hotkey defined."));
     m_loopButton->setCheckable(true);
     runOptionsLayout->setContentsMargins(1,1,1,1);
     runOptionsLayout->setSizeConstraint(QLayout::SetMinimumSize);
@@ -300,7 +300,7 @@ AbstractActionWidget *TaskTab::createActionWidget(const std::shared_ptr<Abstract
         return nullptr;
 
     AbstractActionWidget *actWidgToCreate = nullptr;
-    switch (act->e_type)
+    switch (act->getType())
     {
         case ActionType::Paste:
             actWidgToCreate = new PasteWidget(m_actionsFrame);
@@ -418,6 +418,7 @@ void TaskTab::stopTask()
 {
     m_scheduleState = ScheduleState::NotScheduled;
     m_descriptionEdit->setEnabled(true);
+    m_descriptionEdit->setToolTip("");
     m_scheduleButton->setEnabled(true);
     m_stopButton->setEnabled(false);
     m_addActionButton->setEnabled(true);
@@ -759,7 +760,7 @@ void TaskTab::rescaleCurPosFromDialogReceived()
     for(auto& widget : m_actionWidgetsManager->m_actionWidgetsDisplayOrderedList)
     {
         auto& action = widget->getAction();
-        if(action->e_type != ActionType::CursorMovements)
+        if(action->getType() != ActionType::CursorMovements)
             continue;
 
         auto cursorWidget = qobject_cast<CursorMovementsWidget*>(widget);

@@ -6,7 +6,7 @@ RunningOtherTaskAction::RunningOtherTaskAction() : AbstractAction()
 {
     e_type = ActionType::RunningOtherTask;
 
-    connect(this, &RunningOtherTaskAction::autoRunTaskRequest, MainWindow::getInstance().get(), &MainWindow::autoRun);
+    connect(this, &RunningOtherTaskAction::autoRunTaskRequest, MainWindow::getInstance(), &MainWindow::autoRun);
 }
 
 void RunningOtherTaskAction::runAction() const

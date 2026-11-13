@@ -12,7 +12,7 @@ CursorMovementsSelectedEditDialog::CursorMovementsSelectedEditDialog(QWidget *pa
     ui->setupUi(this);
     ui->addMovsButton->setObjectName("plusminusButton");
     ui->removeMovsButton->setObjectName("plusminusButton");
-    ui->tableWidget->horizontalHeader()->resizeSection(0,180);
+    ui->tableWidget->horizontalHeader()->resizeSection(0,250);
     ui->tableWidget->horizontalHeader()->resizeSection(2,180);
     ui->tableWidget->horizontalHeader()->resizeSection(3,180);
     ui->lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("\\w+"), this));
@@ -140,7 +140,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
     NoWheelFocusSpinBox *xCoordSpin = new NoWheelFocusSpinBox(this);
     xCoordSpin->setObjectName("spinInTable");
     xCoordSpin->setMinimum(0);
-    xCoordSpin->setMaximum(9999);//TODO check screens max width
+    xCoordSpin->setMaximum(999999);
     xCoordSpin->setSingleStep(1);
     xCoordSpin->setAlignment(Qt::AlignCenter);
     xCoordSpin->setLocale(QLocale::English);
@@ -149,7 +149,7 @@ QList<QWidget *> CursorMovementsSelectedEditDialog::addMovsRow()
     NoWheelFocusSpinBox *yCoordSpin = new NoWheelFocusSpinBox(this);
     yCoordSpin->setObjectName("spinInTable");
     yCoordSpin->setMinimum(0);
-    yCoordSpin->setMaximum(9999);//TODO check screens max height
+    yCoordSpin->setMaximum(999999);
     yCoordSpin->setSingleStep(1);
     yCoordSpin->setAlignment(Qt::AlignCenter);
     yCoordSpin->setLocale(QLocale::English);

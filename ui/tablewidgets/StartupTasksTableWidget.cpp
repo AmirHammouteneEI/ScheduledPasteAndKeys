@@ -33,8 +33,7 @@ void StartupTasksTableWidget::refresh()
             insertRow(rowCount());
             setItem(rowCount()-1,0,new QTableWidgetItem(paramL.at(0)));
             setItem(rowCount()-1,1,new QTableWidgetItem(paramL.at(1)));
-            QString loopTimesStr = "";
-            loopTimesStr = paramL.at(2);
+            QString loopTimesStr = paramL.at(2);
             if(loopTimesStr == "-1")
                 setItem(rowCount()-1,2,new QTableWidgetItem(tr("Infinite")));
             else
@@ -49,6 +48,7 @@ void StartupTasksTableWidget::refresh()
 
             paramsInTable.append(taskParam);
 
+            model()->setData(model()->index(rowCount()-1,0),Qt::AlignCenter,Qt::TextAlignmentRole);
             model()->setData(model()->index(rowCount()-1,1),Qt::AlignCenter,Qt::TextAlignmentRole);
             model()->setData(model()->index(rowCount()-1,2),Qt::AlignCenter,Qt::TextAlignmentRole);
             model()->setData(model()->index(rowCount()-1,3),Qt::AlignCenter,Qt::DecorationRole);

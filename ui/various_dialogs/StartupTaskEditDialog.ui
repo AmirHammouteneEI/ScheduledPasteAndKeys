@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>StartupTaskEditDialog</class>
  <widget class="QDialog" name="StartupTaskEditDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,6 +17,21 @@
    <string>Add a task scheduled on system startup</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>1</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>1</number>
+   </property>
+   <property name="bottomMargin">
+    <number>1</number>
+   </property>
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
@@ -230,7 +248,7 @@
         <number>1</number>
        </property>
        <property name="maximum">
-        <number>9999</number>
+        <number>999999</number>
        </property>
       </widget>
      </item>

@@ -21,6 +21,7 @@ class AbstractAction : public QObject
 protected:
     unsigned int m_ID = 0;
     unsigned int m_refID = 0;
+    ActionType e_type;
 public:
     AbstractAction();
     virtual ~AbstractAction() = default;
@@ -33,9 +34,9 @@ public:
     virtual ActionParameters generateParameters() const = 0;
     virtual void optionalProcesses() = 0;
 
-    ActionType e_type;
     unsigned int getID() const {return m_ID;}
     unsigned int getRefID() const {return m_refID;}
+    ActionType getType() const {return e_type;}
 };
 
 #endif // ABSTRACTACTION_H

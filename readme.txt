@@ -1,6 +1,6 @@
 # Tasket++
 
-version 2.5 (October 2026)
+version 3.0 (November 2026)
 
 Schedule automated simulations of actions you would perform on your PC.
 
@@ -12,19 +12,20 @@ We don't collect any data
 Please read private_policy.txt
 
 ----------
-Details of version 2.5 :
+Details of version 3.0 :
 
 Stable version, fully functional
 
 Those actions simulations are available :
 
+   - Paste text
    - Keys sequence
    - Move Cursor
-   - Paste text
-   - Run Windows system specific command (open files, folders, executables, url, shut down pc, reboot, kill processes, create files...)
-   - Wait
+   - Run Windows system specific command (run executables, open url, files and folder operations, shut down pc, reboot, kill processes, take silent screenshots, change audio volume...)
    - Run another task
+   - Wait
 
+Including configuration of global hotkeys to schedule a task to run while the user is on another application or video game.
 Including task tools like duplicating actions list, rescaling cursor position for new screen resolution.
 And other features like data management, scheduled tasks at system startup, create desktop shortcut to autorun a task, import/export task files or program data...
    
@@ -32,7 +33,6 @@ The goal in future versions is to include those features :
 
    - Play sound and show alert dialog actions
    - Add more Windows system specific command
-   - Configure global hot keys to schedule a task to run while the user is on another application or video game
 
 Feedbacks and ideas for further actions are very welcome !
 
@@ -41,7 +41,7 @@ Available for install on Microsoft Store :
 https://apps.microsoft.com/store/detail/XP9CJLHWVXS49P
 
 Available as a portable version :
-https://files.amirhammoutene.dev/Tasket++/2.5/Tasket++_v2.5.zip
+https://files.amirhammoutene.dev/Tasket++/3.0/Tasket++_v3.0.zip
 
 Needs 35 MB disk space, available for Windows systems only
 

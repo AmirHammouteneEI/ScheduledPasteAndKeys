@@ -33,7 +33,7 @@ void CursorMovementsWidget::buildWidget()
     looptimesLabel->setObjectName("actionSubLabel");
     m_loopSpin->setAlignment(Qt::AlignCenter);
     m_loopSpin->setMinimum(1);
-    m_loopSpin->setMaximum(9999);
+    m_loopSpin->setMaximum(999999);
     m_loopSpin->setMinimumWidth(60);
     m_loopSpin->setToolTip(tr("Set how many times this cursor movements should be executed"));
 

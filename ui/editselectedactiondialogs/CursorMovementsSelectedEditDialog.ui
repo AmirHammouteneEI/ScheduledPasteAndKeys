@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>CursorMovementsSelectedEditDialog</class>
  <widget class="QDialog" name="CursorMovementsSelectedEditDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>862</width>
+    <width>943</width>
     <height>534</height>
    </rect>
   </property>
@@ -166,7 +169,7 @@
       <number>5</number>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>140</number>
+      <number>150</number>
      </attribute>
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>true</bool>
