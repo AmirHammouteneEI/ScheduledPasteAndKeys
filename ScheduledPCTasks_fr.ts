@@ -1812,7 +1812,7 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     </message>
     <message>
         <source>version 3.0 (November 2026)</source>
-        <translation>version 3.0 (novembre 2026)</translation>
+        <translation type="vanished">version 3.0 (novembre 2026)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1823,7 +1823,7 @@ initial work on February 2024
 version 3.0 (November 2026)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
@@ -1839,6 +1839,28 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     <message>
         <source>Check to resume global hotkey listening</source>
         <translation>Cochez pour reprendre l&apos;écoute des raccourcis clavier globaux</translation>
+    </message>
+    <message>
+        <source>version 3.1 (November 2026)</source>
+        <translation>version 3.1 (novembre 2026)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 3.1 (November 2026)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 3.1 (novembre 2026)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>
 </context>
 <context>
@@ -1969,6 +1991,10 @@ Assurez-vous que ce programme est exécuté en tant qu&apos;administrateur (clic
     <message>
         <source>No hotkey has been defined to run the task. Please define one.</source>
         <translation>Aucun raccourci clavier n&apos;a été défini pour exécuter la tâche. Veuillez en définir un.</translation>
+    </message>
+    <message>
+        <source>Registration failed: global hotkey already in use by another application.</source>
+        <translation>Échec de l&apos;enregistrement : ce raccourci clavier global est déjà utilisé par une autre application.</translation>
     </message>
 </context>
 <context>

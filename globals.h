@@ -59,6 +59,7 @@ namespace G_Sentences {
     static QString NoStartupTaskSelected() {return QObject::tr("No startup task has been selected. Please select one.");}
     static QString NoHotKeySelected() {return QObject::tr("No global hotkey has been selected. Please select one.");}
     static QString HotKeyAlreadyUsed() {return QObject::tr("This key combination is already assigned to another task.");}
+    static QString HotKeyAlreadyUsedByAnotherApp() {return QObject::tr("Registration failed: global hotkey already in use by another application.");}
     inline const QString AutoRenameFileOption = "Auto-rename if exists";
     inline const QString EraseFileOption = "Erase if exists";
     inline const QString ForceOption = "Force";

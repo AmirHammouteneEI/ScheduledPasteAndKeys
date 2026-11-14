@@ -28,10 +28,12 @@ void GlobalHotKeysTableWidget::refresh()
     bool haveToCreateStopAllTasksEntry = true;
     if(!hotkeysParams.isEmpty())
     {
-        auto hotkeysParamsList = hotkeysParams.split("?");
+        QChar entrySep = hotkeysParams.contains('\x1E') ? '\x1E' : '?';
+        QChar fieldSep = hotkeysParams.contains('\x1F') ? '\x1F' : '/';
+        auto hotkeysParamsList = hotkeysParams.split(entrySep);
         for(auto& hotkeyParam : hotkeysParamsList)
         {
-            auto paramL = hotkeyParam.split("/");
+            auto paramL = hotkeyParam.split(fieldSep);
             QString shortHotkeyParam = hotkeyParam.chopped(2);
             if(paramL.size() != 5 || paramsInTable.contains(shortHotkeyParam))
                 continue;
@@ -76,7 +78,7 @@ void GlobalHotKeysTableWidget::refresh()
             if(!m_hotkeyParamsToObjectIdMap.contains(shortHotkeyParam))
             {
                 auto taskHotKeyObj = std::make_shared<TaskHotKey>();
-                taskHotKeyObj->setAllAttributes(QKeySequence(keySeqStr), taskName, delayStr.toInt(), loopTimesStr.toInt());
+                taskHotKeyObj->setAllAttributes(QKeySequence(keySeqStr, QKeySequence::PortableText), taskName, delayStr.toInt(), loopTimesStr.toInt());
                 if(isStopAllTasks)
                     taskHotKeyObj->setAsStopAllTasksType();
 
@@ -84,8 +86,13 @@ void GlobalHotKeysTableWidget::refresh()
                 m_hotkeyParamsToObjectIdMap.insert(shortHotkeyParam, taskHotKeyObj->getID());
 
                 if(activateHotkey)
-                    registerHotKey(shortHotkeyParam);
-
+                {
+                    if(!registerHotKey(shortHotkeyParam))
+                    {
+                        checkB->setChecked(false);
+                        checkB->setToolTip(G_Sentences::HotKeyAlreadyUsedByAnotherApp());
+                    }
+                }
             }
         }
     }
@@ -95,7 +102,7 @@ void GlobalHotKeysTableWidget::refresh()
         insertRow(0);
         QString keySeqStr = "Ctrl+Alt+S";
         QString taskName = "Stop All Tasks";
-        QString hotkeyParam = keySeqStr+"/"+taskName+"/0/1/1";
+        QString hotkeyParam = keySeqStr+"\x1F"+taskName+"\x1F""0\x1F""1\x1F""1";
         QString shortHotkeyParam = hotkeyParam.chopped(2);
 
         auto button = new QPushButton(this);
@@ -121,14 +128,18 @@ void GlobalHotKeysTableWidget::refresh()
         model()->setData(model()->index(0,4),Qt::AlignCenter,Qt::DecorationRole);
 
         auto stopAllTasksHotKeyObj = std::make_shared<TaskHotKey>();
-        stopAllTasksHotKeyObj->setAllAttributes(QKeySequence(keySeqStr), taskName, 0, 1);
+        stopAllTasksHotKeyObj->setAllAttributes(QKeySequence(keySeqStr,QKeySequence::PortableText), taskName, 0, 1);
         stopAllTasksHotKeyObj->setAsStopAllTasksType();
         GlobalHotkeyRegisterManager::getInstance()->appendTaskHotKey(stopAllTasksHotKeyObj);
         m_hotkeyParamsToObjectIdMap.insert(shortHotkeyParam, stopAllTasksHotKeyObj->getID());
-        registerHotKey(shortHotkeyParam);
-
-        saveInSettings();
+        if(!registerHotKey(shortHotkeyParam))
+        {
+            checkB->setChecked(false);
+            checkB->setToolTip(G_Sentences::HotKeyAlreadyUsedByAnotherApp());
+        }
     }
+
+    saveInSettings();
 }
 
 void GlobalHotKeysTableWidget::saveInSettings()
@@ -166,7 +177,7 @@ void GlobalHotKeysTableWidget::saveInSettings()
         }
         QString activatedStr = checked ? "1" : "0";
 
-        strToWrite += keySeqStr+"/"+item(row,1)->text()+"/"+item(row,2)->text()+"/"+loopTimesStr+"/"+activatedStr+"?";
+        strToWrite += keySeqStr+"\x1F"+item(row,1)->text()+"\x1F"+item(row,2)->text()+"\x1F"+loopTimesStr+"\x1F"+activatedStr+"\x1E";
     }
     strToWrite.chop(1);
 
@@ -212,7 +223,7 @@ void GlobalHotKeysTableWidget::removeHotkeyReceived()
     }
     QString activatedStr = checked ? "1" : "0";
 
-    QString shortHotkeyParam = keySeqStr+"/"+item(row,1)->text()+"/"+item(row,2)->text()+"/"+loopTimesStr;
+    QString shortHotkeyParam = keySeqStr+"\x1F"+item(row,1)->text()+"\x1F"+item(row,2)->text()+"\x1F"+loopTimesStr;
     unregisterHotKey(shortHotkeyParam);
     m_hotkeyParamsToObjectIdMap.remove(shortHotkeyParam);
 
@@ -246,9 +257,9 @@ void GlobalHotKeysTableWidget::editFromDialogReceived()
 
     QSettings settings(QApplication::applicationDirPath()+"/"+G_Files::DataFilePath, QSettings::IniFormat);
     auto hotkeysParams = settings.value(G_Files::HotkeysParams_KeyWord,"").toString();
-    auto entryParams = newKeySeqStr+"/"+m_hotkeyEditDialog->m_filename+"/"+QString::number(m_hotkeyEditDialog->m_delay)+"/"+QString::number(m_hotkeyEditDialog->m_loopTimes)+"/1";
+    auto entryParams = newKeySeqStr+"\x1F"+m_hotkeyEditDialog->m_filename+"\x1F"+QString::number(m_hotkeyEditDialog->m_delay)+"\x1F"+QString::number(m_hotkeyEditDialog->m_loopTimes)+"\x1F""1";
 
-    hotkeysParams += (hotkeysParams.isEmpty() ? "":"?")+entryParams;
+    hotkeysParams += (hotkeysParams.isEmpty() ? "":"\x1E")+entryParams;
     settings.setValue(G_Files::HotkeysParams_KeyWord,hotkeysParams);
 
     refresh();
@@ -350,7 +361,7 @@ void GlobalHotKeysTableWidget::onHotkeyButtonPushed()
         if (loopTimesStr == tr("Infinite"))
             loopTimesStr = "-1";
 
-        QString oldShortParam = oldKeyseqStr+"/"+item(currentRow,1)->text()+"/"+item(currentRow,2)->text()+"/"+loopTimesStr;
+        QString oldShortParam = oldKeyseqStr+"\x1F"+item(currentRow,1)->text()+"\x1F"+item(currentRow,2)->text()+"\x1F"+loopTimesStr;
         unregisterHotKey(oldShortParam);
 
         buttonSender->setText(newKeyseqStr);
