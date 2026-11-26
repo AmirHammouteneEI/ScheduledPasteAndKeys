@@ -12,6 +12,7 @@ class GlobalHotkeyRegisterManager : public QAbstractNativeEventFilter
     void scheduleTask(unsigned int id);
     GlobalHotkeyRegisterManager();
     static GlobalHotkeyRegisterManager* s_instance;
+    QSet<unsigned int> m_registeredHotkeysSet;
 public:
     static GlobalHotkeyRegisterManager * getInstance();
     ~GlobalHotkeyRegisterManager();
@@ -24,12 +25,13 @@ public:
     int appendTaskHotKey(const std::shared_ptr<TaskHotKey> & hotkey);
     bool registerHotkey(unsigned int id);
     bool unregisterHotkey(unsigned int id);
-    QSet<unsigned int> m_registeredHotkeysSet;
 
     void unregisterAllHotkeys();
 
     static UINT qtModifiersToWinVirtualModifiers(Qt::KeyboardModifiers mods);
     static UINT qtKeyToWinVirtualKey(Qt::Key key);
+
+    friend class GlobalHotKeysTableWidget;
 };
 
 #endif // GLOBALHOTKEYREGISTERMANAGER_H

@@ -271,7 +271,10 @@ void TaskTabsManager::createAndLoadTaskObject(int id)
             QJsonObject jobj = jvalue.toObject();
             auto actionToAdd = jsonToAction(jobj);
             if(actionToAdd != nullptr)
-                task->appendAction(actionToAdd);
+            {
+                task->m_actionsMap.insert(actionToAdd->getID(), actionToAdd);
+                task->m_actionsOrderedList.append(actionToAdd);
+            }
         }
     }
 

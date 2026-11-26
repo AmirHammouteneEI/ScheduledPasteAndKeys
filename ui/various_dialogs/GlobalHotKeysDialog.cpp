@@ -24,9 +24,3 @@ void GlobalHotKeysDialog::refreshTable()
 {
     ui->tableWidget->refresh();
 }
-
-void GlobalHotKeysDialog::showDialog()
-{
-    ui->tableWidget->refresh();
-    show();
-}

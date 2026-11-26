@@ -127,17 +127,35 @@ DWORD ActionsTools::mouseFlagPressReleaseConversion(WORD keyInputWord, DWORD typ
 
 void ActionsTools::setClipboard(const QString &str)
 {
-    if(OpenClipboard(NULL))
+    if (!OpenClipboard(nullptr))
+        return;
+
+    EmptyClipboard();
+    const size_t sizeInBytes = (str.length()+1) * sizeof(wchar_t);
+    HGLOBAL clipBuffer = GlobalAlloc(GMEM_MOVEABLE, sizeInBytes);
+    if (!clipBuffer)
     {
-        HGLOBAL clipbuffer;
-        EmptyClipboard();
-        clipbuffer = GlobalAlloc(GMEM_MOVEABLE, str.size()+1);
-        memcpy(GlobalLock(clipbuffer), str.toLatin1(), str.size()+1);
-        GlobalUnlock(clipbuffer);
-        SetClipboardData(CF_TEXT,clipbuffer);
         CloseClipboard();
+        return;
     }
+    void *lockedMemory = GlobalLock(clipBuffer);
+    if (lockedMemory)
+    {
+        memcpy(lockedMemory, str.utf16(), sizeInBytes);
+        GlobalUnlock(clipBuffer);
+        if (!SetClipboardData(CF_UNICODETEXT, clipBuffer))
+        {
+            GlobalFree(clipBuffer);
+            CloseClipboard();
+            return;
+        }
+    }
+    else
+        GlobalFree(clipBuffer);
+
+    CloseClipboard();
 }
+
 
 PressedReleaseDelaysKeysMap ActionsTools::fromStandardQMapToKeysSeqMap(const QMap<QString, QVariant> &standardMap)
 {

@@ -286,7 +286,8 @@ void TaskTab::appendAction(const std::shared_ptr<AbstractAction> &act)
     if(act == nullptr || m_task == nullptr)
         return;
 
-    m_task->appendAction(act);
+    m_task->m_actionsMap.insert(act->getID(), act);
+    m_task->m_actionsOrderedList.append(act);
     m_actionWidgetsManager->appendWidget(createActionWidget(act));
 
     m_actionWidgetsManager->fullRefreshActionWidgets();
@@ -795,7 +796,10 @@ void TaskTab::appendActionsList(const QList<std::shared_ptr<AbstractAction>> &ac
 
     for(auto& act : actionsList)
     {
-        m_task->appendAction(act);
+        if(act == nullptr)
+            continue;
+        m_task->m_actionsMap.insert(act->getID(), act);
+        m_task->m_actionsOrderedList.append(act);
         m_actionWidgetsManager->appendWidget(createActionWidget(act));
     }
 

@@ -64,7 +64,7 @@ bool GlobalHotkeyRegisterManager::registerHotkey(unsigned int id)
 bool GlobalHotkeyRegisterManager::unregisterHotkey(unsigned int id)
 {
     const auto &hotkey = m_TaskHotkeysMap.value(id, nullptr);
-    if(!hotkey)
+    if(hotkey == nullptr)
         return false;
 
     auto success = UnregisterHotKey(nullptr, id);

@@ -53,6 +53,7 @@ void GlobalHotKeysTableWidget::refresh()
             button->setObjectName("buttonInTable");
             button->setText(keySeqStr);
             connect(button, &QPushButton::released, this, &GlobalHotKeysTableWidget::onHotkeyButtonPushed);
+            setItem(rowCount()-1,0,new QTableWidgetItem());
             setCellWidget(rowCount()-1,0,button);
             setItem(rowCount()-1,1,new QTableWidgetItem(taskName));
             setItem(rowCount()-1,2,new QTableWidgetItem(delayStr));
@@ -66,6 +67,7 @@ void GlobalHotKeysTableWidget::refresh()
             checkB->setProperty("params", shortHotkeyParam);
             checkB->setChecked(activateHotkey);
             connect(checkB, &QCheckBox::clicked, this, &GlobalHotKeysTableWidget::checkBoxToggled);
+            setItem(rowCount()-1,4,new QTableWidgetItem());
             setCellWidget(rowCount()-1,4,checkB);
 
             paramsInTable.append(shortHotkeyParam);
@@ -110,6 +112,7 @@ void GlobalHotKeysTableWidget::refresh()
         button->setObjectName("buttonInTable");
         button->setText(keySeqStr);
         connect(button, &QPushButton::released, this, &GlobalHotKeysTableWidget::onHotkeyButtonPushed);
+        setItem(0,0,new QTableWidgetItem());
         setCellWidget(0,0,button);
         setItem(0,1,new QTableWidgetItem(taskName));
         setItem(0,2,new QTableWidgetItem("0"));
@@ -119,6 +122,7 @@ void GlobalHotKeysTableWidget::refresh()
         checkB->setProperty("params", shortHotkeyParam);
         checkB->setChecked(true);
         connect(checkB, &QCheckBox::clicked, this, &GlobalHotKeysTableWidget::checkBoxToggled);
+        setItem(0,4,new QTableWidgetItem());
         setCellWidget(0,4,checkB);
 
         model()->setData(model()->index(0,0),Qt::AlignCenter,Qt::DecorationRole);
@@ -292,6 +296,8 @@ void GlobalHotKeysTableWidget::checkBoxToggled(bool val)
     if(checkBSender == nullptr)
         return;
 
+    checkBSender->setToolTip("");
+
     auto param = checkBSender->property("params").toString();
     if(val)
     {
@@ -299,17 +305,21 @@ void GlobalHotKeysTableWidget::checkBoxToggled(bool val)
         {
             if(!registerHotKey(param))
             {
-                QMessageBox::warning(this, tr("Registration failed"), tr("Windows could not register this global hotkey. It may already be in use by another application."));
+                QMessageBox::warning(this, tr("Registration failed"), G_Sentences::HotKeyAlreadyUsedByAnotherApp());
                 checkBSender->setChecked(false);
+                checkBSender->setToolTip(G_Sentences::HotKeyAlreadyUsedByAnotherApp());
             }
         }
     }
     else
     {
-        if(!unregisterHotKey(param))
+        if(doesHotKeyIsRegistered(param))
         {
-            QMessageBox::warning(this, tr("Unregistration failed"), tr("Windows could not unregister this global hotkey."));
-            checkBSender->setChecked(true);
+            if(!unregisterHotKey(param))
+            {
+                QMessageBox::warning(this, tr("Unregistration failed"), tr("Windows could not unregister this global hotkey."));
+                checkBSender->setChecked(true);
+            }
         }
     }
 

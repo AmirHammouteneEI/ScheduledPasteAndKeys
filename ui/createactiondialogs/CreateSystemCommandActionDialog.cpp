@@ -72,6 +72,11 @@ CreateSystemCommandActionDialog::~CreateSystemCommandActionDialog()
 
 void CreateSystemCommandActionDialog::accept()
 {
+    if(m_type.isEmpty())
+    {
+        QMessageBox::warning(this, tr("No system command selected"), tr("No system command has been selected. Please select one."));
+        return;
+    }
     if((m_option1Button->isEnabled() && m_option1Button->text().isEmpty())
         || ( m_option2Button->isEnabled() && m_option2Button->text().isEmpty()
             && (m_type != G_SystemCommands::ExecuteProgramType) ))
@@ -101,9 +106,9 @@ void CreateSystemCommandActionDialog::commandButtonPushed()
     m_option1Button->setToolTip("");
     m_option2Button->setToolTip("");
     if(m_option1ButConnection)
-        m_option1Button->disconnect(m_option1ButConnection);
+        QObject::disconnect(m_option1ButConnection);
     if(m_option2ButConnection)
-        m_option2Button->disconnect(m_option2ButConnection);
+        QObject::disconnect(m_option2ButConnection);
 
     activateButtons();
 }
@@ -111,15 +116,16 @@ void CreateSystemCommandActionDialog::commandButtonPushed()
 void CreateSystemCommandActionDialog::showDialog()
 {
     show();
+    m_type = "";
     ui->tableWidget->item(0,0)->setText("");
     m_option1Button->setText("");
     m_option1Button->setEnabled(false);
     if(m_option1ButConnection)
-        m_option1Button->disconnect(m_option1ButConnection);
+        QObject::disconnect(m_option1ButConnection);
     m_option2Button->setText("");
     m_option2Button->setEnabled(false);
     if(m_option2ButConnection)
-        m_option2Button->disconnect(m_option2ButConnection);
+        QObject::disconnect(m_option2ButConnection);
 
     // if shows from an existing System Command Widget
     auto mainButtonSender = qobject_cast<QPushButton*>(sender());

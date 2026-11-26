@@ -15,8 +15,6 @@ public:
     explicit GlobalHotKeysDialog(QWidget *parent = nullptr);
     ~GlobalHotKeysDialog();
     void refreshTable();
-public slots:
-    void showDialog();
 private:
     Ui::GlobalHotKeysDialog *ui;
 };

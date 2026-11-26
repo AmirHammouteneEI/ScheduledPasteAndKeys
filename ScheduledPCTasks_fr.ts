@@ -193,7 +193,7 @@ item selected in CreateCursorMovementsActionDialog is null !</translation>
     </message>
     <message>
         <source>No keys sequence selected</source>
-        <translation>Aucune séquence de touches séléctionée</translation>
+        <translation>Aucune séquence de touches séléctionnée</translation>
     </message>
     <message>
         <source>Internal Error</source>
@@ -409,7 +409,7 @@ Veuillez choisir un nouveau nom pour ce fichier à importer :
     </message>
     <message>
         <source>No sentence selected</source>
-        <translation>Aucune phrase séléctionée</translation>
+        <translation>Aucune phrase séléctionnée</translation>
     </message>
     <message>
         <source>Internal Error</source>
@@ -660,6 +660,14 @@ Veuillez fournir toutes les informations nécessaires.</translation>
     <message>
         <source>Won&apos;t force the execution of the action.</source>
         <translation>Ne forcera pas l&apos;exécution de l&apos;action.</translation>
+    </message>
+    <message>
+        <source>No system command selected</source>
+        <translation>Aucune commande système sélectionnée</translation>
+    </message>
+    <message>
+        <source>No system command has been selected. Please select one.</source>
+        <translation>Aucune commande système n&apos;a été sélectionnée. Veuillez en sélectionner une.</translation>
     </message>
 </context>
 <context>
@@ -1017,7 +1025,7 @@ Si des données existent déjà, le suffixe &apos;_other&apos; sera ajouté aux 
     </message>
     <message>
         <source>Windows could not register this global hotkey. It may already be in use by another application.</source>
-        <translation>Windows n&apos;a pas pu enregistrer ce raccourci clavier global. Il est peut-être déjà utilisé par une autre application.</translation>
+        <translation type="vanished">Windows n&apos;a pas pu enregistrer ce raccourci clavier global. Il est peut-être déjà utilisé par une autre application.</translation>
     </message>
     <message>
         <source>Unregistration failed</source>
@@ -1233,7 +1241,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>No keys sequence selected</source>
-        <translation>Aucune séquence de touches séléctionée</translation>
+        <translation>Aucune séquence de touches séléctionnée</translation>
     </message>
     <message>
         <source>Confirm removing keys sequence</source>
@@ -1842,7 +1850,7 @@ Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translat
     </message>
     <message>
         <source>version 3.1 (November 2026)</source>
-        <translation>version 3.1 (novembre 2026)</translation>
+        <translation type="vanished">version 3.1 (novembre 2026)</translation>
     </message>
     <message>
         <source>This software allows you to automatically schedule the actions you would perform on your PC.
@@ -1853,12 +1861,34 @@ initial work on February 2024
 version 3.1 (November 2026)
 
 Free &amp; Open source (see readme.txt for more information)</source>
-        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+        <translation type="vanished">Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
 
 Développé par Amir Hammoutene (contact@amirhammoutene.dev)
 premiers travaux en février 2024
 
 version 3.1 (novembre 2026)
+
+Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
+    </message>
+    <message>
+        <source>version 3.2 (November 2026)</source>
+        <translation>version 3.2 (novembre 2026)</translation>
+    </message>
+    <message>
+        <source>This software allows you to automatically schedule the actions you would perform on your PC.
+
+Developed by Amir Hammoutene (contact@amirhammoutene.dev)
+initial work on February 2024
+
+version 3.2 (November 2026)
+
+Free &amp; Open source (see readme.txt for more information)</source>
+        <translation>Ce logiciel vous permet de planifier automatiquement les actions que vous effectueriez sur votre PC.
+
+Développé par Amir Hammoutene (contact@amirhammoutene.dev)
+premiers travaux en février 2024
+
+version 3.2 (novembre 2026)
 
 Gratuit &amp; Open source (lire readme.txt pour + d&apos;informations)</translation>
     </message>
@@ -2112,7 +2142,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     </message>
     <message>
         <source>No sentence selected</source>
-        <translation>Aucune phrase séléctionée</translation>
+        <translation>Aucune phrase séléctionnée</translation>
     </message>
     <message>
         <source>Confirm removing sentence</source>
@@ -2225,7 +2255,7 @@ Si l&apos;identité est modifiée (via la fenêtre Éditer les données), cela f
     <name>StartupTasksTableWidget</name>
     <message>
         <source>No startup task selected</source>
-        <translation>Aucune tâche de démarrage séléctionée</translation>
+        <translation>Aucune tâche de démarrage séléctionnée</translation>
     </message>
     <message>
         <source>Entry already exists</source>
