@@ -133,25 +133,19 @@ void ActionsTools::setClipboard(const QString &str)
     EmptyClipboard();
     const size_t sizeInBytes = (str.length()+1) * sizeof(wchar_t);
     HGLOBAL clipBuffer = GlobalAlloc(GMEM_MOVEABLE, sizeInBytes);
-    if (!clipBuffer)
+    if (clipBuffer)
     {
-        CloseClipboard();
-        return;
-    }
-    void *lockedMemory = GlobalLock(clipBuffer);
-    if (lockedMemory)
-    {
-        memcpy(lockedMemory, str.utf16(), sizeInBytes);
-        GlobalUnlock(clipBuffer);
-        if (!SetClipboardData(CF_UNICODETEXT, clipBuffer))
+        void *lockedMemory = GlobalLock(clipBuffer);
+        if (lockedMemory)
         {
-            GlobalFree(clipBuffer);
-            CloseClipboard();
-            return;
+            memcpy(lockedMemory, str.utf16(), sizeInBytes);
+            GlobalUnlock(clipBuffer);
+            if (!SetClipboardData(CF_UNICODETEXT, clipBuffer))
+                GlobalFree(clipBuffer);
         }
+        else
+            GlobalFree(clipBuffer);
     }
-    else
-        GlobalFree(clipBuffer);
 
     CloseClipboard();
 }
